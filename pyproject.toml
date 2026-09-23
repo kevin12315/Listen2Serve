@@ -1,0 +1,41 @@
+[project]
+name = "listen2serve"
+version = "0.1.0"
+description = "Listen2Serve: a controlled benchmark of prosody-conditioned service actions for real-time customer-service voice agents"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
+authors = [{ name = "Listen2Serve Authors" }]
+dependencies = [
+    "dashscope>=1.24.0",
+    "httpx>=0.28.0",
+    "numpy>=2.0",
+    "openai>=2.0",
+    "pydantic>=2.8",
+    "pydantic-settings>=2.5",
+    "python-dotenv>=1.0",
+    "pyyaml>=6.0",
+    "scipy>=1.14",
+    "websockets>=14.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.24", "ruff>=0.6"]
+
+[project.scripts]
+l2s = "listen2serve.cli:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/listen2serve"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 110
+target-version = "py312"

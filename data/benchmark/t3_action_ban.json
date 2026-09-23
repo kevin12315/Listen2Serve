@@ -1,0 +1,675 @@
+{
+ "schema": "t3_action_ban/v1",
+ "generated_at": "2026-09-06",
+ "generated_by": "把散在三处、互不一致的禁止动作词表合并成单一数据源",
+ "purpose": "T3 关键轮的「动作语用」禁止词表——全仓唯一数据源。生成侧（T3 prompt / 代码侧词表防线）、检测侧（廉价预筛）、验收侧（第一关）三处一律 import 本文件，不许再各自抄一份。",
+ "why_single_source": "生成侧 prompt、检测侧预筛、验收侧第一关原本各抄一份且条目数分别是 15/40/16，逐字相同的只有 3 条 ⇒ 合并后 53 条(态,词)、0 丢失，每条带出处；冲突与吸收关系记在 conflicts 与各条目的 from 字段。",
+ "action_definition_source": "listen2serve.domains.base.ACTION_V9（已收口的 state→动作唯一真值源）。本文件**不复制**动作文本（连摘要也不存，存了就会漂移），需要时由 listen2serve.data.t3_action_ban.v9_action_summary(state) 现场渲染；每条词只用 maps_to_v9 标注它是否对应该态的 v9 动作。",
+ "sources": {
+  "rewrite_rule1": {
+   "file": "生成侧改写规则",
+   "lines": "改写规则 1 的括号内逐态禁止词",
+   "form": "surface（第二人称舞台指示）",
+   "n_terms": 15,
+   "note": "「本来就该在生成时下发的逐态禁止词表」"
+  },
+  "detect_patterns": {
+   "file": "检测侧预筛",
+   "lines": "ACTION_LEAK_PATTERNS",
+   "form": "台词（第一人称直接引语）",
+   "n_terms": 40,
+   "note": "第一关预筛词表；自带两个已知高误报词（确认 / 改）"
+  },
+  "text_audit_prompt": {
+   "file": "台词审计器",
+   "lines": "TEXT_AUDIT_PROMPT 的 leak 例子",
+   "form": "台词（第一人称直接引语）",
+   "n_terms": 16,
+   "note": "⚠ 前两份之外的第三副本：台词形态审计器的判据"
+  }
+ },
+ "tier_definitions": {
+  "ban": "禁止：生成时不许出现，第二关 LLM 审计的参照，第一关命中即排进优先审队列",
+  "screen_only": "只作第一关排队线索，误报率高到不能参与任何判定（这一关只用来排队，不用来判定）",
+  "rejected": "逐条判后被剔除，留档不删——剔除理由必须能在报告里读到，避免下一个人再把它加回来",
+  "candidate": "按实证漏检提出的新增条目，⚠ 未并入 ban，待裁定后才生效"
+ },
+ "axis_definitions": {
+  "action": "动作语用泄露：把 v9 速查表里客服该做的那个动作说出口或请求它（净化轴本义）",
+  "T": "态度/结论词面泄露：属 T 轴（透明度）管的东西，不是动作语用",
+  "T+action": "两者兼具：既是急迫/质疑的态度词面，又直接指向该态的动作"
+ },
+ "states": {
+  "hushed": {
+   "entries": [
+    {
+     "term": "改时间",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "两份改写侧词表都写作精确短语；detect_patterns 只有单字「改」"
+    },
+    {
+     "term": "换方式",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "detect_patterns 只有单字「换」"
+    },
+    {
+     "term": "不方便",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "v9 opening 原话就是「您现在不方便的话」——用户先说出来，客服那句开场就成了复读，韵律通道被旁路。三份的写法不同：rewrite_rule1/detect_patterns 作「不方便」、text_audit_prompt 作「不方便谈」；取子串更短的「不方便」，匹配面覆盖后者"
+    },
+    {
+     "term": "另约",
+     "tier": "ban",
+     "from": [
+      "detect_patterns",
+      "text_audit_prompt"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "=另约时间；GATE 病例 COL-ALL-23-T3 的 surface「能否另约时间沟通」历史判 leak"
+    },
+    {
+     "term": "再联系",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "「回头再联系」= 改时间 + 换方式"
+    },
+    {
+     "term": "现在不太",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "「现在不太方便」不被「不方便」覆盖，必须单列"
+    },
+    {
+     "term": "回头",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "口语「回头再说」确是改时间，但「回头」二字在无关语境也出现，只配排队"
+    },
+    {
+     "term": "改",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "⚠ 合并阶段  点名的高误报单字：「改一下金额」「改个地址」都是正常业务话。原样保留，不许因为误报就偷偷删（合并阶段 纪律 3）"
+    },
+    {
+     "term": "换",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "⚠ 同上：「换个渠道问一下」是中性业务话"
+    },
+    {
+     "term": "方便",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "被「不方便」真包含；单独用会命中「您方便说下订单号吗」这类中性话"
+    },
+    {
+     "term": "短",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": false,
+     "note": "⚠ 对应的是已退役的 RUBRIC_ACTION「缩短内容」，v9 的 hushed 动作里没有这一项；且单字误报极高（短期/长短/缩短）。留着只作排队"
+    },
+    {
+     "term": "简单说",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": false,
+     "note": "同「短」：只对应退役 rubric 的「缩短内容」"
+    },
+    {
+     "term": "稍后",
+     "tier": "candidate",
+     "from": [],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "实证漏检：一致臂 5/5 条 hushed 台词都用「稍后短信联系/稍后短信说」，三份旧表一条都没拦住",
+     "origin": "合并阶段"
+    },
+    {
+     "term": "短信",
+     "tier": "candidate",
+     "from": [],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "实证漏检：同上，「发短信」就是 v9 follow 的「换个方式联系」",
+     "origin": "合并阶段"
+    }
+   ]
+  },
+  "doubtful": {
+   "entries": [
+    {
+     "term": "依据",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "三份都有，但写法分叉：rewrite_rule1/text_audit_prompt 作「要依据」、detect_patterns 作「依据」。取子串更短的「依据」，匹配面覆盖「要依据」"
+    },
+    {
+     "term": "讲清楚",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "三份逐字相同"
+    },
+    {
+     "term": "工单",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "rewrite_rule1/text_audit_prompt 作「工单号」、detect_patterns 作「工单」。取「工单」（覆盖「工单号」）。GATE 病例 HOT-ALL-14-T3 历史判 leak"
+    },
+    {
+     "term": "核实",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "rewrite_rule1/text_audit_prompt 作「核实身份」、detect_patterns 作「核实」。取「核实」（覆盖「核实身份」）"
+    },
+    {
+     "term": "凭证",
+     "tier": "ban",
+     "from": [
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "= 可核对的依据的另一种说法。text_audit_prompt 作「给凭证」、detect_patterns 作「凭证」，取「凭证」（覆盖前者）"
+    },
+    {
+     "term": "反馈时间",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "GATE 病例 HOT-ALL-14-T3「工单编号与预计反馈的具体时间节点」历史判 leak，有先例可循"
+    },
+    {
+     "term": "没听明白",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "= 要求再讲一遍，等价于「讲清楚」"
+    },
+    {
+     "term": "凭什么",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": "主要是态度词面（T 轴该管），但通常伴随索要依据，留作排队线索"
+    },
+    {
+     "term": "确认",
+     "tier": "rejected",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": false,
+     "note": "⚠ 冲突 C1，合并阶段  点名。剔除理由：rewrite_rule1 规则 5 自己规定 T3 句式就是「只确认/只问 + 中性业务对象」，把「确认」列进禁止表等于禁掉规定句式本身；且 v9 的 doubtful 动作是「给一条可核对的依据」，用户「确认某个单号」并不请求它。命中数仍在第一关报告里单列，不隐藏"
+    }
+   ]
+  },
+  "cooperative": {
+   "entries": [
+    {
+     "term": "坐实",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "三份逐字相同"
+    },
+    {
+     "term": "记下了",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "rewrite_rule1 作「记下了」、text_audit_prompt/detect_patterns 作「我记下了」。取「记下了」（覆盖「我记下了」，也覆盖「那你记下了吧」这类非第一人称形式）"
+    },
+    {
+     "term": "就这么办",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt",
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "三份逐字相同"
+    },
+    {
+     "term": "还款方式期限怎么安排",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "完整短语，最精确的一条：它同时点名了方式、期限与「怎么安排」这个处置动词"
+    },
+    {
+     "term": "还款方式",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "上一条的子串，单列以便命中定位"
+    },
+    {
+     "term": "材料发",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "「材料发我」= 用户替客服把下一步定了"
+    },
+    {
+     "term": "按流程办",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "安排上",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "期限",
+     "tier": "screen_only",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "⚠ 冲突 C2。降级理由：rewrite_rule1 规则 1 明确允许「确认某个金额/渠道/日期/事实」，「期限是多久」正是中性业务对象；单独禁「期限」会把合格台词判成泄露。真正该禁的是完整短语「还款方式期限怎么安排」"
+    },
+    {
+     "term": "这就去办",
+     "tier": "candidate",
+     "from": [],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "实证漏检：一致臂 cooperative 12 条里「我这就去办/我找…核对/我都备齐了」这类自陈办理意向共 5 条，三份旧表都没拦；错配臂 C0(cooperative)=70.0% 正是被这类台词撑起来的",
+     "origin": "合并阶段"
+    },
+    {
+     "term": "备齐",
+     "tier": "candidate",
+     "from": [],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "同上：「材料我都备齐了」= 用户已把要素坐实，客服只需说「好的」",
+     "origin": "合并阶段"
+    }
+   ]
+  },
+  "displeased": {
+   "axis_note": "⚠ 冲突 C3（整态级）：v9 的 displeased 动作是「客服先道歉」，用户无法在文字里请求别人道歉 ⇒ 本态在动作语用轴上恒 clean。下面 8 条全部是 T 轴（态度/结论词面）泄露，不是净化轴泄露。净化脚本的原注已写过这件事（「displeased 的 rubric 动作是客服侧反应，用户无法在文字里请求它」）。实测佐证：文本显性臂本态命中率近地板、语音一致臂明显更高，两者之差全部由「上次答应的时间还没到」这类处境/结论陈述驱动，不含任何动作请求 ⇒ 本态是「净化轴与 T 轴其实是同一根轴」的最强证据（合并阶段 ）。",
+   "entries": [
+    {
+     "term": "没法谈",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": "结论词。留在 ban 是因为 T3 生成侧同样不许说它"
+    },
+    {
+     "term": "没法承诺",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": "结论词"
+    },
+    {
+     "term": "没法往下谈",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": "rewrite_rule1「没法谈」的宽形式"
+    },
+    {
+     "term": "没法给",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": ""
+    },
+    {
+     "term": "不接受",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": "合并阶段 改动 4 已把这类结论词从 T3 prompt 的枚举里删掉，改由代码侧 _vocab_defense / _T3_STANCE_MARKERS 拦；本条是那条防线的同源数据"
+    },
+    {
+     "term": "不认同",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": ""
+    },
+    {
+     "term": "你们这样做不行",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": ""
+    },
+    {
+     "term": "这安排我",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T",
+     "maps_to_v9": false,
+     "note": "⚠ 疑似残句（「这安排我不接受」被截断）。原样保留不猜补，登记在报告里请作者确认原意"
+    }
+   ]
+  },
+  "urgent": {
+   "entries": [
+    {
+     "term": "先给结论",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "text_audit_prompt"
+     ],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "⚠ 冲突 C4：这是 v9 follow「直接给结论」的逐字请求，最直接的一条动作泄露，而 detect_patterns（40 条里 7 条属本态）一条都没收录它。第一关因此对「你先给个结论」这类台词是全盲的"
+    },
+    {
+     "term": "抓紧",
+     "tier": "ban",
+     "from": [
+      "rewrite_rule1",
+      "detect_patterns"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": "rewrite_rule1 作「抓紧」、detect_patterns/text_audit_prompt 作「抓紧时间」。取「抓紧」（覆盖「抓紧时间」）"
+    },
+    {
+     "term": "尽快",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "马上",
+     "tier": "ban",
+     "from": [
+      "detect_patterns",
+      "text_audit_prompt"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "立刻",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "现在就要",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "别拖",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "今天必须",
+     "tier": "ban",
+     "from": [
+      "detect_patterns"
+     ],
+     "axis": "T+action",
+     "maps_to_v9": true,
+     "note": ""
+    },
+    {
+     "term": "给个结果",
+     "tier": "candidate",
+     "from": [],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "实证漏检：一致臂 COL-POS-29「八千欠款金额现在给个结果」",
+     "origin": "合并阶段"
+    },
+    {
+     "term": "明确答复",
+     "tier": "candidate",
+     "from": [],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "实证漏检：一致臂 MAR-POS-27「请现在给出明确答复」——本条同时是新增台词形态 GATE 的 leak 用例",
+     "origin": "合并阶段"
+    },
+    {
+     "term": "现在",
+     "tier": "screen_only",
+     "from": [],
+     "axis": "action",
+     "maps_to_v9": true,
+     "note": "一致臂 urgent 5/5 含「现在」，但错配臂「现在处理到哪一步了」历史判 clean ⇒ 单用必误报，只作排队线索。⚠ 本条不在三份旧表里，是为解释 candidate 的漏检面而登记的反例，不进 ban",
+     "origin": "合并阶段"
+    }
+   ]
+  }
+ },
+ "conflicts": [
+  {
+   "id": "C1",
+   "term": "确认",
+   "state": "doubtful",
+   "kinds": [
+    "自相矛盾"
+   ],
+   "resolution": "rejected",
+   "basis": "rewrite_rule1 规则 5 规定 T3 句式为「只确认/只问 + 中性业务对象」，detect_patterns 却把「确认」列为泄露词——同一份数据的生成规定与检测规定互相否定。合并阶段  已预判此条「几乎必然误报」。判为剔除，但命中数照算照报"
+  },
+  {
+   "id": "C2",
+   "term": "期限",
+   "state": "cooperative",
+   "kinds": [
+    "宽窄不一致"
+   ],
+   "resolution": "screen_only",
+   "basis": "rewrite_rule1 规则 1 允许确认「金额/渠道/日期/事实」，「期限」属中性业务对象；真正该禁的是完整短语「还款方式期限怎么安排」（已入 ban）。取交集会漏掉该短语，取并集会把合格台词判死 ⇒ 分层"
+  },
+  {
+   "id": "C3",
+   "term": "（整态）displeased 的 8 条",
+   "state": "displeased",
+   "kinds": [
+    "轴归属错误"
+   ],
+   "resolution": "保留在 ban 但 axis 标为 T",
+   "basis": "v9 的 displeased 动作是客服先道歉，用户在文字里无法请求它 ⇒ 本态不存在动作语用泄露。8 条全是态度/结论词面（T 轴）。这也说明 合并阶段 「两轴是同一件事」在本态是字面成立的"
+  },
+  {
+   "id": "C4",
+   "term": "先给结论",
+   "state": "urgent",
+   "kinds": [
+    "检测侧缺项"
+   ],
+   "resolution": "ban（以改写侧为准）",
+   "basis": "v9 follow 的逐字请求，detect_patterns 完全没有 ⇒ 第一关对本态最直接的泄露全盲。不许取交集（会漏），按  判为保留"
+  },
+  {
+   "id": "C5",
+   "term": "改 / 换 / 短 / 方便",
+   "state": "hushed",
+   "kinds": [
+    "单字高误报"
+   ],
+   "resolution": "screen_only",
+   "basis": "合并阶段  点名。原样保留（不删、不改），只降级为排队线索，命中数照报"
+  },
+  {
+   "id": "C6",
+   "term": "第三份副本 text_audit_prompt",
+   "state": "（全态）",
+   "kinds": [
+    "plan 未点名的分叉"
+   ],
+   "resolution": "并入本文件并在报告登记",
+   "basis": "合并阶段  只说「两处各有一份」，实测还有第三份（且它是历史上实际使用的判据）。不并入就等于留着一个继续分叉的源头"
+  }
+ ],
+ "provenance_rule": "每条 entry 要么带 from（指向 sources 里的历史副本，可多条），要么带 origin=合并阶段（本次执行新提的条目：candidate 层的建议新增，以及为解释漏检面而登记的反例）。两者都缺 = 来历不明，CI 直接失败。"
+}

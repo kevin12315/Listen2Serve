@@ -1,0 +1,3646 @@
+{
+ "dataset_version": "v6.5",
+ "generator": {
+  "script": "DATASET_CARD.md §construction（人工撰写措辞 + 脚本确定性组装）",
+  "api_calls": 0,
+  "note": "无模型调用、无随机源 ⇒ 同输入必得同输出"
+ },
+ "slice": {
+  "bases": 145,
+  "layers": [
+   "T1",
+   "T3"
+  ]
+ },
+ "instructions": {
+  "COL-ALL-01": {
+   "role": "collection",
+   "dynamics": "all_positive",
+   "sub_domain": "催收",
+   "identity_phrase": "一位38岁男性上班族",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位38岁男性上班族，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位38岁男性上班族，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位38岁男性上班族，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-ALL-04": {
+   "role": "collection",
+   "dynamics": "all_positive",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位35岁女性小店店主",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位35岁女性小店店主，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位35岁女性小店店主，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位35岁女性小店店主，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-ALL-08": {
+   "role": "collection",
+   "dynamics": "all_positive",
+   "sub_domain": "催收",
+   "identity_phrase": "一位33岁女性外卖骑手",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位33岁女性外卖骑手，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位33岁女性外卖骑手，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位33岁女性外卖骑手，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-ALL-10": {
+   "role": "collection",
+   "dynamics": "all_positive",
+   "sub_domain": "催收",
+   "identity_phrase": "一位26岁女性外卖骑手",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位26岁女性外卖骑手，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁女性外卖骑手，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位26岁女性外卖骑手，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-ALL-11": {
+   "role": "collection",
+   "dynamics": "all_positive",
+   "sub_domain": "催收",
+   "identity_phrase": "一位31岁男性个体户",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位31岁男性个体户，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位31岁男性个体户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位31岁男性个体户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-ALL-14": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位38岁女性外卖骑手",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位38岁女性外卖骑手，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位38岁女性外卖骑手，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位38岁女性外卖骑手，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-ALL-15": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "催收",
+   "identity_phrase": "一位52岁男性外卖骑手",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位52岁男性外卖骑手，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位52岁男性外卖骑手，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位52岁男性外卖骑手，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-ALL-16": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "第三方寻人",
+   "identity_phrase": "一位52岁女性债务人的老乡",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位52岁女性债务人的老乡，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "hushed": "一位52岁女性债务人的老乡，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位52岁女性债务人的老乡，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-ALL-17": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位52岁男性小店店主",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位52岁男性小店店主，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位52岁男性小店店主，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位52岁男性小店店主，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-ALL-18": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "催收",
+   "identity_phrase": "一位40岁女性上班族",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位40岁女性上班族，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位40岁女性上班族，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位40岁女性上班族，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-ALL-19": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位31岁男性个体户",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位31岁男性个体户，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位31岁男性个体户，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位31岁男性个体户，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-ALL-20": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位45岁女性小店店主",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位45岁女性小店店主，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位45岁女性小店店主，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位45岁女性小店店主，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-ALL-21": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "法院诉前调解催收",
+   "identity_phrase": "一位26岁男性小店店主",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位26岁男性小店店主，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位26岁男性小店店主，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位26岁男性小店店主，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-ALL-23": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位40岁男性个体户",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位40岁男性个体户，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "hushed": "一位40岁男性个体户，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位40岁男性个体户，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-ALL-24": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位43岁女性自由职业者",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位43岁女性自由职业者，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位43岁女性自由职业者，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位43岁女性自由职业者，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-ALL-49": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位45岁男性建材店个体户",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位45岁男性建材店个体户，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位45岁男性建材店个体户，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位45岁男性建材店个体户，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-ALL-50": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "催收",
+   "identity_phrase": "一位34岁女性超市收银员",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位34岁女性超市收银员，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位34岁女性超市收银员，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位34岁女性超市收银员，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-ALL-53": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位41岁男性建材店老板",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位41岁男性建材店老板，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "hushed": "一位41岁男性建材店老板，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位41岁男性建材店老板，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-ALL-54": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "催收",
+   "identity_phrase": "一位32岁女性门店销售",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位32岁女性门店销售，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "hushed": "一位32岁女性门店销售，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位32岁女性门店销售，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-ALL-55": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "法院诉前调解催收",
+   "identity_phrase": "一位38岁男性货运公司调度",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位38岁男性货运公司调度，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "hushed": "一位38岁男性货运公司调度，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位38岁男性货运公司调度，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-ALL-56": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位35岁女性公司职员",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位35岁女性公司职员，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "hushed": "一位35岁女性公司职员，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位35岁女性公司职员，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-ALL-61": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位34岁男性工程项目承包人",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁男性工程项目承包人，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁男性工程项目承包人，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁男性工程项目承包人，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-ALL-62": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "催收",
+   "identity_phrase": "一位34岁女性超市夜班理货员",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性超市夜班理货员，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性超市夜班理货员，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性超市夜班理货员，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-ALL-63": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "法院诉前调解催收",
+   "identity_phrase": "一位38岁男性货运司机",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位38岁男性货运司机，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "urgent": "一位38岁男性货运司机，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位38岁男性货运司机，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-ALL-64": {
+   "role": "collection",
+   "dynamics": "all_negative",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位34岁女性互联网公司主管",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性互联网公司主管，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性互联网公司主管，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性互联网公司主管，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-NEG-38": {
+   "role": "collection",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位52岁女性小店店主",
+   "candidate_states": [
+    "neutral",
+    "displeased",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "displeased": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位52岁女性小店店主，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位52岁女性小店店主，语气发硬带不满，语速偏快，音量略升，句间几乎不停",
+    "cooperative": "一位52岁女性小店店主，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位52岁女性小店店主，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-NEG-40": {
+   "role": "collection",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "第三方寻人",
+   "identity_phrase": "一位38岁女性债务人的邻居",
+   "candidate_states": [
+    "neutral",
+    "doubtful",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "doubtful": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位38岁女性债务人的邻居，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位38岁女性债务人的邻居，语气存疑追着问，语速中等，音量正常，句间略有停顿",
+    "cooperative": "一位38岁女性债务人的邻居，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位38岁女性债务人的邻居，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-NEG-41": {
+   "role": "collection",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位26岁男性个体户",
+   "candidate_states": [
+    "neutral",
+    "displeased",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "displeased": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位26岁男性个体户，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位26岁男性个体户，语气发硬带不满，语速偏快，音量略升，句间几乎不停",
+    "cooperative": "一位26岁男性个体户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位26岁男性个体户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-NEG-45": {
+   "role": "collection",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "调解协议履约跟进",
+   "identity_phrase": "一位33岁男性个体户",
+   "candidate_states": [
+    "neutral",
+    "displeased",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "displeased": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位33岁男性个体户，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "displeased": "一位33岁男性个体户，语气发硬带不满，语速偏快，音量略升，句间几乎不停",
+    "cooperative": "一位33岁男性个体户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位33岁男性个体户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-NEG-48": {
+   "role": "collection",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位26岁女性自由职业者",
+   "candidate_states": [
+    "neutral",
+    "doubtful",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "doubtful": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位26岁女性自由职业者，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位26岁女性自由职业者，语气存疑追着问，语速中等，音量正常，句间略有停顿",
+    "cooperative": "一位26岁女性自由职业者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位26岁女性自由职业者，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "COL-POS-25": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位35岁男性自由职业者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位35岁男性自由职业者，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位35岁男性自由职业者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位35岁男性自由职业者，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位35岁男性自由职业者，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-POS-26": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位43岁女性外卖骑手",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位43岁女性外卖骑手，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位43岁女性外卖骑手，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位43岁女性外卖骑手，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位43岁女性外卖骑手，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-POS-27": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位26岁男性外卖骑手",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位26岁男性外卖骑手，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁男性外卖骑手，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位26岁男性外卖骑手，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位26岁男性外卖骑手，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-POS-28": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位35岁女性个体户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位35岁女性个体户，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位35岁女性个体户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位35岁女性个体户，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位35岁女性个体户，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-POS-29": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "车抵贷催收",
+   "identity_phrase": "一位26岁男性上班族",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位26岁男性上班族，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁男性上班族，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位26岁男性上班族，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位26岁男性上班族，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-POS-32": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "催收",
+   "identity_phrase": "一位43岁女性上班族",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位43岁女性上班族，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位43岁女性上班族，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位43岁女性上班族，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位43岁女性上班族，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-POS-33": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "调解协议履约跟进",
+   "identity_phrase": "一位26岁男性小店店主",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位26岁男性小店店主，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁男性小店店主，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位26岁男性小店店主，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位26岁男性小店店主，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-POS-35": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "催收",
+   "identity_phrase": "一位40岁男性自由职业者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位40岁男性自由职业者，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位40岁男性自由职业者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位40岁男性自由职业者，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位40岁男性自由职业者，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-POS-36": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位40岁女性上班族",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位40岁女性上班族，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位40岁女性上班族，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位40岁女性上班族，语气发硬带不满，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位40岁女性上班族，语气冲带着火气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "COL-POS-51": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位43岁男性建材店经营者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位43岁男性建材店经营者，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位43岁男性建材店经营者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位43岁男性建材店经营者，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位43岁男性建材店经营者，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-POS-52": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "催收",
+   "identity_phrase": "一位31岁女性花店店员",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位31岁女性花店店员，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位31岁女性花店店员，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位31岁女性花店店员，语气存疑追着问，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位31岁女性花店店员，语气当面质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "COL-POS-57": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位32岁男性物流公司调度",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位32岁男性物流公司调度，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位32岁男性物流公司调度，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位32岁男性物流公司调度，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位32岁男性物流公司调度，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-POS-58": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "催收",
+   "identity_phrase": "一位34岁女性女性",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁女性女性，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性女性，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁女性女性，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁女性女性，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-POS-59": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "法院诉前调解催收",
+   "identity_phrase": "一位41岁男性货运司机",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位41岁男性货运司机，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位41岁男性货运司机，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位41岁男性货运司机，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位41岁男性货运司机，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-POS-60": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位34岁女性公司会计",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁女性公司会计，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性公司会计，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁女性公司会计，语气压着嗓子说话，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁女性公司会计，语气压着嗓子说，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "COL-POS-65": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "不良资产处置",
+   "identity_phrase": "一位34岁男性货运司机",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁男性货运司机，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁男性货运司机，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁男性货运司机，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁男性货运司机，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-POS-66": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "催收",
+   "identity_phrase": "一位28岁女性门店导购",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位28岁女性门店导购，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位28岁女性门店导购，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位28岁女性门店导购，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位28岁女性门店导购，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-POS-67": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "法院诉前调解催收",
+   "identity_phrase": "一位41岁男性建材店老板",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位41岁男性建材店老板，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位41岁男性建材店老板，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位41岁男性建材店老板，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位41岁男性建材店老板，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "COL-POS-68": {
+   "role": "collection",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "物业费催缴",
+   "identity_phrase": "一位34岁女性互联网公司产品经理",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性互联网公司产品经理，语气平实就事论事，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性互联网公司产品经理，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性互联网公司产品经理，语气急着要结果，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性互联网公司产品经理，语气急催不容缓，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-ALL-01": {
+   "role": "hotline",
+   "dynamics": "all_positive",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位31岁男性报修用户",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位31岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位31岁男性报修用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位31岁男性报修用户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-ALL-05": {
+   "role": "hotline",
+   "dynamics": "all_positive",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位40岁男性收货人",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位40岁男性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位40岁男性收货人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位40岁男性收货人，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-ALL-09": {
+   "role": "hotline",
+   "dynamics": "all_positive",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位26岁男性报修用户",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位26岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁男性报修用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位26岁男性报修用户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-ALL-10": {
+   "role": "hotline",
+   "dynamics": "all_positive",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位45岁女性报修用户",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位45岁女性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位45岁女性报修用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位45岁女性报修用户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-ALL-11": {
+   "role": "hotline",
+   "dynamics": "all_positive",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位52岁男性收货人",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位52岁男性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位52岁男性收货人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位52岁男性收货人，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-ALL-13": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位40岁男性收货人",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位40岁男性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位40岁男性收货人，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位40岁男性收货人，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-ALL-14": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位45岁女性网购用户",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位45岁女性网购用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位45岁女性网购用户，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位45岁女性网购用户，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-ALL-15": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位35岁男性报修用户",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位35岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位35岁男性报修用户，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位35岁男性报修用户，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-ALL-16": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位33岁女性患者",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位33岁女性患者，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位33岁女性患者，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位33岁女性患者，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-ALL-17": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位33岁男性会员用户",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位33岁男性会员用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "displeased": "一位33岁男性会员用户，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位33岁男性会员用户，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-ALL-18": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位35岁女性患者",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位35岁女性患者，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "hushed": "一位35岁女性患者，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位35岁女性患者，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-ALL-19": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位26岁男性下单客户",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位26岁男性下单客户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "displeased": "一位26岁男性下单客户，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位26岁男性下单客户，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-ALL-20": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位43岁女性患者",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位43岁女性患者，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "displeased": "一位43岁女性患者，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位43岁女性患者，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-ALL-21": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位33岁男性报修用户",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位33岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位33岁男性报修用户，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位33岁男性报修用户，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-ALL-22": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位40岁女性收货人",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位40岁女性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "displeased": "一位40岁女性收货人，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位40岁女性收货人，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-ALL-23": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位38岁男性报修用户",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位38岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "displeased": "一位38岁男性报修用户，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位38岁男性报修用户，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-ALL-24": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位33岁女性会员用户",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位33岁女性会员用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位33岁女性会员用户，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位33岁女性会员用户，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-ALL-49": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位36岁男性公司职员",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位36岁男性公司职员，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位36岁男性公司职员，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位36岁男性公司职员，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-ALL-50": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位32岁女性职场女性",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位32岁女性职场女性，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位32岁女性职场女性，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位32岁女性职场女性，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-ALL-52": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位34岁男性物流公司调度",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁男性物流公司调度，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁男性物流公司调度，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁男性物流公司调度，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-ALL-53": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位34岁女性会计",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁女性会计，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁女性会计，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁女性会计，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-ALL-54": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位32岁男性公司职员",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位32岁男性公司职员，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "hushed": "一位32岁男性公司职员，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位32岁男性公司职员，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-ALL-55": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位32岁女性公司职员",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位32岁女性公司职员，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "hushed": "一位32岁女性公司职员，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位32岁女性公司职员，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-ALL-60": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位36岁男性货运司机",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位36岁男性货运司机，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位36岁男性货运司机，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位36岁男性货运司机，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-ALL-61": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位34岁女性职场母亲",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性职场母亲，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性职场母亲，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性职场母亲，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-ALL-62": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位38岁男性企业职员",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位38岁男性企业职员，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位38岁男性企业职员，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位38岁男性企业职员，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-ALL-63": {
+   "role": "hotline",
+   "dynamics": "all_negative",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位34岁女性二胎妈妈",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性二胎妈妈，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性二胎妈妈，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性二胎妈妈，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-NEG-38": {
+   "role": "hotline",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位40岁女性收货人",
+   "candidate_states": [
+    "neutral",
+    "urgent",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "urgent": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位40岁女性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位40岁女性收货人，语气焦急催进度，语速快，音量略升，句间几乎不停",
+    "cooperative": "一位40岁女性收货人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位40岁女性收货人，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-NEG-39": {
+   "role": "hotline",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位52岁男性收货人",
+   "candidate_states": [
+    "neutral",
+    "urgent",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "urgent": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位52岁男性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位52岁男性收货人，语气焦急催进度，语速快，音量略升，句间几乎不停",
+    "cooperative": "一位52岁男性收货人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位52岁男性收货人，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-NEG-40": {
+   "role": "hotline",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位31岁女性报修用户",
+   "candidate_states": [
+    "neutral",
+    "displeased",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "displeased": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位31岁女性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "displeased": "一位31岁女性报修用户，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停",
+    "cooperative": "一位31岁女性报修用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位31岁女性报修用户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-NEG-44": {
+   "role": "hotline",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位35岁女性寄件人",
+   "candidate_states": [
+    "neutral",
+    "urgent",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "urgent": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位35岁女性寄件人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "urgent": "一位35岁女性寄件人，语气焦急催进度，语速快，音量略升，句间几乎不停",
+    "cooperative": "一位35岁女性寄件人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位35岁女性寄件人，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-NEG-48": {
+   "role": "hotline",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位31岁女性会员用户",
+   "candidate_states": [
+    "neutral",
+    "doubtful",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "doubtful": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位31岁女性会员用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位31岁女性会员用户，语气怀疑要说法，语速中等，音量正常，句间略有停顿",
+    "cooperative": "一位31岁女性会员用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位31岁女性会员用户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "HOT-POS-25": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位38岁男性报修用户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位38岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位38岁男性报修用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位38岁男性报修用户，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位38岁男性报修用户，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-POS-26": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位52岁女性患者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位52岁女性患者，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位52岁女性患者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位52岁女性患者，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位52岁女性患者，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-POS-27": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "网约车/代驾司机服务专线",
+   "identity_phrase": "一位26岁男性全职司机",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位26岁男性全职司机，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁男性全职司机，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位26岁男性全职司机，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位26岁男性全职司机，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-POS-29": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位28岁男性会员用户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位28岁男性会员用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位28岁男性会员用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位28岁男性会员用户，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位28岁男性会员用户，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-POS-30": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位43岁女性收货人",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位43岁女性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位43岁女性收货人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位43岁女性收货人，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位43岁女性收货人，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-POS-31": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位28岁男性收货人",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位28岁男性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位28岁男性收货人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位28岁男性收货人，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位28岁男性收货人，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-POS-32": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位45岁女性收货人",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位45岁女性收货人，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位45岁女性收货人，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位45岁女性收货人，语气怀疑要说法，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位45岁女性收货人，语气当场质疑，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "HOT-POS-33": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位33岁男性会员用户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位33岁男性会员用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位33岁男性会员用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位33岁男性会员用户，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位33岁男性会员用户，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-POS-35": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位52岁男性会员用户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位52岁男性会员用户，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位52岁男性会员用户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位52岁男性会员用户，语气不耐烦想脱身，语速快，音量正常，句间几乎不停"
+   },
+   "key": "一位52岁男性会员用户，语气不耐烦要挂断，字咬得重、尾音往下压，语速快，音量正常，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-POS-36": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "快递催件/问题件回访",
+   "identity_phrase": "一位38岁女性患者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位38岁女性患者，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位38岁女性患者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位38岁女性患者，语气不耐带抱怨，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位38岁女性患者，语气翻脸不满，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "HOT-POS-56": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位32岁男性公司职员",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位32岁男性公司职员，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位32岁男性公司职员，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位32岁男性公司职员，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位32岁男性公司职员，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-POS-57": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位34岁女性行政主管",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁女性行政主管，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性行政主管，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁女性行政主管，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁女性行政主管，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-POS-58": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位34岁男性公司职员",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁男性公司职员，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁男性公司职员，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁男性公司职员，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁男性公司职员，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-POS-59": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位34岁女性企业行政",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁女性企业行政，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性企业行政，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁女性企业行政，语气低声不想外传，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁女性企业行政，语气压低了吐露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "HOT-POS-64": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "二手车交易服务",
+   "identity_phrase": "一位34岁男性二手车买家",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁男性二手车买家，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁男性二手车买家，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁男性二手车买家，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁男性二手车买家，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-POS-65": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "会员服务专线",
+   "identity_phrase": "一位34岁女性宝妈",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性宝妈，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性宝妈，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性宝妈，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性宝妈，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-POS-66": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "医疗健康服务",
+   "identity_phrase": "一位38岁男性公司职员",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位38岁男性公司职员，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位38岁男性公司职员，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位38岁男性公司职员，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位38岁男性公司职员，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "HOT-POS-67": {
+   "role": "hotline",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "售后服务",
+   "identity_phrase": "一位34岁女性小学老师",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性小学老师，语气平静陈述事情，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性小学老师，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性小学老师，语气焦急催进度，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性小学老师，语气急得发火，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-ALL-02": {
+   "role": "marketing",
+   "dynamics": "all_positive",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位38岁女性门店经营者",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位38岁女性门店经营者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位38岁女性门店经营者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位38岁女性门店经营者，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-ALL-03": {
+   "role": "marketing",
+   "dynamics": "all_positive",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位26岁男性门店经营者",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位26岁男性门店经营者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁男性门店经营者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位26岁男性门店经营者，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-ALL-06": {
+   "role": "marketing",
+   "dynamics": "all_positive",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位26岁女性求职者",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位26岁女性求职者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁女性求职者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位26岁女性求职者，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-ALL-07": {
+   "role": "marketing",
+   "dynamics": "all_positive",
+   "sub_domain": "成人考证/职业培训电销",
+   "identity_phrase": "一位28岁男性待业青年",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位28岁男性待业青年，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位28岁男性待业青年，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位28岁男性待业青年，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-ALL-12": {
+   "role": "marketing",
+   "dynamics": "all_positive",
+   "sub_domain": "司机撮合",
+   "identity_phrase": "一位28岁女性潜在客户",
+   "candidate_states": [
+    "neutral",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位28岁女性潜在客户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位28岁女性潜在客户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-ALL-13": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位38岁男性应届毕业生",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位38岁男性应届毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位38岁男性应届毕业生，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位38岁男性应届毕业生，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-ALL-15": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "法律咨询线索收集",
+   "identity_phrase": "一位35岁男性当事人配偶",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位35岁男性当事人配偶，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位35岁男性当事人配偶，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位35岁男性当事人配偶，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-ALL-16": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位45岁女性应届毕业生",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位45岁女性应届毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "displeased": "一位45岁女性应届毕业生，语气不耐烦想脱身，语速快，音量正常，句间几乎不停"
+   },
+   "key": "一位45岁女性应届毕业生，语气不耐烦要挂断，字咬得重、尾音往下压，语速快，音量正常，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-ALL-17": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位31岁男性潜在客户",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位31岁男性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "displeased": "一位31岁男性潜在客户，语气嫌烦想挂断，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位31岁男性潜在客户，语气直接不客气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-ALL-20": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位40岁女性应届毕业生",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位40岁女性应届毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位40岁女性应届毕业生，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位40岁女性应届毕业生，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-ALL-21": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位33岁男性门店经营者",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位33岁男性门店经营者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位33岁男性门店经营者，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位33岁男性门店经营者，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-ALL-22": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位40岁女性货车司机",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位40岁女性货车司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "displeased": "一位40岁女性货车司机，语气嫌烦想挂断，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位40岁女性货车司机，语气直接不客气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-ALL-23": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位26岁男性门店经营者",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位26岁男性门店经营者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "displeased": "一位26岁男性门店经营者，语气嫌烦想挂断，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位26岁男性门店经营者，语气直接不客气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-ALL-24": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位52岁女性潜在客户",
+   "candidate_states": [
+    "neutral",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位52岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "displeased": "一位52岁女性潜在客户，语气不耐烦想脱身，语速快，音量正常，句间几乎不停"
+   },
+   "key": "一位52岁女性潜在客户，语气不耐烦要挂断，字咬得重、尾音往下压，语速快，音量正常，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-ALL-49": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "司机撮合",
+   "identity_phrase": "一位42岁男性兼职货运司机",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位42岁男性兼职货运司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位42岁男性兼职货运司机，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位42岁男性兼职货运司机，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-ALL-50": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "成人考证/职业培训电销",
+   "identity_phrase": "一位32岁女性企业HR专员",
+   "candidate_states": [
+    "neutral",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位32岁女性企业HR专员，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位32岁女性企业HR专员，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位32岁女性企业HR专员，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-ALL-52": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "司机撮合",
+   "identity_phrase": "一位42岁男性货运司机",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位42岁男性货运司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "hushed": "一位42岁男性货运司机，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位42岁男性货运司机，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-ALL-53": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "成人考证/职业培训电销",
+   "identity_phrase": "一位34岁女性企业HR",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁女性企业HR，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁女性企业HR，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁女性企业HR，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-ALL-54": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位23岁男性应届硕士毕业生",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位23岁男性应届硕士毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "hushed": "一位23岁男性应届硕士毕业生，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位23岁男性应届硕士毕业生，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-ALL-55": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "法律咨询线索收集",
+   "identity_phrase": "一位38岁女性中小企业主",
+   "candidate_states": [
+    "neutral",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位38岁女性中小企业主，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "hushed": "一位38岁女性中小企业主，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位38岁女性中小企业主，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-ALL-60": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "司机撮合",
+   "identity_phrase": "一位42岁男性网约车司机",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位42岁男性网约车司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "urgent": "一位42岁男性网约车司机，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位42岁男性网约车司机，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-ALL-61": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "成人考证/职业培训电销",
+   "identity_phrase": "一位34岁女性企业HR",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性企业HR，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性企业HR，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性企业HR，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-ALL-62": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位23岁男性应届男毕业生",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位23岁男性应届男毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "urgent": "一位23岁男性应届男毕业生，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位23岁男性应届男毕业生，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-ALL-63": {
+   "role": "marketing",
+   "dynamics": "all_negative",
+   "sub_domain": "法律咨询线索收集",
+   "identity_phrase": "一位34岁女性企业财务主管",
+   "candidate_states": [
+    "neutral",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性企业财务主管，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性企业财务主管，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性企业财务主管，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-NEG-37": {
+   "role": "marketing",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位38岁男性求职者",
+   "candidate_states": [
+    "neutral",
+    "displeased",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "displeased": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位38岁男性求职者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "displeased": "一位38岁男性求职者，语气嫌烦想挂断，语速偏快，音量略升，句间几乎不停",
+    "cooperative": "一位38岁男性求职者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位38岁男性求职者，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-NEG-42": {
+   "role": "marketing",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位52岁女性门店经营者",
+   "candidate_states": [
+    "neutral",
+    "doubtful",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "doubtful": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位52岁女性门店经营者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位52岁女性门店经营者，语气戒备地打探，语速中等，音量正常，句间略有停顿",
+    "cooperative": "一位52岁女性门店经营者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位52岁女性门店经营者，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-NEG-46": {
+   "role": "marketing",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位33岁女性应届毕业生",
+   "candidate_states": [
+    "neutral",
+    "doubtful",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "doubtful": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位33岁女性应届毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位33岁女性应届毕业生，语气戒备地打探，语速中等，音量正常，句间略有停顿",
+    "cooperative": "一位33岁女性应届毕业生，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位33岁女性应届毕业生，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-NEG-47": {
+   "role": "marketing",
+   "dynamics": "neg_to_pos",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位35岁男性求职者",
+   "candidate_states": [
+    "neutral",
+    "doubtful",
+    "cooperative"
+   ],
+   "key_state": "cooperative",
+   "tags": {
+    "neutral": null,
+    "doubtful": null,
+    "cooperative": null
+   },
+   "key_tag": null,
+   "non_key": {
+    "neutral": "一位35岁男性求职者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位35岁男性求职者，语气戒备地打探，语速中等，音量正常，句间略有停顿",
+    "cooperative": "一位35岁男性求职者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短"
+   },
+   "key": "一位35岁男性求职者，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短",
+   "allowed_tags": []
+  },
+  "MAR-POS-27": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位26岁男性潜在客户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位26岁男性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位26岁男性潜在客户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位26岁男性潜在客户，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位26岁男性潜在客户，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-POS-28": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位43岁女性求职者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位43岁女性求职者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位43岁女性求职者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位43岁女性求职者，语气嫌烦想挂断，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位43岁女性求职者，语气直接不客气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-POS-29": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位43岁男性求职者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位43岁男性求职者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位43岁男性求职者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位43岁男性求职者，语气嫌烦想挂断，语速偏快，音量略升，句间几乎不停"
+   },
+   "key": "一位43岁男性求职者，语气直接不客气，字咬得重、尾音往下压，语速偏快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-POS-30": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位52岁女性门店经营者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位52岁女性门店经营者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位52岁女性门店经营者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位52岁女性门店经营者，语气不耐烦想脱身，语速快，音量正常，句间几乎不停"
+   },
+   "key": "一位52岁女性门店经营者，语气不耐烦要挂断，字咬得重、尾音往下压，语速快，音量正常，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-POS-31": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位31岁男性求职者",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "displeased"
+   ],
+   "key_state": "displeased",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "displeased": null
+   },
+   "key_tag": "angry",
+   "non_key": {
+    "neutral": "一位31岁男性求职者，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位31岁男性求职者，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "displeased": "一位31岁男性求职者，语气不耐烦想脱身，语速快，音量正常，句间几乎不停"
+   },
+   "key": "一位31岁男性求职者，语气不耐烦要挂断，字咬得重、尾音往下压，语速快，音量正常，句间几乎不停",
+   "allowed_tags": [
+    "angry"
+   ]
+  },
+  "MAR-POS-33": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位38岁男性货车司机",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位38岁男性货车司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位38岁男性货车司机，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位38岁男性货车司机，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位38岁男性货车司机，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-POS-34": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "蓝领招聘",
+   "identity_phrase": "一位35岁女性应届毕业生",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位35岁女性应届毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位35岁女性应届毕业生，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位35岁女性应届毕业生，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位35岁女性应届毕业生，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-POS-35": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位52岁男性潜在客户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位52岁男性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位52岁男性潜在客户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位52岁男性潜在客户，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位52岁男性潜在客户，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-POS-51": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "司机撮合",
+   "identity_phrase": "一位42岁男性货运司机",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位42岁男性货运司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位42岁男性货运司机，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位42岁男性货运司机，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位42岁男性货运司机，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  },
+  "MAR-POS-56": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "司机撮合",
+   "identity_phrase": "一位38岁男性货运司机",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位38岁男性货运司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位38岁男性货运司机，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位38岁男性货运司机，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位38岁男性货运司机，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-POS-57": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "成人考证/职业培训电销",
+   "identity_phrase": "一位28岁女性公司行政专员",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位28岁女性公司行政专员，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位28岁女性公司行政专员，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位28岁女性公司行政专员，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位28岁女性公司行政专员，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-POS-58": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位23岁男性应届硕士生",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位23岁男性应届硕士生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位23岁男性应届硕士生，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位23岁男性应届硕士生，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位23岁男性应届硕士生，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-POS-59": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "法律咨询线索收集",
+   "identity_phrase": "一位34岁女性企业职员",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "hushed"
+   ],
+   "key_state": "hushed",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "hushed": null
+   },
+   "key_tag": "whispers",
+   "non_key": {
+    "neutral": "一位34岁女性企业职员，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性企业职员，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "hushed": "一位34岁女性企业职员，语气小声不便多说，语速中等，音量压低，句间停顿略长"
+   },
+   "key": "一位34岁女性企业职员，语气小声透露，话说得短、说完就停，语速中等，音量压低，句间停顿略长",
+   "allowed_tags": [
+    "whispers"
+   ]
+  },
+  "MAR-POS-64": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "司机撮合",
+   "identity_phrase": "一位34岁男性网约车司机",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁男性网约车司机，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁男性网约车司机，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁男性网约车司机，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁男性网约车司机，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-POS-65": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "成人考证/职业培训电销",
+   "identity_phrase": "一位32岁女性企业HR",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位32岁女性企业HR，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位32岁女性企业HR，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位32岁女性企业HR，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位32岁女性企业HR，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-POS-66": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "校园招聘",
+   "identity_phrase": "一位23岁男性应届硕士毕业生",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位23岁男性应届硕士毕业生，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位23岁男性应届硕士毕业生，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位23岁男性应届硕士毕业生，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位23岁男性应届硕士毕业生，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-POS-67": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "法律咨询线索收集",
+   "identity_phrase": "一位34岁女性个体户",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "urgent"
+   ],
+   "key_state": "urgent",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "urgent": null
+   },
+   "key_tag": "very fast",
+   "non_key": {
+    "neutral": "一位34岁女性个体户，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位34岁女性个体户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "urgent": "一位34岁女性个体户，语气赶时间敷衍，语速快，音量略升，句间几乎不停"
+   },
+   "key": "一位34岁女性个体户，语气急着打断，一句追一句不给空隙，语速快，音量略升，句间几乎不停",
+   "allowed_tags": [
+    "very fast"
+   ]
+  },
+  "MAR-POS-68": {
+   "role": "marketing",
+   "dynamics": "pos_to_neg",
+   "sub_domain": "法律咨询线索收集",
+   "identity_phrase": "一位42岁女性中小企业主",
+   "candidate_states": [
+    "neutral",
+    "cooperative",
+    "doubtful"
+   ],
+   "key_state": "doubtful",
+   "tags": {
+    "neutral": null,
+    "cooperative": null,
+    "doubtful": null
+   },
+   "key_tag": "curious",
+   "non_key": {
+    "neutral": "一位42岁女性中小企业主，语气淡淡地应付，语速中等，音量正常，句间停顿短",
+    "cooperative": "一位42岁女性中小企业主，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短",
+    "doubtful": "一位42岁女性中小企业主，语气戒备地打探，语速中等，音量正常，句间略有停顿"
+   },
+   "key": "一位42岁女性中小企业主，语气追问到底，尾音往上提、追着问，语速中等，音量正常，句间略有停顿",
+   "allowed_tags": [
+    "curious"
+   ]
+  }
+ }
+}

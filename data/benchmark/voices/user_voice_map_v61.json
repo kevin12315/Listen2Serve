@@ -1,0 +1,963 @@
+{
+ "note": "主实验 145 base 的用户侧音色分配：crc32(base_scenario_id) 定序 + 就近借桶（同域内尽量不重复）；音色与 TTS 型号的绑定见 src/listen2serve/model_registry.py",
+ "pool_source": "voice_pool_v61.json（同目录）",
+ "buckets": {
+  "female|26-35": 58,
+  "female|36-50": 32,
+  "female|50+": 11,
+  "male|18-25": 4,
+  "male|26-35": 52,
+  "male|36-50": 38,
+  "male|50+": 7
+ },
+ "distinct_voices": 9,
+ "reuse": {
+  "in_subdomain": 36,
+  "global": 22,
+  "borrowed": 11
+ },
+ "map": {
+  "COL-ALL-01": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "COL-ALL-04": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "COL-ALL-08": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "COL-ALL-10": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "COL-ALL-11": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-ALL-14": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "COL-ALL-15": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音",
+   "borrowed_from": "50+"
+  },
+  "COL-ALL-16": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "borrowed_from": "50+"
+  },
+  "COL-ALL-17": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音",
+   "borrowed_from": "50+"
+  },
+  "COL-ALL-18": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "borrowed_from": "36-50"
+  },
+  "COL-ALL-19": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-ALL-20": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音",
+   "borrowed_from": "36-50"
+  },
+  "COL-ALL-21": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-ALL-23": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "COL-ALL-24": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "borrowed_from": "36-50"
+  },
+  "COL-ALL-49": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "COL-ALL-50": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "COL-ALL-53": {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "COL-ALL-54": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "COL-ALL-55": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "COL-ALL-56": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "COL-ALL-61": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-ALL-62": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "COL-ALL-63": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "COL-ALL-64": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "COL-NEG-38": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音",
+   "borrowed_from": "50+"
+  },
+  "COL-NEG-40": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "COL-NEG-41": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-NEG-45": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-NEG-48": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "COL-POS-25": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-POS-26": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "COL-POS-27": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-POS-28": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "COL-POS-29": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-POS-32": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "borrowed_from": "36-50"
+  },
+  "COL-POS-33": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-POS-35": {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "COL-POS-36": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音",
+   "borrowed_from": "36-50"
+  },
+  "COL-POS-51": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "COL-POS-52": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "COL-POS-57": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-POS-58": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "COL-POS-59": {
+   "voice": "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "COL-POS-60": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "COL-POS-65": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "COL-POS-66": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "COL-POS-67": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "COL-POS-68": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "HOT-ALL-01": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-05": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "HOT-ALL-09": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-10": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-ALL-11": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音",
+   "borrowed_from": "50+"
+  },
+  "HOT-ALL-13": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "HOT-ALL-14": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-ALL-15": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-16": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "HOT-ALL-17": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-18": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "HOT-ALL-19": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-20": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-ALL-21": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-22": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-ALL-23": {
+   "voice": "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "HOT-ALL-24": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "HOT-ALL-49": {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "HOT-ALL-50": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "HOT-ALL-52": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-53": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "HOT-ALL-54": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-ALL-55": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "HOT-ALL-60": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "HOT-ALL-61": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "HOT-ALL-62": {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "HOT-ALL-63": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "HOT-NEG-38": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-NEG-39": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音",
+   "borrowed_from": "50+"
+  },
+  "HOT-NEG-40": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "HOT-NEG-44": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "HOT-NEG-48": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "HOT-POS-25": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "HOT-POS-26": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "50+"
+  },
+  "HOT-POS-27": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-POS-29": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-POS-30": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-POS-31": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-POS-32": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-POS-33": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-POS-35": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音",
+   "borrowed_from": "50+"
+  },
+  "HOT-POS-36": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "borrowed_from": "36-50"
+  },
+  "HOT-POS-56": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-POS-57": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "HOT-POS-58": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-POS-59": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "HOT-POS-64": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "HOT-POS-65": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "HOT-POS-66": {
+   "voice": "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "HOT-POS-67": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "MAR-ALL-02": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "borrowed_from": "36-50"
+  },
+  "MAR-ALL-03": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-ALL-06": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "MAR-ALL-07": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-ALL-12": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "MAR-ALL-13": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "MAR-ALL-15": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-ALL-16": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "MAR-ALL-17": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-ALL-20": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "MAR-ALL-21": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-ALL-22": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "MAR-ALL-23": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-ALL-24": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "borrowed_from": "50+"
+  },
+  "MAR-ALL-49": {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "MAR-ALL-50": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "MAR-ALL-52": {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "MAR-ALL-53": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "MAR-ALL-54": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音"
+  },
+  "MAR-ALL-55": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音",
+   "borrowed_from": "36-50"
+  },
+  "MAR-ALL-60": {
+   "voice": "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "MAR-ALL-61": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "MAR-ALL-62": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音"
+  },
+  "MAR-ALL-63": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "MAR-NEG-37": {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "MAR-NEG-42": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "borrowed_from": "50+"
+  },
+  "MAR-NEG-46": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音"
+  },
+  "MAR-NEG-47": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-POS-27": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-POS-28": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "borrowed_from": "36-50"
+  },
+  "MAR-POS-29": {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "MAR-POS-30": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "borrowed_from": "50+"
+  },
+  "MAR-POS-31": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-POS-33": {
+   "voice": "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音"
+  },
+  "MAR-POS-34": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "MAR-POS-35": {
+   "voice": "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "爽朗利落音",
+   "borrowed_from": "50+"
+  },
+  "MAR-POS-51": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "MAR-POS-56": {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "gender": "male",
+   "age_band": "36-50",
+   "trait": "客观冷静音"
+  },
+  "MAR-POS-57": {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "爽朗利落音"
+  },
+  "MAR-POS-58": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音"
+  },
+  "MAR-POS-59": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "MAR-POS-64": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "borrowed_from": "26-35"
+  },
+  "MAR-POS-65": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "直爽利落音"
+  },
+  "MAR-POS-66": {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "gender": "male",
+   "age_band": "18-25",
+   "trait": "中气充沛音"
+  },
+  "MAR-POS-67": {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "平实质朴音"
+  },
+  "MAR-POS-68": {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "gender": "female",
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "borrowed_from": "36-50"
+  }
+ }
+}

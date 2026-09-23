@@ -1,0 +1,427 @@
+{
+ "source": "人工精选（自 data/benchmark/voices/voice_pool.json 预筛候选）",
+ "built_at": "2026-08-21T01:46:47+0800",
+ "policy": {
+  "usage": "v61 精选池（10-20 个'最像普通人打电话'音色）；分配结果见同目录 user_voice_map_v61.json；v5.5 voice_pool.json/user_voice_map.json 原位不动，运行时按数据版本选表",
+  "pipeline": "agent 元数据预筛（voice_prescreen_v61.json）→ AI 听审预评（voice_prescreen_scores.json，三锚点打分）→ 人工听审精选",
+  "model_decision": {
+   "verdict": "keep",
+   "note": "",
+   "options": "keep=保留 qwen-audio-3.0-tts-plus；switch=切换 cosyvoice-v2"
+  }
+ },
+ "selection_exported_at": "2026-08-20T17:44:02.552Z",
+ "buckets": {
+  "female|26-35": [
+   "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "qwen-audio-3.0-tts-plus-longlanxuanxian"
+  ],
+  "male|18-25": [
+   "qwen-audio-3.0-tts-plus-longjuhefeng"
+  ],
+  "female|18-25": [
+   "qwen-audio-3.0-tts-plus-longlanfengyu"
+  ],
+  "male|36-50": [
+   "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "qwen-audio-3.0-tts-plus-longyuzhihe"
+  ]
+ },
+ "pool": [
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+   "name": "龙璨竹月",
+   "gender": "female",
+   "age": 26,
+   "age_band": "26-35",
+   "trait": "平实质朴音",
+   "scene": "日常对话",
+   "preview": "longcanzhuyue.wav",
+   "whitelist_reason": "音色质地：平实，无情绪倾向",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 4067
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实的口语停顿和应答感，完全符合普通用户日常通话特征。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然，语速适中，带有真实用户咨询时的急切与口语化特征，无机械或朗读痕迹。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longfengmeihui",
+   "name": "龙峰梅晖",
+   "gender": "female",
+   "age": 26,
+   "age_band": "26-35",
+   "trait": "利落麻利音",
+   "scene": "日常对话",
+   "preview": "longfengmeihui.wav",
+   "whitelist_reason": "利落质地，无情绪",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2022
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实的口语互动感（如“你讲”），完全符合普通用户接听电话的状态。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实用户咨询时的急切感与口语起伏，完全符合真人日常通话特征。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longfengyueyao",
+   "name": "龙风月瑶",
+   "gender": "female",
+   "age": 28,
+   "age_band": "26-35",
+   "trait": "直爽利落音",
+   "scene": "日常对话",
+   "preview": "longfengyueyao.wav",
+   "whitelist_reason": "利落质地，无情绪（计划点名）",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 1607
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有日常口语的即时反应感，完全符合真人通话特征。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然急切，语速适中，停顿符合口语习惯，完全符合普通用户投诉场景。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+   "name": "龙菊荷风",
+   "gender": "male",
+   "age": 23,
+   "age_band": "18-25",
+   "trait": "中气充沛音",
+   "scene": "日常对话",
+   "preview": "longjuhefeng.wav",
+   "whitelist_reason": "气息物理描述，情绪中性",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2269
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实的口语互动感（如“你讲”），完全符合普通用户打电话的状态。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实的口语停顿和情绪起伏，完全符合普通用户来电特征。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longlanfengyu",
+   "name": "龙嵐凤羽",
+   "gender": "female",
+   "age": 24,
+   "age_band": "18-25",
+   "trait": "成熟沉稳音",
+   "scene": "日常对话",
+   "preview": "longlanfengyu.wav",
+   "whitelist_reason": "沉稳气质",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2258
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实的口语互动感，完全符合普通用户日常通话特征。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然流畅，语速适中，带有真实的情绪起伏和口语化表达，完全符合普通用户打电话的特征。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longlanxuanxian",
+   "name": "龙兰暄弦",
+   "gender": "female",
+   "age": 26,
+   "age_band": "26-35",
+   "trait": "爽朗利落音",
+   "scene": "日常对话",
+   "preview": "longlanxuanxian.wav",
+   "whitelist_reason": "爽朗利落质地（计划点名）",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2177
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有日常口语的起伏和呼吸感，完全符合真实用户接听电话的状态。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然焦急，语速适中，有真实的口语停顿和情绪起伏，完全符合普通用户打电话的场景。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longlinghuiyan",
+   "name": "龙凌晦燕",
+   "gender": "male",
+   "age": 36,
+   "age_band": "36-50",
+   "trait": "客观冷静音",
+   "scene": "日常对话",
+   "preview": "longlinghuiyan.wav",
+   "whitelist_reason": "客观冷静陈述气质，无情绪倾向",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2008
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，停顿符合真实通话逻辑，无机械、朗读或播音腔痕迹。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实的情绪起伏和口语化表达，完全符合普通用户打电话的场景。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longmeixiaolan",
+   "name": "龙梅霄嵐",
+   "gender": "male",
+   "age": 38,
+   "age_band": "36-50",
+   "trait": "爽朗利落音",
+   "scene": "日常对话",
+   "preview": "longmeixiaolan.wav",
+   "whitelist_reason": "爽朗利落质地（计划点名）",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2006
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，停顿符合日常口语习惯，完全像真人接听电话。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实用户陈述事实时的口语起伏，无机械或朗读痕迹。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longyanyuantao",
+   "name": "龙妍渊桃",
+   "gender": "male",
+   "age": 37,
+   "age_band": "36-50",
+   "trait": "爽朗利落音",
+   "scene": "日常对话",
+   "preview": "longyanyuantao.wav",
+   "whitelist_reason": "爽朗利落质地（计划点名）",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2221
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，停顿符合口语习惯，完全像真实用户在日常通话中的状态。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然，带有真实用户咨询时的急切与口语化停顿，无机械、朗读或播音腔痕迹。"
+     }
+    },
+    "owner_note": ""
+   }
+  },
+  {
+   "voice": "qwen-audio-3.0-tts-plus-longyuzhihe",
+   "name": "龙羽芷荷",
+   "gender": "male",
+   "age": 42,
+   "age_band": "36-50",
+   "trait": "客观冷静音",
+   "scene": "日常对话",
+   "preview": "longyuzhihe.wav",
+   "whitelist_reason": "客观冷静陈述气质，无情绪倾向",
+   "probe": {
+    "status": "ok",
+    "latency_ms": 2433
+   },
+   "audit": {
+    "ai_prescreen_mean": 5.0,
+    "ai_samples": {
+     "s1": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然松弛，语速适中，带有真实的口语交互感（如“你讲”），完全符合普通用户通话特征。"
+     },
+     "s2": {
+      "score": 5,
+      "anchors": {
+       "mechanical": 0,
+       "reading": 0,
+       "seiyuu": 0
+      },
+      "reason": "语气自然焦急，语速适中，停顿符合口语逻辑，完全符合真实用户投诉场景。"
+     }
+    },
+    "owner_note": ""
+   }
+  }
+ ],
+ "selection": "按「最像普通人打电话」从厂商预置音色里人工听审精选；逐 base 的分配规则见 user_voice_map_v61.json"
+}

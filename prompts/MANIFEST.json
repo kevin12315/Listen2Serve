@@ -1,0 +1,26 @@
+{
+  "note": "prompt/量规的导出快照（真值源在代码常量里）；由 scripts/dump_prompts.py 生成",
+  "files": {
+    "evaluation_dialogue_task_judge_prompt.md": "2adfc063129af15d7b83bf7aec8348c7111d050c444a43b009b2539b3999ed95",
+    "evaluation_dialogue_transition_judge_prompt.md": "de7e1042c405ac368eb4d3c7c1ae91d9c53c5bdc0b8f9301edf4523b95f7e48c",
+    "evaluation_flow_judge_prompt.md": "ff557acd62dc90f44335517945a4825c7b4e65834ac025d7c9076a1c57958be9",
+    "evaluation_keyturn_action_cheatsheet.md": "755a2876023e6318b013dcda6ab23f2569e891eecfd3ff03872a150163fe963d",
+    "evaluation_keyturn_judge_prompt.md": "65e5e377aca64d196f63d08f93b00dd75e014bd780f34a61b7f49b4158ddb2d4",
+    "evaluation_leakage_probe_prompt.md": "2302188684f37d7521793801902af6bc629114bc50692dd2eb63236e3fef1fd3",
+    "evaluation_policy_judge_prompt.md": "c5aabfa8fe7da3ca17b4d190cf97753d520e333de9051b7e1d2c565420b7e1b7",
+    "evaluation_voice_judge_prompt.md": "d30ac01bda5adc8678d79e23ed6228df7533d845563c56599831c628bb04760a",
+    "agent_voice_call_instruction.md": "de34e96b77d6c749649eb8ac457909e3841e1cba0560aca890bb4484b3096cf2",
+    "agent_voice_call_instruction_v6.md": "815e02a1c4d6a0c16049248f49355b255ca3911e48c5d39481196be936cc1d74",
+    "agent_voice_call_instruction_v7.md": "8a36ce1ceb1ed58a7c29623826e3b3cc1bc406f95cc66a13fdf5db63fb7eb9a8",
+    "agent_voice_call_instruction_v8.md": "9634877205ff5c88d911f45a3d74a7a1bd2a1d69988c1e527da897651bd32023",
+    "agent_voice_call_instruction_v9.md": "de34e96b77d6c749649eb8ac457909e3841e1cba0560aca890bb4484b3096cf2",
+    "agent_voice_call_instruction_v9_notable.md": "8a1dd637028405c2d8cf2956298edab91d08ea2b202257254b36f161f20b83cc",
+    "agent_voice_call_instruction_v9_turnwise.md": "0aab479668ebf58687aceb34da6a14f0b00c20e05a62086b666f3f47704228f1",
+    "base_action_v9.md": "2eb359c695a3bbd12b57491a35422f073002575c037025e485d85e67a87a5161",
+    "base_policy_section_keys.md": "b35dbbda63d8ec0e5f68c2faab7a06c1a082424d3137a28d341348c36a6486c2",
+    "user_simulator_max_utterance_chars.md": "39fa9ec190eee7b6f4dff1100d6343e10918d044c75eac8f9e9a2596173f80c9",
+    "user_simulator_min_utterance_chars.md": "4a44dc15364204a80fe80e9039455cc1608281820fe2b24f1e5233ade6af1dd5",
+    "user_simulator_outbound_opening_pool.md": "30dc17f74db8f4c71e86847a6826546676655bb600e16cdf9165349b278b4746",
+    "user_simulator_states.md": "0122bcd62ae2afe609499a78d47956730f085325c5bb888dc8926c88a773c85e"
+  }
+}
