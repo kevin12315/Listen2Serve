@@ -115,11 +115,17 @@ prompts/         configs/      scripts/     tests/     docs/
 
 ## License and dataset terms
 
-* Code: **Apache-2.0** ([LICENSE](LICENSE)).
-* Benchmark content under `data/` (**CC BY-NC 4.0 semantics**, see [LICENSE_DATASET](LICENSE_DATASET)):
-  scenario skeletons are distilled from anonymised production call logs (roles, stages and policy
-  rules only — no transcripts), utterances are LLM-generated and human-reviewed, and all audio is
-  synthesised. No real customer or agent voice appears anywhere.
+**Everything in this repository — the evaluation framework *and* the benchmark content under
+`data/`, `prompts/` and `docs/` — is released under the Apache License, Version 2.0**
+([LICENSE](LICENSE)); SPDX identifier `Apache-2.0`, copyright Alibaba Group Holding Limited (2026).
+Third-party attribution (tau2-bench, MIT © Sierra) lives in [NOTICE](NOTICE).
+
+Data provenance and non-binding usage notes are in [LICENSE_DATASET](LICENSE_DATASET): scenario
+skeletons are distilled from anonymised production call logs (roles, stages and policy rules only —
+no transcripts), utterances are LLM-generated and human-reviewed, and all audio is synthesised.
+No real customer or agent voice appears anywhere. Apache-2.0 permits commercial use and training on
+this benchmark; the provenance file exists so you can judge your own compliance posture, not to add
+licence terms of its own.
 
 ## Citation
 

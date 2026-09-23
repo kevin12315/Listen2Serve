@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | Version | `v6.5` (content), release slice `main-multiturn-145x2` |
-| Licence | see [LICENSE_DATASET](../../LICENSE_DATASET) (research use only, non-commercial) |
+| Licence | **Apache-2.0** — same as the code ([LICENSE](../../LICENSE)); provenance and usage notes in [LICENSE_DATASET](../../LICENSE_DATASET) |
 | Files | `scenarios.jsonl` 290 · `scenarios_base.jsonl` 145 · `subsets/` 2 · `tts_instructions.json` 145 · `keyturn_canonical.jsonl` 275 · `t3_action_ban.json` · `voices/` 2 · `audio_samples/` 20 wav + `manifest.jsonl` |
 | Verify | `python scripts/check_dataset.py` (fingerprints, balance, coverage, audio hashes) |
 

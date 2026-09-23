@@ -1,0 +1,41 @@
+Listen2Serve: a controlled benchmark of prosody-conditioned service actions
+for real-time customer-service voice agents
+
+Copyright 2026 Alibaba Group Holding Limited
+
+This product includes software and benchmark content developed for the
+Listen2Serve project.
+
+===============================================================================
+Third-party attribution
+===============================================================================
+
+* tau2-bench / tau-voice — Copyright (c) Sierra
+  https://github.com/sierra-research/tau2-bench
+  Licensed under the MIT License.
+
+  Referenced only for the verified wire-protocol sequencing of realtime
+  speech APIs (event ordering, audio-channel handling, tick/commit
+  adaptation). The corresponding modules in this repository are independent
+  implementations; no third-party source code is copied or redistributed:
+
+    src/listen2serve/runtime/realtime/events.py
+    src/listen2serve/runtime/realtime/qwen_provider.py
+    src/listen2serve/runtime/realtime/tick_adapter.py
+    src/listen2serve/audio/conversation_audio.py
+
+===============================================================================
+Scope of this notice
+===============================================================================
+
+Everything in this repository is distributed under the Apache License,
+Version 2.0 — this includes the evaluation-framework source code and the
+benchmark content under `data/benchmark/` (scenario records, subset
+manifests, judge rubrics, TTS instructions and the synthesised audio
+samples). See `LICENSE` for the license text, `LICENSE_DATASET` for data
+provenance, and `README.md` for the citation/bibliography entry to use when
+referring to a specific release slice.
+
+No patent, copyright or other licence claim is made or accepted by listing
+the third-party work above; the listing exists solely to satisfy the
+attribution conditions of that work.
