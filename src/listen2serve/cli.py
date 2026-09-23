@@ -784,8 +784,6 @@ def main() -> int:
         os.environ["AGENT_PROMPT"] = args.agent_prompt
         get_settings.cache_clear()
 
-        _sys.argv = ["probe"] + (["--out", args.out] if args.out else [])
-        return probe_main()
     if args.cmd == "run-eval":
         if args.model is None:
             from listen2serve.runtime.realtime.registry import default_model_spec
