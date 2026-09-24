@@ -23,8 +23,8 @@ Companion to the paper *"Listen2Serve: Benchmarking Real-Time Customer Service A
 | Voice assignment | `data/benchmark/voices/` | per-base user timbre, gender × age band |
 | Service / simulation / rubric prompts | `prompts/` | text snapshots; source of truth is the code, drift fails a test |
 | Reproduction configs | `configs/` | one file per paper condition (E/E, N/E, N/N) |
-| Audio samples only | `data/benchmark/audio_samples/` | 20 clips (5 states × 2 conditions × 2 bases) + `manifest.jsonl` |
-| Contract tests | `tests/` | 350 checks: data schema, judge contracts, orchestrator, release hygiene |
+| Audio demo (not a data subset) | `data/benchmark/audio_samples/` | 20 clips (5 states × 2 conditions × 2 bases) + `manifest.jsonl` |
+| Contract tests | `tests/` | data schema, judge contracts, orchestrator, licence scope, release hygiene |
 
 **Not included, deliberately** (see [docs/limitations.md](docs/limitations.md)):
 per-item verdicts and model outputs, the full stimulus audio, the single-turn / replay /
@@ -113,19 +113,27 @@ data/benchmark/{scenarios.jsonl,scenarios_base.jsonl,subsets/,voices/,audio_samp
 prompts/         configs/      scripts/     tests/     docs/
 ```
 
-## License and dataset terms
+## Licence (three scopes, one table)
 
-**Everything in this repository — the evaluation framework *and* the benchmark content under
-`data/`, `prompts/` and `docs/` — is released under the Apache License, Version 2.0**
-([LICENSE](LICENSE)); SPDX identifier `Apache-2.0`, copyright Alibaba Group Holding Limited (2026).
-Third-party attribution (tau2-bench, MIT © Sierra) lives in [NOTICE](NOTICE).
+The repository is released under **three licences by asset type**; the authoritative path →
+SPDX-identifier table lives in [LICENSE_DATASET](LICENSE_DATASET) and is checked by a test, so a new
+data file cannot silently inherit the wrong terms.
 
-Data provenance and non-binding usage notes are in [LICENSE_DATASET](LICENSE_DATASET): scenario
-skeletons are distilled from anonymised production call logs (roles, stages and policy rules only —
-no transcripts), utterances are LLM-generated and human-reviewed, and all audio is synthesised.
-No real customer or agent voice appears anywhere. Apache-2.0 permits commercial use and training on
-this benchmark; the provenance file exists so you can judge your own compliance posture, not to add
-licence terms of its own.
+| Asset | Licence |
+|---|---|
+| Framework code, prompts, docs, configs, plus the plumbing under `data/benchmark/` (`version.json`, `t3_action_ban.json`, `subsets/`) | **Apache-2.0** ([LICENSE](LICENSE)); copyright Alibaba Group Holding Limited (2026); third-party attribution in [NOTICE](NOTICE) |
+| Benchmark content: `scenarios*.jsonl`, `keyturn_canonical.jsonl`, `tts_instructions.json`, `voices/`, `DATASET_CARD.md` | **CC BY-NC 4.0** |
+| Audio demo: `data/benchmark/audio_samples/` (20 clips) | **CC BY-NC-ND 4.0** |
+
+The split is deliberate: the pipeline and the files it needs to *run* stay Apache-2.0 so anyone
+(including companies) can install, modify and redistribute the framework, while the benchmark
+*content* itself is not licensed for commercial use or for training production models without
+separate permission. The 20 audio clips are a **demo, not a sample of the stimulus set** — nothing
+in the measurement path reads them ([LICENSE_DATASET](LICENSE_DATASET) explains the count).
+
+Data provenance (anonymised call-log skeletons, LLM-written utterances, fully synthesised speech,
+no real voices) and the release-time model-name generalisation are documented in
+[LICENSE_DATASET](LICENSE_DATASET) and [docs/limitations.md](docs/limitations.md).
 
 ## Citation
 

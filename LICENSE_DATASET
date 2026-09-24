@@ -1,41 +1,73 @@
-# 数据与素材许可说明（LICENSE_DATASET）
+# 基准内容与音频 demo 的许可说明（LICENSE_DATASET）
 
-**SPDX-License-Identifier: Apache-2.0**
+本仓库**按资产类型分三份许可**申报，避免"一份许可盖全部"造成的要么管不住数据、
+要么把非商业限制传染回代码使用路径的问题。
 
-本仓库的**全部内容**——评测框架代码（`src/`、`scripts/`、`tests/`、`configs/`）与基准数据
-（`data/benchmark/` 下的场景记录、子集清单、裁判量规、TTS 指令文本、合成音频样本，以及
-`prompts/`、`docs/` 中的文本）——统一按根目录 [LICENSE](LICENSE) 的 **Apache License 2.0**
-授权，版权主体为 Alibaba Group Holding Limited（见 `LICENSE` 附录与 [NOTICE](NOTICE)）。
+## 范围划分（scope）
 
-**本文件不引入任何额外的许可条款。** 它只提供数据侧的来源事实与风险边界说明，帮助使用者在
-自行合规评估时判断"这份数据能不能用、怎么用才稳妥"。Apache-2.0 允许商业使用、修改、再分发
-以及把本基准用于模型训练，这一点不因下述说明而改变。
+下表是唯一口径；`tests/test_release_hygiene.py` 会解析本表并断言 `data/benchmark/`
+下的每一项都被覆盖，新增数据文件时漏标许可会直接红。
+
+| 路径 | SPDX 许可标识 | 说明 |
+|---|---|---|
+| `src/` | Apache-2.0 | 评测框架代码 |
+| `scripts/` | Apache-2.0 | 复现与自检入口 |
+| `tests/` | Apache-2.0 | 契约测试 |
+| `configs/` | Apache-2.0 | 论文条件的复现配置 |
+| `prompts/` | Apache-2.0 | 提示词文本快照（真源在代码里，快照随代码走同一许可） |
+| `docs/` | Apache-2.0 | 说明文档 |
+| `data/benchmark/version.json` | Apache-2.0 | 发布元数据与文件指纹 |
+| `data/benchmark/t3_action_ban.json` | Apache-2.0 | 禁止动作门禁表（管线运行必需的连接件） |
+| `data/benchmark/subsets/` | Apache-2.0 | 论文批次的 `scenario_id` 清单（选择元数据，不含内容） |
+| `data/benchmark/scenarios.jsonl` | CC-BY-NC-4.0 | 基准内容 |
+| `data/benchmark/scenarios_base.jsonl` | CC-BY-NC-4.0 | 基准内容 |
+| `data/benchmark/keyturn_canonical.jsonl` | CC-BY-NC-4.0 | 基准内容 |
+| `data/benchmark/tts_instructions.json` | CC-BY-NC-4.0 | 基准内容 |
+| `data/benchmark/voices/` | CC-BY-NC-4.0 | 基准内容 |
+| `data/benchmark/DATASET_CARD.md` | CC-BY-NC-4.0 | 数据卡 |
+| `data/benchmark/audio_samples/` | CC-BY-NC-ND-4.0 | **展示用 demo，不是数据集的一部分**（见下） |
+
+* 代码侧许可全文见 [LICENSE](LICENSE)（Apache-2.0），第三方归属见 [NOTICE](NOTICE)。
+* 内容侧与 demo 侧使用 Creative Commons 标准条款，本文件不自撰条款，只声明标识与边界：
+  * **CC BY-NC 4.0** — <https://creativecommons.org/licenses/by-nc/4.0/legalcode>
+  * **CC BY-NC-ND 4.0** — <https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
+
+## 为什么这样切
+
+* 把 `version.json` / `t3_action_ban.json` / `subsets/` 留在 Apache-2.0，是为了让"跑通这套
+  管线"这条使用路径不被 NC 拖成非商业：任何人（含公司）都可以自由安装、改造、二次分发框架
+  本身。
+* 基准**内容**（场景、台词、韵律配方、音色分配）走 CC BY-NC 4.0：可自由用于研究、评测、
+  课堂与衍生标注，但商用与把它灌进生产模型训练需要另行授权。
+* 音频**只作为 demo** 发布，因此额外加 ND：不许把这几条 wav 拆出来重组进别的语料库或榜单附件。
+
+## 音频 demo 的定性
+
+`data/benchmark/audio_samples/` 里的 20 条 wav 是**展示件**，用来让读者听见 T1/T3 两臂在
+五种客户状态上的差别到底有多大。它们不是基准刺激集的抽样子集，也不构成任何统计意义上的
+代表性；主实验所需的完整刺激音频（1,100 条量级）**不随本仓库发布**，理由与后果写在
+[docs/limitations.md](docs/limitations.md)。跑评测时音频由管线在用你自己的 TTS key 时
+现合成，不依赖这 20 个文件。
+
+数量设计就是"能听完所有对照格"的最小集合：每个客户状态取 2 个 base、每个 base 渲染 2 个
+韵律臂（state / neutral），即 5 状态 × 2 base × 2 臂 = 20 条（覆盖 10 个 base 场景）。
+`scripts/check_dataset.py` 会核对矩阵不缺格、不重复，且每条 wav 与 `manifest.jsonl` 的
+sha256 逐条对上 —— 文档里的"20 条"由这条断言兜住。
 
 ## 数据来源（provenance）
 
 * **场景骨架**：派生自已脱敏的客服会话记录的骨架抽取结果，只保留角色、流程阶段与策略规则，
-  **不包含原始对话原文**，也不包含可回溯到具体客户或坐席的标识符。
+  不包含原始对话原文，也不包含可回溯到具体客户或坐席的标识符。
 * **话术文本**：由 LLM 依据骨架重新生成，并经人工与规则校验，属于生成内容。
-* **音频资产**：`data/benchmark/audio_samples/` 下全部样本均由商用 TTS 接口合成，
-  **不含任何真人录音，也不含真人音色克隆**。真人声纹属个人敏感信息，本仓库不涉及。
-* **实体信息**：场景中的姓名、公司名、金额、案情、岗位与补贴等均为虚构，如与现实重合属巧合。
-* **指纹可核验**：`python scripts/check_dataset.py` 可校验素材指纹、平衡性与音频哈希，
-  `data/benchmark/version.json` 记录 `dataset_version` 与切片标识。
+* **音频资产**：全部由商用 TTS 接口合成，不含任何真人录音，也不含真人音色克隆
+  （真人声纹属个人敏感信息）。厂商音色的再分发边界是完整刺激集不发布的理由之一。
+* **实体信息**：姓名、公司、金额、案情、岗位与补贴等均为虚构，与现实重合属巧合。
+* **生成器型号的公开口径**：见 [docs/limitations.md](docs/limitations.md) 的
+  "发布时的型号泛化"一节 —— `keyturn_canonical.jsonl` 的 `gen_model` 是**层级标签而非可复现
+  的快照名**，不要把它当作可复算的生成器标识。
 
-## 使用提示（建议，不构成许可限制）
+## 引用与问询
 
-1. 再分发或发布衍生版本时，请保留 `LICENSE`、`NOTICE` 与本文件，并按 Apache-2.0 §4(b) 标注你所做的修改；
-2. 请保留 `data/benchmark/version.json` 中的版本与素材指纹：跨数据集版本 / 裁判型号 / 提示词版本
-   的评测数值不可直接比较，引用时请一并注明 commit 或 tag；
-3. 请勿使用本仓库名称、徽标或其中提及的服务商品牌为衍生产品背书（Apache-2.0 §6 不授予任何商标权）；
-4. 若把本基准用于对外产品或公开榜单，请自行确认你所调用的 TTS / ASR / LLM 服务端服务条款允许
-   你将生成内容用于该用途——这一义务来自你与服务商之间的协议，与本许可无关；
-5. 数据来源于生产业务骨架这一事实意味着：即便许可宽松，请在公开引用时避免暗示其对应任何真实
-   企业、真实客户或真实通话记录。
-
-## 关于"为什么数据也走 Apache-2.0"
-
-本文件的前一版曾声明"仅限学术研究与评测、禁止商用与训练用途"（CC BY-NC 4.0 语义对齐）。
-经评审决定把代码与数据统一到 Apache-2.0，使整个仓库以单一许可证申报与复用。需要明确的后果是：
-非商业限制随之放弃，且**对已获取本版本的接收人不可追溯收回**——许可一旦分发即生效，后续改回
-严格条款对既有接收人无效。如果某个使用场景确实需要非商业约束，应由该场景自己选择其他数据集。
+引用格式见 [CITATION.bib](CITATION.bib)（论文 / 数据集 / 代码三段分开）。需要把基准内容或
+demo 音频用于非商业学术之外的用途（商用评测、产品训练、语料再分发），请按对应 CC 条款另行
+取得授权后再发布。

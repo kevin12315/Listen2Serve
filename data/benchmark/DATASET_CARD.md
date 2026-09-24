@@ -3,8 +3,8 @@
 | | |
 |---|---|
 | Version | `v6.5` (content), release slice `main-multiturn-145x2` |
-| Licence | **Apache-2.0** — same as the code ([LICENSE](../../LICENSE)); provenance and usage notes in [LICENSE_DATASET](../../LICENSE_DATASET) |
-| Files | `scenarios.jsonl` 290 · `scenarios_base.jsonl` 145 · `subsets/` 2 · `tts_instructions.json` 145 · `keyturn_canonical.jsonl` 275 · `t3_action_ban.json` · `voices/` 2 · `audio_samples/` 20 wav + `manifest.jsonl` |
+| Licence | **CC BY-NC 4.0** for the content in this directory; `audio_samples/` is **CC BY-NC-ND 4.0** (demo, see below). Code is Apache-2.0 — full path table in [LICENSE_DATASET](../../LICENSE_DATASET) |
+| Files | `scenarios.jsonl` 290 · `scenarios_base.jsonl` 145 · `subsets/` 2 · `tts_instructions.json` 145 · `keyturn_canonical.jsonl` 275 · `t3_action_ban.json` · `voices/` 2 · `audio_samples/` 20 **demo** wav + `manifest.jsonl` |
 | Verify | `python scripts/check_dataset.py` (fingerprints, balance, coverage, audio hashes) |
 
 ## What one scenario fixes, and what does not
@@ -46,7 +46,7 @@ not part of this release.
 rendered versions of a cooperative stimulus are near-indistinguishable. Any cross-state prosody
 summary must therefore keep it out (see [docs/limitations.md](../../docs/limitations.md)).
 
-## Provenance, and how the audio is rebuilt
+## Provenance, and how the audio relates to the measurement
 
 Scenario skeletons were extracted from anonymised production call logs of three service lines (debt
 collection, hotline support, marketing outbound): role, stage sequence and policy structure only — no
@@ -54,11 +54,19 @@ transcript text and no customer data carry over. Business facts (`db_seed`) were
 scratch. All speech is synthesised through a commercial TTS API; no real person is recorded, and the
 personal names, amounts and account numbers in the scenarios are fictional.
 
-Stimulus audio is not redistributed here. `keyturn_canonical.jsonl` (target text) +
-`tts_instructions.json` (instruction and tag) + `voices/user_voice_map_v61.json` (timbre) fully
-specify it, and the TTS path is byte-deterministic for a given (text, voice, instruction, tag)
-quadruple — so the same clips can be regenerated and checked against
-`audio_samples/manifest.jsonl` (sha256 and byte size per clip).
+`audio_samples/` (20 clips) is a **listening demo, not a slice of the stimulus set**: nothing in the
+measurement path reads it, and its state × arm × base matrix is chosen so that every contrast cell
+can be heard at least once. The full stimulus audio (1,100 clips, ~230 MB) is not redistributed —
+vendor voice-redistribution boundaries are unclear and the volume is large
+([docs/limitations.md](../../docs/limitations.md)).
+
+Stimulus audio is therefore rebuilt at run time from `keyturn_canonical.jsonl` (target text) +
+`tts_instructions.json` (instruction and tag) + `voices/user_voice_map_v61.json` (timbre), against
+whichever TTS endpoint your own key reaches. Those three files pin down the composition of every
+clip; they do **not** pin the waveform. Vendor TTS makes no cross-time byte-identity guarantee, so
+treat the sha256 / byte size in `audio_samples/manifest.jsonl` as the fingerprint of *our* release
+batch (that is what `scripts/check_dataset.py` verifies against the shipped wav) rather than as a
+reproduction target: after re-synthesising, compare transcript and duration, not digests.
 
 ## Known limitations of this slice
 

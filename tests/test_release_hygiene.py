@@ -105,6 +105,31 @@ def test_banned_directories_absent():
     assert not present, f"发布仓不该带这些目录：{present}"
 
 
+# 未公开/内部型号标识：**连 tests/ 一起扫**（与 BANNED_IN_SHIPPED 的"开发面豁免"不同）。
+# tests/ 会随仓库公开，测试夹具里的假型号字符串对读者同样是"论文用了未发布模型"的证据；
+# docs/limitations.md 里"公开口径只写可调用的型号"这条政策要成立，这些串就不能存在。
+BANNED_MODEL_IDS_ANYWHERE = (r"qwen3\.8-max", r"kimi-k3", r"gemini-3\.1-")
+
+
+def test_no_unreleased_model_ids_anywhere_including_tests():
+    offenders = []
+    for rel, p in _source_files():
+        if p.suffix not in {".py", ".md", ".json", ".jsonl", ".sh", ".toml", ".example", ""}:
+            continue
+        try:
+            text = p.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, OSError):
+            continue
+        for pat in BANNED_MODEL_IDS_ANYWHERE:
+            for i, line in enumerate(text.splitlines(), 1):
+                if re.search(pat, line) and rel not in SELF_EXEMPT:
+                    offenders.append(f"{rel}:{i}: {pat} → {line.strip()[:80]}")
+    assert not offenders, (
+        "仓库（含 tests/）出现未公开型号标识，夹具请改用 stub-* 一类中性名：\n"
+        + "\n".join(offenders[:20])
+    )
+
+
 def test_no_dotenv_file():
     assert not (ROOT / ".env").exists(), ".env 属凭据文件，绝不允许入库"
 
@@ -138,10 +163,79 @@ def test_judge_backend_is_swappable():
 
 
 def test_release_assets_present():
-    for rel in ("LICENSE", "LICENSE_DATASET", "README.md", "CITATION.bib",
+    for rel in ("LICENSE", "LICENSE_DATASET", "NOTICE", "README.md", "CITATION.bib",
                 "data/benchmark/version.json", "data/benchmark/DATASET_CARD.md",
                 "data/benchmark/subsets/balanced145_T1.json",
                 "data/benchmark/subsets/balanced145_T3.json",
                 "data/benchmark/audio_samples/manifest.jsonl",
                 "prompts/MANIFEST.json", "docs/limitations.md"):
         assert (ROOT / rel).exists(), f"缺发布件：{rel}"
+
+
+# --------------------------------------------------------------------------- 许可范围表
+
+ALLOWED_LICENSES = {"Apache-2.0", "CC-BY-NC-4.0", "CC-BY-NC-ND-4.0"}
+_SCOPE_ROW = re.compile(r"^\|\s*`(?P<path>[^`]+)`\s*\|\s*(?P<lic>[A-Za-z0-9.\-]+)\s*\|")
+
+
+def _licence_scope() -> dict[str, str]:
+    """解析 LICENSE_DATASET 的「路径 → SPDX」表（全仓许可的唯一口径）。"""
+    text = (ROOT / "LICENSE_DATASET").read_text(encoding="utf-8")
+    scope = {}
+    for line in text.splitlines():
+        m = _SCOPE_ROW.match(line.strip())
+        if m:
+            scope[m.group("path")] = m.group("lic")
+    return scope
+
+
+def test_licence_scope_table_is_wellformed():
+    scope = _licence_scope()
+    assert scope, "LICENSE_DATASET 的范围表解析不出任何一行（表格格式被改坏了？）"
+    unknown = {p: lic for p, lic in scope.items() if lic not in ALLOWED_LICENSES}
+    assert not unknown, f"非白名单 SPDX 标识：{unknown}"
+    missing = [p for p in scope if not (ROOT / p).exists()]
+    assert not missing, f"范围表声明了不存在的路径（口径漂移）：{missing}"
+
+
+def test_every_data_file_declares_a_licence():
+    """`data/benchmark/` 下每一项都必须被范围表覆盖（精确路径或目录前缀）。
+
+    新增数据文件时最容易发生的事：它悄悄继承"看起来最宽松"的那份许可。所以这里不
+    列清单，而是拿真实目录树去比对表 —— 漏标即红。
+    """
+    scope = _licence_scope()
+    top = ROOT / "data" / "benchmark"
+    uncovered = []
+    for p in sorted(top.iterdir()):
+        rel = p.relative_to(ROOT).as_posix()
+        rel_norm = rel + "/" if p.is_dir() else rel
+        if rel_norm in scope:
+            continue
+        # 目录型条目以 `xxx/` 声明，覆盖其下全部内容
+        if any(rel_norm.startswith(d) for d in scope if d.endswith("/")):
+            continue
+        uncovered.append(rel_norm)
+    assert not uncovered, f"这些发布数据没有声明许可：{uncovered}"
+
+
+def test_audio_demo_is_the_strongest_licence():
+    """音频是 demo，许可必须比内容侧更严（ND 在）—— 否则"只是 demo"就成了空话。"""
+    scope = _licence_scope()
+    assert scope.get("data/benchmark/audio_samples/") == "CC-BY-NC-ND-4.0", \
+        "audio_samples 的许可标识变了：demo 定性依赖 ND，改动需同步 README 与数据卡"
+    content = [lic for path, lic in scope.items()
+               if path.startswith("data/benchmark/") and not path.endswith("/")]
+    assert "CC-BY-NC-4.0" in content, "基准内容侧应保留 CC BY-NC 4.0"
+
+
+def test_readme_licence_table_matches_scope_table():
+    """README 的许可小册必须把三个 SPDX 都说到，且不许出现第四种。"""
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    section = readme.split("## Licence", 1)
+    assert len(section) == 2, "README 丢了 Licence 段"
+    body = section[1].split("\n## ", 1)[0]
+    for lic, label in (("Apache-2.0", "Apache-2.0"), ("CC-BY-NC-4.0", "CC BY-NC 4.0"),
+                       ("CC-BY-NC-ND-4.0", "CC BY-NC-ND 4.0")):
+        assert label in body, f"README 许可段缺 {lic} 的口径"
+    assert _licence_scope(), "范围表为空时上面的比对无意义"

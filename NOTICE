@@ -28,13 +28,17 @@ Third-party attribution
 Scope of this notice
 ===============================================================================
 
-Everything in this repository is distributed under the Apache License,
-Version 2.0 — this includes the evaluation-framework source code and the
-benchmark content under `data/benchmark/` (scenario records, subset
-manifests, judge rubrics, TTS instructions and the synthesised audio
-samples). See `LICENSE` for the license text, `LICENSE_DATASET` for data
-provenance, and `README.md` for the citation/bibliography entry to use when
-referring to a specific release slice.
+This NOTICE applies to the Apache-2.0 part of the repository: the evaluation
+framework and its tooling (`src/`, `scripts/`, `tests/`, `configs/`, `prompts/`,
+`docs/`) plus the pipeline plumbing under `data/benchmark/` (`version.json`,
+`t3_action_ban.json`, `subsets/`).
+
+The benchmark content (`scenarios*.jsonl`, `keyturn_canonical.jsonl`,
+`tts_instructions.json`, `voices/`, `DATASET_CARD.md`) and the audio demo
+(`data/benchmark/audio_samples/`) are released under Creative Commons terms
+instead of Apache-2.0. `LICENSE_DATASET` holds the authoritative
+path -> SPDX-identifier table, and a contract test asserts that every entry
+under `data/benchmark/` appears in it.
 
 No patent, copyright or other licence claim is made or accepted by listing
 the third-party work above; the listing exists solely to satisfy the

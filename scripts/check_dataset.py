@@ -103,16 +103,26 @@ def main() -> int:
     check("关键轮标签只挂四态（cooperative 无标签是设计）",
           set(tagged) <= {"angry", "curious", "very fast", "whispers"}, str(dict(tagged)))
 
-    print("[5] 样音包（全量音频不发的替代品）")
+    print("[5] 音频 demo 包（展示件，不参与测量；全量刺激音频不发布）")
     man = jl(BENCH / "audio_samples" / "manifest.jsonl")
     ok = bool(man)
     for row in man:
         p = BENCH / "audio_samples" / row["file"]
         ok = ok and p.exists() and sha256(p) == row["sha256"] and p.stat().st_size == row["bytes"]
-    check(f"{len(man)} 个样音 wav 与 manifest 逐条对得上", ok)
-    check("五态 × {state,neutral} 都有样音",
-          {r["state"] for r in man} == set(STATES) and {r["condition"] for r in man} ==
-          {"state", "neutral"}, f"{len(man)} 条")
+    check(f"{len(man)} 个 demo wav 与 manifest 逐条对得上", ok)
+    demo_states = {r["state"] for r in man}
+    demo_arms = {r["condition"] for r in man}
+    check("五态 × {state,neutral} 都有 demo，且矩阵不缺格",
+          demo_states == set(STATES) and demo_arms == {"state", "neutral"},
+          f"{len(man)} 条")
+    # demo 的数量是设计出来的：每个状态取 2 个 base × 2 个韵律臂 = 4 条，五态共 20 条。
+    # README / LICENSE_DATASET 里的"20 条"靠这两条断言兜住：加/删 clip 必须同步改文档口径。
+    per_state = {s: {r["base_scenario_id"] for r in man if r["state"] == s} for s in STATES}
+    check("每个状态各 2 个 base（demo 矩阵 5×2×2）",
+          all(len(b) == 2 for b in per_state.values()),
+          " ".join(f"{s}:{len(b)}" for s, b in per_state.items()))
+    check("demo 条数 == 状态×臂×每态 base（不重复不缺格）",
+          len(man) == len(demo_states) * len(demo_arms) * 2, f"{len(man)} 条")
 
     print(f"\n{'✅ 全部通过' if not fails else '⛔ 失败项：' + ', '.join(fails)}")
     return 0 if not fails else 1

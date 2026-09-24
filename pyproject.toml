@@ -4,8 +4,10 @@ version = "0.1.0"
 description = "Listen2Serve: a controlled benchmark of prosody-conditioned service actions for real-time customer-service voice agents"
 readme = "README.md"
 requires-python = ">=3.12"
+# 包本身 = 框架代码，Apache-2.0；基准内容与音频 demo 是另外的许可，
+# 不打进 wheel，口径见 LICENSE_DATASET 的路径表。
 license = "Apache-2.0"
-license-files = ["LICENSE", "NOTICE", "LICENSE_DATASET"]
+license-files = ["LICENSE", "NOTICE"]
 authors = [{ name = "Listen2Serve Authors" }]
 dependencies = [
     "dashscope>=1.24.0",
