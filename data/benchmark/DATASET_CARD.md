@@ -55,8 +55,11 @@ scratch. All speech is synthesised through a commercial TTS API; no real person 
 personal names, amounts and account numbers in the scenarios are fictional.
 
 `audio_samples/` (20 clips) is a **listening demo, not a slice of the stimulus set**: nothing in the
-measurement path reads it, and its state × arm × base matrix is chosen so that every contrast cell
-can be heard at least once. The full stimulus audio (1,100 clips, ~230 MB) is not redistributed —
+measurement path reads it. Each clip is **one customer turn** (mean 3.5 s, 16 kHz mono) — not a whole
+multi-turn conversation — and every clip comes from the **T3 (text-neutral) layer**, so the demo
+illustrates the voice channel only; the text channel has no audio here. The pairing is
+5 states × 2 bases × {state, neutral} renderings of the *same* utterance, so each state can be heard
+as an A/B. The full stimulus audio (1,100 clips, ~230 MB) is not redistributed —
 vendor voice-redistribution boundaries are unclear and the volume is large
 ([docs/limitations.md](../../docs/limitations.md)).
 

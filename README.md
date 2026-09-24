@@ -23,7 +23,7 @@ Companion to the paper *"Listen2Serve: Benchmarking Real-Time Customer Service A
 | Voice assignment | `data/benchmark/voices/` | per-base user timbre, gender × age band |
 | Service / simulation / rubric prompts | `prompts/` | text snapshots; source of truth is the code, drift fails a test |
 | Reproduction configs | `configs/` | one file per paper condition (E/E, N/E, N/N) |
-| Audio demo (not a data subset) | `data/benchmark/audio_samples/` | 20 clips (5 states × 2 conditions × 2 bases) + `manifest.jsonl` |
+| Audio demo (not a data subset) | `data/benchmark/audio_samples/` | 20 single-turn clips: 5 states × 2 bases × {state, neutral} renderings of the same line, all from the T3 layer |
 | Contract tests | `tests/` | data schema, judge contracts, orchestrator, licence scope, release hygiene |
 
 **Not included, deliberately** (see [docs/limitations.md](docs/limitations.md)):
