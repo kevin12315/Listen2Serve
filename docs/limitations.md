@@ -70,5 +70,7 @@ reachable endpoint.
 
 Wilson 95% intervals for proportions; exact McNemar for paired binary outcomes on the same
 scenario or utterance; Benjamini–Hochberg over explicitly declared comparison families
-(38 main + a separate 14-item family after the fourth endpoint entered the pool). q-values move when
-the family changes even if p does not — quote the family size whenever you quote a q.
+(38 main + a separate 14-item family after the fourth endpoint entered the pool — that fourth
+endpoint is not part of this release's `configs/`, which carry the three public endpoints only).
+q-values move when the family changes even if p does not — quote the family size whenever you
+quote a q.
