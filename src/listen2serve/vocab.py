@@ -231,7 +231,7 @@ def _occurrence_runtime_exempt(text: str, word: str, pos: int) -> bool:
             start = idx + 1
     for rule in RUNTIME_CONTEXT_EXEMPT.get(word, ()):
         left_ok = not rule["left"] or any(
-            text[pos - len(l):pos] == l for l in rule["left"] if l)
+            text[pos - len(frag):pos] == frag for frag in rule["left"] if frag)
         right_ok = not rule["right"] or any(
             (r == "" and pos + len(word) == len(text))
             or (r and text[pos + len(word):pos + len(word) + len(r)] == r)

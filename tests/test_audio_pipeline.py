@@ -70,7 +70,7 @@ class TestConversationAudio:
         assert "[user] turn1" in labels
         assert "[agent] turn2" in labels
         # 客服 turn1 应从 1.3s 开始（user 1s + 反应间隙 0.3s，推理不计入）
-        agent_line = [l for l in labels.split("\n") if "[agent] turn1" in l][0]
+        agent_line = [ln for ln in labels.split("\n") if "[agent] turn1" in ln][0]
         assert agent_line.startswith("1.30")
 
 

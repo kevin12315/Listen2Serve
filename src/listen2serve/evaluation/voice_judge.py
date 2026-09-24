@@ -128,8 +128,6 @@ class VoiceJudge:
     def _judge_dashscope_native(
         self, audio_wav_path: str | Path, prompt: str, model: str
     ) -> tuple[str, str]:
-        import base64
-
         import httpx
 
         from listen2serve.runtime.config import get_settings
@@ -171,8 +169,6 @@ class VoiceJudge:
     def _judge_openai_compat(
         self, audio_wav_path: str | Path, prompt: str, model: str
     ) -> tuple[str, str]:
-        import base64
-
         audio_b64 = base64.b64encode(Path(audio_wav_path).read_bytes()).decode()
         messages = [
             {

@@ -5,11 +5,10 @@
 "手上的评测集是完整且自洽的"，而 pytest 只在开发者机器上跑。CI 与人都调这个脚本，
 退出码非零 = 数据有问题，⛔ 不许靠"警告继续跑"。
 
-用法：PYTHONPATH=src python scripts/check_dataset.py [--verbose]
+用法：PYTHONPATH=src python scripts/check_dataset.py
 """
 from __future__ import annotations
 
-import argparse
 import hashlib
 import json
 import sys
@@ -41,9 +40,6 @@ def state_of(row: dict) -> str:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--verbose", action="store_true")
-    a = ap.parse_args()
     fails: list[str] = []
 
     def check(name: str, ok: bool, detail: str = "") -> None:
@@ -73,7 +69,7 @@ def main() -> int:
     for s in scenarios:
         by_base.setdefault(s["base_scenario_id"], []).append(s["leakage_label"])
     check("展开层只有 T1/T3（发布切片不含 T2）",
-          {l for v in by_base.values() for l in v} == set(LAYERS), str(sorted(by_base)))
+          {lay for v in by_base.values() for lay in v} == set(LAYERS), str(sorted(by_base)))
     check("每个 base 两档齐全", all(sorted(v) == sorted(LAYERS) for v in by_base.values()))
     need = ("agent_policy", "gold_action_plan", "measurement", "oracle_state", "user_script")
     missing = [s["scenario_id"] for s in scenarios for k in need if k not in s]
@@ -131,6 +127,8 @@ def main() -> int:
               for row in man), f"{len(man)} 条")
     demo_states = {r["state"] for r in man}
     demo_arms = {r["condition"] for r in man}
+    check("demo 全部取自 T3 层（文档口径：只演示声音通道，不演示文本通道）",
+          {r["layer"] for r in man} == {"T3"}, str(sorted({r["layer"] for r in man})))
     check("五态 × {state,neutral} 都有 demo，且矩阵不缺格",
           demo_states == set(STATES) and demo_arms == {"state", "neutral"},
           f"{len(man)} 条")

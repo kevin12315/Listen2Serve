@@ -18,7 +18,6 @@ import base64
 import io
 import logging
 import time
-import uuid
 import wave
 from dataclasses import dataclass, field
 from typing import Any
@@ -176,8 +175,6 @@ def _extract_audio_bytes(data: dict[str, Any], raw: bytes) -> bytes:
 
 
 def _b64decode_or_raw(value: str) -> bytes:
-    import base64
-
     try:
         return base64.b64decode(value)
     except Exception: # noqa: BLE001 - 非 base64 则按原始字节

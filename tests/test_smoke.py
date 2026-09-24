@@ -26,8 +26,8 @@ _EXPECTED_VERSION = json.loads(
 @pytest.fixture(scope="module")
 def scenarios() -> list[dict]:
     path = Path("data/benchmark/scenarios.jsonl")
-    assert path.exists(), "评测集缺失：请先运行 （内部产物，未随本仓发布）"
-    return [json.loads(l) for l in path.open(encoding="utf-8") if l.strip()]
+    assert path.exists(), "缺评测集：data/benchmark/scenarios.jsonl 未随发布切片带上"
+    return [json.loads(row) for row in path.open(encoding="utf-8") if row.strip()]
 
 
 class TestBenchmarkContract:
