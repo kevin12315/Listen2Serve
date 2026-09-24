@@ -37,13 +37,16 @@ by this pipeline on commercial endpoints; this release ships the instrument, not
 python3 -m venv .venv && source .venv/bin/activate
 pip install -e ".[dev]"
 
-cp .env.example .env          # add DASHSCOPE_API_KEY (tested endpoints + TTS + ASR)
-make check-data               # structure / balance / fingerprints / audio samples
+cp .env.example .env          # keys, per step: DASHSCOPE_API_KEY = agent under test + TTS + ASR;
+                              # GEMINI_API_KEY = the three judges; VOLC_API_KEY = doubao baseline only
+make check-data               # structure / balance / fingerprints / audio demo
 make test                     # contract tests, no network access required
 make smoke                    # offline end-to-end check of the swappable judge backend
 
 # one full paper condition: run → judge → report, once per endpoint in the config
 # (3 endpoints × 145 scenarios); `--model all` loops over configs/*.json `endpoints`.
+# Note: the loop includes `doubao-seeduplex-3.0`, which needs VOLC_API_KEY — if you do
+# not have that key, run the endpoints you can reach by naming them with `--model`.
 bash scripts/run_experiment.sh --run-id main_N_E --config configs/main_N_E.json --model all
 # or a single endpoint:
 bash scripts/run_experiment.sh --run-id main_N_E --config configs/main_N_E.json \

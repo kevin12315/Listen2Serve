@@ -68,6 +68,11 @@ treat the sha256 / byte size in `audio_samples/manifest.jsonl` as the fingerprin
 batch (that is what `scripts/check_dataset.py` verifies against the shipped wav) rather than as a
 reproduction target: after re-synthesising, compare transcript and duration, not digests.
 
+One reading trap in `keyturn_canonical.jsonl`: its `wav_state` / `wav_neutral` fields are **file
+names from our internal stimulus batch, not paths resolvable in this repository** — of the 275 × 2
+names, only the 20 demo clips ship here. Use them to identify which rendering a row refers to, and
+re-synthesise anything else as described above.
+
 ## Known limitations of this slice
 
 * The 145 bases are stratified by **state** (29 each), not by gender: within a role × dynamics cell

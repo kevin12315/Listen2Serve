@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""发布仓的数据自检：结构、规模、均衡、指纹、样音五项，全绿才允许跑实验。
+"""发布仓的数据自检：结构、规模、均衡、指纹、台词表、音频 demo 六项，全绿才允许跑实验。
 
 为什么不把校验塞进 pytest 就够了：`scripts/run_experiment.sh` 的入口需要先确认
 "手上的评测集是完整且自洽的"，而 pytest 只在开发者机器上跑。CI 与人都调这个脚本，
@@ -103,13 +103,32 @@ def main() -> int:
     check("关键轮标签只挂四态（cooperative 无标签是设计）",
           set(tagged) <= {"angry", "curious", "very fast", "whispers"}, str(dict(tagged)))
 
-    print("[5] 音频 demo 包（展示件，不参与测量；全量刺激音频不发布）")
+    print("[5] 关键轮台词表（keyturn_canonical）自洽")
+    # 这个文件不在 version.json 的指纹清单里，也没有任何 pytest 读它 —— 也就是说改坏
+    # 内容不会有任何地方报警。所以规模/来源/格式三条都在这儿钉住。
+    kt = jl(BENCH / "keyturn_canonical.jsonl")
+    kt_layers = Counter(r["leakage_label"] for r in kt)
+    check("规模 == 数据卡声明（145 T1 + 130 T3 = 275）",
+          dict(kt_layers) == {"T1": 145, "T3": 130}, str(dict(kt_layers)))
+    check("scenario_id 全部能在 scenarios.jsonl 里找到",
+          {r["scenario_id"] for r in kt} <= {s["scenario_id"] for s in scenarios})
+    check("台词不含括号舞台指示（user_simulator 的括号判据依赖这条）",
+          not [r for r in kt if any(c in r["text"] for c in "（）()")])
+    check("生成器型号不冒充公开型号（口径见 docs/limitations.md）",
+          all("undisclosed" in str(r.get("gen_model", "")) for r in kt),
+          str(sorted({str(r.get("gen_model")) for r in kt})[:2]))
+
+    print("[6] 音频 demo 包（展示件，不参与测量；全量刺激音频不发布）")
     man = jl(BENCH / "audio_samples" / "manifest.jsonl")
     ok = bool(man)
     for row in man:
         p = BENCH / "audio_samples" / row["file"]
         ok = ok and p.exists() and sha256(p) == row["sha256"] and p.stat().st_size == row["bytes"]
     check(f"{len(man)} 个 demo wav 与 manifest 逐条对得上", ok)
+    kt_wavs = {r[f]: r for r in kt for f in ("wav_state", "wav_neutral")}
+    check("每条 demo wav 都能在 keyturn 里找到同名的行且台词一致",
+          all(row["file"] in kt_wavs and kt_wavs[row["file"]]["text"] == row["text"]
+              for row in man), f"{len(man)} 条")
     demo_states = {r["state"] for r in man}
     demo_arms = {r["condition"] for r in man}
     check("五态 × {state,neutral} 都有 demo，且矩阵不缺格",
