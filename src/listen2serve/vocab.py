@@ -139,11 +139,11 @@ NEG_CONTEXT_EXEMPT: dict[str, tuple[str, ...]] = {
     "挂了": ("先挂了",),
 }
 
-# ---- 运行期语境豁免表（内部方案，仅 validate_level_runtime 生效）----
+# ---- 运行期语境豁免表（仅 validate_level_runtime 生效）----
 # 口径：非关键轮 T2/T3 演绎话术的事后违规计数（lexicon_check）。
-# 条目 =（命中词 + 左右邻接字符模式 [+ 守卫词]），由 内部方案 Step 2 误报聚类生成
-# （（未发布），qwen-plus 逐条判定），
-# 逐条可人工核查；不引入分词依赖。不影响 validate_level（v4 契约）与
+# 条目 =（命中词 + 左右邻接字符模式 [+ 守卫词]），由误报聚类结果整理而成；每条规则先由
+# LLM 逐条判定再人工复核（判定所用型号未公开，见 docs/limitations.md），逐条可核查，
+# 不引入分词依赖。不影响 validate_level（v4 契约）与
 # validate_level_v2（关键轮预写文本契约），两者语义保持不变。
 # 规则字段：left/right 为邻接字符串候选（空元组 = 该侧无要求；
 # right 中 "" 表示句尾），guard 为句内守卫词（命中任一则豁免失效）。
