@@ -31,7 +31,7 @@ Scope of this notice
 This NOTICE applies to the Apache-2.0 part of the repository: the evaluation
 framework and its tooling (`src/`, `scripts/`, `tests/`, `configs/`, `prompts/`,
 `docs/`) plus the pipeline plumbing under `data/benchmark/` (`version.json`,
-`t3_action_ban.json`, `subsets/`).
+`neutral_wording_ban.json`, `subsets/`).
 
 The benchmark content (`scenarios*.jsonl`, `keyturn_canonical.jsonl`,
 `tts_instructions.json`, `voices/`, `DATASET_CARD.md`) and the audio demo

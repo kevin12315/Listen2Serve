@@ -1,106 +1,149 @@
 #!/usr/bin/env bash
-# 一轮实验的端到端入口：生成 → 评测 → 报告（三步绑成一条命令，任一步失败立即终止）。
-#
-# 为什么要有这个脚本：三步分开手跑时最容易漏掉后两步，而漏掉的后果不报错——报告层继续显示
-# 上一批次的数字，看起来"跑完了"。所以这里把生成→评测→报告绑成一条命令，并在结尾校验
-# "本批次产物齐了 + 口径三要素（数据版本 / 被测 prompt 版本 / 裁判指纹）写进了 manifest"。
-#
-# 用法：
-#   单端点： bash scripts/run_experiment.sh --run-id main_N_E --config configs/main_N_E.json \
-#                --model dashscope/qwen3.5-omni-plus-realtime
-#   整条件（论文一张表 = config.endpoints 里的三端点各跑一轮）：
-#          bash scripts/run_experiment.sh --run-id main_N_E --config configs/main_N_E.json --model all
-#   # --config 会带出该条件的文本层/韵律臂/裁判契约版本；显式传参优先于 config。
+# Run generation, scoring and reporting as one checked pipeline (Bash 3.2+).
+# Explicit command-line options override the selected JSON configuration.
 set -euo pipefail
 cd "$(dirname "$0")/.."
 PY=${PY:-python}
-export PYTHONPATH="src:scripts"
+export PYTHONPATH="src:scripts${PYTHONPATH:+:$PYTHONPATH}"
 
-RUN_ID="" MODEL="" CONFIG="" PROSODY="" LEAKAGE="" PROMPT="" JUDGE="" LIMIT="" EXTRA=()
+RUN_ID="" MODEL="" CONFIG="" PROSODY="" WORDING="" IDS="" JUDGE="" VOICE_JUDGE=""
+LIMIT="" SCENARIOS="" MODALITY="" ASR="" SIM_OVERRIDE="" EXTRA=() ENDPOINTS=()
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --run-id) RUN_ID="$2"; shift 2;;
-    --model) MODEL="$2"; shift 2;;
-    --config) CONFIG="$2"; shift 2;;
-    --prosody-arm) PROSODY="$2"; shift 2;;
-    --agent-prompt) PROMPT="$2"; shift 2;;
-    --judge-model) JUDGE="$2"; shift 2;;
-    --limit) LIMIT="$2"; shift 2;;
+    --run-id|--model|--config|--prosody-arm|--wording|--scenario-ids|--judge-model|--voice-judge-model|--limit|--scenarios|--modality|--sim-model)
+      [[ $# -ge 2 && -n "$2" ]] || { echo "Missing value for $1" >&2; exit 2; }
+      case "$1" in
+        --run-id) RUN_ID="$2";; --model) MODEL="$2";; --config) CONFIG="$2";;
+        --prosody-arm) PROSODY="$2";; --wording) WORDING="$2";; --scenario-ids) IDS="$2";;
+        --judge-model) JUDGE="$2";; --voice-judge-model) VOICE_JUDGE="$2";;
+        --limit) LIMIT="$2";; --scenarios) SCENARIOS="$2";; --modality) MODALITY="$2";;
+        --sim-model) SIM_OVERRIDE="$2";;
+      esac
+      shift 2;;
+    --sim-model=*) SIM_OVERRIDE="${1#*=}"; shift;;
+    --asr) ASR="true"; shift;;
+    --no-asr) ASR="false"; shift;;
     *) EXTRA+=("$1"); shift;;
   esac
 done
-[[ -n "$RUN_ID" && -n "$MODEL" ]] || { echo "必须给 --run-id 与 --model"; exit 2; }
+[[ -n "$RUN_ID" && -n "$MODEL" ]] || { echo "--run-id and --model are required" >&2; exit 2; }
 
-SCENARIOS="data/benchmark/scenarios.jsonl"
 if [[ -n "$CONFIG" ]]; then
-  [[ -f "$CONFIG" ]] || { echo "找不到 config：$CONFIG"; exit 2; }
-  read -r PROSODY LEAKAGE SCHEMA IDS <<<"$($PY - "$CONFIG" <<'PYF'
-import json,sys
-c=json.load(open(sys.argv[1]))
-print(c.get("prosody_arm",""), c.get("leakage",""), c.get("sim_prompt_schema",""),
-      c.get("scenario_ids_file",""))
-PYF
-)"
-  [[ -n "$SCHEMA" ]] && EXTRA+=(--sim-prompt-schema "$SCHEMA")
-  # 发布仓的 scenarios.jsonl 只含论文主批次 145×2，按档位筛即选中该条件的 145 条；
-  # 若你换了更大的人工挑选集，改用 --scenario-ids 逐条点名。
-  [[ -n "$IDS" && -f "$IDS" ]] && echo "（config 指定的批次清单：$IDS，本脚本用 --leakage $LEAKAGE 等价筛出）"
-fi
-ARGS=(--run-id "$RUN_ID" --model "$MODEL" --scenarios "$SCENARIOS")
-[[ -n "$LEAKAGE" ]] && ARGS+=(--leakage "$LEAKAGE")
-[[ -n "$PROSODY" ]] && ARGS+=(--prosody-arm "$PROSODY")
-[[ -n "$PROMPT" ]] && ARGS+=(--agent-prompt "$PROMPT")
-[[ -n "$LIMIT" ]] && ARGS+=(--limit "$LIMIT")
-ARGS+=("${EXTRA[@]}")
+  [[ -f "$CONFIG" ]] || { echo "Configuration not found: ${CONFIG}" >&2; exit 2; }
+  CONFIG_VALUES=$("$PY" - "$CONFIG" <<'PYCONFIG'
+import json
+import sys
+from pathlib import Path
 
-# 一个端点的一轮：生成→评测→报告→三要素自检，任一步失败立即终止。
+config = json.loads(Path(sys.argv[1]).read_text(encoding="utf-8"))
+for key in ("prosody_arm", "wording", "scenarios", "judge_model", "voice_judge_model", "modality"):
+    value = config.get(key)
+    if value is not None:
+        if not isinstance(value, str) or "\n" in value or "\t" in value:
+            raise ValueError(f"Invalid configuration value: {key}")
+        print(key, value, sep="\t")
+if "asr_for_judge_input" in config:
+    value = config["asr_for_judge_input"]
+    if type(value) is not bool:
+        raise ValueError("asr_for_judge_input must be a boolean")
+    print("asr", str(value).lower(), sep="\t")
+if config.get("scenario_ids_file"):
+    path = Path(config["scenario_ids_file"])
+    subset = json.loads(path.read_text(encoding="utf-8"))
+    ids = subset.get("scenario_ids") if isinstance(subset, dict) else subset
+    if not isinstance(ids, list) or not ids or any(not isinstance(s, str) or not s for s in ids):
+        raise ValueError(f"Invalid scenario IDs: {path}")
+    print("ids", ",".join(ids), sep="\t")
+endpoints = config.get("endpoints", [])
+if not isinstance(endpoints, list):
+    raise ValueError("endpoints must be a list")
+for endpoint in endpoints:
+    if not isinstance(endpoint, str) or not endpoint or "\n" in endpoint:
+        raise ValueError("Invalid endpoint")
+    print("endpoint", endpoint, sep="\t")
+PYCONFIG
+)
+  while IFS=$'\t' read -r key value; do
+    case "$key" in
+      prosody_arm) [[ -n "$PROSODY" ]] || PROSODY="$value";;
+      wording) [[ -n "$WORDING" ]] || WORDING="$value";;
+      scenarios) [[ -n "$SCENARIOS" ]] || SCENARIOS="$value";;
+      judge_model) [[ -n "$JUDGE" ]] || JUDGE="$value";;
+      voice_judge_model) [[ -n "$VOICE_JUDGE" ]] || VOICE_JUDGE="$value";;
+      modality) [[ -n "$MODALITY" ]] || MODALITY="$value";;
+      asr) [[ -n "$ASR" ]] || ASR="$value";;
+      ids) [[ -n "$IDS" ]] || IDS="$value";;
+      endpoint) ENDPOINTS+=("$value");;
+    esac
+  done <<< "$CONFIG_VALUES"
+fi
+SCENARIOS=${SCENARIOS:-data/benchmark/scenarios.jsonl}
+MODALITY=${MODALITY:-audio}
+ASR=${ASR:-false}
+
+# Validate every selected service, including all endpoints, before any generation.
+PREFLIGHT=(--modality "$MODALITY")
+[[ -z "$SIM_OVERRIDE" ]] || PREFLIGHT+=(--sim-model "$SIM_OVERRIDE")
+[[ -z "$JUDGE" ]] || PREFLIGHT+=(--judge-model "$JUDGE")
+[[ -z "$VOICE_JUDGE" ]] || PREFLIGHT+=(--voice-judge-model "$VOICE_JUDGE")
+[[ "$ASR" != "true" ]] || PREFLIGHT+=(--asr)
+if [[ "$MODEL" == "all" ]]; then
+  [[ -n "$CONFIG" && ${#ENDPOINTS[@]} -gt 0 ]] || { echo "--model all requires config.endpoints" >&2; exit 2; }
+  for endpoint in "${ENDPOINTS[@]}"; do PREFLIGHT+=(--target-model "$endpoint"); done
+else
+  PREFLIGHT+=(--target-model "$MODEL")
+fi
+"$PY" -m listen2serve.runtime.preflight "${PREFLIGHT[@]}"
+
 run_one() {
   local model="$1" rid="$2"
   local a=(--run-id "$rid" --model "$model" --scenarios "$SCENARIOS")
-  [[ -n "$LEAKAGE" ]] && a+=(--leakage "$LEAKAGE")
-  [[ -n "$PROSODY" ]] && a+=(--prosody-arm "$PROSODY")
-  [[ -n "$PROMPT" ]] && a+=(--agent-prompt "$PROMPT")
-  [[ -n "$LIMIT" ]] && a+=(--limit "$LIMIT")
-  a+=("${EXTRA[@]}")
-  local step; step() { echo; echo "=== [$rid] $1 ==="; shift; "$@"; }
-  step 生成 "$PY" -m listen2serve.cli run-eval "${a[@]}"
-  step 评测 "$PY" -m listen2serve.cli evaluate --run-id "$rid" ${JUDGE:+--judge-model "$JUDGE"}
-  step 报告 "$PY" -m listen2serve.cli report --run-id "$rid"
-  # 收尾自检：本批次的三要素（数据版本 / 被测 prompt 版本 / 裁判指纹）必须已落盘，
-  # 否则一个月后没人能判断这批数字还能不能和别的批次放一起。
-  step 自检 "$PY" - "$rid" <<'PYCHK'
-import json, sys
+  [[ -z "$WORDING" ]] || a+=(--wording "$WORDING")
+  [[ -z "$PROSODY" ]] || a+=(--prosody-arm "$PROSODY")
+  [[ -z "$IDS" ]] || a+=(--scenario-ids "$IDS")
+  [[ -z "$LIMIT" ]] || a+=(--limit "$LIMIT")
+  [[ -z "$SIM_OVERRIDE" ]] || a+=(--sim-model "$SIM_OVERRIDE")
+  a+=(${EXTRA[@]+"${EXTRA[@]}"})
+  echo "[${rid}] Generate"
+  "$PY" -m listen2serve.cli run-eval "${a[@]}"
+  local e=(--run-id "$rid" --scenarios "$SCENARIOS" --modality "$MODALITY")
+  [[ -z "$JUDGE" ]] || e+=(--judge-model "$JUDGE")
+  [[ -z "$VOICE_JUDGE" ]] || e+=(--voice-judge-model "$VOICE_JUDGE")
+  [[ "$ASR" != "true" ]] || e+=(--asr)
+  echo "[${rid}] Evaluate"
+  "$PY" -m listen2serve.cli evaluate "${e[@]}"
+  echo "[${rid}] Report"
+  "$PY" -m listen2serve.cli report --run-id "$rid" --modality "$MODALITY"
+  "$PY" - "$rid" "$MODALITY" <<'PYCHECK'
+import json
+import sys
 from pathlib import Path
-run_id = sys.argv[1]
-mani = Path("runs") / run_id / "run_manifest.json"
-assert mani.exists(), f"缺 {mani}：生成步没落盘"
-m = json.loads(mani.read_text(encoding="utf-8"))
-for key_path in (("data", "dataset_version"), ("prompts", "agent_prompt"), ("prompts", "judge_prompts_file_sha256")):
-    node = m
-    for k in key_path:
-        node = node.get(k) if isinstance(node, dict) else None
-    assert node, f"manifest 缺 {'.'.join(key_path)}：口径无法追溯"
-vd = Path("reports") / run_id / "verdicts_audio.json"
-assert vd.exists(), f"缺 {vd}：评测步没落盘"
-rows = json.loads(vd.read_text(encoding="utf-8"))
-n = len(rows.get("items", rows) if isinstance(rows, dict) else rows)
-print(f"✓ {run_id}: dataset/prompt/judge 三要素齐，判定点 {n} 条")
-PYCHK
-  echo; echo "✅ $rid 完成（产物在 runs/$rid 与 reports/$rid）"
+
+run_id, modality = sys.argv[1:]
+manifest = json.loads((Path("runs") / run_id / "run_manifest.json").read_text(encoding="utf-8"))
+for path in (("data", "dataset_version"), ("prompts", "agent_prompt_sha256"),
+             ("prompts", "sim_prompt_sha256"), ("prompts", "judge_prompts_file_sha256"),
+             ("evaluation", "judge_model")):
+    value = manifest
+    for key in path:
+        value = value.get(key) if isinstance(value, dict) else None
+    if not value:
+        raise ValueError(f"Missing manifest field: {'.'.join(path)}")
+verdicts = json.loads((Path("reports") / run_id / f"verdicts_{modality}.json").read_text(encoding="utf-8"))
+items = verdicts.get("items", verdicts) if isinstance(verdicts, dict) else verdicts
+if not items:
+    raise ValueError("No scored results")
+partial = sum(item.get("dialogue_complete") is False or item.get("termination_reason") == "endpoint_session_closed"
+              for item in items)
+print(f"Completed {run_id}: {len(items) - partial} complete, {partial} partial scored scenarios")
+PYCHECK
 }
 
 if [[ "$MODEL" == "all" ]]; then
-  # --model all：按 config.endpoints 数组逐端点各跑一轮（论文一张表 = 三端点 × 145）。
-  [[ -n "$CONFIG" ]] || { echo "--model all 需配 --config"; exit 2; }
-  mapfile -t ENDPOINTS < <("$PY" - "$CONFIG" <<'PYE'
-import json, sys
-for e in json.load(open(sys.argv[1])).get("endpoints", []):
-    print(e)
-PYE
-)
-  [[ ${#ENDPOINTS[@]} -gt 0 ]] || { echo "config 里没有 endpoints 字段"; exit 2; }
-  echo "按 config.endpoints 依次跑 ${#ENDPOINTS[@]} 个端点：${ENDPOINTS[*]}"
-  for e in "${ENDPOINTS[@]}"; do run_one "$e" "${RUN_ID}__${e}"; done
+  [[ -n "$CONFIG" && ${#ENDPOINTS[@]} -gt 0 ]] || { echo "--model all requires config.endpoints" >&2; exit 2; }
+  for endpoint in "${ENDPOINTS[@]}"; do
+    run_one "$endpoint" "${RUN_ID}__${endpoint//\//_}"
+  done
 else
   run_one "$MODEL" "$RUN_ID"
 fi

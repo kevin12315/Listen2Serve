@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-"""Plan J §8.2：TTS 文本规范化单测（纯函数，无 API）。"""
+"§8.2：TTS 文本规范化单测（纯函数，无 API）"
 
 from __future__ import annotations
 

@@ -1,5 +1,1 @@
-"""数据集侧的派生与卫生检查（内部方案 起）。
-
-这个子包只放「读 `data/benchmark/` 并判定它是否自洽」的代码，不放生成逻辑
-（生成在 `（未发布）`）。存在的理由见 `hygiene.py` 的模块 docstring。
-"""
+"""Local scenario validation and wording rules."""

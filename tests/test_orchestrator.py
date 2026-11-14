@@ -1,4 +1,4 @@
-"""编排器单测（tick 级全双工，fake Agent 全流程；Plan I v6.0 骨架驱动模拟器口径）。"""
+"""编排器单测：tick 级全双工与 fake Agent 完整流程。"""
 
 from __future__ import annotations
 
@@ -15,30 +15,41 @@ from listen2serve.runtime.user_simulator import UserSimulator
 
 
 def _proto(text: str, **over) -> str:
-    """v6.0 输出协议 JSON（中性台词均避开情绪词，T2 口径安全）。"""
+    """输出协议 JSON（中性文本避开情绪词）。"""
     d = {
-        "text": text, "state": "neutral", "is_key_turn": False,
-        "end_call": False, "covered": [], "interrupt": False,
+        "text": text,
+        "state": "neutral",
+        "is_key_turn": False,
+        "end_call": False,
+        "covered": [],
+        "interrupt": False,
     }
     d.update(over)
     return json.dumps(d, ensure_ascii=False)
 
 
 class FakeLLM:
-    """按脚本顺序逐次返回协议 JSON（v6.0 模拟器消费）。"""
+    """按脚本顺序逐次返回协议 JSON（用户模拟器消费）。"""
 
     def __init__(self, script: list[str] | None = None) -> None:
         # 缺省脚本：前 6 轮中性推进，第 2 轮关键事件，第 5 轮收尾
-        self.script = list(script or [
-            _proto("喂你好，我就是本人，你说吧，什么事？", covered=[1]),
-            _proto("行，我下个月十号前后先还一部分，其余再宽限几天。",
-                   state="cooperative", is_key_turn=True, covered=[2, 3],
-                   tts={"tone": "商量着来", "rate": "中等", "volume": "正常"}),
-            _proto("嗯，那还款的渠道你跟我说一下，怎么操作？", covered=[4]),
-            _proto("好，到账时间我知道了，没别的问题了。", covered=[5]),
-            _proto("行，那就这么说定了，麻烦你了，再见。", end_call=True, covered=[6]),
-            _proto("嗯，好的，先这样吧，挂了。"),
-        ])
+        self.script = list(
+            script
+            or [
+                _proto("喂你好，我就是本人，你说吧，什么事？", covered=[1]),
+                _proto(
+                    "行，我下个月十号前后先还一部分，其余再宽限几天。",
+                    state="cooperative",
+                    is_key_turn=True,
+                    covered=[2, 3],
+                    tts={"tone": "商量着来", "rate": "中等", "volume": "正常"},
+                ),
+                _proto("嗯，那还款的渠道你跟我说一下，怎么操作？", covered=[4]),
+                _proto("好，到账时间我知道了，没别的问题了。", covered=[5]),
+                _proto("行，那就这么说定了，麻烦你了，再见。", end_call=True, covered=[6]),
+                _proto("嗯，好的，先这样吧，挂了。"),
+            ]
+        )
         self.calls = 0
 
     def chat(self, *a, **kw):
@@ -54,16 +65,16 @@ class FakeTTS:
         return TTSResult(audio=b"\x01\x00" * 1600, sample_rate=16000)
 
 
-def _v6_scenario(**over) -> dict:
-    """最小 v6.0 合成场景（骨架契约：mission/key_event/disclosure_plan/turn_budget）。"""
+def _scenario(**over) -> dict:
+    """最小合成场景（骨架契约：mission/key_event/disclosure_plan/turn_budget）。"""
     sc = {
-        "scenario_id": "SYN-V6-01-T2",
+        "scenario_id": "SYN-01-T3",
         "role": "collection",
         "role_type": "outbound_pressure",
         "dynamics": "all_positive",
-        "leakage_label": "T2",
+        "leakage_label": "T3",
         "leakage_level": "implicit_consistent",
-        "dataset_version": "v6.0",
+        "dataset_version": "test",
         "oracle_state": "用户处于cooperative（配合）状态，动态类型 all_positive",
         "user_script": {
             "identity": "张三，35 岁上班族，有一笔欠款",
@@ -153,12 +164,19 @@ class FakeTickAgent:
 
 @pytest.mark.asyncio
 async def test_orchestrator_tick_full_flow(tmp_path):
-    scenario = _v6_scenario()
+    scenario = _scenario()
     agent = FakeTickAgent()
-    sim = UserSimulator(scenario["user_script"], FakeLLM(), FakeTTS(), voice="Cherry",
-                        role="collection", dynamics="all_positive",
-                        leakage_label="T2", scenario_id=scenario["scenario_id"],
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    sim = UserSimulator(
+        scenario["user_script"],
+        FakeLLM(),
+        FakeTTS(),
+        voice="Cherry",
+        role="collection",
+        dynamics="all_positive",
+        leakage_label="T3",
+        scenario_id=scenario["scenario_id"],
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=True)
 
     traj = await orch.run_scenario(scenario, agent, sim, max_turns=4)
@@ -168,7 +186,7 @@ async def test_orchestrator_tick_full_flow(tmp_path):
     t1 = traj.traces[0]
     assert t1.user_text
     assert t1.agent_text == "您好，请问是张三先生吗？"
-    # Plan I：协议字段随 TurnTrace 落盘（唯一关键轮定位来源）
+
     assert t1.is_key_turn is False
     assert traj.traces[1].is_key_turn is True
     assert traj.traces[1].user_tts_instruct
@@ -193,12 +211,19 @@ async def test_orchestrator_tick_full_flow(tmp_path):
 @pytest.mark.asyncio
 async def test_user_closed_termination(tmp_path):
     """end_call 自然收尾：next_turn 返回 None → termination_reason=user_closed。"""
-    scenario = _v6_scenario()
+    scenario = _scenario()
     agent = FakeTickAgent()
-    sim = UserSimulator(scenario["user_script"], FakeLLM(), FakeTTS(), voice="Cherry",
-                        role="collection", dynamics="all_positive",
-                        leakage_label="T2", scenario_id=scenario["scenario_id"],
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    sim = UserSimulator(
+        scenario["user_script"],
+        FakeLLM(),
+        FakeTTS(),
+        voice="Cherry",
+        role="collection",
+        dynamics="all_positive",
+        leakage_label="T3",
+        scenario_id=scenario["scenario_id"],
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=False)
     traj = await orch.run_scenario(scenario, agent, sim, max_turns=8)
     assert traj.status == "ok"
@@ -210,20 +235,29 @@ async def test_user_closed_termination(tmp_path):
 @pytest.mark.asyncio
 async def test_key_turn_missing_marked(tmp_path):
     """到达硬上限仍无关键轮 → key_turn_missing（评测侧跳过并计数）。"""
-    scenario = _v6_scenario()
+    scenario = _scenario()
     agent = FakeTickAgent()
     # 脚本里始终不报关键轮、不收尾
-    llm = FakeLLM([
-        _proto("喂你好，我就是本人，你说吧，什么事啊？"),
-        _proto("嗯，这个情况我再想想，你容我考虑两天。"),
-        _proto("我知道了，你先说说具体的流程吧。"),
-        _proto("嗯，渠道这块我清楚了，还有别的吗？"),
-        _proto("好，时间上我记下了，回头安排。"),
-    ])
-    sim = UserSimulator(scenario["user_script"], llm, FakeTTS(), voice="Cherry",
-                        role="collection", dynamics="all_positive",
-                        leakage_label="T2", scenario_id=scenario["scenario_id"],
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    llm = FakeLLM(
+        [
+            _proto("喂你好，我就是本人，你说吧，什么事啊？"),
+            _proto("嗯，这个情况我再想想，你容我考虑两天。"),
+            _proto("我知道了，你先说说具体的流程吧。"),
+            _proto("嗯，渠道这块我清楚了，还有别的吗？"),
+            _proto("好，时间上我记下了，回头安排。"),
+        ]
+    )
+    sim = UserSimulator(
+        scenario["user_script"],
+        llm,
+        FakeTTS(),
+        voice="Cherry",
+        role="collection",
+        dynamics="all_positive",
+        leakage_label="T3",
+        scenario_id=scenario["scenario_id"],
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=False)
     traj = await orch.run_scenario(scenario, agent, sim, max_turns=3)
     assert traj.status == "ok"
@@ -271,9 +305,12 @@ class FakeToolTickAgent:
             n = len(self.FOLLOWUP_TEXT)
             for i in range(3):
                 hi = (i + 1) * n // 3 if i < 2 else n
-                s.append(AgentTickResult(
-                    audio=b"\x02\x00" * 4800, transcript=self.FOLLOWUP_TEXT[i * n // 3 : hi],
-                ))
+                s.append(
+                    AgentTickResult(
+                        audio=b"\x02\x00" * 4800,
+                        transcript=self.FOLLOWUP_TEXT[i * n // 3 : hi],
+                    )
+                )
         return s
 
     async def run_tick(self, chunk: bytes, tick: int = 0) -> AgentTickResult:
@@ -296,11 +333,17 @@ class FakeToolTickAgent:
 @pytest.mark.parametrize("pre_speech", [False, True])
 async def test_tool_turn_late_followup_captured(tmp_path, pre_speech):
     """工具轮续接语音（迟到、done 不重发）必须记入本轮——含先说话再调工具的情形。"""
-    scenario = _v6_scenario()
+    scenario = _scenario()
     agent = FakeToolTickAgent(pre_speech=pre_speech, followup=True, delay_ticks=8)
-    sim = UserSimulator(scenario["user_script"], FakeLLM(), FakeTTS(), voice="Cherry",
-                        role="collection", leakage_label="T2",
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    sim = UserSimulator(
+        scenario["user_script"],
+        FakeLLM(),
+        FakeTTS(),
+        voice="Cherry",
+        role="collection",
+        leakage_label="T3",
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=False)
     traj = await orch.run_scenario(scenario, agent, sim, max_turns=1)
     assert traj.status == "ok"
@@ -316,11 +359,17 @@ async def test_tool_turn_no_followup_ends_by_grace(tmp_path):
     """纯工具轮无续接语音：宽限期后正常结束，不拖到 30s 超时。"""
     from listen2serve.runtime.orchestrator import POST_TOOL_GRACE_TICKS
 
-    scenario = _v6_scenario()
+    scenario = _scenario()
     agent = FakeToolTickAgent(pre_speech=False, followup=False)
-    sim = UserSimulator(scenario["user_script"], FakeLLM(), FakeTTS(), voice="Cherry",
-                        role="collection", leakage_label="T2",
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    sim = UserSimulator(
+        scenario["user_script"],
+        FakeLLM(),
+        FakeTTS(),
+        voice="Cherry",
+        role="collection",
+        leakage_label="T3",
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=False)
     traj = await orch.run_scenario(scenario, agent, sim, max_turns=1)
     assert traj.status == "ok"
@@ -349,9 +398,10 @@ async def test_orchestrator_error(tmp_path):
         async def run_tick(self, chunk, tick=0):
             raise RuntimeError("provider died")
 
-    scenario = _v6_scenario()
-    sim = UserSimulator(scenario["user_script"], FakeLLM(), FakeTTS(),
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    scenario = _scenario()
+    sim = UserSimulator(
+        scenario["user_script"], FakeLLM(), FakeTTS(), instruction_entry=fake_instruction_entry("cooperative")
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=False)
     traj = await orch.run_scenario(scenario, BrokenAgent(), sim)
     assert traj.status == "error"
@@ -361,15 +411,32 @@ async def test_orchestrator_error(tmp_path):
 
 @pytest.mark.asyncio
 async def test_trajectory_roundtrip(tmp_path):
-    """Trajectory.as_dict ↔ from_dict（checkpoint 续跑依赖；含 Plan I 新字段）。"""
+    """Trajectory.as_dict ↔ from_dict（checkpoint 续跑依赖；含关键轮协议字段）。"""
     from listen2serve.runtime.orchestrator import Trajectory, TurnTrace
 
-    traj = Trajectory(scenario_id="S1", model="m", role="collection", status="ok",
-                      termination_reason="user_closed", seed=42, key_turn_missing=False)
-    traj.traces.append(TurnTrace(turn=1, user_state="neutral", user_text="喂",
-                                 agent_text="您好", tick_start=0, tick_end=9,
-                                 is_key_turn=True, user_tts_instruct="用…的语气",
-                                 covered=[1, 2], forced_key_turn=False))
+    traj = Trajectory(
+        scenario_id="S1",
+        model="m",
+        role="collection",
+        status="ok",
+        termination_reason="user_closed",
+        seed=42,
+        key_turn_missing=False,
+    )
+    traj.traces.append(
+        TurnTrace(
+            turn=1,
+            user_state="neutral",
+            user_text="喂",
+            agent_text="您好",
+            tick_start=0,
+            tick_end=9,
+            is_key_turn=True,
+            user_tts_instruct="用…的语气",
+            covered=[1, 2],
+            forced_key_turn=False,
+        )
+    )
     d = traj.as_dict()
     back = Trajectory.from_dict(d)
     assert back.scenario_id == "S1"
@@ -382,9 +449,10 @@ async def test_trajectory_roundtrip(tmp_path):
 
 # ---- 打断来源拆分（interrupt_source：script=关键轮打断 / vad=自然 VAD 截断）----
 
+
 def _interrupt_scenario() -> dict:
     """key_event.interrupt=true 的合成场景（关键轮以打断方式开口）。"""
-    sc = _v6_scenario()
+    sc = _scenario()
     sc["user_script"]["key_event"]["interrupt"] = True
     return sc
 
@@ -394,18 +462,25 @@ def _interrupt_llm_script() -> FakeLLM:
     1) turn1 正常开口；2) agent1 期间 peek 草案（不打断）；3) turn2 正常；
     4) agent2 期间 peek 草案（关键轮+打断=true）→ agent2 被截断；
     5) 打断后 next_turn 重生成关键轮；6+) 推进收尾。"""
-    key = dict(state="cooperative", is_key_turn=True, interrupt=True, covered=[2, 3],
-               tts={"tone": "着急", "rate": "偏快", "volume": "正常"})
-    return FakeLLM([
-        _proto("喂你好，我就是本人，你说吧，什么事？", covered=[1]),
-        _proto("嗯，你等一下，这个情况我得想想再说。"),          # agent1 peek 草案（不打断）
-        _proto("欠款的事我知道了，你容我核对一下细节。", covered=[2]),
-        _proto("你等等，我先说，这钱我下月十号前先还一部分。", **key),  # agent2 peek 草案（打断）
-        _proto("你听我说，这钱我下月十号前先还一部分，行不行？", **key),  # 打断后重生成
-        _proto("嗯，渠道和到账时间你说一下吧，我听着。", covered=[4]),
-        _proto("行，那就这么说定了，麻烦你了，再见。", end_call=True, covered=[5, 6]),
-        _proto("嗯，好的，先这样吧，挂了。"),
-    ])
+    key = {
+        "state": "cooperative",
+        "is_key_turn": True,
+        "interrupt": True,
+        "covered": [2, 3],
+        "tts": {"tone": "着急", "rate": "偏快", "volume": "正常"},
+    }
+    return FakeLLM(
+        [
+            _proto("喂你好，我就是本人，你说吧，什么事？", covered=[1]),
+            _proto("嗯，你等一下，这个情况我得想想再说。"),  # agent1 peek 草案（不打断）
+            _proto("欠款的事我知道了，你容我核对一下细节。", covered=[2]),
+            _proto("你等等，我先说，这钱我下月十号前先还一部分。", **key),  # agent2 peek 草案（打断）
+            _proto("你听我说，这钱我下月十号前先还一部分，行不行？", **key),  # 打断后重生成
+            _proto("嗯，渠道和到账时间你说一下吧，我听着。", covered=[4]),
+            _proto("行，那就这么说定了，麻烦你了，再见。", end_call=True, covered=[5, 6]),
+            _proto("嗯，好的，先这样吧，挂了。"),
+        ]
+    )
 
 
 @pytest.mark.asyncio
@@ -413,10 +488,17 @@ async def test_script_interrupt_marked_script_source(tmp_path):
     """关键轮打断：被打断轮标记 interrupt_source=script，且不混入 VAD 截断统计。"""
     scenario = _interrupt_scenario()
     agent = FakeTickAgent()
-    sim = UserSimulator(scenario["user_script"], _interrupt_llm_script(), FakeTTS(),
-                        voice="Cherry", role="collection", dynamics="all_positive",
-                        leakage_label="T2", scenario_id=scenario["scenario_id"],
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    sim = UserSimulator(
+        scenario["user_script"],
+        _interrupt_llm_script(),
+        FakeTTS(),
+        voice="Cherry",
+        role="collection",
+        dynamics="all_positive",
+        leakage_label="T3",
+        scenario_id=scenario["scenario_id"],
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=False)
     traj = await orch.run_scenario(scenario, agent, sim, max_turns=5)
     assert traj.status == "ok"
@@ -455,12 +537,19 @@ class FakeVadTruncateAgent(FakeTickAgent):
 @pytest.mark.asyncio
 async def test_vad_truncation_not_counted_as_script(tmp_path):
     """自然 VAD 截断：标记 interrupt_source=vad，不计入脚本打断统计。"""
-    scenario = _v6_scenario()  # key_event.interrupt=False
+    scenario = _scenario()  # key_event.interrupt=False
     agent = FakeVadTruncateAgent()
-    sim = UserSimulator(scenario["user_script"], FakeLLM(), FakeTTS(), voice="Cherry",
-                        role="collection", dynamics="all_positive",
-                        leakage_label="T2", scenario_id=scenario["scenario_id"],
-                        instruction_entry=fake_instruction_entry("cooperative"))
+    sim = UserSimulator(
+        scenario["user_script"],
+        FakeLLM(),
+        FakeTTS(),
+        voice="Cherry",
+        role="collection",
+        dynamics="all_positive",
+        leakage_label="T3",
+        scenario_id=scenario["scenario_id"],
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
     orch = FullDuplexOrchestrator(artifact_dir=str(tmp_path), save_audio=False)
     traj = await orch.run_scenario(scenario, agent, sim, max_turns=2)
     assert traj.status == "ok"
@@ -480,14 +569,40 @@ def test_interaction_metrics_interrupt_split():
         compute_interaction_metrics,
     )
 
-    t1 = TurnTrace(turn=1, user_state="displeased", user_text="a", agent_text="x",
-                   tick_start=0, user_end_tick=2, agent_first_audio_tick=4, tick_end=9,
-                   interrupted=True, interrupt_source="script")
-    t2 = TurnTrace(turn=2, user_state="cooperative", user_text="b", agent_text="y",
-                   tick_start=10, user_end_tick=12, agent_first_audio_tick=14, tick_end=19,
-                   interrupted=True, interrupt_source="vad")
-    t3 = TurnTrace(turn=3, user_state="neutral", user_text="c", agent_text="z",
-                   tick_start=20, user_end_tick=22, agent_first_audio_tick=24, tick_end=29)
+    t1 = TurnTrace(
+        turn=1,
+        user_state="displeased",
+        user_text="a",
+        agent_text="x",
+        tick_start=0,
+        user_end_tick=2,
+        agent_first_audio_tick=4,
+        tick_end=9,
+        interrupted=True,
+        interrupt_source="script",
+    )
+    t2 = TurnTrace(
+        turn=2,
+        user_state="cooperative",
+        user_text="b",
+        agent_text="y",
+        tick_start=10,
+        user_end_tick=12,
+        agent_first_audio_tick=14,
+        tick_end=19,
+        interrupted=True,
+        interrupt_source="vad",
+    )
+    t3 = TurnTrace(
+        turn=3,
+        user_state="neutral",
+        user_text="c",
+        agent_text="z",
+        tick_start=20,
+        user_end_tick=22,
+        agent_first_audio_tick=24,
+        tick_end=29,
+    )
     m = compute_interaction_metrics([t1, t2, t3], 0.2)
     assert m["interrupted_turns"] == 2  # 合计口径（任意来源）
     assert m["script_interrupted_turns"] == 1
@@ -509,3 +624,78 @@ def test_interaction_metrics_interrupt_split():
     assert all(t.interrupted for t in back2.traces[:2])  # interrupted 语义不变
     assert all(t.is_key_turn is False for t in back2.traces)
     assert back2.key_turn_missing is False
+
+
+@pytest.mark.asyncio
+async def test_endpoint_closure_after_key_retains_partial_evidence(tmp_path):
+    from listen2serve.runtime.errors import EndpointSessionClosed
+    from listen2serve.runtime.orchestrator import Trajectory
+
+    class ClosingAgent(FakeTickAgent):
+        responses = 0
+
+        async def run_tick(self, chunk, tick=0):
+            if self.responses == 2 and any(chunk):
+                raise EndpointSessionClosed("fixture session limit")
+            result = await super().run_tick(chunk, tick)
+            self.responses += int(result.response_done)
+            return result
+
+    scenario = _scenario()
+    simulator = UserSimulator(
+        scenario["user_script"], FakeLLM(), FakeTTS(), role="collection",
+        leakage_label="T3", scenario_id=scenario["scenario_id"],
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
+    trajectory = await FullDuplexOrchestrator(artifact_dir=str(tmp_path)).run_scenario(
+        scenario, ClosingAgent(), simulator
+    )
+    assert trajectory.status == "partial"
+    assert trajectory.termination_reason == "endpoint_session_closed"
+    assert not trajectory.key_turn_missing
+    key = next(t for t in trajectory.traces if t.is_key_turn)
+    assert not key.endpoint_interrupted and key.agent_audio_pcm24_len > 0
+    from pathlib import Path
+    assert Path(key.agent_audio_path).is_file()
+    assert Path(key.agent_audio_path).stat().st_size > 44
+    assert (tmp_path / "ticks.json").exists()
+    assert trajectory.traces[-1].endpoint_interrupted
+    assert Trajectory.from_dict(trajectory.as_dict()).status == "partial"
+    legacy = trajectory.as_dict()
+    legacy["status"] = "ok"
+    assert Trajectory.from_dict(legacy).status == "partial"
+
+
+@pytest.mark.asyncio
+async def test_endpoint_closure_during_key_keeps_audio_but_rejects_incomplete_key(tmp_path):
+    from pathlib import Path
+
+    from listen2serve.runtime.errors import EndpointSessionClosed
+
+    class ClosingAgent(FakeTickAgent):
+        responses = 0
+        key_audio_seen = False
+
+        async def run_tick(self, chunk, tick=0):
+            if self.key_audio_seen:
+                raise EndpointSessionClosed("fixture mid-response closure")
+            result = await super().run_tick(chunk, tick)
+            if self.responses == 1 and result.audio:
+                self.key_audio_seen = True
+            self.responses += int(result.response_done)
+            return result
+
+    scenario = _scenario()
+    simulator = UserSimulator(
+        scenario["user_script"], FakeLLM(), FakeTTS(), role="collection",
+        leakage_label="T3", scenario_id=scenario["scenario_id"],
+        instruction_entry=fake_instruction_entry("cooperative"),
+    )
+    trajectory = await FullDuplexOrchestrator(artifact_dir=str(tmp_path)).run_scenario(
+        scenario, ClosingAgent(), simulator
+    )
+    assert trajectory.status == "error" and trajectory.key_turn_missing
+    key = next(t for t in trajectory.traces if t.is_key_turn)
+    assert key.endpoint_interrupted and key.agent_audio_pcm24_len > 0
+    assert Path(key.agent_audio_path).stat().st_size > 44
+    assert not FullDuplexOrchestrator._key_turn_captured(trajectory)

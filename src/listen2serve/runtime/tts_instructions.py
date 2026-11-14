@@ -1,14 +1,4 @@
-"""预生成 TTS instruction 表的加载与校验（内部方案 /）。
-
-运行期的韵律指令不再由「LLM 自填 tone/rate/volume + 代码拼模板」产生，而是按
-`base_scenario_id × state` 从离线表里查——索引键不含 `-T1/-T2/-T3`，于是「文本透明度
-递减而情绪强度恒定」这个不变量由数据结构保证，不依赖代码约定。
-
-本模块只做三件事：按路径加载并缓存表、算文件 sha256（进 run meta 指纹）、逐条做结构
-校验。**任何缺失都硬失败**（）：表缺失、base 无条目、条目缺 `non_key[state]` 一律
-`raise`，不回落到旧的模板拼装——静默回落正是上一版把「文本平静、声音愤怒」的错配藏了
-一整轮的原因。构造期能查出的错就别留到运行期（`UserSimulator.__init__` 即校验条目）。
-"""
+"""Load and validate the released vocal-delivery instruction table."""
 
 from __future__ import annotations
 
@@ -86,7 +76,7 @@ def validate_entry(base_scenario_id: str, entry: dict[str, Any]) -> None:
         raise ValueError(f"instruction 条目缺 candidate_states：{where}")
     non_key = entry.get("non_key")
     if not isinstance(non_key, dict):
-        raise ValueError(f"instruction 条目缺 non_key：{where}")
+        raise ValueError(f"instruction 条目缺 non_key：{where}")  # noqa: TRY004 - invalid instruction data
     missing = [s for s in cand if not str(non_key.get(s) or "").strip()]
     if missing:
         raise ValueError(f"instruction 条目 non_key 缺 state {missing}：{where}")
@@ -94,8 +84,7 @@ def validate_entry(base_scenario_id: str, entry: dict[str, Any]) -> None:
         raise ValueError(f"instruction 条目缺关键轮文本 key：{where}")
     if str(entry.get("key_state") or "") not in cand:
         raise ValueError(
-            f"instruction 条目 key_state={entry.get('key_state')!r} 不在 candidate_states "
-            f"{cand}：{where}"
+            f"instruction 条目 key_state={entry.get('key_state')!r} 不在 candidate_states {cand}：{where}"
         )
     # 标签「允许加什么」是全局不变量，必须代码硬管：表里写错一个标签就能静默改变韵律。
     for state, tag in (entry.get("tags") or {}).items():

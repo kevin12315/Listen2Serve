@@ -8,6 +8,7 @@
 
 用法：PYTHONPATH=src python scripts/dump_prompts.py
 """
+
 from __future__ import annotations
 
 import hashlib
@@ -23,10 +24,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 # 模块 → 要导出的常量名（正则匹配，避免点名点漏；新增量规会自动进快照）
 MODULES = {
-    "listen2serve.evaluation.prompts": r"^(KEYTURN|POLICY|FLOW|VOICE|DIALOGUE|LEAKAGE)_.*PROMPT$|"
+    "listen2serve.evaluation.prompts": r"^(KEYTURN|FLOW|VOICE|LEAKAGE)_.*PROMPT$|"
     r"^KEYTURN_ACTION_CHEATSHEET$",
-    "listen2serve.runtime.agent": r"^VOICE_CALL_INSTRUCTION(_V\d[_A-Z]*)?$",
-    "listen2serve.domains.base": r"^(ACTION_V9|STATE_ACTION_TABLE|POLICY_SECTION_KEYS)$",
+    "listen2serve.runtime.agent": r"^VOICE_CALL_INSTRUCTION$",
+    "listen2serve.domains.base": r"^(STATE_ACTIONS|STATE_ACTION_TABLE|POLICY_SECTION_KEYS)$",
     "listen2serve.runtime.user_simulator": r"^(OUTBOUND_OPENING_POOL|STATES|"
     r"MIN_UTTERANCE_CHARS|MAX_UTTERANCE_CHARS)$",
 }
@@ -61,12 +62,29 @@ def main() -> int:
             body = render(value)
             slug = f"{modname.split('.')[-2 if modname.endswith('prompts') else -1]}_{name}".lower()
             path = OUT / f"{slug}.md"
-            path.write_text(HEADER.format(name=name, module=modname, const=name, sha=sha(body))
-                            + "\n```text\n" + body + "\n```\n", encoding="utf-8")
+            path.write_text(
+                HEADER.format(name=name, module=modname, const=name, sha=sha(body))
+                + "\n```text\n"
+                + body
+                + "\n```\n",
+                encoding="utf-8",
+            )
             manifest[path.name] = sha(body)
-    (OUT / "MANIFEST.json").write_text(json.dumps(
-        {"note": "prompt/量规的导出快照（真值源在代码常量里）；由 scripts/dump_prompts.py 生成",
-         "files": manifest}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    for stale in OUT.glob("*.md"):
+        if stale.name not in manifest:
+            stale.unlink()
+    (OUT / "MANIFEST.json").write_text(
+        json.dumps(
+            {
+                "note": "prompt/量规的导出快照（真值源在代码常量里）；由 scripts/dump_prompts.py 生成",
+                "files": manifest,
+            },
+            ensure_ascii=False,
+            indent=2,
+        )
+        + "\n",
+        encoding="utf-8",
+    )
     print(f"导出 {len(manifest)} 份 prompt/量规快照 → prompts/")
     for f in sorted(manifest):
         print(f" {f}")

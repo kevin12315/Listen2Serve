@@ -3,7 +3,7 @@
 - 来源：`listen2serve.evaluation.prompts` 的常量 `LEAKAGE_PROBE_PROMPT`
 - sha256：`2302188684f37d7521793801902af6bc629114bc50692dd2eb63236e3fef1fd3`
 - 说明：本文件是**导出快照**，真值源是代码常量；二者不一致由
-  `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
+ `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
 
 ```text
 你是一名只能看到文字记录的分析员。你听不到录音，拿不到说话人的语气、语速、音量，也不知道他真实的意图。请仅凭下面这两句文字作判断。

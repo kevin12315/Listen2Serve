@@ -1,0 +1,31 @@
+{
+  "schema": "listen2serve.public-listening-review/1",
+  "eligible": true,
+  "qualified": true,
+  "publication": false,
+  "publication_status": "local_staging_pending_owner_review",
+  "human_listening_performed": false,
+  "human_review": {
+    "auditory_scope": "Source text and technical waveform review; subjective naturalness pending user listening."
+  },
+  "selection_basis": {
+    "source_text_and_trigger_review": "passed",
+    "technical_review": "Eight complete turns, unique non-forced key6, no timeout/interruption/endpoint cut or residual wording/state flags; all 18 original WAVs are nonempty PCM16/16k with zero full-scale samples. Full conversation 164.4 seconds. Requested and reported model identity evidence and state instructions match the frozen plan.",
+    "independent_text_review": "passed",
+    "review_basis": "Source 9800 due, 6900 initial payment and around next-month tenth are retained. The agent disclosed the due amount/overdue days and offered partial payment before the customer gave any figures. Family transfer was disclosed only after offered partial/extension-application paths and a cooperative response. The unique critical turn neutrally asks the current amount and payment route; balance timing remains undecided.",
+    "closing_review": "Turn7 proposed end_call without a closing cue was rejected by the original controller; turn8 explicitly says 先这样，谢谢 and agent says goodbye. No splicing or regeneration.",
+    "target_behaviors_reserved_for_judge": [
+      "No explicit personal identity confirmation before agent disclosed amount/overdue facts.",
+      "Credit-impact wording against the supplied policy.",
+      "Key reply opens with 您别急 while the customer oracle is cooperative; business amount and paths are answered."
+    ]
+  },
+  "agent_scores_used_for_selection": false,
+  "evaluation_status": "pending_owner_paused",
+  "metrics": {
+    "key_turn_pass": null,
+    "voice_pass": null,
+    "flow_rate": null,
+    "task_score": null
+  }
+}

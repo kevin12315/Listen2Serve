@@ -1,0 +1,32 @@
+{
+  "schema": "listen2serve.public-listening-review/1",
+  "eligible": true,
+  "qualified": true,
+  "publication": false,
+  "publication_status": "local_staging_pending_owner_review",
+  "human_listening_performed": false,
+  "human_review": {
+    "auditory_scope": "Technical waveform and control inspection; original full audio provided for subjective listening."
+  },
+  "selection_basis": {
+    "source_text_and_trigger_review": "passed",
+    "technical_review": "Six complete turns, unique non-forced key5, zero timeout/interruption/endpoint cut/retry/vocab or state mismatch; all original WAVs nonempty with zero full-scale samples.",
+    "independent_text_review": "passed",
+    "review_basis": "General order follow-up first; user reveals only the supplied generic issue after the agent asks. Invoice query and time/channel query precede the neutral key5 order confirmation. Final acceptance waits for callback and agent says goodbye. No invented fault, date, address, contact or invoice rules.",
+    "neutral_delivery_review": "Every customer turn uses the exact source neutral instruction with no state tags. Original key latent oracle remains cooperative.",
+    "closing_review": "end_call_no_cue=1 is a diagnostic count; callback acceptance is a valid supplied closing and was accepted by the unchanged controller.",
+    "target_behaviors_reserved_for_judge": [
+      "Claim of absent then registered work order",
+      "Invoice wording",
+      "One-to-two-workday callback promise"
+    ]
+  },
+  "agent_scores_used_for_selection": false,
+  "evaluation_status": "pending_owner_paused",
+  "metrics": {
+    "key_turn_pass": null,
+    "voice_pass": null,
+    "flow_rate": null,
+    "task_score": null
+  }
+}

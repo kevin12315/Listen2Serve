@@ -73,22 +73,24 @@ class AdapterTickResult:
     """一个 tick 的适配器输出。"""
 
     tick: int = 0
-    agent_audio: bytes = b"" # 本 tick 播出的客服音频（24k PCM16，封顶未填充）
-    transcript: str = "" # 与本 tick 播出音频成比例的转写增量
+    agent_audio: bytes = b""  # 本 tick 播出的客服音频（24k PCM16，封顶未填充）
+    transcript: str = ""  # 与本 tick 播出音频成比例的转写增量
     tool_calls: list[dict[str, Any]] = field(default_factory=list)
     response_done: bool = False
-    done_status: str = "" # response.done 携带的状态（completed/cancelled/failed/incomplete，审计用）
-    speech_started: bool = False # server VAD 检测到用户语音（打断信号）
+    done_status: str = ""  # response.done 携带的状态（completed/cancelled/failed/incomplete，审计用）
+    speech_started: bool = False  # server VAD 检测到用户语音（打断信号）
     was_truncated: bool = False
     truncated_bytes: int = 0
-    has_activity: bool = False # 本 tick 是否收到任何真实事件
-    agent_output: bool = False # 本 tick 是否收到**下行产出**事件（音频帧/转写增量/response.done）
+    has_activity: bool = False  # 本 tick 是否收到任何真实事件
+    agent_output: bool = False  # 本 tick 是否收到**下行产出**事件（音频帧/转写增量/response.done）
     # has_activity 与 agent_output 的差别不是文字游戏：has_activity 含输入侧事件
     # （如 server VAD 的 speech_started），且各端点“还有哪些事件”并不一致；而
     # 「客服这一轮是否还在产出」必须是纯下行口径，才能给编排器当判轮依据。
-    buffer_bytes: int = 0 # 尚未播出的缓冲音频字节数
-    tools_flushed: int = 0 # 本 tick 投递的工具结果数（供编排器判定工具轮后续语音窗口）
+    buffer_bytes: int = 0  # 尚未播出的缓冲音频字节数
+    tools_flushed: int = 0  # 本 tick 投递的工具结果数（供编排器判定工具轮后续语音窗口）
     errors: list[str] = field(default_factory=list)
+    played_item_ids: list[str] = field(default_factory=list)  # 仅诊断：本 tick 实际播出的 item
+    truncated_item_ids: list[str] = field(default_factory=list)  # 仅诊断：VAD 丢弃缓冲中的 item
 
 
 class QwenTickAdapter:
@@ -104,13 +106,13 @@ class QwenTickAdapter:
         self.tick_ms = tick_ms
         self.bytes_per_tick = int(output_sample_rate * 2 * tick_ms / 1000)
         # 缓冲与转写状态
-        self._buffer: list[tuple[bytes, str | None]] = [] # (音频, item_id)
+        self._buffer: list[tuple[bytes, str | None]] = []  # (音频, item_id)
         self._utterances: dict[str, UtteranceTranscript] = {}
         self._current_item_id: str | None = None
         self._skip_item_id: str | None = None
-        self._pending_tool_results: list[tuple[str, str]] = [] # (call_id, output)
+        self._pending_tool_results: list[tuple[str, str]] = []  # (call_id, output)
         self._seen_call_ids: set[str] = set()
-        self._last_flush_count: int = 0 # 本 tick 投递的工具结果数
+        self._last_flush_count: int = 0  # 本 tick 投递的工具结果数
         # 会话 token 用量（response.done 携带的 usage 累计，审计/熔断用）
         self._usage = {"input_tokens": 0, "output_tokens": 0, "total_tokens": 0, "responses": 0}
 
@@ -150,7 +152,7 @@ class QwenTickAdapter:
     async def cancel_response(self) -> None:
         try:
             await self.provider.cancel_response()
-        except Exception as exc: # noqa: BLE001 - 无活动响应时服务端拒绝，忽略
+        except Exception as exc:  # noqa: BLE001 - 无活动响应时服务端拒绝，忽略
             logger.debug("response.cancel 忽略: %s", exc)
 
     # ---- 主入口 ----
@@ -176,22 +178,22 @@ class QwenTickAdapter:
         # 封顶：本 tick 最多播出 bytes_per_tick 字节
         played = self._pop_played()
         result.agent_audio = b"".join(d for d, _ in played)
+        result.played_item_ids = list(dict.fromkeys(item_id for data, item_id in played if data and item_id))
         result.transcript = self._proportional_transcript(played)
         result.buffer_bytes = self.buffer_bytes
         result.tools_flushed = self._last_flush_count
         return result
 
-    # ---- 内部 ----
     async def _flush_pending_tool_results(self) -> None:
         if not self._pending_tool_results:
             return
         await self.cancel_response()
-        await asyncio.sleep(0.1) # 等 cancel 生效（tau-voice 同款）
+        await asyncio.sleep(0.1)  # 等 cancel 生效（tau-voice 同款）
         n = len(self._pending_tool_results)
         for call_id, output in self._pending_tool_results:
             await self.provider.send_tool_result(call_id, output)
         self._pending_tool_results.clear()
-        self._last_flush_count = n # 供 run_tick 写入结果（投递后模型会再出语音）
+        self._last_flush_count = n  # 供 run_tick 写入结果（投递后模型会再出语音）
 
     async def _collect_events(self, budget_s: float) -> list[QwenEvent]:
         events: list[QwenEvent] = []
@@ -214,9 +216,13 @@ class QwenTickAdapter:
             result.has_activity = True
         # 产出侧信号先行置位：必须在下面那些 `return`（空音频、被截断 item 的迟到
         # 音频丢弃）之前，否则「模型还在说、只是这一帧被我方丢了」会被读成静默。
-        if etype in ("response.audio.delta", "response.audio_transcript.delta",
-                     "response.audio_transcript.done", "response.done",
-                     "response.output_item.done"):
+        if etype in (
+            "response.audio.delta",
+            "response.audio_transcript.delta",
+            "response.audio_transcript.done",
+            "response.done",
+            "response.output_item.done",
+        ):
             result.agent_output = True
 
         if etype == "response.created":
@@ -233,12 +239,12 @@ class QwenTickAdapter:
             item_id = event.data.get("item_id") or self._current_item_id
             try:
                 audio = base64.b64decode(event.data.get("delta", ""))
-            except Exception: # noqa: BLE001
+            except Exception:  # noqa: BLE001
                 return
             if not audio:
                 return
             if self._skip_item_id is not None and item_id == self._skip_item_id:
-                result.truncated_bytes += len(audio) # 被截断 item 的后续音频丢弃
+                result.truncated_bytes += len(audio)  # 被截断 item 的后续音频丢弃
                 return
             self._buffer.append((audio, item_id))
             if item_id:
@@ -267,6 +273,11 @@ class QwenTickAdapter:
             # 打断：丢弃未播出的缓冲音频，跳过被截断 item 的后续音频
             if self._buffer:
                 result.truncated_bytes += self.buffer_bytes
+                result.truncated_item_ids.extend(
+                    item_id
+                    for _, item_id in self._buffer
+                    if item_id and item_id not in result.truncated_item_ids
+                )
                 self._buffer.clear()
                 result.was_truncated = True
                 self._skip_item_id = self._current_item_id
@@ -356,7 +367,11 @@ class QwenTickAdapter:
             # 该 item 已播完（缓冲无剩余）→ 补齐尾部转写，避免文本残留
             remaining = sum(len(d) for d, i in self._buffer if i == item_id)
             text = ut.take_for_audio(n)
-            if remaining == 0 and ut.audio_bytes_received > 0 and ut.audio_bytes_played >= ut.audio_bytes_received:
+            if (
+                remaining == 0
+                and ut.audio_bytes_received > 0
+                and ut.audio_bytes_played >= ut.audio_bytes_received
+            ):
                 text += ut.flush_remaining()
             if text:
                 parts.append(text)

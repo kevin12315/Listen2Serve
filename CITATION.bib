@@ -1,29 +1,15 @@
-% Listen2Serve —— 三段分开引用：论文 / 评测集 / 代码。
-% 只引论文会让人以为数据集与代码随论文一起可得；三者版本节奏并不同步。
-
-@inproceedings{listen2serve2027,
-  title     = {{Listen2Serve}: Benchmarking Real-Time Customer Service Agents That Listen and Act},
-  author    = {Anonymous},
-  booktitle = {ICASSP 2027 (under review)},
-  year      = {2027},
-  note      = {Replace with the final author list, venue and DOI once the paper is published.}
+@unpublished{listen2serve,
+  title = {{Listen2Serve}: Benchmarking Real-Time Customer Service Agents That Listen and Act},
+  author = {Chang, Kai and Xu, Yichen and Chen, Yueyi and Lyu, Chenyang and Wang, Yuejiao},
+  note = {Manuscript submitted to ICASSP},
+  year = {2026}
 }
 
-@misc{listen2serve-dataset-2026,
-  title  = {{Listen2Serve} Scenario Set (main experiment, v6.5 slice main-multiturn-145x2)},
+@misc{listen2serve-code,
+  title = {{Listen2Serve}: Multi-Turn Evaluation Framework and Scenario Set},
   author = {{Listen2Serve Authors}},
-  year   = {2026},
-  howpublished = {\url{https://github.com/kevin12315/Listen2Serve/tree/main/data/benchmark}},
-  note   = {145 balanced bases \times \{T1, T3\}; release fingerprints in data/benchmark/version.json.
-            Benchmark content CC BY-NC 4.0, audio demo CC BY-NC-ND 4.0, code Apache-2.0;
-            path table in LICENSE_DATASET.}
-}
-
-@misc{listen2serve-code-2026,
-  title  = {{Listen2Serve}: evaluation framework for prosody-conditioned service actions},
-  author = {{Listen2Serve Authors}},
-  year   = {2026},
+  year = {2026},
   howpublished = {\url{https://github.com/kevin12315/Listen2Serve}},
-  note   = {Apache-2.0. Cite the git tag or commit you ran; results are only comparable within a
-            dataset version, agent-prompt version and judge fingerprint.}
+  note = {Cite the code revision and dataset fingerprints used. Framework: Apache-2.0;
+          benchmark content: CC BY-NC 4.0; audio demonstrations: CC BY-NC-ND 4.0.}
 }

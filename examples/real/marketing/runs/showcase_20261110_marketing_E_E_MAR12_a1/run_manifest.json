@@ -1,0 +1,343 @@
+{
+  "schema": "listen2serve.public-listening-manifest/1",
+  "derived_artifact": true,
+  "run_id": "showcase_20261110_marketing_E_E_MAR12_a1",
+  "role": "marketing",
+  "scenario_id": "MAR-ALL-12-T1",
+  "condition": "E/E",
+  "wording": "explicit",
+  "prosody_arm": "state",
+  "latent_oracle": "cooperative",
+  "generation": {
+    "protocol": "multi-turn",
+    "scenario_sha256": "364e4b02ea8d7981d20ad9c3edfcabc1895bbfdcc2095fda807ddce4043c5aaf",
+    "models": {
+      "target": "dashscope/qwen-audio-3.0-realtime-plus",
+      "sim": "moonshot/kimi-k3",
+      "tts": "dashscope/qwen-audio-3.0-tts-plus"
+    },
+    "voices": {
+      "user_gender": "female",
+      "user_voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+      "agent_gender": "female",
+      "agent_voice": "longanqian"
+    },
+    "prompts": {
+      "agent_sha256": "7f3e0ba86645165c7215b1392c8c81298aa4c30c52b785b21573a589e0c460f2",
+      "sim_sha256": "6df65e7cbb78a96489d015428957ae4b25225a91fe0aaf71e3f4137ef26a1377"
+    },
+    "tts_instructions": {
+      "dataset_version": "v6.5",
+      "sha256": "be9be08c565e923be17ec5600de35ec56c017665008bab128ac0a95c2555381e"
+    },
+    "prosody_arm": "state",
+    "sim_thinking": false,
+    "source_identity_sha256": "e365e82068e1daf657e3b611fde61e3050eb51be4b73897b80125af84fb874f2",
+    "source_package_sha256": "a12d88ddc5f25eab21e0a16c05ddca94e4ac088c4d777c78585a93aa4b690792",
+    "source_package_hash_root": "src/listen2serve",
+    "source_src_tree_sha256": "fd20a44544ff67a678e49a9bb6b9a27343f563b5cbf1a81f32fc370f99ada09c",
+    "source_src_tree_hash_root": "src",
+    "runtime_parameters": {
+      "tick_ms": 200,
+      "max_turns": 12,
+      "max_response_ticks": 150,
+      "streaming_response_ticks": 300,
+      "idle_end_ticks": 3,
+      "turn_gap_ticks": 2,
+      "interrupt_delay_ticks": 3,
+      "max_session_tokens": 30000,
+      "tools_enabled": false,
+      "tts_sample_rate": 16000
+    },
+    "actual_request_parameters": {
+      "llm": [
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515002,
+          "sequence": 1,
+          "thinking_type": "disabled",
+          "source_request_sha256": "e90c32050d27ede96c36f48708cbb94b587ed30371069910ce4c75de624f97f7"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515003,
+          "sequence": 2,
+          "thinking_type": "disabled",
+          "source_request_sha256": "baa692ff3afe91880a0cc57a4e649424a5ac0693da243c0275cf8b2ab30f2329"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515004,
+          "sequence": 3,
+          "thinking_type": "disabled",
+          "source_request_sha256": "e3dbd6b666693d4b7dc9467874be337a574c0f08230a73c36283816ff59cd595"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515005,
+          "sequence": 4,
+          "thinking_type": "disabled",
+          "source_request_sha256": "97e35f654d6cbab8f2f805662bf0b004ac87d3194b2ddd2f97f38dce2c030f25"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515006,
+          "sequence": 5,
+          "thinking_type": "disabled",
+          "source_request_sha256": "39260a6cf4b5134fa61ba266a2ff46525baa143dd36eaa14b5f512d7c1d055f7"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515007,
+          "sequence": 6,
+          "thinking_type": "disabled",
+          "source_request_sha256": "ac415d6e834f474fe3b63dbeecb708bed2be7cdf7bbe64ece948a2f7cd1180a5"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515008,
+          "sequence": 7,
+          "thinking_type": "disabled",
+          "source_request_sha256": "4942bce77c501372dd7a0aba04c989dcb2ef8b821e166d87c46f233360bb40ab"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515009,
+          "sequence": 8,
+          "thinking_type": "disabled",
+          "source_request_sha256": "0e5a1eed6591aacc42d49caa9acb2d6f7cb9d7cf7f2e2e683efc8db9a1457cc2"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 9515010,
+          "sequence": 9,
+          "thinking_type": "disabled",
+          "source_request_sha256": "56283257189b55d8db0b4d25b68b6e90f6bdd6d3fa0de2e0af5ce6bad3c5986c"
+        }
+      ],
+      "tts": [
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短的语气",
+          "turn": 1,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "3e094dcae464c1fb84d081c19fefa9ab8970be45f54107fc7cc83a96298a4611"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短的语气",
+          "turn": 2,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "6db616faa3064822c190f00b212a7671059b1af0b5bddda8e16e9644f848f9e1"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短的语气",
+          "turn": 3,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "2c688f4dd7039f22dda3baa81405c0a6c635049054ec5514e1fc25313ad23c8f"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短的语气",
+          "turn": 4,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "c81cf17d165a3576f9e9e8f0461bb37bc82e6f9c07d2d8fcc6e684b75bbab63c"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短的语气",
+          "turn": 5,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "f484b95e66396277cdea3d4defdd731bc7eb1772a4dd61e7864b54a35c2c37a0"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气爽快答应、积极配合，语速平稳、应答利落，语速中等，音量正常，句间停顿短的语气",
+          "turn": 6,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "a8c61b96b0c5ce48b2d9544da3b88c070f2c22f8a745c2a10525f6e14c736697"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短的语气",
+          "turn": 7,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "1a83e3c7b0d8a5f55244fa4042c48be6056c2cb68086c9e69eca44979cab0c09"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短的语气",
+          "turn": 8,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "34b33ac74aac6e0b32a8a890d0de583af0d84ec9c69843d604d62b8f1845baba"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气平和爽快、积极配合，语速中等，音量正常，句间停顿短的语气",
+          "turn": 9,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "e6ff80a39cbf66a9a7f1c39fb3ebfb0c42c8848cc48a17264532058af1f0055b"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longcanzhuyue",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位28岁女性潜在客户，语气淡淡地应付，语速中等，音量正常，句间停顿短的语气",
+          "turn": 10,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "d4a3bae042321aad72cb7a18bcc0ed8977a4e25961a8fcc62df536d79ab866d9"
+        }
+      ]
+    }
+  },
+  "model_identity": {
+    "schema": "requested-response-v1",
+    "generation_target": {
+      "requested_model": "qwen-audio-3.0-realtime-plus",
+      "requested_wire_model": "qwen-audio-3.0-realtime-plus",
+      "response_model": "qwen-audio-3.0-realtime-plus",
+      "response_model_differs": false,
+      "requested_host": "dashscope.aliyuncs.com",
+      "provider_host": null
+    },
+    "generation_gateway_calls": [
+      {
+        "service": "tts",
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-tts-plus",
+        "response_model": null,
+        "response_model_differs": null,
+        "calls": 10,
+        "requested_host": "dashscope.aliyuncs.com",
+        "provider_host": "dashscope.aliyuncs.com"
+      },
+      {
+        "service": "llm",
+        "backend": "moonshot",
+        "requested_model": "kimi-k3",
+        "response_model": "kimi-k3",
+        "response_model_differs": false,
+        "calls": 9,
+        "requested_host": "api.moonshot.cn",
+        "provider_host": null
+      }
+    ]
+  },
+  "evaluation": {
+    "schema": "listen2serve.listening-only-evaluation/1",
+    "complete": false,
+    "scoring_paused_by_owner": true,
+    "metrics": {
+      "key_turn_pass": null,
+      "voice_pass": null,
+      "flow_rate": null,
+      "task_score": null
+    },
+    "metric_denominators": {
+      "key_turn_pass": 0,
+      "voice_pass": 0,
+      "flow_rate": 0,
+      "task_score": 0
+    },
+    "key_turn_score": null,
+    "amount_paid": null,
+    "monetary_note": "Call counts are observed usage; failed-call token usage and monetary charges may be unknown.",
+    "judge_stages": {
+      "keyturn": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": "google/gemini-3.8-flash",
+        "response_model": null,
+        "request_count": 2,
+        "successful_count": 0
+      },
+      "voice": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "flow": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "leakage": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      }
+    },
+    "evaluation_status": "pending_after_provider_failures",
+    "original_evaluation_status": "incomplete",
+    "physical_invocations": 2,
+    "logical_evaluations": 1,
+    "recovery_count": 1,
+    "counts": {
+      "asr_requests": 10,
+      "asr_successful": 10,
+      "asr_cache_hits": 10,
+      "gemini_requests": 2,
+      "gemini_successful": 0
+    },
+    "failure_history": [
+      {
+        "attempt": 1,
+        "service": "gemini",
+        "kind": "provider_request_failed",
+        "http_status": null,
+        "exception_type": "APITimeoutError"
+      },
+      {
+        "attempt": 2,
+        "service": "gemini",
+        "kind": "provider_request_failed",
+        "http_status": 503,
+        "exception_type": "InternalServerError"
+      }
+    ],
+    "failed_judge_token_usage": null
+  },
+  "source_manifest_sha256": "754c002fa3bfd148276574d1d9a8a019ceb219f0cbab1d3c79a8bc865c9e6770"
+}

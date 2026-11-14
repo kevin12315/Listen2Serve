@@ -6,7 +6,6 @@ import base64
 
 import pytest
 
-from listen2serve.evaluation.objective import aggregate_pass_hat_k, pass_hat_k
 from listen2serve.runtime.realtime.events import QwenEvent, QwenTimeout
 from listen2serve.runtime.realtime.tick_adapter import QwenTickAdapter
 
@@ -44,9 +43,7 @@ def audio_delta(data: bytes, item_id: str = "i1") -> QwenEvent:
 
 
 def transcript_delta(text: str, item_id: str = "i1") -> QwenEvent:
-    return QwenEvent(
-        type="response.audio_transcript.delta", data={"delta": text, "item_id": item_id}
-    )
+    return QwenEvent(type="response.audio_transcript.delta", data={"delta": text, "item_id": item_id})
 
 
 def make_adapter(batches: list[list[QwenEvent]], tick_ms: int = 200) -> QwenTickAdapter:
@@ -79,11 +76,13 @@ async def test_barge_in_truncation():
     big = b"\x01\x00" * 10000
     speech_started = QwenEvent(type="input_audio_buffer.speech_started", data={})
     late_audio = audio_delta(b"\x02\x00" * 1000, item_id="i1")  # 截断后同 item 的音频
-    adapter = make_adapter([
-        [audio_delta(big)],
-        [speech_started, late_audio],
-        [audio_delta(b"\x03\x00" * 1000, item_id="i2")],  # 新 item 正常通过
-    ])
+    adapter = make_adapter(
+        [
+            [audio_delta(big)],
+            [speech_started, late_audio],
+            [audio_delta(b"\x03\x00" * 1000, item_id="i2")],  # 新 item 正常通过
+        ]
+    )
 
     r1 = await adapter.run_tick(b"\x00" * 6400, 0)
     assert r1.buffer_bytes > 0
@@ -104,13 +103,20 @@ async def test_tool_call_recorded_and_result_queued():
     """工具调用记录保留（name/arguments/call_id），结果下一 tick 先 cancel 再投递。"""
     fc = QwenEvent(
         type="response.output_item.done",
-        data={"item": {"type": "function_call", "call_id": "c1", "name": "query_debt",
-                       "arguments": '{"customer_name": "张三"}'}},
+        data={
+            "item": {
+                "type": "function_call",
+                "call_id": "c1",
+                "name": "query_debt",
+                "arguments": '{"customer_name": "张三"}',
+            }
+        },
     )
     adapter = make_adapter([[fc], []])
     r1 = await adapter.run_tick(b"\x00" * 6400, 0)
-    assert r1.tool_calls == [{"call_id": "c1", "name": "query_debt",
-                              "arguments": '{"customer_name": "张三"}'}]
+    assert r1.tool_calls == [
+        {"call_id": "c1", "name": "query_debt", "arguments": '{"customer_name": "张三"}'}
+    ]
 
     adapter.queue_tool_result("c1", "欠款 8000 元")
     provider: FakeProvider = adapter.provider  # type: ignore[assignment]
@@ -122,33 +128,20 @@ async def test_tool_call_recorded_and_result_queued():
 @pytest.mark.asyncio
 async def test_session_usage_accumulated():
     """response.done 携带的 usage 被累计（Realtime 用量审计）。"""
-    done1 = QwenEvent(type="response.done",
-                      data={"response": {"usage": {"input_tokens": 100, "output_tokens": 50, "total_tokens": 150}}})
-    done2 = QwenEvent(type="response.done",
-                      data={"response": {"usage": {"input_tokens": 200, "output_tokens": 80, "total_tokens": 280}}})
+    done1 = QwenEvent(
+        type="response.done",
+        data={"response": {"usage": {"input_tokens": 100, "output_tokens": 50, "total_tokens": 150}}},
+    )
+    done2 = QwenEvent(
+        type="response.done",
+        data={"response": {"usage": {"input_tokens": 200, "output_tokens": 80, "total_tokens": 280}}},
+    )
     adapter = make_adapter([[done1], [done2]])
     await adapter.run_tick(b"\x00" * 6400, 0)
     await adapter.run_tick(b"\x00" * 6400, 1)
     assert adapter.session_usage == {
-        "input_tokens": 300, "output_tokens": 130, "total_tokens": 430, "responses": 2,
+        "input_tokens": 300,
+        "output_tokens": 130,
+        "total_tokens": 430,
+        "responses": 2,
     }
-
-
-class TestPassHatK:
-    def test_values(self):
-        assert pass_hat_k(4, 3, 1) == 0.75
-        assert pass_hat_k(4, 3, 2) == 0.5  # C(3,2)/C(4,2) = 3/6
-        assert pass_hat_k(4, 4, 4) == 1.0
-        assert pass_hat_k(4, 1, 2) == 0.0  # 成功数 < k
-
-    def test_invalid(self):
-        with pytest.raises(ValueError):
-            pass_hat_k(2, 1, 3)
-
-    def test_aggregate(self):
-        mean, per_task = aggregate_pass_hat_k(
-            {"a": [True, True, False, True], "b": [True, True, True, True], "c": [True]},
-            k=2,
-        )
-        assert per_task == {"a": 0.5, "b": 1.0}  # c 试验数不足 k，跳过
-        assert mean == 0.75

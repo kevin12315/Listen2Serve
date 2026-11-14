@@ -89,9 +89,7 @@ def build_domain() -> DomainSpec:
         ),
         DBTableSpec(
             name="logistics",
-            create_sql=(
-                "CREATE TABLE logistics (order_id TEXT, ts TEXT, event TEXT, location TEXT)"
-            ),
+            create_sql=("CREATE TABLE logistics (order_id TEXT, ts TEXT, event TEXT, location TEXT)"),
         ),
         DBTableSpec(
             name="issues",
@@ -99,7 +97,6 @@ def build_domain() -> DomainSpec:
         ),
     ]
 
-    # 内部方案（v6.0）：新 6 态 policy_rules（策略要点见计划 表）
     policy_rules = {
         "neutral": {
             "required": ["先确认用户身份与待处理事项", "简明告知处理方向"],

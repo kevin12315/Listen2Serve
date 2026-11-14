@@ -1,15 +1,4 @@
-"""Qwen Realtime WebSocket Provider（被测 Agent 接入）。
-
-协议要点（DashScope Realtime，OpenAI 兼容变体）：
-- WSS: `wss://dashscope.aliyuncs.com/api-ws/v1/realtime?model={model}`，Bearer 鉴权
-- 输入 PCM16 16kHz（base64），输出 PCM24 24kHz
-- session.update 的 tools 采用嵌套格式 `{"type": "function", "function": {...}}`
-- tool result 前需先发 `response.cancel` 取消进行中的响应
-- ping_interval=10s / ping_timeout=30s / max_size=16MB
-- 支持 server_vad（barge-in 打断）与 manual 两种轮转模式
-
-基于 tau2-bench 验证的协议细节自研实现（MIT License © Sierra，参考其架构模式）。
-"""
+"Qwen Realtime WebSocket Provider（被测 Agent 接入）"
 
 from __future__ import annotations
 
@@ -17,17 +6,19 @@ import asyncio
 import base64
 import json
 import logging
-from typing import Any, AsyncGenerator
+from collections.abc import AsyncGenerator
+from typing import Any
 
 import websockets
 
+from listen2serve.gateway.base import model_identity
 from listen2serve.runtime.realtime.events import QwenEvent, QwenTimeout, parse_qwen_event
 
 logger = logging.getLogger(__name__)
 
 QWEN_REALTIME_URL = "wss://dashscope.aliyuncs.com/api-ws/v1/realtime"
-QWEN_INPUT_SAMPLE_RATE = 16000 # 服务端固定
-QWEN_OUTPUT_SAMPLE_RATE = 24000 # 服务端固定
+QWEN_INPUT_SAMPLE_RATE = 16000  # 服务端固定
+QWEN_OUTPUT_SAMPLE_RATE = 24000  # 服务端固定
 
 
 class QwenRealtimeProvider:
@@ -44,8 +35,20 @@ class QwenRealtimeProvider:
         self.model = model
         self.voice = voice
         self.base_url = base_url
+        self.identity = model_identity(None, model, requested_url=base_url)
         self.ws: websockets.WebSocketClientProtocol | None = None
         self.session_id: str | None = None
+
+    def _capture_identity(self, data: dict[str, Any]) -> None:
+        payload = data.get("session") if data.get("type", "").startswith("session.") else data.get("response")
+        if not isinstance(payload, dict):
+            return
+        identity = model_identity(
+            payload, self.model, requested_url=self.base_url, response=getattr(self.ws, "response", None)
+        )
+        for key, value in identity.items():
+            if value is not None:
+                self.identity[key] = value
 
     @property
     def is_connected(self) -> bool:
@@ -55,7 +58,7 @@ class QwenRealtimeProvider:
             from websockets.protocol import State
 
             return self.ws.state == State.OPEN
-        except Exception: # noqa: BLE001
+        except Exception:  # noqa: BLE001
             return False
 
     async def connect(self, max_retries: int = 3) -> None:
@@ -76,10 +79,11 @@ class QwenRealtimeProvider:
                 data = json.loads(raw)
                 if data.get("type") != "session.created":
                     raise RuntimeError(f"握手失败，期望 session.created，实际 {data.get('type')}")
+                self._capture_identity(data)
                 self.session_id = data.get("session", {}).get("id")
                 logger.info("Qwen Realtime 已连接 session=%s", self.session_id)
                 return
-            except Exception as exc: # noqa: BLE001
+            except Exception as exc:  # noqa: BLE001
                 last_exc = exc
                 await self.disconnect()
                 if attempt < max_retries - 1:
@@ -90,8 +94,8 @@ class QwenRealtimeProvider:
         if self.ws is not None:
             try:
                 await self.ws.close()
-            except Exception: # noqa: BLE001
-                pass
+            except Exception as exc:  # noqa: BLE001
+                logger.debug("Optional transport cleanup: %s", type(exc).__name__)
             self.ws = None
             self.session_id = None
 
@@ -147,6 +151,7 @@ class QwenRealtimeProvider:
             raw = await asyncio.wait_for(self.ws.recv(), timeout=30)
             data = json.loads(raw)
             if data.get("type") == "session.updated":
+                self._capture_identity(data)
                 return
             if data.get("type") == "error":
                 raise RuntimeError(f"会话配置失败: {data.get('error')}")
@@ -154,9 +159,7 @@ class QwenRealtimeProvider:
 
     async def send_audio(self, pcm16: bytes) -> None:
         """追加输入音频（PCM16 16k）。"""
-        await self._send(
-            {"type": "input_audio_buffer.append", "audio": base64.b64encode(pcm16).decode()}
-        )
+        await self._send({"type": "input_audio_buffer.append", "audio": base64.b64encode(pcm16).decode()})
 
     async def commit_audio(self) -> None:
         """提交音频缓冲并请求响应。"""
@@ -187,7 +190,7 @@ class QwenRealtimeProvider:
         """
         try:
             await self._send({"type": "response.cancel"})
-        except Exception as exc: # noqa: BLE001 - 无活动响应时服务端拒绝 cancel，忽略
+        except Exception as exc:  # noqa: BLE001 - 无活动响应时服务端拒绝 cancel，忽略
             logger.debug("response.cancel 无活动响应（忽略）: %s", exc)
         await self._send(
             {
@@ -215,8 +218,10 @@ class QwenRealtimeProvider:
         while self.is_connected:
             try:
                 raw = await asyncio.wait_for(self.ws.recv(), timeout=poll_s)
-                yield parse_qwen_event(raw)
-            except asyncio.TimeoutError:
+                event = parse_qwen_event(raw)
+                self._capture_identity(event.data)
+                yield event
+            except TimeoutError:
                 yield QwenTimeout()
             except websockets.ConnectionClosed as exc:
                 logger.error("Qwen Realtime 连接关闭: %s", exc)

@@ -1,145 +1,105 @@
 # Listen2Serve
 
-**A controlled benchmark of prosody-conditioned service actions for real-time customer-service voice agents.**
+A multi-turn benchmark for real-time customer-service voice agents that listen and act.
 
-Does a voice agent change *what it does* because of *how the customer said it*?
-Listen2Serve pairs each customer state (dissatisfied / doubtful / urgent / hushed / cooperative) with
-the service action that the shared policy requires at the moment that state is expressed, and then
-turns the two cue channels — wording and voice — on and off independently.
+Listen2Serve connects five customer states to the service actions required in the agent's immediate reply. This release provides the multi-turn evaluation framework, all 145 base scenarios in two wording conditions, service and judging prompts, audio demonstrations, real-call listening examples, and an offline run example.
 
-Companion to the paper *"Listen2Serve: Benchmarking Real-Time Customer Service Agents That Listen and Act"*
-(ICASSP 2027 submission; arXiv link TBD).
+Companion to *Listen2Serve: Benchmarking Real-Time Customer Service Agents That Listen and Act* (ICASSP submission).
 
-## What this repository contains
+## Install
 
-| Component | Path | Notes |
+Use Python 3.12 or newer, and run commands from the repository root. The framework reads the separately licensed benchmark assets from this checkout.
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[dev]'
+cp .env.example .env
+make check-data
+make test
+make smoke
+```
+
+These checks use local data and simulated API responses. They require no commercial API credentials. `make smoke` opens a temporary loopback HTTP server.
+
+## Configure models
+
+Fill the credentials in `.env` for the services you will use:
+
+| Role | Default model | Credential |
 |---|---|---|
-| Evaluation framework | `src/listen2serve/` | orchestrator, constrained user simulator, TTS/ASR/judge gateways, four metrics |
-| Scenario set (main experiment) | `data/benchmark/scenarios.jsonl` | 145 balanced bases × {T1 text-explicit, T3 text-neutral} = 290 scenarios |
-| Paper batch definitions | `data/benchmark/subsets/` | the exact 145 `scenario_id` lists behind every number in the paper |
-| Prosody recipe | `data/benchmark/tts_instructions.json` | per-turn `instruction` + key-turn TTS tag, keyed by base × state |
-| Key-turn target scripts | `data/benchmark/keyturn_canonical.jsonl` | 275 reviewed utterances (145 T1 + 130 T3) |
-| Forbidden-action gate | `data/benchmark/t3_action_ban.json` | single source consumed by generator, screener and judge |
-| Voice assignment | `data/benchmark/voices/` | per-base user timbre, gender × age band |
-| Service / simulation / rubric prompts | `prompts/` | text snapshots; source of truth is the code, drift fails a test |
-| Reproduction configs | `configs/` | one file per paper condition (E/E, N/E, N/N) |
-| Audio demo (not a data subset) | `data/benchmark/audio_samples/` | 20 single-turn clips: 5 states × 2 bases × {state, neutral} renderings of the same line, all from the T3 layer |
-| Contract tests | `tests/` | data schema, judge contracts, orchestrator, licence scope, release hygiene |
+| Customer simulator | `kimi-k3` | `MOONSHOT_API_KEY` |
+| Customer TTS | `qwen-audio-3.0-tts-plus` | `DASHSCOPE_API_KEY` |
+| Uniform response transcription | `qwen-audio-3.0-asr-flash` | `DASHSCOPE_API_KEY` |
+| Action, voice, flow and task judges | `google/gemini-3.8-flash` | `GEMINI_API_KEY` |
+| Qwen agent under test | model selected below | `DASHSCOPE_API_KEY` |
+| Doubao agent under test | `doubao-seeduplex-3.0` | `VOLC_API_KEY` |
 
-**Not included, deliberately** (see [docs/limitations.md](docs/limitations.md)):
-per-item verdicts and model outputs, the full stimulus audio, the single-turn / replay /
-auditory-probe experiments, and the human-annotation materials. Numbers in the paper were produced
-by this pipeline on commercial endpoints; this release ships the instrument, not the recordings.
+The simulator sends the model ID `kimi-k3` to Moonshot's official OpenAI-compatible API. An alternative compatible backend can be selected explicitly with `openai/<model>` and `OPENAI_BASE_URL` / `OPENAI_API_KEY`. Each run records the models actually configured. See [model configuration](docs/model_configuration.md) for endpoint details and the confirmed correspondence between the manuscript TTS name and its official request ID.
 
-## Quick start
+See the [real-service acceptance checklist](docs/real_run_checklist.md) for account permissions, all assigned voices, and the staged acceptance procedure.
+
+## Run a multi-turn evaluation
+
+Start with one scenario. Real model runs use your API account and are billed by the selected providers.
 
 ```bash
-python3 -m venv .venv && source .venv/bin/activate
-pip install -e ".[dev]"
-
-cp .env.example .env          # keys, per step: DASHSCOPE_API_KEY = agent under test + TTS + ASR;
-                              # GEMINI_API_KEY = the three judges; VOLC_API_KEY = doubao baseline only
-make check-data               # structure / balance / fingerprints / audio demo
-make test                     # contract tests, no network access required
-make smoke                    # offline end-to-end check of the swappable judge backend
-
-# one full paper condition: run → judge → report, once per endpoint in the config
-# (3 endpoints × 145 scenarios); `--model all` loops over configs/*.json `endpoints`.
-# Note: the loop includes `doubao-seeduplex-3.0`, which needs VOLC_API_KEY — if you do
-# not have that key, run the endpoints you can reach by naming them with `--model`.
-bash scripts/run_experiment.sh --run-id main_N_E --config configs/main_N_E.json --model all
-# or a single endpoint:
-bash scripts/run_experiment.sh --run-id main_N_E --config configs/main_N_E.json \
-    --model dashscope/qwen3.5-omni-plus-realtime
+bash scripts/run_experiment.sh --run-id example_N_E \
+  --config configs/main_N_E.json \
+  --model qwen-audio-3.0-realtime-plus --limit 1
 ```
 
-## The measurement
+Remove `--limit 1` to run all 145 scenarios in the condition. Use `--model all` to run the three endpoints listed in the config; Doubao requires its own speech-service credential.
 
-One call per scenario, then four numbers:
+| Paper condition | Customer wording | Vocal delivery | Config |
+|---|---|---|---|
+| E/E | explicit | expressive | `configs/main_E_E.json` |
+| N/E | neutral | expressive | `configs/main_N_E.json` |
+| N/N | neutral | neutral | `configs/main_N_N.json` |
 
-| Metric | Question | How it is decided |
-|---|---|---|
-| **KeyTurnPass** (primary) | did the reply perform the action the state requires, in the key turn | rubric score ≥ 4 **and** no forbidden action in that turn |
-| **VoicePass** | was the agent's own voice appropriate (role / state fit / naturalness) | audio judge, 1–5 per axis, mean ≥ 3.5 and every axis ≥ 3 |
-| **FlowRate** | were the required flow items covered across the call | 1 / 0.5 / 0 per item, implicit execution counts |
-| **TaskScore** | was the business goal reached by the end | 1 / 0.5 / 0 |
+Public options and reports use **explicit / neutral wording** and these paper condition codes. Scenario IDs and source fields retain their original storage labels so that the scenario, voice assignment, and audio demonstration references remain stable. Treat IDs as opaque identifiers; the loader maps their wording metadata to the paper terminology.
 
-Conditions vary two knobs independently: how explicit the **text** is (E vs N) and how explicit the
-**voice** is (E vs N). `configs/` pins the three combinations the paper reports.
+The script runs generation, judging, and reporting in order. Results are written to `runs/<run_id>/` and `reports/<run_id>/`. Completed and explicitly partial trajectories, and saved verdicts, can be resumed only when their input identities match. Use a new run ID when changing a model, scenario, prompt, voice, or condition. For deliberate re-judging, use `l2s evaluate --fresh` and a separate `--report-id`.
 
-Reproducibility is by construction: scenario seeds come from `crc32(scenario_id)`, the user
-simulator draws utterances from a fixed seed chain, prosody comes from a table (never improvised at
-run time), and every run records a `judge_meta` fingerprint — change a rubric and old verdicts are
-flagged as stale instead of being silently reused.
+The three stages can also be run separately; see `l2s --help` and the help for each subcommand. The condition configs enable uniform ASR for the key-turn action judge. ASR or judge failures are surfaced as evaluation errors. A server disconnect after the key reply is captured is labelled `partial`: its key-turn action and voice can be scored, while whole-call FlowRate and TaskScore are left unscored. Reports show completion counts and metric denominators. A response timeout stops the session and preserves its partial audio; it never carries the old reply into the next turn. Timeout records are retained on resume; use a new run ID for a new attempt.
 
-## The judge, and swapping it
+## Outputs and metrics
 
-All three judgements (key-turn action, output voice, flow/task) are made by
-`gemini-3.8-flash` through **Google's official OpenAI-compatible endpoint** — the same model the
-paper used, now a publicly available one:
+Each trajectory includes the customer/agent turns, the uniquely identified key turn, audio references, timing, and termination status. Verdicts contain per-item judge results and input fingerprints; the report presents:
 
-```bash
-GEMINI_API_KEY=...                 # the default: JUDGE_MODEL / VOICE_JUDGE_MODEL = google/gemini-3.8-flash
-```
-
-Any other OpenAI-compatible backend is a two-line change (this is how you ablate judge choice):
-
-```bash
-OPENAI_BASE_URL=https://api.openai.com/v1
-OPENAI_API_KEY=...
-JUDGE_MODEL=openai/gpt-4.1-mini  VOICE_JUDGE_MODEL=openai/gpt-4o-audio-preview
-```
-
-Judge choice changes absolute scores, so always report judge model + `judge_meta` fingerprint
-alongside a number; the user simulator (`LLM_MODEL`, default `qwen-plus` on Model Studio/Bailian,
-which is publicly callable) is deliberately a *different* model from the judge, so generation
-style and judging preference are not co-sourced. `make smoke` exercises the whole path
-(gateway → rubric → verdict → KeyTurnPass) against a local stub, with no external call.
-
-Nothing in this repository calls an internal or non-public endpoint: that claim is enforced by
-`tests/test_release_hygiene.py`, not by a promise.
-
-## Adding an endpoint, a domain, or a state
-
-* new realtime endpoint → [docs/adding_an_endpoint.md](docs/adding_an_endpoint.md) (provider adapter
-  + registry entry + liveness gate)
-* new service domain / policy section → `src/listen2serve/domains/`, then the scenario generator
-  contract in `tests/test_policy_rules.py`
-* new customer state → extend `runtime/tts_tags.STATE_TAG_ALLOWED`, the action table in
-  `domains/base.py` **and** the rubric, all three at once (`tests/test_judge_contract.py` checks it)
-
-## Repository layout
-
-```
-src/listen2serve/{runtime,evaluation,gateway,domains,audio,data,report}/
-data/benchmark/{scenarios.jsonl,scenarios_base.jsonl,subsets/,voices/,audio_samples/,version.json}
-prompts/         configs/      scripts/     tests/     docs/
-```
-
-## Licence (three scopes, one table)
-
-The repository is released under **three licences by asset type**; the authoritative path →
-SPDX-identifier table lives in [LICENSE_DATASET](LICENSE_DATASET) and is checked by a test, so a new
-data file cannot silently inherit the wrong terms.
-
-| Asset | Licence |
+| Metric | Definition |
 |---|---|
-| Framework code, prompts, docs, configs, plus the plumbing under `data/benchmark/` (`version.json`, `t3_action_ban.json`, `subsets/`) | **Apache-2.0** ([LICENSE](LICENSE)); copyright Alibaba Group Holding Limited (2026); third-party attribution in [NOTICE](NOTICE) |
-| Benchmark content: `scenarios*.jsonl`, `keyturn_canonical.jsonl`, `tts_instructions.json`, `voices/`, `DATASET_CARD.md` | **CC BY-NC 4.0** |
-| Audio demo: `data/benchmark/audio_samples/` (20 clips) | **CC BY-NC-ND 4.0** |
+| **KeyTurnPass** | key-turn action score ≥ 4, with no prohibited action in that reply |
+| **VoicePass** | mean role/state/naturalness score ≥ 3.5, with every score ≥ 3 |
+| **FlowRate** | mean checklist coverage, with full / partial / absent = 1 / 0.5 / 0 |
+| **TaskScore** | complete / partial / absent task attainment = 1 / 0.5 / 0 |
 
-The split is deliberate: the pipeline and the files it needs to *run* stay Apache-2.0 so anyone
-(including companies) can install, modify and redistribute the framework, while the benchmark
-*content* itself is not licensed for commercial use or for training production models without
-separate permission. The 20 audio clips are a **demo, not a sample of the stimulus set** — nothing
-in the measurement path reads them ([LICENSE_DATASET](LICENSE_DATASET) explains the count).
+See [how a scored example is displayed](docs/scoring_display.md) for the readable report, per-item evidence, audio links and pending-score states.
 
-Data provenance (anonymised call-log skeletons, LLM-written utterances, fully synthesised speech,
-no real voices) and the release-time model-name generalisation are documented in
-[LICENSE_DATASET](LICENSE_DATASET) and [docs/limitations.md](docs/limitations.md).
+[examples/offline](examples/offline) illustrates the complete pipeline using simulated responses. The 20 clips in `data/benchmark/audio_samples/` demonstrate customer vocal delivery. The [real conversation examples](examples/real/index.html) contain Mandarin audio, aligned text, and model provenance:
 
-## Citation
+| Service | Condition | Scenario | Turns | Key turn |
+|---|---|---|---|---|
+| Collection | N/E | `COL-NEG-45-T3` | 8 | 6 |
+| Marketing | E/E | `MAR-ALL-12-T1` | 10 | 6 |
+| Hotline | N/N | `HOT-ALL-01-T3` | 6 | 5 |
 
-See [CITATION.bib](CITATION.bib). If you extend or re-mix the scenario set, please keep the
-`dataset_version` / asset fingerprints in `data/benchmark/version.json` — they are how we and
-everyone else tell incompatible batches apart.
+Clone or download the repository, then open `examples/real/index.html` in a browser. GitHub's file view shows the HTML source and does not play the embedded examples. The local checkout also provides the linked JSON status records.
+
+These saved real calls are unscored. The [2026-11-12 judging check](examples/real/evaluation/20261112/README.md) recorded two marketing timeouts followed by HTTP 503, with no successful judge response; its ten original ASR turns were reused. Hotline and collection judging and new ASR were not started. All four metrics remain `null` with zero scored denominators. Earlier failures are recorded separately; example selection uses input and recording fidelity before judging.
+
+## Repository contents
+
+- `src/listen2serve/`: multi-turn controller, simulator, endpoint adapters, judges and reports.
+- `data/benchmark/`: 145 base scenarios, 290 wording variants, scenario lists, voice and prosody assets, and audio demonstrations.
+- `prompts/`: readable snapshots exported from the runtime constants; tests check their consistency.
+- `configs/`: the three multi-turn cue conditions.
+- `tests/` and `scripts/`: offline checks and experiment entrypoint.
+
+See [release scope and reproducibility](docs/limitations.md), [the limited order-reference correction](docs/dataset_corrections.md), [adding an endpoint](docs/adding_an_endpoint.md), and [contributing](CONTRIBUTING.md).
+
+## License and citation
+
+Framework code, prompts and tooling use Apache-2.0. Benchmark content uses CC BY-NC 4.0; audio demonstrations use CC BY-NC-ND 4.0. The path-specific license table is in [LICENSE_DATASET](LICENSE_DATASET), and attribution is in [NOTICE](NOTICE).
+
+Citation entries are in [CITATION.bib](CITATION.bib). Record the code revision, dataset fingerprints, models, and judge/input fingerprints with reported results.

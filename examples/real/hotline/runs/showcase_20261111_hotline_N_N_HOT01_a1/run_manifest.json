@@ -1,0 +1,261 @@
+{
+  "schema": "listen2serve.public-listening-manifest/1",
+  "derived_artifact": true,
+  "run_id": "showcase_20261111_hotline_N_N_HOT01_a1",
+  "role": "hotline",
+  "scenario_id": "HOT-ALL-01-T3",
+  "condition": "N/N",
+  "wording": "neutral",
+  "prosody_arm": "neutral",
+  "latent_oracle": "cooperative",
+  "generation": {
+    "protocol": "multi-turn",
+    "scenario_sha256": "c9c20d7dc0e2cb51173f9b61c71ea0fd77babb2be8d22363193368f381ec7d8d",
+    "models": {
+      "target": "dashscope/qwen-audio-3.0-realtime-plus",
+      "sim": "moonshot/kimi-k3",
+      "tts": "dashscope/qwen-audio-3.0-tts-plus"
+    },
+    "voices": {
+      "user_gender": "male",
+      "user_voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+      "agent_gender": "male",
+      "agent_voice": "longanlufeng"
+    },
+    "prompts": {
+      "agent_sha256": "5df2063be774cfeeacd95a1f04fa1bc246e51da6f9ee75664457ad97fa0da9fc",
+      "sim_sha256": "3567b6f4d6ddcecb9aa1335d2031b47b4e8e34f5a4c629b7617089f9c670537d"
+    },
+    "tts_instructions": {
+      "dataset_version": "v6.5",
+      "sha256": "be9be08c565e923be17ec5600de35ec56c017665008bab128ac0a95c2555381e"
+    },
+    "prosody_arm": "neutral",
+    "sim_thinking": false,
+    "source_identity_sha256": "6043c391eefa2d89cf0e857cf49839f784d88e509610a044a89f161a2ee603cc",
+    "source_package_sha256": "6d18d18e5217218ab82595ee03ffa34d7e90e074b185f7f323346cffbc056b49",
+    "source_package_hash_root": "src/listen2serve",
+    "source_src_tree_sha256": "52aa8681b2112b981d70d98e7980ca6fd7b7345e415522f73f71d2d15f9d4ac0",
+    "source_src_tree_hash_root": "src",
+    "runtime_parameters": {
+      "tick_ms": 200,
+      "max_turns": 12,
+      "max_response_ticks": 150,
+      "streaming_response_ticks": 300,
+      "idle_end_ticks": 3,
+      "turn_gap_ticks": 2,
+      "interrupt_delay_ticks": 3,
+      "max_session_tokens": 30000,
+      "tools_enabled": false,
+      "tts_sample_rate": 16000
+    },
+    "actual_request_parameters": {
+      "llm": [
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 74807001,
+          "sequence": 1,
+          "thinking_type": "disabled",
+          "source_request_sha256": "b7a1487580b11afc81d2e434b60b1cfc9477d2894bdd6f0be41f43b76044ef66"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 74807002,
+          "sequence": 2,
+          "thinking_type": "disabled",
+          "source_request_sha256": "21e58d19775b27e8585f946cdfbc75dafb0888c541f660b03c57bca6feab6f20"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 74807003,
+          "sequence": 3,
+          "thinking_type": "disabled",
+          "source_request_sha256": "4f11988872a49e86c336c32241bc77db8ad5071239b4dab6b419e106222256c0"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 74807004,
+          "sequence": 4,
+          "thinking_type": "disabled",
+          "source_request_sha256": "5987620a2a30ef4e22aecf588c0f8071076d0e831563821c3d133e8829d1f9b2"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 74807005,
+          "sequence": 5,
+          "thinking_type": "disabled",
+          "source_request_sha256": "1054277ea45e7518a37be9efb0f2f737bfbbc9fa4db19ded48a8f305b4ad9961"
+        },
+        {
+          "model": "kimi-k3",
+          "temperature": 0.6,
+          "max_tokens": 320,
+          "seed": 74807006,
+          "sequence": 6,
+          "thinking_type": "disabled",
+          "source_request_sha256": "5d55decf089bf232ae37787d5b12d757c7f71a9d4ab5f994bd5c3c0706c12f8a"
+        }
+      ],
+      "tts": [
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位31岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短的语气",
+          "turn": 1,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "fe99b0e8d9504835c3366b816a2730cf474a2c5b6c64d28ba7966d2a881d4532"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位31岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短的语气",
+          "turn": 2,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "e1f4a8aaaf7603f4843c2ab92c26710885e5f9d94ae2ff817353fa51c233d2ce"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位31岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短的语气",
+          "turn": 3,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "3ec2ea2bf43c315d727200f7cfd407fbf9019accc2445d4c3f1942613e34a6c3"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位31岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短的语气",
+          "turn": 4,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "10436ce5491e2a10bd01c1abff9ce3d40588e0a22bd02a75a43ee83cc60a4d43"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位31岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短的语气",
+          "turn": 5,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "6d333da0718c396e0528206cdea33b643b6f706164f98c9db679c8d830886dfc"
+        },
+        {
+          "voice": "qwen-audio-3.0-tts-plus-longjuhefeng",
+          "sample_rate": 16000,
+          "format": "wav",
+          "instruction": "用一位31岁男性报修用户，语气平静陈述事情，语速中等，音量正常，句间停顿短的语气",
+          "turn": 6,
+          "model": "qwen-audio-3.0-tts-plus",
+          "source_request_sha256": "5a92ad038226ff886eb441210fb14e3a46163da1923f8b1a5099ab4f4fd3670b"
+        }
+      ]
+    }
+  },
+  "model_identity": {
+    "schema": "requested-response-v1",
+    "generation_target": {
+      "requested_model": "qwen-audio-3.0-realtime-plus",
+      "requested_wire_model": "qwen-audio-3.0-realtime-plus",
+      "response_model": "qwen-audio-3.0-realtime-plus",
+      "response_model_differs": false,
+      "requested_host": "dashscope.aliyuncs.com",
+      "provider_host": null
+    },
+    "generation_gateway_calls": [
+      {
+        "service": "llm",
+        "backend": "moonshot",
+        "requested_model": "kimi-k3",
+        "response_model": "kimi-k3",
+        "response_model_differs": false,
+        "calls": 6,
+        "requested_host": "api.moonshot.cn",
+        "provider_host": null
+      },
+      {
+        "service": "tts",
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-tts-plus",
+        "response_model": null,
+        "response_model_differs": null,
+        "calls": 6,
+        "requested_host": "dashscope.aliyuncs.com",
+        "provider_host": "dashscope.aliyuncs.com"
+      }
+    ]
+  },
+  "evaluation": {
+    "schema": "listen2serve.listening-only-evaluation/1",
+    "complete": false,
+    "scoring_paused_by_owner": true,
+    "metrics": {
+      "key_turn_pass": null,
+      "voice_pass": null,
+      "flow_rate": null,
+      "task_score": null
+    },
+    "metric_denominators": {
+      "key_turn_pass": 0,
+      "voice_pass": 0,
+      "flow_rate": 0,
+      "task_score": 0
+    },
+    "key_turn_score": null,
+    "amount_paid": null,
+    "monetary_note": "Call counts are observed usage; failed-call token usage and monetary charges may be unknown.",
+    "judge_stages": {
+      "keyturn": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "voice": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "flow": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "leakage": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      }
+    },
+    "evaluation_status": "pending_owner_paused",
+    "original_evaluation_status": "not_requested",
+    "counts": {
+      "asr_requests": 0,
+      "asr_successful": 0,
+      "asr_cache_hits": 0,
+      "gemini_requests": 0,
+      "gemini_successful": 0
+    },
+    "failure_history": []
+  },
+  "source_manifest_sha256": "89e54700308049a294620801e5357f0b086c2029b9b3e82bceede54c9b416d1c"
+}

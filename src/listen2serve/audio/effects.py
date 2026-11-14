@@ -21,13 +21,13 @@ TELEPHONE_BAND = (300.0, 3400.0)
 class EffectConfig:
     """音频效果配置。"""
 
-    phone_channel: bool = True # 电话带宽滤波
-    noise_snr_db: float | None = 15.0 # None = 不加噪声
-    packet_loss_rate: float = 0.0 # 丢帧率（Gilbert-Elliott）
-    packet_loss_burst: float = 0.0 # Gilbert-Elliott 突发概率
-    packet_ms: int = 20 # 丢帧粒度
-    muffled: bool = False # 闷音（低通 2kHz）
-    vocal_tics: bool = False # 添加 tic 类杂音
+    phone_channel: bool = True  # 电话带宽滤波
+    noise_snr_db: float | None = 15.0  # None = 不加噪声
+    packet_loss_rate: float = 0.0  # 丢帧率（Gilbert-Elliott）
+    packet_loss_burst: float = 0.0  # Gilbert-Elliott 突发概率
+    packet_ms: int = 20  # 丢帧粒度
+    muffled: bool = False  # 闷音（低通 2kHz）
+    vocal_tics: bool = False  # 添加 tic 类杂音
     seed: int = 0
 
 
@@ -73,15 +73,13 @@ def _add_noise(data: np.ndarray, snr_db: float, rng: np.random.Generator) -> np.
     return data + noise
 
 
-def _packet_loss(
-    data: np.ndarray, sr: int, cfg: EffectConfig, rng: np.random.Generator
-) -> np.ndarray:
+def _packet_loss(data: np.ndarray, sr: int, cfg: EffectConfig, rng: np.random.Generator) -> np.ndarray:
     """Gilbert-Elliott 两状态丢帧模型。"""
     chunk = int(sr * cfg.packet_ms / 1000)
     n_chunks = len(data) // chunk
     if n_chunks == 0:
         return data
-    state = False # False=好, True=坏
+    state = False  # False=好, True=坏
     p_good_to_bad = cfg.packet_loss_rate
     p_bad_to_good = cfg.packet_loss_burst or max(p_good_to_bad, 0.5)
     out = data.copy()
@@ -108,8 +106,8 @@ def _add_ticks(data: np.ndarray, sr: int, rng: np.random.Generator) -> np.ndarra
     n_ticks = rng.integers(2, 6)
     for _ in range(n_ticks):
         start = rng.integers(0, max(len(data) - sr // 100, 1))
-        dur = rng.integers(sr // 200, sr // 100) # 5-10ms
-        amp = rng.uniform(0.05, 0.15) * 32767.0 # int16 满量程比例
+        dur = rng.integers(sr // 200, sr // 100)  # 5-10ms
+        amp = rng.uniform(0.05, 0.15) * 32767.0  # int16 满量程比例
         tick = amp * np.sin(2 * np.pi * rng.uniform(800, 2000) * np.arange(dur) / sr)
         out[start : start + dur] += tick
     return out
@@ -118,7 +116,8 @@ def _add_ticks(data: np.ndarray, sr: int, rng: np.random.Generator) -> np.ndarra
 def audio_pipeline_regular(pcm: np.ndarray, sr: int, seed: int = 0) -> np.ndarray:
     """`regular` 条件：电话信道 + SNR15 噪声 + 1% 丢帧。"""
     return apply_effects(
-        pcm, sr,
+        pcm,
+        sr,
         EffectConfig(phone_channel=True, noise_snr_db=15.0, packet_loss_rate=0.01, seed=seed),
     )
 

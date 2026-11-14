@@ -1,119 +1,31 @@
-"""Judge prompt 模板（随评测集发布，版本固定）。
-
-B2 起裁判 prompt 冻结版本号 + 文本 hash（F1：版本可追溯），
-每条 verdict 由 cli evaluate 组装 judge_meta 写入。
-"""
+"""Published multi-turn judge prompts and content fingerprints."""
 
 from __future__ import annotations
 
 import hashlib
 from typing import Any
 
-# 内部方案：裁判侧的动作口径从 domains.base 单一来源注入（不在此处硬编码文字）。
-# 依赖方向安全：domains/* 从不 import evaluation.prompts（已实测），不会成环。
 from listen2serve.domains.base import judge_action_table
 
-# ---- F1：裁判 prompt 版本追溯 ----
-JUDGE_PROMPT_VERSION = "v2.5-K" # 冻结版本号（登记升版记录后方可改）；v2.5-K：内部方案 弦外之音量规
-# 内部方案 升档（v2.5-K）：key_behavior_met（是/部分/否）升级为 key_turn_score（1-5 锚定式量规，
-# MOS 口径）：评的是客服对用户关键轮「弦外之音」（语气表达的真实状态/真意，未必见于文字）
-# 的听出与承接质量；流程性动作归 FlowRate；passed = score≥4 ∧ 禁止零触发；state_fit 保留为诊断维度。
-# v2.4-K（过渡）：key_behavior_met 收敛为即时响应妥当性；v2.3-J：判据结构三项化。
-# 内部方案 升档：情绪状态 11→6 态（neutral/cooperative/displeased/urgent/doubtful/
-# hushed），契约状态规则面随之变化；Voice 裁判 prompt 增 6 态图例（裁判可见文案
-# 变化，hash 变）。判据结构（逐动作分解/三维声音评分/对话级 0-2 分）未动。
-
-# 内部方案（v2.3-J）：judge prompt 冻结解除（README 跨计划禁区第 3 条，升版记录已登记）。
-# 关键轮裁判判据收敛（KeyTurnJudge）+ 新增全对话裁判（FlowJudge：固定清单逐条
-# 命中 + 终局结果分，单次调用合并产出）；v2.2-I 三模板原文保留，供 --legacy-judges 切回。
-JUDGE_PROMPT_VERSION_V23J = "v2.3-J"
-# 内部方案：keyturn/flow 裁判各自独立版本追踪（keyturn 升 1-5 量规，flow 未动）
-KEYTURN_JUDGE_VERSION = "v2.7-S" # 内部方案：动作口径同源化 + 判据优先级 + 无音频声明（见下方说明）
-# 内部方案 升档（v2.7-S）三点变更，判据结构（1-5 量规 / forbidden_items / state_fit 诊断）**未动**：
-# ① 动作速查不再硬编码文字，改为模块加载期插入 domains.base.judge_action_table()
-# （= ACTION_V9 的裁判侧渲染，全仓唯一动作口径来源）。原两行压缩速查是 v8 措辞
-# （「疑问/不信→先自证身份」「配合→顺势推进坐实要素」），与被测侧 v9 表（「先说明白您有
-# 疑虑」「先说好的」）不同源 ⇒ 被测按一份做、裁判按另一份判（内部方案 问题 3）。
-# 裁判侧只把 opening 当判据、follow 显式标注不单独扣分（ACTION_V9 的定义即如此）。
-# ② 新增「判据优先级」段：速查表 + 锚点【承接】是打分的动作判据；契约其余板块
-# （逐态必须/可选、通用约束里的动作举例、业务流程与收口）只作背景，不得作为加减分依据。
-# 理由：契约里 AGENT_DUAL_RESPONSE_RULE 内嵌同一串 v8 措辞举例，而原文写着「以契约
-# 『通用约束』的双通道应答规则为准，此处为速查」——不声明优先级，新注入的 v9 表会被
-# 上一句压成附注（内部方案 §残留 1 已把这处冲突移交 内部方案）。
-# ③ 新增「本轮无客服音频」声明：Layer R（C/D/B2/B3）只收文本回复、没有客服音频，
-# 双通道应答规则的（二）语气转变部分不可判，明示不适用，避免裁判因一条它无法核验的
-# 规则压分。语气通道在有音频的臂仍由 Voice 裁判独立评分。
-# 同时删除的旧句：无（v2.6-P 的证据窗口声明、1-5 锚点、forbidden_items 口径全部逐字保留）。
-KEYTURN_JUDGE_VERSION_V26P = "v2.6-P" # 冻结：2026-09-06 之前的 run 用此版本复算
-FLOW_JUDGE_VERSION = "v2.3-J" # FlowJudge 判据未变，沿用 v2.3-J
-# 内部方案 审阅修正：Voice 判据自 内部方案 后未再改动，但原来复用 JUDGE_PROMPT_VERSION，
-# 被 内部方案 全局升版连带误标为 v2.5-K（judge_meta.voice.version 与注释矛盾，K18 审阅 P7）；
-# 此处拆为独立常量，与 keyturn/flow 同构各自跟踪。
-VOICE_JUDGE_VERSION = "v2.3-P" # 内部方案：state_voice_fit 改判「语气是否为听到的状态而转变」
-# K18c：泄露探针（LeakageProbe）——不评客服，只盲评用户关键轮文本本身的态度表露量，
-# 给 T1/T2/T3 三层透明度“是否真的分级”一个与被测模型无关的独立度量（manipulation check）。
-LEAKAGE_PROBE_VERSION = "v1.0-K18c"
+JUDGE_PROMPT_VERSION = "1.0"
+KEYTURN_JUDGE_VERSION = JUDGE_PROMPT_VERSION
+FLOW_JUDGE_VERSION = JUDGE_PROMPT_VERSION
+VOICE_JUDGE_VERSION = JUDGE_PROMPT_VERSION
+LEAKAGE_PROBE_VERSION = JUDGE_PROMPT_VERSION
 
 
 def prompt_hash(text: str) -> str:
-    """prompt 文本 sha256 前 16 位（版本追溯用）。"""
+    """Return a compact SHA-256 fingerprint of a prompt."""
     return hashlib.sha256(text.encode("utf-8")).hexdigest()[:16]
 
 
-POLICY_JUDGE_PROMPT = """你是一名客服策略合规裁判。请基于给定的策略契约、对话历史、用户状态真相（oracle）与客服的关键轮回复，对契约中的每条必需动作与禁止动作逐一分解判定，再汇总结论，并输出 JSON。
-
-## 判定要求
-1. required_items：对契约要求本次判定的每条必需动作逐条判定命中情况
-   - hit："是"（回复中明确执行）/"否"（未执行）/"部分"（执行但不充分）
-   - evidence：引用客服回复中的关键依据（无则写"无"）
-2. forbidden_items：对契约的每条禁止动作逐条判定是否触发
-   - triggered："是"/"否"；evidence 同上
-3. state_fit：客服回复是否与用户当前状态适配？（是/否/过度/不足）
-   - "过度"：反应强于状态所需（如对轻微不满使用过度安抚/对轻微抗拒过度施压）
-   - "不足"：未充分回应状态（如面对强烈抗拒仍按普通流程推进）
-4. context_coherent：客服回复是否与对话历史上下文连贯？（是/否）
-5. required_rate：必需动作中 hit="是" 的比例（0-1，保留两位小数）
-
-## 策略契约
-{policy_rules}
-
-## 对话历史
-{history}
-
-## 用户状态真相（oracle）
-{oracle_state}
-
-## 关键轮客服回复
-{agent_reply}
-
-## 输出格式
-只输出 JSON：
-{{
-  "required_items": [{{"action": "必需动作原文", "hit": "是|否|部分", "evidence": "回复中的依据"}}, ...],
-  "forbidden_items": [{{"action": "禁止动作原文", "triggered": "是|否", "evidence": "回复中的依据"}}, ...],
-  "state_fit": "是|否|过度|不足",
-  "context_coherent": "是|否",
-  "required_rate": 0-1,
-  "reason": "简要理由（中文，50字内）"
-}}
-"""
-
-# ---- 内部方案（v2.3-J）：关键轮裁判（KeyTurnJudge） ----
-# 修复 v2.2-I 结构性缺陷（planJ）：判定对象收敛为关键轮单条回复 × 单锚点，
-# 删除 required_items 逐条判定（移入 FlowJudge 全对话口径），证据窗口显式声明。
-# 内部方案（v2.7-S）：动作速查改为**模板槽位** + 模块加载期插入，本文件不再存第二份动作措辞。
 def _indent_block(text: str, pad: str = "     ") -> str:
     """整块缩进，供插进 prompt 的编号列表项之下（空白行不加垫）。"""
     return "\n".join(pad + ln if ln.strip() else ln for ln in text.split("\n"))
 
 
-# 裁判侧动作速查：由 domains.base.judge_action_table()（= ACTION_V9 的裁判侧渲染）产出。
 KEYTURN_ACTION_CHEATSHEET = _indent_block(judge_action_table())
 
-# 模板与成品分开存：正文里的 JSON 示例是 {{ }} 转义形态，供 KeyTurnJudge 后续
-# .format(policy_rules=…, history=…, oracle_state=…, agent_reply=…) 使用。
-# 因此速查插入必须走 str.replace 而不是 str.format —— 在此处 format 会把双花括号提前压成
-# 单花括号，下游 format 直接 KeyError（这是本模块唯一的注入点，别处不要再 format 模板）。
 _KEYTURN_JUDGE_PROMPT_TMPL = """你是一名客服关键轮应对裁判。判定对象仅为**关键轮的一条客服回复**。用户的关键轮台词往往是“字面一个意思、语气另一个意思”（弦外之音）：文字未必表露真实状态，语气才承载真意。请基于策略契约（重点看「关键事件应对锚点」中的【表面】【弦外】【承接】三要素）、对话历史（仅供理解上下文）、用户状态真相（oracle）与待判定回复，完成三项判定并输出 JSON。
 
 ## 证据窗口声明（必须遵守）
@@ -170,17 +82,8 @@ _KEYTURN_JUDGE_PROMPT_TMPL = """你是一名客服关键轮应对裁判。判定
 }}
 """
 
-# 成品 prompt（对外只暴露这一个名字；KeyTurnJudge 与 judge_meta hash 都用它）
-KEYTURN_JUDGE_PROMPT = _KEYTURN_JUDGE_PROMPT_TMPL.replace(
-    "{action_cheatsheet}", KEYTURN_ACTION_CHEATSHEET)
-assert "{action_cheatsheet}" not in KEYTURN_JUDGE_PROMPT, "速查槽位未被替换（judge_action_table 返回空？）"
-assert KEYTURN_JUDGE_PROMPT.count("{{") == _KEYTURN_JUDGE_PROMPT_TMPL.count("{{"), \
-    "注入破坏了 JSON 示例的双花括号转义（下游 .format 会 KeyError）"
+KEYTURN_JUDGE_PROMPT = _KEYTURN_JUDGE_PROMPT_TMPL.replace("{action_cheatsheet}", KEYTURN_ACTION_CHEATSHEET)
 
-# ---- 内部方案（v2.3-J）：全对话裁判（FlowJudge） ----
-# 单次调用合并产出：过程清单 flow_items（数据侧固定清单，裁判不得增删）+ 终局
-# task_score（0-2，聚合层归一 0/0.5/1）；替代 v2.2-I 的 DIALOGUE_TASK/TRANSITION
-# 两个独立裁判（完整对话正文只进一次 prompt，控 token）。
 FLOW_JUDGE_PROMPT = """你是一名客服全对话裁判。请基于策略契约、完整对话记录与给定的过程清单，一次完成两项判定：过程清单逐条命中（flow_items）与终局结果分（task_score），并输出 JSON。
 
 ## 证据窗口声明
@@ -228,12 +131,6 @@ FLOW_JUDGE_PROMPT = """你是一名客服全对话裁判。请基于策略契约
 }}
 """
 
-# ---- 截断观察窗追加段（2026-09-11，为「通话物理上跑不完」的端点而加）----
-# 为什么必须另开一口径：被调端点的服务端会话只能活 91-146 s，而其余端点跑完
-# 一通需 176-238 s（p50）⇒ 它的对话必然中途结束。拿中止的对话去评整通 FlowRate（清单
-# p50=5 条、其中 43.9% 是收尾/确认类）与终局 task_score，量到的是「走到了第几轮」而不是
-# 「能力如何」。故把四端点都截到前 K 轮，在同一观察窗内比。
-# 本段**追加**在 FLOW_JUDGE_PROMPT 之后、不改原模板：三家已入文档的整通读数不得被重评改动。
 FLOW_JUDGE_WINDOW_SUFFIX = """
 ## 附加要求：本次只给到前 {turn_cap} 轮（截断观察窗）
 本次提交的对话记录**只包含前 {turn_cap} 轮**（不是整通）。请在此窗口内判定，并遵守：
@@ -243,7 +140,6 @@ FLOW_JUDGE_WINDOW_SUFFIX = """
 - 已在窗口内执行的动作（hit="是"/"部分"）：`in_window` **必须**为 true；
 - 本次**不给终局结果分**：`task_score` 固定输出 null（对话未结束，终局无从判定）。
 """
-
 
 VOICE_JUDGE_PROMPT = """你是一名客服语音质量裁判。请直接聆听客服的关键轮回复音频，结合角色设定、声音要求、用户状态与回复文本，对以下三个维度分别打 1-5 分（整数），并输出 JSON。
 
@@ -290,56 +186,6 @@ VOICE_JUDGE_PROMPT = """你是一名客服语音质量裁判。请直接聆听�
 }}
 """
 
-DIALOGUE_TASK_JUDGE_PROMPT = """你是一名客服任务完成度裁判。请基于任务目标、策略规则与完整对话记录，判定客服任务完成度（0-2 分），并输出 JSON。
-
-## 评分标准
-- 2：任务目标完全达成（如：促成还款承诺/完成产品推介/解决用户问题），且无违规
-- 1：任务部分推进但未完全达成（如：用户同意考虑但未给承诺），无违规
-- 0：任务未推进，或触发禁止动作，或对话无效循环
-
-## 任务目标
-{task_goal}
-
-## 策略规则
-{policy_rules}
-
-## 完整对话记录
-{history}
-
-## 输出格式
-只输出 JSON：
-{{
-  "score": 0|1|2,
-  "reason": "简要理由（中文，50字内）"
-}}
-"""
-
-DIALOGUE_TRANSITION_JUDGE_PROMPT = """你是一名客服状态转变适应度裁判。请基于策略规则、完整对话记录与状态转变真相（oracle），判定客服在状态转变前后的整体表现（0-2 分），并输出 JSON。
-
-## 评分标准
-- 2：转变前策略正确 + 转变后识别了状态变化 + 调整了策略行为
-- 1：部分满足：识别了变化但调整不充分，或转变前正确但转变后滞后 1-2 轮
-- 0：未识别状态变化（继续旧策略），或转变后触发禁止动作
-
-（口径说明：本维度仅基于文本策略行为判定；B2 起声音相关子项不再纳入本维度，声音表现由 Voice Judge 独立评分。）
-
-## 状态转变
-{transition_desc}
-
-## 策略规则
-{policy_rules}
-
-## 完整对话记录
-{history}
-
-## 输出格式
-只输出 JSON：
-{{
-  "score": 0|1|2,
-  "reason": "简要理由（中文，50字内）"
-}}
-"""
-
 LEAKAGE_PROBE_PROMPT = """你是一名只能看到文字记录的分析员。你听不到录音，拿不到说话人的语气、语速、音量，也不知道他真实的意图。请仅凭下面这两句文字作判断。
 
 ## 文字记录
@@ -369,83 +215,30 @@ LEAKAGE_PROBE_PROMPT = """你是一名只能看到文字记录的分析员。你
 }}
 """
 
-# ---- F1：各 prompt 文本 hash（模块加载即冻结）----
-POLICY_JUDGE_PROMPT_HASH = prompt_hash(POLICY_JUDGE_PROMPT)
-VOICE_JUDGE_PROMPT_HASH = prompt_hash(VOICE_JUDGE_PROMPT)
-DIALOGUE_TASK_JUDGE_PROMPT_HASH = prompt_hash(DIALOGUE_TASK_JUDGE_PROMPT)
-DIALOGUE_TRANSITION_JUDGE_PROMPT_HASH = prompt_hash(DIALOGUE_TRANSITION_JUDGE_PROMPT)
-# 内部方案（v2.3-J）新模板 hash
 KEYTURN_JUDGE_PROMPT_HASH = prompt_hash(KEYTURN_JUDGE_PROMPT)
-# 内部方案（v2.7-S）：速查表由 domains.base 注入 ⇒ 单独留一份 hash，
-# 便于审计「prompt 变了是因为判据文字变了，还是因为动作表变了」。
 KEYTURN_ACTION_CHEATSHEET_HASH = prompt_hash(KEYTURN_ACTION_CHEATSHEET)
 FLOW_JUDGE_PROMPT_HASH = prompt_hash(FLOW_JUDGE_PROMPT)
-# K18c 新增：泄露探针（操纵有效性检验，与客服表现无关）
+VOICE_JUDGE_PROMPT_HASH = prompt_hash(VOICE_JUDGE_PROMPT)
 LEAKAGE_PROBE_PROMPT_HASH = prompt_hash(LEAKAGE_PROBE_PROMPT)
 
 
 def build_judge_meta(
     policy_model: str = "",
     voice_model: str = "",
-    dialogue_model: str = "",
-    dialogue_metric: str | None = None,
     profile_injected: bool | None = None,
-    judge_schema: str = "v2.2-I",
 ) -> dict[str, Any]:
-    """组装 verdict 级 judge_meta（F1）：policy/voice/dialogue 各自的版本、hash 与裁判模型。
-
-    profile_injected（v5.9 契约内容维度标记）：policy/dialogue 裁判契约输入末尾是否
-    追加了同源客户信息档案（render_customer_profile，v5.8 起；仅元信息，不改判据与
-    prompt 模板）。v5.8 之前产出的 verdict 无此键 → 可按键缺失/取值程序化甄别
-    v5.8 断点前后的判定（裁判可见事实面不同，分数不宜混比）；Voice 裁判不注入档案，
-    故 voice 条目不携带该标记。
-
-    judge_schema："v2.2-I"（legacy：policy+dialogue 双裁判）或
-    "v2.3-J"（keyturn+flow 双裁判；voice 不变）。两种 schema 的 meta 结构不同，
-    续评指纹天然互斥（不同 schema 的 partial 不可混用）。
-    """
-    if judge_schema == "v2.3-J":
-        meta: dict[str, Any] = {
-            "schema": "v2.3-J",
-            "keyturn": {
-                "version": KEYTURN_JUDGE_VERSION,
-                "prompt_hash": KEYTURN_JUDGE_PROMPT_HASH,
-                # 内部方案（v2.7-S）：动作口径由 domains.base 注入，单独入指纹。
-                # 动作表若变（= 尺子变），即使 prompt 模板一字未动也必须让旧 partial 失效。
-                "action_cheatsheet_hash": KEYTURN_ACTION_CHEATSHEET_HASH,
-                "model": policy_model,
-            },
-            "flow": {
-                "version": FLOW_JUDGE_VERSION,
-                "prompt_hash": FLOW_JUDGE_PROMPT_HASH,
-                "model": dialogue_model,
-            },
-            "voice": {
-                "version": VOICE_JUDGE_VERSION, # Voice 判据未动，独立跟踪（不随全局版本号漂移）
-                "prompt_hash": VOICE_JUDGE_PROMPT_HASH,
-                "model": voice_model,
-            },
-            # K18c：泄露探针亦入指纹——新增该探针后 verdict 多了 leakage_* 键，
-            # 旧 partial 必须失效重评，否则会被错误复用成“指标缺失”的半成品。
-            "leakage": {
-                "version": LEAKAGE_PROBE_VERSION,
-                "prompt_hash": LEAKAGE_PROBE_PROMPT_HASH,
-                "model": policy_model,
-            },
-        }
-        if profile_injected is not None:
-            meta["keyturn"]["profile_injected"] = profile_injected
-            meta["flow"]["profile_injected"] = profile_injected
-        # 裁判契约（render_judge_contract）随 Agent prompt 版本变化 → 入续评指纹，
-        # 否则 v6 run 的 partial 会被 v7 契约的重评静默复用。
-        from listen2serve.domains.base import resolve_agent_prompt_version
-
-        meta["agent_prompt"] = resolve_agent_prompt_version()
-        return meta
-    meta: dict[str, Any] = {
-        "policy": {
-            "version": JUDGE_PROMPT_VERSION,
-            "prompt_hash": POLICY_JUDGE_PROMPT_HASH,
+    """Identify the published judge protocol, prompt contents and selected models."""
+    meta = {
+        "protocol": "multi-turn/1",
+        "keyturn": {
+            "version": KEYTURN_JUDGE_VERSION,
+            "prompt_hash": KEYTURN_JUDGE_PROMPT_HASH,
+            "action_cheatsheet_hash": KEYTURN_ACTION_CHEATSHEET_HASH,
+            "model": policy_model,
+        },
+        "flow": {
+            "version": FLOW_JUDGE_VERSION,
+            "prompt_hash": FLOW_JUDGE_PROMPT_HASH,
             "model": policy_model,
         },
         "voice": {
@@ -453,23 +246,13 @@ def build_judge_meta(
             "prompt_hash": VOICE_JUDGE_PROMPT_HASH,
             "model": voice_model,
         },
+        "leakage": {
+            "version": LEAKAGE_PROBE_VERSION,
+            "prompt_hash": LEAKAGE_PROBE_PROMPT_HASH,
+            "model": policy_model,
+        },
     }
     if profile_injected is not None:
-        meta["policy"]["profile_injected"] = profile_injected
-    if dialogue_metric == "transition_score":
-        meta["dialogue"] = {
-            "version": JUDGE_PROMPT_VERSION,
-            "prompt_hash": DIALOGUE_TRANSITION_JUDGE_PROMPT_HASH,
-            "model": dialogue_model,
-        }
-    elif dialogue_metric == "task_completion":
-        meta["dialogue"] = {
-            "version": JUDGE_PROMPT_VERSION,
-            "prompt_hash": DIALOGUE_TASK_JUDGE_PROMPT_HASH,
-            "model": dialogue_model,
-        }
-    else:
-        meta["dialogue"] = None
-    if meta["dialogue"] is not None and profile_injected is not None:
-        meta["dialogue"]["profile_injected"] = profile_injected
+        meta["keyturn"]["profile_injected"] = profile_injected
+        meta["flow"]["profile_injected"] = profile_injected
     return meta

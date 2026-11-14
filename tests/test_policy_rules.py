@@ -1,11 +1,4 @@
-"""Plan I（v6.0）回归测试：三域 policy_rules 新 6 态全覆盖 + 状态键归一化兼容新旧格式。
-
-防回归点：
-1. 任何域的 policy_rules 键集合必须覆盖全部 6 个 canonical 状态；
-2. normalize_state 同时兼容新 6 态码、旧 11 态码与中文标签（旧 run 重评）；
-3. 被测 prompt 的「用户状态应对策略」段标题由 STATE_LABELS 派生（单一来源）；
-4. STATE_LABELS 与 emotion.STATE_EMOTION 同码。
-"""
+"""六态规则、资产状态标签归一化和轮次预算检查。"""
 
 from listen2serve.domains import available_roles, get_domain
 from listen2serve.domains.base import LEGACY_STATE_MAP, STATE_LABELS, normalize_state
@@ -77,33 +70,17 @@ def test_normalize_state_unknown():
     assert normalize_state(None) is None
 
 
-def test_render_policy_prompt_labels_from_state_labels():
-    """被测 prompt「用户状态应对策略」段标题由 STATE_LABELS 派生（6 态全覆盖，两版本各自措辞）。"""
-    heads = {"v6": "## 当用户表现出[{}]时：", "v7": "## 当你从客户声音中听出[{}]时："}
-    for role in available_roles():
-        domain = get_domain(role)
-        for variant, head in heads.items():
-            prompt = domain.render_policy_prompt(variant=variant)
-            assert "# 用户状态应对策略" in prompt
-            for label in STATE_LABELS.values():
-                assert head.format(label) in prompt
-    # v7 把「状态判据是声音」写进段标题（听→做任务面的入口）
-    v7 = get_domain("collection").render_policy_prompt(variant="v7")
-    assert "# 用户状态应对策略（状态以你听到的声音为主要判据；本节优先于上方业务流程）" in v7
+def test_shared_action_labels():
+    from listen2serve.domains.base import ACTION_TABLE_ORDER, action_table
+
+    table = action_table()
+    for state in ACTION_TABLE_ORDER:
+        assert f"听出【{STATE_LABELS[state]}】" in table
 
 
 def test_render_policy_prompt_turn_budget_pace_line():
-    """Plan I：turn_budget.soft 存在时末尾追加节奏引导行；缺省不输出。
-
-    v7 改写文案：删去与「状态优先、流程可跳转可回补」矛盾的「不跳步」，改为要求为收尾轮留余量。
-    """
     domain = get_domain("collection")
-    expected = {
-        "v6": "本通电话预计约 6 轮内完成主要流程，请合理推进，既不拖沓也不跳步。",
-        "v7": "本通电话预计约 6 轮内完成主要流程，请合理推进不要拖沓，并为收尾轮留出余量。",
-    }
-    for variant, line in expected.items():
-        prompt = domain.render_policy_prompt(turn_budget={"soft": 6, "hard": 10}, variant=variant)
-        assert line in prompt
-        assert "本通电话预计约" not in domain.render_policy_prompt(variant=variant)
-    assert "不跳步" not in domain.render_policy_prompt(turn_budget={"soft": 6}, variant="v7")
+    prompt = domain.render_policy_prompt(turn_budget={"soft": 6, "hard": 10})
+    assert "本通电话预计约 6 轮内完成主要流程，请合理推进不要拖沓，并为收尾轮留出余量。" in prompt
+    assert "本通电话预计约" not in domain.render_policy_prompt()
+    assert "不跳步" not in prompt

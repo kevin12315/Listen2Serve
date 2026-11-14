@@ -1,4 +1,4 @@
-"""lexicon_check 行为测试（Plan I v6.0：关键轮不再跳过，全轮同口径）。"""
+"lexicon_check 行为测试（ ：关键轮不再跳过，全轮同口径）"
 
 from __future__ import annotations
 
@@ -20,12 +20,18 @@ def _traj(turns: list[dict]) -> dict:
 class TestLexiconCheck:
     def test_t2_all_turns_zero_hit(self):
         """T2 全轮（含关键轮）命中明确情绪词 → 计违规。"""
-        traj = _traj([
-            {"turn": 1, "user_text": "那个，我现在手头有点紧。", "user_state": "neutral"},
-            {"turn": 2, "user_text": "你们这样我真烦。", "user_state": "displeased"},
-            {"turn": 3, "user_text": "这事真闹心，就这么着吧。", "user_state": "displeased",
-             "is_key_turn": True},  # 关键轮同样校验（Plan I）
-        ])
+        traj = _traj(
+            [
+                {"turn": 1, "user_text": "那个，我现在手头有点紧。", "user_state": "neutral"},
+                {"turn": 2, "user_text": "你们这样我真烦。", "user_state": "displeased"},
+                {
+                    "turn": 3,
+                    "user_text": "这事真闹心，就这么着吧。",
+                    "user_state": "displeased",
+                    "is_key_turn": True,
+                },
+            ]
+        )
         r = check_user_lexicon(_scenario("T2"), traj)
         assert r["vocab_checked_turns"] == 3
         assert r["vocab_violation_turns"] == 2
@@ -34,43 +40,63 @@ class TestLexiconCheck:
     def test_t1_key_positive_check(self):
         """T1 关键轮：正向命中 key_event.state 子表词通过；未命中计违规。"""
         # displeased 子表含「烦」
-        ok_traj = _traj([
-            {"turn": 1, "user_text": "嗯，你先说说什么情况。", "user_state": "neutral"},
-            {"turn": 2, "user_text": "我真是烦透了，这钱的事没完。",
-             "user_state": "displeased", "is_key_turn": True},
-        ])
+        ok_traj = _traj(
+            [
+                {"turn": 1, "user_text": "嗯，你先说说什么情况。", "user_state": "neutral"},
+                {
+                    "turn": 2,
+                    "user_text": "我真是烦透了，这钱的事没完。",
+                    "user_state": "displeased",
+                    "is_key_turn": True,
+                },
+            ]
+        )
         r = check_user_lexicon(_scenario("T1"), ok_traj)
         assert r["vocab_violation_turns"] == 0
-        bad_traj = _traj([
-            {"turn": 1, "user_text": "行吧，那就先这样处理一下。",
-             "user_state": "displeased", "is_key_turn": True},
-        ])
+        bad_traj = _traj(
+            [
+                {
+                    "turn": 1,
+                    "user_text": "行吧，那就先这样处理一下。",
+                    "user_state": "displeased",
+                    "is_key_turn": True,
+                },
+            ]
+        )
         r2 = check_user_lexicon(_scenario("T1"), bad_traj)
         assert r2["vocab_violation_turns"] == 1
         assert r2["vocab_violations"][0]["is_key_turn"] is True
 
     def test_t1_non_key_zero_hit(self):
-        """T1 非关键轮（v6.0 克制中性）：命中情绪词计违规。"""
-        traj = _traj([
-            {"turn": 1, "user_text": "我真的很烦。", "user_state": "displeased"},
-            {"turn": 2, "user_text": "嗯，你先说说情况。", "user_state": "neutral",
-             "is_key_turn": True},  # neutral 关键事件无子表词要求
-        ])
+        "T1 非关键轮（ 克制中性）：命中情绪词计违规"
+        traj = _traj(
+            [
+                {"turn": 1, "user_text": "我真的很烦。", "user_state": "displeased"},
+                {
+                    "turn": 2,
+                    "user_text": "嗯，你先说说情况。",
+                    "user_state": "neutral",
+                    "is_key_turn": True,
+                },  # neutral 关键事件无子表词要求
+            ]
+        )
         r = check_user_lexicon(_scenario("T1", key_state="neutral"), traj)
         assert r["vocab_checked_turns"] == 2
         assert r["vocab_violation_turns"] == 1
         assert r["vocab_violations"][0]["turn"] == 1
 
     def test_legacy_run_fallback_critical_turn(self):
-        """旧 run（无 is_key_turn 字段）回落场景 critical_turn 定位。"""
+        "Test legacy run fallback critical turn."
         sc = _scenario("T2")
         sc["measurement"] = {"critical_turn": 2}
         sc.pop("user_script")
         sc["oracle_state"] = "用户处于N1_frustrated状态"
-        traj = _traj([
-            {"turn": 1, "user_text": "你们这样我真烦。", "user_state": "N1_frustrated"},
-            {"turn": 2, "user_text": "烦死人的事情又来了。", "user_state": "N1_frustrated"},
-        ])
+        traj = _traj(
+            [
+                {"turn": 1, "user_text": "你们这样我真烦。", "user_state": "N1_frustrated"},
+                {"turn": 2, "user_text": "烦死人的事情又来了。", "user_state": "N1_frustrated"},
+            ]
+        )
         r = check_user_lexicon(sc, traj)
         # T2 全轮校验（关键轮也不跳过）
         assert r["vocab_checked_turns"] == 2
@@ -85,7 +111,7 @@ class TestLexiconCheck:
 
     def test_vocab_words_read_dynamically(self):
         """词表动态读自 listen2serve.vocab（monkeypatch 扩容立即生效，证明无硬编码副本）。"""
-        import listen2serve.vocab as vocab
+        from listen2serve import vocab
 
         traj = _traj([{"turn": 1, "user_text": "这事儿真闹心。", "user_state": "displeased"}])
         assert check_user_lexicon(_scenario("T2"), traj)["vocab_violation_turns"] == 1
@@ -96,3 +122,26 @@ class TestLexiconCheck:
             assert r["vocab_violation_turns"] == 0
         finally:
             vocab.NEG_WORDS, vocab.POS_WORDS = orig_neg, orig_pos
+
+
+def test_recorded_neutral_key_refusal_is_flagged_without_rewriting_the_call():
+    from copy import deepcopy
+
+    text = "还一部分你们还要接着追，这方案我不接受。眼下这个安排我不同意，改天再谈吧。"
+    trajectory = _traj([
+        {"turn": 4, "user_text": text, "user_state": "displeased", "is_key_turn": False},
+        {"turn": 5, "user_text": text, "user_state": "displeased", "is_key_turn": True},
+    ])
+    original = deepcopy(trajectory)
+    result = check_user_lexicon(_scenario("T3"), trajectory)
+    assert result["vocab_checked_turns"] == 2
+    assert result["vocab_violation_turns"] == 1
+    assert result["vocab_violations"][0]["turn"] == 5
+    assert trajectory == original
+
+
+def test_neutral_business_confirmation_has_no_refusal_declaration():
+    trajectory = _traj([
+        {"turn": 5, "user_text": "这笔欠款我记的是逾期二十天，您再核对一下。", "user_state": "displeased", "is_key_turn": True},
+    ])
+    assert check_user_lexicon(_scenario("T3"), trajectory)["vocab_violation_turns"] == 0

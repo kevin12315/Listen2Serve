@@ -1,16 +1,4 @@
-"""TTS 网关：dashscope qwen-audio-3.0-tts-plus / CosyVoice 参数切换。
-
-统一输出 16k PCM16（mono），由调用方决定是否写盘为 WAV。
-指令控制字段（2026-08-26 修正，官方文档 + 真机双向验证）：SpeechSynthesizer 端点
-（Qwen-Audio-TTS / CosyVoice 系）的指令字段是 `input.instruction`（单数）；
-`instructions`（复数）是 Qwen3-TTS 系 multimodal-generation 端点的字段名，打到本端点
-会被后端**静默忽略**（HTTP 200 且音频与不带指令的基线逐字节相同）。
-设计约束：评测通路**不做自动回退**——指定后端失败即抛错、该样本判定为失败；
-备选后端通过 `backend` 参数或 `settings.tts_backend` 显式切换：
-  - dashscope：qwen-audio-3.0-tts-plus（主要 TTS，情感 instruct + prosody 控制）
-    data 或 audio 字段；超时 300s，失败重试一次后仍失败即抛错，无后端间回退）
-  - cosyvoice：DashScope CosyVoice v2（克隆音色场景）
-"""
+"TTS 网关：dashscope qwen-audio-3.0-tts-plus / CosyVoice 参数切换"
 
 from __future__ import annotations
 
@@ -24,21 +12,16 @@ from typing import Any
 
 import httpx
 
-from listen2serve.gateway.base import CallRecord, CallSink, MemoryCallSink, prompt_hash
+from listen2serve.gateway.base import CallRecord, CallSink, MemoryCallSink, model_identity, prompt_hash
 from listen2serve.model_registry import voice_for
 from listen2serve.runtime.config import Settings, get_settings
 
 logger = logging.getLogger(__name__)
 
-# seed-tts 火山协议成功码（0=同步成功，3000=服务内部排队后成功）
 SEEDTTS_SUCCESS_CODES = (0, 3000, "0", "3000")
 SEEDTTS_TIMEOUT_S = 300.0
-SEEDTTS_RETRIES = 1 # 失败重试一次（共最多 2 次请求）
+SEEDTTS_RETRIES = 1  # 失败重试一次（共最多 2 次请求）
 
-# 支持指令控制（input.instruction）的 dashscope 模型前缀：
-# Qwen-Audio-TTS 全系（系统音色/复刻音色均可任意指令）、CosyVoice v3 及以上；
-# cosyvoice-v2 不在官方支持清单内，实测传 instruction 直接 HTTP 400（Engine 428），
-# 故对不支持的模型显式丢弃指令并 warning 留痕，避免整条请求失败。
 INSTRUCT_CAPABLE_PREFIXES = ("qwen-audio-3.0-tts-", "cosyvoice-v3")
 
 
@@ -49,11 +32,17 @@ def supports_instruct(model: str) -> bool:
 
 @dataclass
 class TTSResult:
-    audio: bytes # PCM16 16k mono（无 WAV 头）
+    audio: bytes  # PCM16 16k mono（无 WAV 头）
     sample_rate: int
     latency_ms: float = 0.0
     backend: str = ""
     record: CallRecord | None = field(default=None, repr=False)
+    requested_model: str | None = None
+    response_model: str | None = None
+    requested_host: str | None = None
+    provider_host: str | None = None
+    request_id: str | None = None
+    response_model_differs: bool | None = None
 
 
 class TTSGateway:
@@ -131,21 +120,47 @@ class TTSGateway:
         latency = (time.perf_counter() - start) * 1000
         if resp.status_code != 200:
             detail = resp.text[:500]
-            self.sink.append(CallRecord(service="tts", backend="dashscope", model=model,
-                                        prompt_hash=ph, latency_ms=latency, error=f"HTTP {resp.status_code}: {detail}"))
+            self.sink.append(
+                CallRecord(
+                    service="tts",
+                    backend="dashscope",
+                    model=model,
+                    prompt_hash=ph,
+                    latency_ms=latency,
+                    error=f"HTTP {resp.status_code}: {detail}",
+                    **model_identity(None, model, response=resp, requested_url=s.dashscope_tts_url),
+                )
+            )
             raise RuntimeError(f"dashscope TTS HTTP {resp.status_code}: {detail}")
-        data = resp.json()
+        data = {} if resp.content[:4] == b"RIFF" else resp.json()
+        identity = model_identity(data, model, response=resp, requested_url=s.dashscope_tts_url)
         if data.get("code") not in (None, 0, "0") and data.get("code") != 200:
-            self.sink.append(CallRecord(service="tts", backend="dashscope", model=model,
-                                        prompt_hash=ph, latency_ms=latency, error=str(data)[:500]))
+            self.sink.append(
+                CallRecord(
+                    service="tts",
+                    backend="dashscope",
+                    model=model,
+                    prompt_hash=ph,
+                    latency_ms=latency,
+                    error=str(data)[:500],
+                    **identity,
+                )
+            )
             raise RuntimeError(f"dashscope TTS error: {data}")
         # 响应可能直接是 WAV 二进制，也可能在 output.audio 字段
         audio = _extract_audio_bytes(data, resp.content)
-        self.sink.append(CallRecord(service="tts", backend="dashscope", model=model,
-                                    prompt_hash=ph, latency_ms=latency))
-        return TTSResult(audio=_wav_to_pcm16(audio), sample_rate=s.tts_sample_rate,
-                         latency_ms=latency, backend="dashscope")
-
+        record = CallRecord(
+            service="tts", backend="dashscope", model=model, prompt_hash=ph, latency_ms=latency, **identity
+        )
+        self.sink.append(record)
+        return TTSResult(
+            audio=_wav_to_pcm16(audio),
+            sample_rate=s.tts_sample_rate,
+            latency_ms=latency,
+            backend="dashscope",
+            record=record,
+            **identity,
+        )
 
 
 # ---- 工具函数 ----
@@ -170,14 +185,16 @@ def _extract_audio_bytes(data: dict[str, Any], raw: bytes) -> bytes:
                 return _b64decode_or_raw(aud)
             url = out.get("audio_url") or out.get("url")
             if url:
-                return _b64decode_or_raw(url)
-    return raw
+                resp = httpx.get(url, timeout=60)
+                resp.raise_for_status()
+                return resp.content
+    raise RuntimeError("TTS response contains no audio")
 
 
 def _b64decode_or_raw(value: str) -> bytes:
     try:
         return base64.b64decode(value)
-    except Exception: # noqa: BLE001 - 非 base64 则按原始字节
+    except Exception:  # noqa: BLE001 - 非 base64 则按原始字节
         return value.encode("latin-1")
 
 

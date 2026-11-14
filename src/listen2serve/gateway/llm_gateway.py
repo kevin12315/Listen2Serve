@@ -20,7 +20,7 @@ from typing import Any
 
 from openai import OpenAI
 
-from listen2serve.gateway.base import CallRecord, CallSink, MemoryCallSink, prompt_hash
+from listen2serve.gateway.base import CallRecord, CallSink, MemoryCallSink, model_identity, prompt_hash
 from listen2serve.model_registry import resolve_model
 from listen2serve.runtime.config import Settings, get_settings
 
@@ -47,17 +47,27 @@ REASONING_EFFORT_BY_MODEL: dict[str, str] = {}
 _WARNED_PARAM_ADAPT: set[tuple[str, float, float]] = set()
 
 
-def _adapt_temperature(name: str, temperature: float) -> tuple[float, str]:
+def _adapt_temperature(name: str, temperature: float, thinking: bool | None = None) -> tuple[float, str]:
     """把 temperature 收敛到该模型的合法值域；返回 (生效值, 留痕文本)。
 
     不在适配表里的模型原样返回、留痕为空串 ⇒ 对未登记模型**零行为变化**。
     """
     domain = TEMPERATURE_DOMAIN.get(name)
+    mode_note = ""
+    if name == "kimi-k3":
+        # The registry binds this model to Moonshot. Its accepted temperature
+        # follows the thinking mode; an omitted setting uses the provider default.
+        domain = (0.6,) if thinking is False else (1.0,)
+        mode = "disabled" if thinking is False else "enabled" if thinking is True else "default"
+        mode_note = f"thinking={mode}, "
     if not domain or temperature in domain:
         return temperature, ""
     effective = min(domain, key=lambda v: abs(v - temperature))
-    note = (f"temperature {temperature}→{effective}"
-            f"（{name} 只接受 {list(domain)}，见 TEMPERATURE_DOMAIN）")
+    note = (
+        f"temperature {temperature}→{effective}（{name}, {mode_note}只接受 {list(domain)}）"
+        if name == "kimi-k3"
+        else f"temperature {temperature}→{effective}（{name} 只接受 {list(domain)}，见 TEMPERATURE_DOMAIN）"
+    )
     key = (name, temperature, effective)
     if key not in _WARNED_PARAM_ADAPT:
         _WARNED_PARAM_ADAPT.add(key)
@@ -97,9 +107,12 @@ def _coerce_content(raw: Any, model: str) -> str:
         joined = "".join(parts)
         key = (model, "list_content")
         if key not in _WARNED_PARAM_ADAPT:
-            _WARNED_PARAM_ADAPT.add(key) # 复用同一个去重集合，避免逐调用刷屏
-            logger.warning("LLM 网关：模型 %s 返回 list 型 content（%d 段），已归一为字符串。"
-                           "每个模型只告警一次。", model, len(raw))
+            _WARNED_PARAM_ADAPT.add(key)  # 复用同一个去重集合，避免逐调用刷屏
+            logger.warning(
+                "LLM 网关：模型 %s 返回 list 型 content（%d 段），已归一为字符串。每个模型只告警一次。",
+                model,
+                len(raw),
+            )
         return joined
     return str(raw)
 
@@ -111,8 +124,14 @@ class LLMResult:
     prompt_tokens: int = 0
     completion_tokens: int = 0
     latency_ms: float = 0.0
-    finish_reason: str = "" # 截断守卫（length = 输出被 max_tokens 截断）
+    finish_reason: str = ""  # 截断守卫（length = 输出被 max_tokens 截断）
     record: CallRecord | None = field(default=None, repr=False)
+    requested_model: str | None = None
+    response_model: str | None = None
+    requested_host: str | None = None
+    provider_host: str | None = None
+    request_id: str | None = None
+    response_model_differs: bool | None = None
 
 
 class LLMGateway:
@@ -121,35 +140,27 @@ class LLMGateway:
     def __init__(self, settings: Settings | None = None, sink: CallSink | None = None) -> None:
         self.settings = settings or get_settings()
         self.sink = sink or MemoryCallSink()
-        self._clients: dict[str, OpenAI] = {}
+        self._clients: dict[tuple[str, str, str], OpenAI] = {}
 
     # ---- 客户端懒加载 ----
     def _client(self, backend: str, model_name: str = "") -> OpenAI:
         s = self.settings
-        if backend == "openai":
-            # 通用 OpenAI 兼容后端：key / base_url 全来自 .env，本仓不预设厂商
-            key = s.openai_api_key or "unset"
-            if key not in self._clients:
-                self._clients[key] = OpenAI(api_key=key, base_url=s.openai_base_url,
-                                            timeout=300)
-            return self._clients[key]
-        if backend == "google":
-            # Google 官方 OpenAI 兼容入口：base_url 已含 /v1beta/openai，SDK 自带 /chat/completions
-            key = s.gemini_api_key or "unset"
-            if key not in self._clients:
-                self._clients[key] = OpenAI(api_key=key, base_url=s.gemini_base_url,
-                                            timeout=300)
-            return self._clients[key]
-        if backend in self._clients:
-            return self._clients[backend]
-        if backend == "dashscope":
-            client = OpenAI(api_key=s.dashscope_api_key or "unset", base_url=s.dashscope_base_url, timeout=300)
-        elif backend == "local":
-            client = OpenAI(api_key="local", base_url=s.local_base_url, timeout=300)
-        else:
-            raise ValueError(f"未知 LLM 后端: {backend}")
-        self._clients[backend] = client
-        return client
+        routes = {
+            "openai": (s.openai_base_url, s.openai_api_key),
+            "google": (s.gemini_base_url, s.gemini_api_key),
+            "moonshot": (s.moonshot_base_url, s.moonshot_api_key),
+            "dashscope": (s.dashscope_base_url, s.dashscope_api_key),
+            "local": (s.local_base_url, "local"),
+        }
+        if backend not in routes:
+            raise ValueError(f"Unknown LLM backend: {backend}")
+        base_url, api_key = routes[backend]
+        if not api_key:
+            raise ValueError(f"Missing API key for {backend}")
+        identity = (backend, base_url, api_key)
+        if identity not in self._clients:
+            self._clients[identity] = OpenAI(api_key=api_key, base_url=base_url, timeout=300)
+        return self._clients[identity]
 
     def _parse_model(self, model: str | None) -> tuple[str, str]:
         """返回 (backend, model_name)；以模型↔平台绑定表为准，冲突即抛错。"""
@@ -172,20 +183,31 @@ class LLMGateway:
                 qwen3 系经 extra_body.enable_thinking 传递；None = 后端默认）。
         """
         backend, name = self._parse_model(model)
+        requested_url = {
+            "openai": self.settings.openai_base_url,
+            "google": self.settings.gemini_base_url,
+            "moonshot": self.settings.moonshot_base_url,
+            "dashscope": self.settings.dashscope_base_url,
+            "local": self.settings.local_base_url,
+        }.get(backend)
         ph = prompt_hash(str(messages))
         start = time.perf_counter()
         extra: dict[str, Any] = {}
         if seed is not None:
             extra["seed"] = seed
         # 按模型适配请求参数（不在适配表里的模型 ⇒ 生效值 == 请求值、note 为空串）
-        eff_temp, param_note = _adapt_temperature(name, temperature)
+        eff_temp, param_note = _adapt_temperature(name, temperature, thinking=thinking)
         extra_body: dict[str, Any] = {}
         if thinking is not None and backend == "dashscope":
             extra_body["enable_thinking"] = bool(thinking)
+        elif thinking is not None and backend == "moonshot":
+            extra_body["thinking"] = {"type": "enabled" if thinking else "disabled"}
         effort = REASONING_EFFORT_BY_MODEL.get(name)
         if effort:
             extra_body["reasoning_effort"] = effort
-            param_note = (param_note + "; " if param_note else "") + f"reasoning_effort={effort}（网关默认档）"
+            param_note = (
+                param_note + "; " if param_note else ""
+            ) + f"reasoning_effort={effort}（网关默认档）"
         if extra_body:
             extra["extra_body"] = extra_body
         try:
@@ -197,13 +219,21 @@ class LLMGateway:
                 max_tokens=max_tokens,
                 **extra,
             )
-        except Exception as exc: # noqa: BLE001 - 记录审计后原样抛出
-            self.sink.append(CallRecord(
-                service="llm", backend=backend, model=name, prompt_hash=ph,
-                latency_ms=(time.perf_counter() - start) * 1000,
-                error=f"{type(exc).__name__}: {exc}",
-                param_note=param_note,
-            ))
+        except Exception as exc:
+            self.sink.append(
+                CallRecord(
+                    service="llm",
+                    backend=backend,
+                    model=name,
+                    prompt_hash=ph,
+                    latency_ms=(time.perf_counter() - start) * 1000,
+                    error=f"{type(exc).__name__}: {exc}",
+                    param_note=param_note,
+                    **model_identity(
+                        None, name, response=getattr(exc, "response", None), requested_url=requested_url
+                    ),
+                )
+            )
             raise
         latency = (time.perf_counter() - start) * 1000
         # content 归一（见 _coerce_content）：有的模型返回多段 list，直接透传会让下游
@@ -213,12 +243,26 @@ class LLMGateway:
         usage = getattr(resp, "usage", None)
         pt = getattr(usage, "prompt_tokens", 0) or 0
         ct = getattr(usage, "completion_tokens", 0) or 0
+        identity = model_identity(resp, name, requested_url=requested_url)
         record = CallRecord(
-            service="llm", backend=backend, model=name, prompt_hash=ph,
-            latency_ms=latency, prompt_tokens=pt, completion_tokens=ct,
+            service="llm",
+            backend=backend,
+            model=name,
+            prompt_hash=ph,
+            latency_ms=latency,
+            prompt_tokens=pt,
+            completion_tokens=ct,
             param_note=param_note,
+            **identity,
         )
         self.sink.append(record)
-        return LLMResult(text=text, model=f"{backend}/{name}", prompt_tokens=pt,
-                         completion_tokens=ct, latency_ms=latency,
-                         finish_reason=finish_reason, record=record)
+        return LLMResult(
+            text=text,
+            model=f"{backend}/{name}",
+            prompt_tokens=pt,
+            completion_tokens=ct,
+            latency_ms=latency,
+            finish_reason=finish_reason,
+            record=record,
+            **identity,
+        )

@@ -1,8 +1,5 @@
 name: ci
 
-# 论文配套仓的最小可复现保证：不联网也要跑绿这三件事。
-# check-data 校验数据自洽，smoke 用本地桩服务跑通裁判链路，pytest 是契约测试。
-# 任何一条需要真实外部端点的都不放 CI（发布仓本就不调内部/付费端点，见 docs/limitations.md）。
 on:
   push:
     branches: [main, master]
@@ -11,9 +8,10 @@ on:
 
 jobs:
   offline-gates:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
     strategy:
       matrix:
+        os: [ubuntu-latest, macos-latest]
         python-version: ["3.12"]
     steps:
       - uses: actions/checkout@v4
@@ -30,3 +28,5 @@ jobs:
         run: make smoke
       - name: Contract tests
         run: make test
+      - name: Lint
+        run: make lint

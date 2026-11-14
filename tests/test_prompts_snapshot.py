@@ -1,9 +1,5 @@
-"""`prompts/*.md` 快照必须与代码常量逐字一致（发布闸门）。
+"`prompts/*.md` 快照必须与代码常量逐字一致（发布闸门）"
 
-快照存在的意义见 `scripts/dump_prompts.py` 的 docstring；它的风险是"导出之后就忘了重导"，
-那时快照比没有更糟（读者以为看的是判据，实际是旧判据）。所以这里逐条重算 sha256 比对：
-代码改了量规而没重跑导出脚本 → 本测试红。
-"""
 from __future__ import annotations
 
 import hashlib
@@ -15,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
+
 
 def _load_dump_module():
     """与导出脚本共用同一份清单（不复制第二份，否则两边各改一半必漂移）。"""
@@ -49,6 +46,7 @@ def _expected() -> dict[str, str]:
 
 def test_manifest_lists_every_snapshot():
     manifest = json.loads((ROOT / "prompts" / "MANIFEST.json").read_text(encoding="utf-8"))
+    assert {p.name for p in (ROOT / "prompts").glob("*.md")} == set(manifest["files"])
     assert set(manifest["files"]) == set(_expected()), "快照清单与代码常量不一致，请重跑 dump_prompts.py"
 
 

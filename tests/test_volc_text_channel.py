@@ -1,21 +1,4 @@
-"""豆包下行文本通道的回归测试（零 API，事件形态取自 2026-09-08 真机下行实录）。
-
-为什么单独一个文件而不是塞进 test_tick_adapter.py：这里守的是**跨两个模块的配对不变量**
-（`VolcRealtimeProvider._normalize` 给的 utterance 键 ↔ `QwenTickAdapter` 的音频/转写配对），
-任何一侧"看起来更合理"的改动都会把它拆开，而拆开的症状是**静默的**：
-`trace.agent_text` 恒空、不报错、音频一切正常。
-
-这个缺陷的实际代价（2026-09-08 定位）：豆包 Layer L 三条件的 `agent_text` 全空，于是
-① FlowRate/TaskScore/closing_ok 被当成"结构性失效"（实测 0.008/0.012）；
-② 更重的是生成侧 —— 用户模拟器 `next_turn(agent_reply="")` 全程看不到客服说了什么，
-   且 `peek_interrupt` 要求 ≥8 字 ⇒ 脚本标注的 barge-in 在豆包上物理不可能触发。
-两条都被归因成"端点只回音频不回文本""豆包明显更安静"，而事实是端点一直在发文本。
-
-真机下行事件的关键形态（本文件的 fixture 即按此写死）：
-  · `response.output_text.delta` keys = [delta, event_id, question_id, **response_id**, type]
-  · `response.output_audio.delta` keys = [delta, event_id, type]        ← **不带任何 id**
-  · 顺序：文本增量先到 → `response.output_audio.started`(带 response_id) → 音频增量
-"""
+"豆包下行文本通道的回归测试"
 
 from __future__ import annotations
 
@@ -31,7 +14,7 @@ from listen2serve.runtime.realtime.volc_provider import (
     VolcRealtimeProvider,
 )
 
-RESP_ID = "54810143316620290"      # 真机：本轮客服回复的 response_id
+RESP_ID = "54810143316620290"  # 真机：本轮客服回复的 response_id
 QUESTION_ID = "54810143316620546"  # 真机：本轮用户条目的 item_id
 DIALOG_ID = "6e07f577-3bd6-402f-aaae-8cc32030f773"  # 真机：session.created 的 session.id
 
@@ -61,14 +44,17 @@ def doubao_batches(p: VolcRealtimeProvider) -> list[list[QwenEvent]]:
     注意：`_normalize` 是有状态的（active response_id 靠它累积），所以必须**按到达顺序
     一次性预归一化**，得到的事件再喂给适配器 —— 这样测的才是真机链路。
     """
-    ev = lambda kind, **f: p._normalize(raw(kind, **f))[0]  # noqa: E731
+    ev = lambda kind, **f: p._normalize(raw(kind, **f))[0]
     head = [
-        [ev("response.output_text.delta", delta=TEXT_PARTS[0],
-            response_id=RESP_ID, question_id=QUESTION_ID)],
-        [ev("response.output_text.delta", delta=TEXT_PARTS[1], response_id=RESP_ID),
-         ev("response.output_text.delta", delta=TEXT_PARTS[2], response_id=RESP_ID)],
-        [ev("response.output_text.done", text=TEXT_FULL, response_id=RESP_ID),
-         ev("response.output_audio.started", response_id=RESP_ID, tts_type="default")],
+        [ev("response.output_text.delta", delta=TEXT_PARTS[0], response_id=RESP_ID, question_id=QUESTION_ID)],
+        [
+            ev("response.output_text.delta", delta=TEXT_PARTS[1], response_id=RESP_ID),
+            ev("response.output_text.delta", delta=TEXT_PARTS[2], response_id=RESP_ID),
+        ],
+        [
+            ev("response.output_text.done", text=TEXT_FULL, response_id=RESP_ID),
+            ev("response.output_audio.started", response_id=RESP_ID, tts_type="default"),
+        ],
     ]
     # 6 帧音频：每帧占一个 tick（= tick 适配器每 tick 只收一帧的节奏）
     return head + [[ev("response.output_audio.delta", delta=audio_b64())] for _ in range(6)]
@@ -114,7 +100,7 @@ async def drain(adapter: QwenTickAdapter, ticks: int) -> tuple[str, int]:
 
 @pytest.mark.asyncio
 async def test_doubao_agent_text_is_not_empty():
-    """核心回归：豆包一轮回复的 agent_text 必须等于下行文本（历史上恒为 ''）。"""
+    "核心回归：豆包一轮回复的 agent_text 必须等于下行文本"
     adapter = make_adapter(doubao_batches(volc_provider()))
     text, audio = await drain(adapter, 9)
 
@@ -131,11 +117,13 @@ async def test_transcript_is_released_proportionally_to_played_audio():
     必须用单帧大音频才能测到比例：“每 tick 收一帧、播一帧”时比例恒为 1。
     """
     p = volc_provider()
-    ev = lambda kind, **f: p._normalize(raw(kind, **f))[0]  # noqa: E731
-    adapter = make_adapter([
-        [ev("response.output_text.delta", delta=TEXT_FULL, response_id=RESP_ID)],
-        [ev("response.output_audio.delta", delta=audio_b64(ONE_FRAME * 3))],  # 整轮 = 3 tick 量
-    ])
+    ev = lambda kind, **f: p._normalize(raw(kind, **f))[0]
+    adapter = make_adapter(
+        [
+            [ev("response.output_text.delta", delta=TEXT_FULL, response_id=RESP_ID)],
+            [ev("response.output_audio.delta", delta=audio_b64(ONE_FRAME * 3))],  # 整轮 = 3 tick 量
+        ]
+    )
     # 共 4 个 tick：tick0 只有文本（不出字）、tick1–3 分三次把 3 帧量播完
     texts = [(await adapter.run_tick(b"\x00" * 6400, t)).transcript for t in range(4)]
 
@@ -154,17 +142,21 @@ async def test_barge_in_skip_resets_on_next_response():
     原实现 `_skip_item_id` 除 init 外无复位点。豆包音频帧不带 id、全靠 provider 给的
     逐轮键 ⇒ 一次真打断会让该会话其后所有客服音频都被当成"被截断 item 的迟到音频"丢掉。
     """
-    def a_delta(item_id: str, filler: bytes) -> QwenEvent:
-        return QwenEvent(type="response.audio.delta",
-                         data={"delta": audio_b64(filler=filler), "item_id": item_id})
 
-    adapter = make_adapter([
-        [a_delta("item-A", b"\x01\x02"), a_delta("item-A", b"\x01\x02")],  # 两帧：留一帧在缓冲
-        [QwenEvent(type="input_audio_buffer.speech_started", data={})],  # 用户插话 → skip=A
-        [a_delta("item-A", b"\x03\x04")],                              # A 的迟到音频 → 应丢
-        [QwenEvent(type="response.created", data={"response": {"id": "resp-B"}})],  # 复位
-        [a_delta("item-B", b"\x05\x06")],                              # B 的音频 → 应放行
-    ])
+    def a_delta(item_id: str, filler: bytes) -> QwenEvent:
+        return QwenEvent(
+            type="response.audio.delta", data={"delta": audio_b64(filler=filler), "item_id": item_id}
+        )
+
+    adapter = make_adapter(
+        [
+            [a_delta("item-A", b"\x01\x02"), a_delta("item-A", b"\x01\x02")],  # 两帧：留一帧在缓冲
+            [QwenEvent(type="input_audio_buffer.speech_started", data={})],  # 用户插话 → skip=A
+            [a_delta("item-A", b"\x03\x04")],  # A 的迟到音频 → 应丢
+            [QwenEvent(type="response.created", data={"response": {"id": "resp-B"}})],  # 复位
+            [a_delta("item-B", b"\x05\x06")],  # B 的音频 → 应放行
+        ]
+    )
 
     r1 = await adapter.run_tick(b"\x00" * 6400, 0)
     assert len(r1.agent_audio) == ONE_FRAME and r1.buffer_bytes == ONE_FRAME
@@ -172,7 +164,7 @@ async def test_barge_in_skip_resets_on_next_response():
     assert r2.was_truncated is True and r2.buffer_bytes == 0
     r3 = await adapter.run_tick(b"\x00" * 6400, 2)
     assert r3.agent_audio == b"", "被取消 item 的迟到音频不该播出"
-    r4 = await adapter.run_tick(b"\x00" * 6400, 3)   # 仅 response.created
+    r4 = await adapter.run_tick(b"\x00" * 6400, 3)  # 仅 response.created
     assert r4.agent_audio == b""
     r5 = await adapter.run_tick(b"\x00" * 6400, 4)
     assert len(r5.agent_audio) == ONE_FRAME, "新响应的音频被 stale skip 误杀"
@@ -182,31 +174,43 @@ async def test_barge_in_skip_resets_on_next_response():
 async def test_transcript_done_fills_only_an_empty_utterance():
     """`.done` 只在**该 utterance 一个字都没收到 delta** 时兜底，绝不覆盖/补齐。"""
     p = volc_provider()
-    ev = lambda kind, **f: p._normalize(raw(kind, **f))[0]  # noqa: E731
+    ev = lambda kind, **f: p._normalize(raw(kind, **f))[0]
 
     # 场景 1：只有 done 没有 delta → 整句可用
     only_done = make_adapter(
-        [[ev("response.output_text.done", text=TEXT_FULL, response_id=RESP_ID)],
-         [ev("response.output_audio.started", response_id=RESP_ID, tts_type="default")]]
-        + [[ev("response.output_audio.delta", delta=audio_b64())] for _ in range(6)])
+        [
+            [ev("response.output_text.done", text=TEXT_FULL, response_id=RESP_ID)],
+            [ev("response.output_audio.started", response_id=RESP_ID, tts_type="default")],
+        ]
+        + [[ev("response.output_audio.delta", delta=audio_b64())] for _ in range(6)]
+    )
     text, _ = await drain(only_done, 9)
     assert text == TEXT_FULL
 
     # 场景 2：delta 已到一半，done 带整句 → 不得把没播出的尾部补进来
-    partial = make_adapter([
-        [QwenEvent(type="response.audio_transcript.delta",
-                   data={"delta": TEXT_PARTS[0], "item_id": "i1"})],
-        [QwenEvent(type="response.audio_transcript.done",
-                   data={"transcript": TEXT_FULL, "item_id": "i1"})],
-    ])
+    partial = make_adapter(
+        [
+            [
+                QwenEvent(
+                    type="response.audio_transcript.delta", data={"delta": TEXT_PARTS[0], "item_id": "i1"}
+                )
+            ],
+            [
+                QwenEvent(
+                    type="response.audio_transcript.done", data={"transcript": TEXT_FULL, "item_id": "i1"}
+                )
+            ],
+        ]
+    )
     await partial.run_tick(b"\x00" * 6400, 0)
     await partial.run_tick(b"\x00" * 6400, 1)
-    assert partial._utterances["i1"].transcript_received == TEXT_PARTS[0], \
+    assert partial._utterances["i1"].transcript_received == TEXT_PARTS[0], (
         "done 覆盖/补齐了已有 delta（会泄出未播出的文字）"
+    )
 
 
 def test_provider_response_id_scopes_per_turn():
-    """轮边界：canceled/done 后清空 active 键；无主音频回落 dialog 级键（旧行为）。"""
+    "轮边界：canceled/done 后清空 active 键；无主音频回落 dialog 级键"
     p = volc_provider()
     p._normalize(raw("response.output_text.delta", delta="x", response_id=RESP_ID))
     audio = p._normalize(raw("response.output_audio.delta", delta=""))[0]
@@ -226,7 +230,7 @@ def test_idle_pump_fills_only_input_gaps():
 
     class AlwaysConnected(VolcRealtimeProvider):
         @property
-        def is_connected(self) -> bool:  # noqa: D401 - 测试替身
+        def is_connected(self) -> bool:
             return True
 
     async def scenario():
@@ -251,39 +255,32 @@ def test_idle_pump_fills_only_input_gaps():
         await asyncio.sleep(_IDLE_PUMP_AFTER_S + 0.08)
         assert len(sent) >= 2, f"停滞期没补静音：{sent}"
         assert set(sent) == {"input_audio_buffer.append"}
-        assert p.stream_diag()["silence_keepalive_frames"] == len(sent), \
+        assert p.stream_diag()["silence_keepalive_frames"] == len(sent), (
             "保活帧没进可审计计数（这个故障模式全静默，没计数就无从自证）"
+        )
         task.cancel()
 
     asyncio.run(scenario())
 
 
 def test_pump_catch_up_frames_covers_time_without_bursts():
-    """保活必须能**追赶**：单帧实际周期（20ms + `_send` 开销）比 20ms 长，
-    每轮只发一帧会越欠越多。2026-09-08 实测：不追赶时某通断流 76.6s 只补到 24.0s。
-    封顶 5 帧防止在长停滞后来一个“单帧过大”的 burst（旧坑 `52000033`）。
-    """
-    from listen2serve.runtime.realtime.volc_provider import (
-        _IDLE_PUMP_MAX_FRAMES, _pump_catch_up_frames)
+    "保活必须能**追赶**：单帧实际周期（20ms + `_send` 开销）比 20ms 长"
+    from listen2serve.runtime.realtime.volc_provider import _IDLE_PUMP_MAX_FRAMES, _pump_catch_up_frames
 
-    assert _pump_catch_up_frames(0.03) == 1      # 只欠一帧就补一帧
+    assert _pump_catch_up_frames(0.03) == 1  # 只欠一帧就补一帧
     assert _pump_catch_up_frames(0.05) == 2
     assert _pump_catch_up_frames(0.13) == _IDLE_PUMP_MAX_FRAMES
     assert _pump_catch_up_frames(30.0) == _IDLE_PUMP_MAX_FRAMES, "长停滞不得一次性补满"
 
 
 class TestDoubaoStabilityKnobs:
-    """同一份缺陷报告带的两个稳定性旋钮（拖尾等待 / 重试退避）。
-
-    背对背实测：豆包首响 p50 1.5s，但同一条输入出现过 24.7s 的拖尾（旧 30s 阈值
-    正好撞上 ⇒ 旧批 17/48 「Agent 无响应」）；而旧重试间隔 2/4s 三次连撞同一次抖动。
-    """
+    "同一份缺陷报告带的两个稳定性旋钮（拖尾等待 / 重试退避）"
 
     def test_streaming_endpoints_wait_longer(self):
         from types import SimpleNamespace
 
-        from listen2serve.runtime.orchestrator import (
-            STREAMING_GRACE_TICKS, FullDuplexOrchestrator)
+        from listen2serve.runtime.orchestrator import STREAMING_GRACE_TICKS, FullDuplexOrchestrator
+
         s = SimpleNamespace(max_response_ticks=150)
 
         class Plain:
@@ -295,7 +292,7 @@ class TestDoubaoStabilityKnobs:
         limit = FullDuplexOrchestrator._response_wait_ticks
         assert limit(Plain(), s) == 150, "不声明连续输入的端点不得改变时序口径"
         assert limit(Streaming(), s) == 150 + STREAMING_GRACE_TICKS
-        # 缺属性（假 provider / 旧 provider）不得抛错，按一般端点处理
+
         assert limit(object(), s) == 150
 
     def test_volc_retry_backoff_is_minutes_not_seconds(self):

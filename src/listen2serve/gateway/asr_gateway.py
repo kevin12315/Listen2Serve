@@ -1,17 +1,4 @@
-"""ASR 网关：音频 → 文本转写（qwen-audio-3.0-asr-flash，DashScope 云端）。
-
-调用格式（官方文档验证，2026-08-05；字段复核 2026-08-26）：
-- 端点：multimodal-generation/generation（同步）
-- content 用 OpenAI 风格 `{"type": "input_audio", "input_audio": {"data": ...}}`
-- **format/sample_rate 在顶层 parameters 中**（不在 content 内）
-- data 支持 base64 data URL 与公网 URL
-- 语种指定的官方字段是 `parameters.language_hints`（**数组**，Qwen-Audio-3.0-ASR-Flash
-  最多 4 个）；旧写法 `parameters.language`（标量）不在文档字段表内，且本端点对未知
-  parameters 一律静默接受（真机验证：传 bogus_field 也回 HTTP 200），故写错不报错、只是不生效
-- 响应：文档口径为 `output.text`（全量文本）+ `output.sentence`（句级详情/词时间戳）；
-  真机另额外回一层历史兼容的 `output.output.{text,sentence}`（内容与外层一致），
-  解析以文档口径优先、嵌套层作回退
-"""
+"ASR 网关：音频 → 文本转写（qwen-audio-3.0-asr-flash，DashScope 云端）"
 
 from __future__ import annotations
 
@@ -23,7 +10,7 @@ from typing import Any
 
 import httpx
 
-from listen2serve.gateway.base import CallRecord, CallSink, MemoryCallSink, prompt_hash
+from listen2serve.gateway.base import CallRecord, CallSink, MemoryCallSink, model_identity, prompt_hash
 from listen2serve.runtime.config import Settings, get_settings
 
 logger = logging.getLogger(__name__)
@@ -37,7 +24,13 @@ class ASRResult:
     language: str = "zh"
     duration_ms: int = 0
     words: list[dict[str, Any]] = field(default_factory=list)
-    backend: str = "qwen-audio-3.0-asr-flash"
+    backend: str = "dashscope"
+    requested_model: str | None = None
+    response_model: str | None = None
+    requested_host: str | None = None
+    provider_host: str | None = None
+    request_id: str | None = None
+    response_model_differs: bool | None = None
     record: CallRecord | None = field(default=None, repr=False)
 
     def as_dict(self) -> dict[str, Any]:
@@ -47,6 +40,12 @@ class ASRResult:
             "duration_ms": self.duration_ms,
             "words": self.words,
             "backend": self.backend,
+            "requested_model": self.requested_model,
+            "response_model": self.response_model,
+            "requested_host": self.requested_host,
+            "provider_host": self.provider_host,
+            "request_id": self.request_id,
+            "response_model_differs": self.response_model_differs,
         }
 
 
@@ -98,24 +97,39 @@ class ASRGateway:
             timeout=180,
         )
         if resp.status_code != 200:
-            self.sink.append(CallRecord(
-                service="asr", backend="dashscope", model=self.settings.asr_model,
-                prompt_hash=ph, error=f"HTTP {resp.status_code}: {resp.text[:300]}",
-            ))
+            self.sink.append(
+                CallRecord(
+                    service="asr",
+                    backend="dashscope",
+                    model=self.settings.asr_model,
+                    prompt_hash=ph,
+                    error=f"HTTP {resp.status_code}: {resp.text[:300]}",
+                    **model_identity(None, self.settings.asr_model, response=resp, requested_url=ASR_URL),
+                )
+            )
             raise RuntimeError(f"ASR 失败 HTTP {resp.status_code}: {resp.text[:300]}")
         data = resp.json()
         out = data.get("output") or {}
-        # 文档口径 output.{text,sentence} 优先；历史兼容层 output.output 作回退
+
         nested = out.get("output") if isinstance(out.get("output"), dict) else {}
         sentence = out.get("sentence") or nested.get("sentence") or {}
         text = out.get("text") or sentence.get("text") or nested.get("text") or ""
         words = sentence.get("words", [])
         duration_ms = sentence.get("end_time", 0) - sentence.get("begin_time", 0)
-        self.sink.append(CallRecord(
-            service="asr", backend="dashscope", model=self.settings.asr_model, prompt_hash=ph,
-        ))
+        identity = model_identity(data, self.settings.asr_model, response=resp, requested_url=ASR_URL)
+        record = CallRecord(
+            service="asr",
+            backend="dashscope",
+            model=self.settings.asr_model,
+            prompt_hash=ph,
+            **identity,
+        )
+        self.sink.append(record)
         return ASRResult(
             text=text,
             duration_ms=duration_ms,
             words=words,
+            backend="dashscope",
+            record=record,
+            **identity,
         )

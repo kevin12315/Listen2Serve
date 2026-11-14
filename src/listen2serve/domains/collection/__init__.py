@@ -94,9 +94,7 @@ def build_domain() -> DomainSpec:
         ),
         DBTableSpec(
             name="promises",
-            create_sql=(
-                "CREATE TABLE promises (customer_name TEXT, amount REAL, deadline TEXT, ts TEXT)"
-            ),
+            create_sql=("CREATE TABLE promises (customer_name TEXT, amount REAL, deadline TEXT, ts TEXT)"),
         ),
         DBTableSpec(
             name="callbacks",
@@ -104,8 +102,6 @@ def build_domain() -> DomainSpec:
         ),
     ]
 
-    # 内部方案（v6.0）：新 6 态 policy_rules（策略要点见计划 表）
-    # 内部方案（v6.0）：新 6 态 policy_rules（策略要点见计划 表）
     policy_rules = {
         "neutral": {
             "required": ["先确认客户身份", "简明告知来电来意"],

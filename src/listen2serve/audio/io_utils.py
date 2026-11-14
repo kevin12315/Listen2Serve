@@ -52,7 +52,7 @@ def resample_audio(data: np.ndarray, src_rate: int, dst_rate: int) -> np.ndarray
     """线性插值重采样（电话语音用途足够）。"""
     if src_rate == dst_rate:
         return data
-    n_out = int(round(len(data) * dst_rate / src_rate))
+    n_out = round(len(data) * dst_rate / src_rate)
     x_old = np.linspace(0.0, 1.0, len(data))
     x_new = np.linspace(0.0, 1.0, n_out)
     return np.interp(x_new, x_old, data).astype(data.dtype)

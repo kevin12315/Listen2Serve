@@ -3,7 +3,7 @@
 - 来源：`listen2serve.runtime.agent` 的常量 `VOICE_CALL_INSTRUCTION`
 - sha256：`de34e96b77d6c749649eb8ac457909e3841e1cba0560aca890bb4484b3096cf2`
 - 说明：本文件是**导出快照**，真值源是代码常量；二者不一致由
-  `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
+ `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
 
 ```text
 # 本次通话的第一要务（优先级高于下方任何业务规范）

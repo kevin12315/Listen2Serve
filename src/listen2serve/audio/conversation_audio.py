@@ -21,19 +21,19 @@ from pathlib import Path
 import numpy as np
 
 SAMPLE_RATE = 16000
-AGENT_REACTION_GAP_S = 0.3 # 客服反应间隙（仿真时间：推理不计入，固定自然停顿）
-TURN_GAP_S = 0.3 # 轮间间隙
+AGENT_REACTION_GAP_S = 0.3  # 客服反应间隙（仿真时间：推理不计入，固定自然停顿）
+TURN_GAP_S = 0.3  # 轮间间隙
 
 
 @dataclass
 class Segment:
     """一段语音（一轮中的一方），含真实时间信息。"""
 
-    role: str # user | agent
+    role: str  # user | agent
     turn: int
     text: str
     pcm16: np.ndarray
-    start_s: float = 0.0 # 在对话时间轴上的起点（秒）
+    start_s: float = 0.0  # 在对话时间轴上的起点（秒）
 
 
 def _load_pcm16(path: str | None) -> np.ndarray:
@@ -74,7 +74,11 @@ def _build_timeline(traces: list) -> list[Segment]:
 
         # ---- 用户段 ----
         if user_pcm.size:
-            text = getattr(trace, "user_text", None) if not isinstance(trace, dict) else trace.get("user_text", "")
+            text = (
+                getattr(trace, "user_text", None)
+                if not isinstance(trace, dict)
+                else trace.get("user_text", "")
+            )
             segments.append(Segment("user", _turn(trace), text or "", user_pcm, start_s=t))
             t += len(user_pcm) / SAMPLE_RATE
 
@@ -84,7 +88,11 @@ def _build_timeline(traces: list) -> list[Segment]:
 
         # ---- 客服段 ----
         if agent_pcm.size:
-            text = getattr(trace, "agent_text", None) if not isinstance(trace, dict) else trace.get("agent_text", "")
+            text = (
+                getattr(trace, "agent_text", None)
+                if not isinstance(trace, dict)
+                else trace.get("agent_text", "")
+            )
             segments.append(Segment("agent", _turn(trace), text or "", agent_pcm, start_s=t))
             t += len(agent_pcm) / SAMPLE_RATE
 
@@ -190,9 +198,7 @@ def write_tick_conversation(
     _write_wav(both_path, both, channels=2)
 
     # 单声道：双方混音（打断时真实重叠），裁剪防溢出
-    conv = np.clip(
-        both[:, 0].astype(np.int32) + both[:, 1].astype(np.int32), -32768, 32767
-    ).astype(np.int16)
+    conv = np.clip(both[:, 0].astype(np.int32) + both[:, 1].astype(np.int32), -32768, 32767).astype(np.int16)
     conv_path = output_dir / "conversation.wav"
     _write_wav(conv_path, conv, channels=1)
 
@@ -210,11 +216,12 @@ def write_tick_conversation(
             a_start = _attr(t, "agent_first_audio_tick")
             a_end = _attr(t, "tick_end")
             if a_start is not None and a_start >= 0 and a_end is not None and a_end >= 0:
-                # 打断标记带来源（script=脚本打断 / vad=自然 VAD 截断）；白名单外/旧轨迹无来源时回落通用标记
                 src = _attr(t, "interrupt_source")
                 if src not in ("script", "vad"):
                     src = ""
-                mark = (f" [interrupted:{src}]" if src else " [interrupted]") if _attr(t, "interrupted") else ""
+                mark = (
+                    (f" [interrupted:{src}]" if src else " [interrupted]") if _attr(t, "interrupted") else ""
+                )
                 f.write(
                     f"{a_start * tick_s:.2f}\t{(a_end + 1) * tick_s:.2f}\t"
                     f"[agent] turn{_attr(t, 'turn')}{mark}: {_attr(t, 'agent_text') or ''}\n"

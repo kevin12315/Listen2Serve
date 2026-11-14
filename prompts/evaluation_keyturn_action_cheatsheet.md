@@ -3,7 +3,7 @@
 - 来源：`listen2serve.evaluation.prompts` 的常量 `KEYTURN_ACTION_CHEATSHEET`
 - sha256：`755a2876023e6318b013dcda6ab23f2569e891eecfd3ff03872a150163fe963d`
 - 说明：本文件是**导出快照**，真值源是代码常量；二者不一致由
-  `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
+ `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
 
 ```text
      各状态对应的动作口径（与被测客服 prompt §六 同源；每行的 opening 才是判据）：

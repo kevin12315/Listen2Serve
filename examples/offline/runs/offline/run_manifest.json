@@ -1,0 +1,142 @@
+{
+  "run_id": "offline",
+  "created_at": "2026-10-17T12:06:05+0800",
+  "code": {
+    "git_commit": "57633a48a44043e2ef186ccd9897d05c7a2f62e3",
+    "git_dirty": true,
+    "fallback_tree_hash": null,
+    "source_tree_sha256": "47a4ff015cb7f5f32237548b35faa8afbfd054017c3f6be38ca77d6670be4893",
+    "git_dirty_paths_included": false
+  },
+  "data": {
+    "dataset_version": "v6.5",
+    "seed": 20260803,
+    "generated_at": "2026-09-16T18:57:17+0800",
+    "release": {
+      "slice": "main-multiturn-145x2",
+      "cut_at": "2026-09-15",
+      "scope": "Multi-turn evaluation: 145 base scenarios in explicit and neutral wording conditions (290 scenarios).",
+      "note": "Scenario content and stable IDs are preserved. Release assets are checked by their file fingerprints."
+    },
+    "assets": {
+      "vocab": {
+        "NEG_WORDS": {
+          "count": 107,
+          "md5": "c1a2e6f40ce5dbd2477bb05b858efb01",
+          "crc32": "d746c2f4"
+        },
+        "POS_WORDS": {
+          "count": 65,
+          "md5": "d9a8a9da737f6a9c5a93bc3946bcdbda",
+          "crc32": "62ac4d47"
+        },
+        "T2_SIGNAL_WORDS": {
+          "count": 13,
+          "md5": "81b8f2be642b44c7f4d4077639cc7045",
+          "crc32": "8b3fcdc2"
+        }
+      },
+      "scenarios_base": {
+        "count": 145,
+        "sha256": "7d96b8559bf709751dd106808fb28d067f0fb3abc520019843b8361db327e1f2"
+      },
+      "scenarios": {
+        "count": 290,
+        "sha256": "f39c8b06b746ada295940cdf68ec0cfa82c8251a6505d86b3f82d6674173da50"
+      },
+      "user_voice_map": {
+        "count": 145,
+        "md5": "214d96af382d0a9c96ab9acba716f946"
+      }
+    }
+  },
+  "prompts": {
+    "sim_prompt_file_sha256": "731acacd124c158f1c202cb3741cc4e919ca9233602a913ee8e31bd2c4be475f",
+    "protocol": "multi-turn",
+    "judge_prompts_file_sha256": "d5351c6058b8d72b731bfacf0572839fd324fed20c44bc87b8f7d9a5c10b5cfa",
+    "policy_domains_sha256": "fb3f62801705f222706c3fd88935c01be50a2a2ea527450c19fe2dd56997317f",
+    "agent_prompt_sha256": "84e57ccd272a9c7027e83ae36292749c6b4866f2d0fb4971ba86fa6ee9fc22f8",
+    "sim_prompt_sha256": "fb71a6fc78a9c4402576323cd9b3e4dc8a23c863ee529090ea474b4850ff3b6a"
+  },
+  "models": {
+    "target": "dashscope/offline-single",
+    "sim": "openai/offline-simulator",
+    "judge": null,
+    "voice_judge": null,
+    "tts": "dashscope/qwen-audio-3.0-tts-plus"
+  },
+  "cli_args": {
+    "cmd": "run-eval",
+    "scenarios": "data/benchmark/scenarios.jsonl",
+    "model": "dashscope/offline-single",
+    "role": null,
+    "wording": "neutral",
+    "limit": null,
+    "scenario_ids": "HOT-ALL-01-T3",
+    "per_role": null,
+    "run_id": "offline",
+    "concurrency": null,
+    "sim_model": null,
+    "prosody_arm": "state",
+    "sim_thinking": false,
+    "no_audio": false,
+    "max_retries": 0
+  },
+  "config_snapshot": {
+    "openai_base_url": "https://api.openai.com/v1",
+    "moonshot_base_url": "https://api.moonshot.cn/v1",
+    "gemini_base_url": "https://generativelanguage.googleapis.com/v1beta/openai",
+    "dashscope_base_url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "dashscope_tts_url": "https://dashscope.aliyuncs.com/api/v1/services/audio/tts/SpeechSynthesizer",
+    "tts_voice_user": null,
+    "realtime_voice": null,
+    "volc_base_url": "https://ark.cn-beijing.volces.com/api/v3",
+    "volc_realtime_url": "wss://openspeech.bytedance.com/api/v3/duplex/realtime/dialogue",
+    "llm_model": "kimi-k3",
+    "sim_model": "openai/offline-simulator",
+    "voice_judge_model": "openai/offline-voice",
+    "judge_model": "openai/offline-judge",
+    "asr_model": "qwen-audio-3.0-asr-flash",
+    "tts_backend": "dashscope",
+    "tts_model": "qwen-audio-3.0-tts-plus",
+    "tts_sample_rate": 16000,
+    "local_base_url": "http://localhost:8000/v1",
+    "tools_enabled": false,
+    "tick_ms": 200,
+    "concurrency": 4,
+    "max_turns": 12,
+    "max_tick_timeout_s": 600.0,
+    "max_response_ticks": 150,
+    "streaming_response_ticks": 300,
+    "idle_end_ticks": 3,
+    "turn_gap_ticks": 2,
+    "interrupt_delay_ticks": 3,
+    "max_session_tokens": 200000
+  },
+  "generation": {
+    "protocol": "multi-turn",
+    "settings_sha256": "d6d6fa7ad3a9a2bf7dc6f83e33a1b70da3b3bad660f62a64afd70ca1f76fe290",
+    "models": {
+      "target": "dashscope/offline-single",
+      "sim": "openai/offline-simulator",
+      "tts": "dashscope/qwen-audio-3.0-tts-plus"
+    },
+    "fingerprints": {
+      "HOT-ALL-01-T3": "75fe55db8e2d28347efcba53aad716bac07f82dcf9f34e89d3f79ba89fb50806"
+    }
+  },
+  "evaluation": {
+    "judge_model": "openai/offline-judge",
+    "keyturn_model_observed": "openai/offline-judge",
+    "voice_judge_model": "openai/offline-voice",
+    "modality": "audio",
+    "asr": true,
+    "asr_model": "qwen-audio-3.0-asr-flash",
+    "flow_turn_cap": null,
+    "verdicts_path": "reports/offline/verdicts_audio.json",
+    "verdict_count": 1,
+    "verdicts_sha256": "0fff16ef50f1816fcf901bf1ca23f2fce13b881e2b006a48c07ed1f75bed828f",
+    "judge_meta_sha256": "7668195aa9906a050e28cf1d3cc579f8d76e45fc280a12b0ec5dd5bdfe31442a",
+    "completed_at": "2026-10-17T12:06:06+0800"
+  }
+}

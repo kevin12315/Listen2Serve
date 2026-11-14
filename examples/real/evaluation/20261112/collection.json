@@ -1,0 +1,94 @@
+{
+  "schema": "listen2serve.scoring-service-check/1",
+  "date": "2026-11-12",
+  "role": "collection",
+  "run_id": "showcase_20261111_collection_N_E_COLNEG45_a1",
+  "scenario_id": "COL-NEG-45-T3",
+  "condition": "N/E",
+  "example_adopted": true,
+  "complete": false,
+  "evaluation_status": "not_started_waiting_for_provider",
+  "metrics": {
+    "key_turn_pass": null,
+    "voice_pass": null,
+    "flow_rate": null,
+    "task_score": null
+  },
+  "metric_denominators": {
+    "key_turn_pass": 0,
+    "voice_pass": 0,
+    "flow_rate": 0,
+    "task_score": 0
+  },
+  "new_gemini_requests": 0,
+  "new_asr_requests": 0,
+  "unique_original_asr_turns_reused": 0,
+  "asr_cache_replays": 0,
+  "generation_source_sha256": "5f1431112848e374775d5883169efbc9f304901a26d8fe4f2a1faad5284d92ed",
+  "evaluation_source_sha256": "5f1431112848e374775d5883169efbc9f304901a26d8fe4f2a1faad5284d92ed",
+  "configured_judge_model": "google/gemini-3.8-flash",
+  "requested_wire_model": null,
+  "reported_model": null,
+  "attempts": [],
+  "previous_evaluation_before_20261112": {
+    "schema": "listen2serve.listening-only-evaluation/1",
+    "complete": false,
+    "scoring_paused_by_owner": true,
+    "metrics": {
+      "key_turn_pass": null,
+      "voice_pass": null,
+      "flow_rate": null,
+      "task_score": null
+    },
+    "metric_denominators": {
+      "key_turn_pass": 0,
+      "voice_pass": 0,
+      "flow_rate": 0,
+      "task_score": 0
+    },
+    "key_turn_score": null,
+    "amount_paid": null,
+    "monetary_note": "Call counts are observed usage; failed-call token usage and monetary charges may be unknown.",
+    "judge_stages": {
+      "keyturn": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "voice": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "flow": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      },
+      "leakage": {
+        "configured_model": "google/gemini-3.8-flash",
+        "requested_model": null,
+        "response_model": null,
+        "request_count": 0,
+        "successful_count": 0
+      }
+    },
+    "evaluation_status": "pending_owner_paused",
+    "original_evaluation_status": "not_requested",
+    "counts": {
+      "asr_requests": 0,
+      "asr_successful": 0,
+      "asr_cache_hits": 0,
+      "gemini_requests": 0,
+      "gemini_successful": 0
+    },
+    "failure_history": []
+  },
+  "source_authorization_sha256": "4b6bd65e96ad82123fab6d361de30d58e632aabec5af00537238d3f16c00c992"
+}

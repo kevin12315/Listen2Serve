@@ -3,7 +3,7 @@
 - 来源：`listen2serve.evaluation.prompts` 的常量 `VOICE_JUDGE_PROMPT`
 - sha256：`d30ac01bda5adc8678d79e23ed6228df7533d845563c56599831c628bb04760a`
 - 说明：本文件是**导出快照**，真值源是代码常量；二者不一致由
-  `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
+ `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
 
 ```text
 你是一名客服语音质量裁判。请直接聆听客服的关键轮回复音频，结合角色设定、声音要求、用户状态与回复文本，对以下三个维度分别打 1-5 分（整数），并输出 JSON。

@@ -17,5 +17,4 @@ def export_jsonl(items: list[Any], out_path: str | Path) -> None:
     """导出 JSONL。"""
     Path(out_path).parent.mkdir(parents=True, exist_ok=True)
     with open(out_path, "w", encoding="utf-8") as f:
-        for item in items:
-            f.write(json.dumps(item, ensure_ascii=False) + "\n")
+        f.writelines(json.dumps(item, ensure_ascii=False) + "\n" for item in items)

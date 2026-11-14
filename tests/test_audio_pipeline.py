@@ -70,7 +70,7 @@ class TestConversationAudio:
         assert "[user] turn1" in labels
         assert "[agent] turn2" in labels
         # 客服 turn1 应从 1.3s 开始（user 1s + 反应间隙 0.3s，推理不计入）
-        agent_line = [ln for ln in labels.split("\n") if "[agent] turn1" in ln][0]
+        agent_line = next(ln for ln in labels.split("\n") if "[agent] turn1" in ln)
         assert agent_line.startswith("1.30")
 
 
@@ -99,9 +99,21 @@ class TestASRGateway:
 
         def fake_post(url, headers=None, json=None, timeout=None):
             captured["body"] = json
-            resp = type("R", (), {"status_code": 200, "text": "", "json": lambda self: {
-                "output": {"output": {"sentence": {"text": "你好", "begin_time": 0, "end_time": 1000, "words": []}}}
-            }})()
+            resp = type(
+                "R",
+                (),
+                {
+                    "status_code": 200,
+                    "text": "",
+                    "json": lambda self: {
+                        "output": {
+                            "output": {
+                                "sentence": {"text": "你好", "begin_time": 0, "end_time": 1000, "words": []}
+                            }
+                        }
+                    },
+                },
+            )()
             return resp
 
         monkeypatch.setattr("listen2serve.gateway.asr_gateway.httpx.post", fake_post)
@@ -116,21 +128,29 @@ class TestASRGateway:
         assert "language_hints" not in captured["body"]["parameters"]  # 不传则不下发
 
     def test_transcribe_parses_documented_shape(self, monkeypatch, tmp_path):
-        """文档口径响应 output.{text,sentence}（无历史嵌套层）也能解析。
-
-        真机目前同时回外层与 output.output 兼容层；兼容层将来下线时不能静默降级成空文本
-        （cli 侧 ASR 空文本会回落到真值文本，属高危静默失败）。
-        """
+        "文档口径响应 output.{text,sentence}也能解析"
         _make_wav(tmp_path / "a.wav", 16000)
 
         def fake_post(url, headers=None, json=None, timeout=None):
-            return type("R", (), {"status_code": 200, "text": "", "json": lambda self: {
-                "output": {
-                    "text": "你好，请问有什么可以帮您",
-                    "sentence": {"text": "你好，请问有什么可以帮您", "begin_time": 120,
-                                 "end_time": 2120, "words": [{"text": "你好"}]},
-                }
-            }})()
+            return type(
+                "R",
+                (),
+                {
+                    "status_code": 200,
+                    "text": "",
+                    "json": lambda self: {
+                        "output": {
+                            "text": "你好，请问有什么可以帮您",
+                            "sentence": {
+                                "text": "你好，请问有什么可以帮您",
+                                "begin_time": 120,
+                                "end_time": 2120,
+                                "words": [{"text": "你好"}],
+                            },
+                        }
+                    },
+                },
+            )()
 
         monkeypatch.setattr("listen2serve.gateway.asr_gateway.httpx.post", fake_post)
         r = ASRGateway().transcribe(tmp_path / "a.wav")
@@ -149,13 +169,12 @@ class TestASRGateway:
 
         def fake_post(url, headers=None, json=None, timeout=None):
             captured["body"] = json
-            return type("R", (), {"status_code": 200, "text": "", "json": lambda self: {
-                "output": {"text": "hi"}
-            }})()
+            return type(
+                "R", (), {"status_code": 200, "text": "", "json": lambda self: {"output": {"text": "hi"}}}
+            )()
 
         monkeypatch.setattr("listen2serve.gateway.asr_gateway.httpx.post", fake_post)
         ASRGateway().transcribe(tmp_path / "a.wav", language="zh")
         params = captured["body"]["parameters"]
         assert params["language_hints"] == ["zh"]
         assert "language" not in params
-

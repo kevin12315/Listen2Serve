@@ -1,0 +1,357 @@
+{
+  "schema": "listen2serve.listening-real-example/1",
+  "run_id": "showcase_20261111_hotline_N_N_HOT01_a1",
+  "scenario_id": "HOT-ALL-01-T3",
+  "role": "hotline",
+  "condition": "N/N",
+  "wording": "neutral",
+  "prosody_arm": "neutral",
+  "latent_oracle": "cooperative",
+  "turns": 6,
+  "key_turn": 5,
+  "publication": false,
+  "evaluation_status": "pending_owner_paused",
+  "metrics": {
+    "key_turn_pass": null,
+    "voice_pass": null,
+    "flow_rate": null,
+    "task_score": null
+  },
+  "metric_denominators": {
+    "key_turn_pass": 0,
+    "voice_pass": 0,
+    "flow_rate": 0,
+    "task_score": 0
+  },
+  "source_package_sha256": "6d18d18e5217218ab82595ee03ffa34d7e90e074b185f7f323346cffbc056b49",
+  "source_package_hash_root": "src/listen2serve",
+  "sources": {
+    "campaign_plan": {
+      "path": "validation/showcase-20261111/campaign_plan.json",
+      "source_sha256": "2e4d3a4cbba098c6a4f3f293e3aae1010c82b090ec2d2b595e0d7c90a6de1eb3",
+      "included_unchanged": false
+    },
+    "verification": {
+      "path": "validation/showcase-20261111/verification.json",
+      "source_sha256": "0dc6e99234b0e67f581883bfa00e26344d4187504d1769c559722908bc165a37",
+      "included_unchanged": false
+    },
+    "selection": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/selection.json",
+      "source_sha256": "9daacc0bd2c5a09c6a6402ef67b241236b09e5a580dd0928bea4d08d49ab4d0f",
+      "included_unchanged": false
+    },
+    "generation_summary": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/summary.json",
+      "source_sha256": "37ddb2b8b3c236ab39c057ec36d03b64322e0fad7ec412c954821b4f8f85b04a",
+      "included_unchanged": false
+    },
+    "quality_review": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/quality_review.json",
+      "source_sha256": "22ebc3e3f11c1871371efbe71565d254b0f9beda5e2309a16f4a0c75b91cec7c",
+      "included_unchanged": false
+    },
+    "trajectory": {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/sim_status.json",
+      "source_sha256": "b247f1c2b65eced0faf7c954d33bb2b5de71938d17dac90607b424912560caa3",
+      "included_unchanged": false
+    },
+    "run_manifest": {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/run_manifest.json",
+      "source_sha256": "89e54700308049a294620801e5357f0b086c2029b9b3e82bceede54c9b416d1c",
+      "included_unchanged": false
+    },
+    "voices": {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/voices.json",
+      "source_sha256": "85b48a5894883faf5430fc11c06386e6af62dc010357b18c110f78a73752b137",
+      "included_unchanged": false
+    },
+    "llm_request_1": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/llm-001.request.json",
+      "source_sha256": "b7a1487580b11afc81d2e434b60b1cfc9477d2894bdd6f0be41f43b76044ef66",
+      "included_unchanged": false
+    },
+    "llm_request_2": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/llm-002.request.json",
+      "source_sha256": "21e58d19775b27e8585f946cdfbc75dafb0888c541f660b03c57bca6feab6f20",
+      "included_unchanged": false
+    },
+    "llm_request_3": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/llm-003.request.json",
+      "source_sha256": "4f11988872a49e86c336c32241bc77db8ad5071239b4dab6b419e106222256c0",
+      "included_unchanged": false
+    },
+    "llm_request_4": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/llm-004.request.json",
+      "source_sha256": "5987620a2a30ef4e22aecf588c0f8071076d0e831563821c3d133e8829d1f9b2",
+      "included_unchanged": false
+    },
+    "llm_request_5": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/llm-005.request.json",
+      "source_sha256": "1054277ea45e7518a37be9efb0f2f737bfbbc9fa4db19ded48a8f305b4ad9961",
+      "included_unchanged": false
+    },
+    "llm_request_6": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/llm-006.request.json",
+      "source_sha256": "5d55decf089bf232ae37787d5b12d757c7f71a9d4ab5f994bd5c3c0706c12f8a",
+      "included_unchanged": false
+    },
+    "tts_request_1": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/tts-001.request.json",
+      "source_sha256": "fe99b0e8d9504835c3366b816a2730cf474a2c5b6c64d28ba7966d2a881d4532",
+      "included_unchanged": false
+    },
+    "tts_request_2": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/tts-002.request.json",
+      "source_sha256": "e1f4a8aaaf7603f4843c2ab92c26710885e5f9d94ae2ff817353fa51c233d2ce",
+      "included_unchanged": false
+    },
+    "tts_request_3": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/tts-003.request.json",
+      "source_sha256": "3ec2ea2bf43c315d727200f7cfd407fbf9019accc2445d4c3f1942613e34a6c3",
+      "included_unchanged": false
+    },
+    "tts_request_4": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/tts-004.request.json",
+      "source_sha256": "10436ce5491e2a10bd01c1abff9ce3d40588e0a22bd02a75a43ee83cc60a4d43",
+      "included_unchanged": false
+    },
+    "tts_request_5": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/tts-005.request.json",
+      "source_sha256": "6d333da0718c396e0528206cdea33b643b6f706164f98c9db679c8d830886dfc",
+      "included_unchanged": false
+    },
+    "tts_request_6": {
+      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/raw-responses/tts-006.request.json",
+      "source_sha256": "5a92ad038226ff886eb441210fb14e3a46163da1923f8b1a5099ab4f4fd3670b",
+      "included_unchanged": false
+    }
+  },
+  "unchanged_files": [
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn1_user.wav",
+      "source_sha256": "83a33e808f988ad2cafb199265d59c785df3a5c29d8d107d6248b522a2a7b657",
+      "public_sha256": "83a33e808f988ad2cafb199265d59c785df3a5c29d8d107d6248b522a2a7b657"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn1_agent.wav",
+      "source_sha256": "19e7898a674840a229843ebaa8d5b4462a0ed78feebcc42b30de8a1728025d6e",
+      "public_sha256": "19e7898a674840a229843ebaa8d5b4462a0ed78feebcc42b30de8a1728025d6e"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn2_user.wav",
+      "source_sha256": "b91a1c43751b5584571a8101205cc23795f864416e5361f623ccc597d22e48cf",
+      "public_sha256": "b91a1c43751b5584571a8101205cc23795f864416e5361f623ccc597d22e48cf"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn2_agent.wav",
+      "source_sha256": "665886bcba3a756a9f02734a6460c0763893957cc2d6d841e611ca0033fb833f",
+      "public_sha256": "665886bcba3a756a9f02734a6460c0763893957cc2d6d841e611ca0033fb833f"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn3_user.wav",
+      "source_sha256": "2b9b1f3f788472e05f430868f439bce1008e684ec5a947aa0c3c34032f0f4cda",
+      "public_sha256": "2b9b1f3f788472e05f430868f439bce1008e684ec5a947aa0c3c34032f0f4cda"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn3_agent.wav",
+      "source_sha256": "f25f242121330c36e366488ab8970345d3cade961ea0c136317f631fcf27874a",
+      "public_sha256": "f25f242121330c36e366488ab8970345d3cade961ea0c136317f631fcf27874a"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn4_user.wav",
+      "source_sha256": "55d0d1008f7ef2741967dc2a4d3868d7025e14a9e9da82d33b554a16cf23230d",
+      "public_sha256": "55d0d1008f7ef2741967dc2a4d3868d7025e14a9e9da82d33b554a16cf23230d"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn4_agent.wav",
+      "source_sha256": "832174b4c241d347b892e9fb6c1c18a410f6a31f10393df0e092fc7d82546334",
+      "public_sha256": "832174b4c241d347b892e9fb6c1c18a410f6a31f10393df0e092fc7d82546334"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn5_user.wav",
+      "source_sha256": "fe61922fa30dfb11fbceee4e71ced8770a86ba204480de8eb22f455cf74fbd05",
+      "public_sha256": "fe61922fa30dfb11fbceee4e71ced8770a86ba204480de8eb22f455cf74fbd05"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn5_agent.wav",
+      "source_sha256": "9a94d2e7e64c8b41578dbf43ae628fcc1b36279aeaee34b4f1c53953ce631226",
+      "public_sha256": "9a94d2e7e64c8b41578dbf43ae628fcc1b36279aeaee34b4f1c53953ce631226"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn6_user.wav",
+      "source_sha256": "12c034306553982fa864e0ea86b48b14ba8678f25fc42838ec134cb7a64dc8ab",
+      "public_sha256": "12c034306553982fa864e0ea86b48b14ba8678f25fc42838ec134cb7a64dc8ab"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn6_agent.wav",
+      "source_sha256": "0b7a375c33986857c6d86e228bfca0bf862b0d47390d666762a7229315799125",
+      "public_sha256": "0b7a375c33986857c6d86e228bfca0bf862b0d47390d666762a7229315799125"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/conversation.wav",
+      "source_sha256": "3aef76975b0b0b77029405f6a31722acd46c207ff1ed8436296a0739ab142e70",
+      "public_sha256": "3aef76975b0b0b77029405f6a31722acd46c207ff1ed8436296a0739ab142e70"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/both.wav",
+      "source_sha256": "34448ba3f832afeb13bd3d30ee840947fe886bb5b03438ce8584a426a3a6e966",
+      "public_sha256": "34448ba3f832afeb13bd3d30ee840947fe886bb5b03438ce8584a426a3a6e966"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/segments.txt",
+      "source_sha256": "55c617fb8b730fa7cfabf104e7a063193825740ec84a8de8c127fc8781178d48",
+      "public_sha256": "55c617fb8b730fa7cfabf104e7a063193825740ec84a8de8c127fc8781178d48"
+    }
+  ],
+  "audio": [
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn1_user.wav",
+      "sha256": "83a33e808f988ad2cafb199265d59c785df3a5c29d8d107d6248b522a2a7b657",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 6.24
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn1_agent.wav",
+      "sha256": "19e7898a674840a229843ebaa8d5b4462a0ed78feebcc42b30de8a1728025d6e",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 16.4
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn2_user.wav",
+      "sha256": "b91a1c43751b5584571a8101205cc23795f864416e5361f623ccc597d22e48cf",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 5.28
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn2_agent.wav",
+      "sha256": "665886bcba3a756a9f02734a6460c0763893957cc2d6d841e611ca0033fb833f",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 20.96
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn3_user.wav",
+      "sha256": "2b9b1f3f788472e05f430868f439bce1008e684ec5a947aa0c3c34032f0f4cda",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 5.12
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn3_agent.wav",
+      "sha256": "f25f242121330c36e366488ab8970345d3cade961ea0c136317f631fcf27874a",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 18.48
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn4_user.wav",
+      "sha256": "55d0d1008f7ef2741967dc2a4d3868d7025e14a9e9da82d33b554a16cf23230d",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 5.92
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn4_agent.wav",
+      "sha256": "832174b4c241d347b892e9fb6c1c18a410f6a31f10393df0e092fc7d82546334",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 12.24
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn5_user.wav",
+      "sha256": "fe61922fa30dfb11fbceee4e71ced8770a86ba204480de8eb22f455cf74fbd05",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 9.52
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn5_agent.wav",
+      "sha256": "9a94d2e7e64c8b41578dbf43ae628fcc1b36279aeaee34b4f1c53953ce631226",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 10.56
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn6_user.wav",
+      "sha256": "12c034306553982fa864e0ea86b48b14ba8678f25fc42838ec134cb7a64dc8ab",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 3.2
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/turn6_agent.wav",
+      "sha256": "0b7a375c33986857c6d86e228bfca0bf862b0d47390d666762a7229315799125",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 14.96
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/conversation.wav",
+      "sha256": "3aef76975b0b0b77029405f6a31722acd46c207ff1ed8436296a0739ab142e70",
+      "channels": 1,
+      "sample_rate": 16000,
+      "duration_s": 141.6
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/both.wav",
+      "sha256": "34448ba3f832afeb13bd3d30ee840947fe886bb5b03438ce8584a426a3a6e966",
+      "channels": 2,
+      "sample_rate": 16000,
+      "duration_s": 141.6
+    }
+  ],
+  "curation": {
+    "collection_size_intended": 3,
+    "coverage": "one selected role-condition sample per role; not a 3-by-3 matrix or population benchmark",
+    "agent_scores_used": false
+  },
+  "licenses": {
+    "text_transcription_provenance": "CC-BY-NC-4.0",
+    "all_wav_audio": "CC-BY-NC-ND-4.0"
+  },
+  "derivation": [
+    "All WAVs and segments are original bytes, without normalization, trimming, replacement or splicing.",
+    "Endpoint text remains separate from independently requested, audio-bound ASR; unavailable ASR stays absent.",
+    "Raw source hashes and public derived hashes are distinct; these sanitized views are not resumable private caches.",
+    "Requested and provider-reported model identities stay separate; absent reported model remains null.",
+    "Formal scoring is paused; all four metrics are null with zero evaluated denominators."
+  ],
+  "public_derived_files": [
+    {
+      "path": "README.md",
+      "sha256": "5e601f6a5cacd5f50566e7d8d4063d8618ccb74d721a4379cd723cf45bd44451"
+    },
+    {
+      "path": "reports/showcase_20261111_hotline_N_N_HOT01_a1/evaluation_status.json",
+      "sha256": "2ccd9c3597549ba354b21b4087a673e351843c2fe70c8424e941c74db1b47f38"
+    },
+    {
+      "path": "review_status.json",
+      "sha256": "4789c98c5c9b28a5fcb4588000e531815351c6aa4b0cc08ad091488738466d83"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/agent_asr.json",
+      "sha256": "21d964fc3d8a26de2f0947f38cd59c6986daad9db6fbcee8233dbe7a7be7a792"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/sim_status.json",
+      "sha256": "e36f5f43c3b39e274d6ee0e200f023b2e9d49d2f9515c3cc5395ab7d15d006a1"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/voices.json",
+      "sha256": "027cd0b1cdda84f8b2ab158b98992fe06cc0efdbec8ed33fbe02b1bc8adc0284"
+    },
+    {
+      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/run_manifest.json",
+      "sha256": "bc118e3140c0d8f77877d0ef6ee6917dcf0fd5b9d590489d06926a5a0743061d"
+    },
+    {
+      "path": "transcript.md",
+      "sha256": "3fddf09ab5759795b8ac2ce9b76bfb4e8266d65e27d998f2839b6174f37a496a"
+    }
+  ]
+}

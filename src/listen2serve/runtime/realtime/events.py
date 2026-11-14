@@ -54,7 +54,7 @@ def event_audio_delta(event: QwenEvent) -> bytes | None:
 
     try:
         return base64.b64decode(event.data.get("delta", ""))
-    except Exception: # noqa: BLE001
+    except Exception:  # noqa: BLE001
         return None
 
 

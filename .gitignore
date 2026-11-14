@@ -11,3 +11,21 @@ runs/
 reports/
 .DS_Store
 *.bak
+
+# Published offline examples are deliberate fixtures.
+!examples/offline/runs/
+!examples/offline/runs/**
+!examples/offline/reports/
+!examples/offline/reports/**
+
+# Published live-call example artifacts.
+!examples/real/runs/
+!examples/real/runs/**
+!examples/real/reports/
+!examples/real/reports/**
+
+# Published live-call artifacts grouped by service role.
+!examples/real/*/runs/
+!examples/real/*/runs/**
+!examples/real/*/reports/
+!examples/real/*/reports/**

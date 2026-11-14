@@ -1,11 +1,4 @@
-"""evaluate 增量落盘 / 断点续评 / 并发调度层。
-
-职责边界（铁律）：
-- 只负责调度：逐场景结果原子追加 partial、指纹校验续评、并发编排、429 退避、进度口径；
-- 裁判判定逻辑与 prompt 不动；最终产物 verdicts_*.json 格式与 内部方案 前逐字段一致
-  （partial 行的调度附加键以 `_` 前缀存储，汇总导出时剔除）；
-- no-fallback：退避耗尽 / 非限流失败一律抛错，不静默降级。
-"""
+"""Incremental judge execution with content-bound resume checks and rate-limit backoff."""
 
 from __future__ import annotations
 
@@ -20,6 +13,16 @@ from pathlib import Path
 from typing import Any
 
 
+def dialogue_is_complete(record: dict[str, Any]) -> bool:
+    """Distinguish truncated calls, including legacy records labelled as successful."""
+    return not (
+        record.get("dialogue_complete") is False
+        or record.get("trajectory_status", record.get("status")) == "partial"
+        or record.get("termination_reason") == "endpoint_session_closed"
+        or any(turn.get("timed_out") for turn in record.get("turns") or [])
+    )
+
+
 class PartialRejected(RuntimeError):
     """partial 指纹不一致，拒绝复用（需 --fresh 显式重评）。"""
 
@@ -29,7 +32,7 @@ class EvalTask:
     """单场景评测任务（调度层透传 payload，judge 语义由 judge_fn 负责）。"""
 
     scenario_id: str
-    expected_meta: dict[str, Any] # 本次运行该场景应持有的 judge_meta 指纹
+    expected_meta: dict[str, Any]
     payload: Any = None
 
 
@@ -60,7 +63,7 @@ class PartialStore:
             with open(self.path, "a", encoding="utf-8") as f:
                 f.write(data + "\n")
                 f.flush()
-                os.fsync(f.fileno()) # NAS 写入时序防护：确保单行真实落盘
+                os.fsync(f.fileno())
 
     def load(self) -> tuple[dict[str, dict[str, Any]], int]:
         """逐行读入；返回 ({scenario_id: 行}, 损坏行数)。
@@ -145,7 +148,7 @@ def judge_with_backoff(
     while True:
         try:
             return judge_fn(task)
-        except Exception as exc: # 仅拦截限流类，其余原样上抛
+        except Exception as exc:
             if not is_rate_limited(exc) or attempt >= len(delays):
                 raise
             wait = delays[attempt]
@@ -179,7 +182,6 @@ def run_incremental(
     total = len(tasks)
     expected = {t.scenario_id: t.expected_meta for t in tasks}
 
-    # ---- 断点续评：指纹一致才复用，任一不一致整份拒绝 ----
     reused: dict[str, dict[str, Any]] = {}
     records, corrupted = store.load() if not fresh else ({}, 0)
     if records:
@@ -196,7 +198,7 @@ def run_incremental(
         if mismatches:
             detail = "、".join(sorted(mismatches)[:5]) + ("…" if len(mismatches) > 5 else "")
             raise PartialRejected(
-                f"partial 指纹不一致（judge prompt hash / 裁判模型与本次运行不同）: "
+                f"partial 指纹不一致（证据内容、评分配置或裁判身份与本次运行不同）: "
                 f"{detail} 等 {len(mismatches)} 条；拒绝复用旧判定。"
                 "如确认要全量重评，请加 --fresh 显式重评。"
             )
@@ -212,23 +214,20 @@ def run_incremental(
     elif fresh:
         log(f"--fresh: 忽略既有 partial，全量重评 {len(pending)} 条。")
 
-    # ---- 逐场景判定（并发可配）+ 增量落盘 + 进度 ----
     new_verdicts: dict[str, dict[str, Any]] = {}
     completed = len(reused)
     new_done = 0
     t0 = time.monotonic()
 
     def process(task: EvalTask) -> JudgeOutcome:
-        return judge_with_backoff(
-            judge_fn, task, log=log, sleep_fn=sleep_fn, max_retries=max_retries
-        )
+        return judge_with_backoff(judge_fn, task, log=log, sleep_fn=sleep_fn, max_retries=max_retries)
 
     with ThreadPoolExecutor(max_workers=max(1, concurrency)) as executor:
         futures = {executor.submit(process, t): t for t in pending}
         try:
             for fut in as_completed(futures):
                 task = futures[fut]
-                outcome = fut.result() # 非限流失败原样上抛（partial 已保留既有进度）
+                outcome = fut.result()
                 line = {**outcome.verdict, "_elapsed": outcome.timings}
                 store.append(line)
                 new_verdicts[task.scenario_id] = outcome.verdict
@@ -245,10 +244,8 @@ def run_incremental(
                     + f" 累计{elapsed_min:.1f}分 预计剩余{eta_min:.1f}分"
                 )
         finally:
-            # 失败快速中止：不再等待未开始的场景（进行中的由 worker 自行收尾）
             executor.shutdown(wait=False, cancel_futures=True)
 
-    # ---- 按任务原始顺序汇总（与 内部方案 前遍历顺序逐字节一致）----
     verdicts: list[dict[str, Any]] = []
     for t in tasks:
         if t.scenario_id in reused:

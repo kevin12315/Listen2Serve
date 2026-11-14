@@ -1,42 +1,57 @@
 {
- "dataset_version": "v6.5",
- "seed": 20260803,
- "generated_at": "2026-09-16T18:57:17+0800",
- "release": {
-  "slice": "main-multiturn-145x2",
-  "cut_at": "2026-09-15",
-  "scope": "多轮自驱主实验输入：均衡 145 base × {T1, T3} = 290 条。T2 层、其余 57 base、单轮/Layer R/听辨刺激，以及全部 item 级实验结果均不在发布仓内。",
-  "note": "内容逐字继承内部 v6.5（未改写任何一行台词或策略）；文件级指纹按本切片重算，故与内部仓同名文件的 sha256 不同属预期。"
- },
- "assets": {
-  "vocab": {
-   "NEG_WORDS": {
-    "count": 107,
-    "md5": "c1a2e6f40ce5dbd2477bb05b858efb01",
-    "crc32": "d746c2f4"
-   },
-   "POS_WORDS": {
-    "count": 65,
-    "md5": "d9a8a9da737f6a9c5a93bc3946bcdbda",
-    "crc32": "62ac4d47"
-   },
-   "T2_SIGNAL_WORDS": {
-    "count": 13,
-    "md5": "81b8f2be642b44c7f4d4077639cc7045",
-    "crc32": "8b3fcdc2"
-   }
+  "dataset_version": "v6.5",
+  "seed": 20260803,
+  "generated_at": "2026-09-16T18:57:17+0800",
+  "release": {
+    "slice": "main-multiturn-145x2",
+    "cut_at": "2026-09-15",
+    "scope": "Multi-turn evaluation: 145 base scenarios in explicit and neutral wording conditions (290 scenarios).",
+    "note": "Limited release correction: only approved order identifier references in agent_policy were aligned with db_seed.orders. Stable IDs and all other scenario content are preserved. File fingerprints identify the corrected assets.",
+    "asset_revision": "order-reference-correction-1",
+    "corrections": [
+      {
+        "id": "order-reference-correction-1",
+        "fields": [
+          "agent_policy.knowledge_base[0]",
+          "agent_policy.business_flow[0].goal"
+        ],
+        "base_scenarios": 16,
+        "expanded_scenarios": 32,
+        "record_count": 48,
+        "string_replacements": 96,
+        "details": "docs/dataset_corrections.md"
+      }
+    ]
   },
-  "scenarios_base": {
-   "count": 145,
-   "sha256": "7d96b8559bf709751dd106808fb28d067f0fb3abc520019843b8361db327e1f2"
-  },
-  "scenarios": {
-   "count": 290,
-   "sha256": "f39c8b06b746ada295940cdf68ec0cfa82c8251a6505d86b3f82d6674173da50"
-  },
-  "user_voice_map_v61": {
-   "count": 145,
-   "md5": "214d96af382d0a9c96ab9acba716f946"
+  "assets": {
+    "vocab": {
+      "NEG_WORDS": {
+        "count": 107,
+        "md5": "c1a2e6f40ce5dbd2477bb05b858efb01",
+        "crc32": "d746c2f4"
+      },
+      "POS_WORDS": {
+        "count": 65,
+        "md5": "d9a8a9da737f6a9c5a93bc3946bcdbda",
+        "crc32": "62ac4d47"
+      },
+      "T2_SIGNAL_WORDS": {
+        "count": 13,
+        "md5": "81b8f2be642b44c7f4d4077639cc7045",
+        "crc32": "8b3fcdc2"
+      }
+    },
+    "scenarios_base": {
+      "count": 145,
+      "sha256": "167211d9ee93ea881aa9f460ae79c3daccd966e0ab73b526cbf9128f5a7587d6"
+    },
+    "scenarios": {
+      "count": 290,
+      "sha256": "e6fb2850e00e34c2034b25cb53bd24a516e9772fa5e39b71c4f6ad423ed48ee3"
+    },
+    "user_voice_map": {
+      "count": 145,
+      "md5": "214d96af382d0a9c96ab9acba716f946"
+    }
   }
- }
 }

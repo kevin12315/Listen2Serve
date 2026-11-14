@@ -3,7 +3,7 @@
 - 来源：`listen2serve.evaluation.prompts` 的常量 `FLOW_JUDGE_PROMPT`
 - sha256：`ff557acd62dc90f44335517945a4825c7b4e65834ac025d7c9076a1c57958be9`
 - 说明：本文件是**导出快照**，真值源是代码常量；二者不一致由
-  `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
+ `tests/test_prompts_snapshot.py` 判红。运行时填充的槽位以 {…} 形式保留在原文里。
 
 ```text
 你是一名客服全对话裁判。请基于策略契约、完整对话记录与给定的过程清单，一次完成两项判定：过程清单逐条命中（flow_items）与终局结果分（task_score），并输出 JSON。

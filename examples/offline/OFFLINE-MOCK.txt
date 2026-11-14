@@ -1,0 +1,1 @@
+All backend responses and scores are synthetic test doubles. No commercial model was called.

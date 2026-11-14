@@ -1,75 +1,46 @@
-# 基准内容与音频 demo 的许可说明（LICENSE_DATASET）
+# Asset licenses
 
-本仓库**按资产类型分三份许可**申报，避免"一份许可盖全部"造成的要么管不住数据、
-要么把非商业限制传染回代码使用路径的问题。
+Framework code and tooling use Apache-2.0. Benchmark content and audio demonstrations have the separate Creative Commons licenses listed below.
 
-## 范围划分（scope）
-
-下表是唯一口径；`tests/test_release_hygiene.py` 会解析本表并断言 `data/benchmark/`
-下的每一项都被覆盖，新增数据文件时漏标许可会直接红。
-
-| 路径 | SPDX 许可标识 | 说明 |
+| Path | SPDX identifier | Description |
 |---|---|---|
-| `src/` | Apache-2.0 | 评测框架代码 |
-| `scripts/` | Apache-2.0 | 复现与自检入口 |
-| `tests/` | Apache-2.0 | 契约测试 |
-| `configs/` | Apache-2.0 | 论文条件的复现配置 |
-| `prompts/` | Apache-2.0 | 提示词文本快照（真源在代码里，快照随代码走同一许可） |
-| `docs/` | Apache-2.0 | 说明文档 |
-| `data/benchmark/version.json` | Apache-2.0 | 发布元数据与文件指纹 |
-| `data/benchmark/t3_action_ban.json` | Apache-2.0 | 禁止动作门禁表（管线运行必需的连接件） |
-| `data/benchmark/subsets/` | Apache-2.0 | 论文批次的 `scenario_id` 清单（选择元数据，不含内容） |
-| `data/benchmark/scenarios.jsonl` | CC-BY-NC-4.0 | 基准内容 |
-| `data/benchmark/scenarios_base.jsonl` | CC-BY-NC-4.0 | 基准内容 |
-| `data/benchmark/keyturn_canonical.jsonl` | CC-BY-NC-4.0 | 基准内容 |
-| `data/benchmark/tts_instructions.json` | CC-BY-NC-4.0 | 基准内容 |
-| `data/benchmark/voices/` | CC-BY-NC-4.0 | 基准内容 |
-| `data/benchmark/DATASET_CARD.md` | CC-BY-NC-4.0 | 数据卡 |
-| `data/benchmark/audio_samples/` | CC-BY-NC-ND-4.0 | **展示用 demo，不是数据集的一部分**（见下） |
+| `src/` | Apache-2.0 | Evaluation framework |
+| `scripts/` | Apache-2.0 | Experiment and validation tools |
+| `tests/` | Apache-2.0 | Offline tests |
+| `configs/` | Apache-2.0 | Multi-turn conditions |
+| `prompts/` | Apache-2.0 | Runtime prompt snapshots |
+| `docs/` | Apache-2.0 | Documentation |
+| `examples/offline/` | CC-BY-NC-4.0 | Offline runtime artifacts including scenario-derived text |
+| `examples/real/` | CC-BY-NC-4.0 | Live-call text, transcription and provenance |
+| `examples/real/marketing/runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/marketing/runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/conversation.wav` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/marketing/runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/both.wav` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/hotline/runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/audio/` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/hotline/runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/conversation.wav` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/hotline/runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/both.wav` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/collection/runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/audio/` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/collection/runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/conversation.wav` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `examples/real/collection/runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/both.wav` | CC-BY-NC-ND-4.0 | Original synthesized speech; audio-specific license takes precedence |
+| `data/benchmark/version.json` | Apache-2.0 | Asset identity and fingerprints |
+| `data/benchmark/neutral_wording_ban.json` | Apache-2.0 | Screening rules |
+| `data/benchmark/subsets/` | Apache-2.0 | Scenario selection IDs |
+| `data/benchmark/scenarios.jsonl` | CC-BY-NC-4.0 | Scenario content |
+| `data/benchmark/scenarios_base.jsonl` | CC-BY-NC-4.0 | Base scenario content |
+| `data/benchmark/keyturn_canonical.jsonl` | CC-BY-NC-4.0 | Demonstration utterance metadata |
+| `data/benchmark/tts_instructions.json` | CC-BY-NC-4.0 | Vocal-delivery instructions |
+| `data/benchmark/voices/` | CC-BY-NC-4.0 | Voice assignments |
+| `data/benchmark/DATASET_CARD.md` | CC-BY-NC-4.0 | Dataset description |
+| `data/benchmark/audio_samples/` | CC-BY-NC-ND-4.0 | Listening demonstrations |
 
-* 代码侧许可全文见 [LICENSE](LICENSE)（Apache-2.0），第三方归属见 [NOTICE](NOTICE)。
-* 内容侧与 demo 侧使用 Creative Commons 标准条款，本文件不自撰条款，只声明标识与边界：
-  * **CC BY-NC 4.0** — <https://creativecommons.org/licenses/by-nc/4.0/legalcode>
-  * **CC BY-NC-ND 4.0** — <https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode>
+Within `examples/real/`, **all `*.wav` files recursively**, including full-call, stereo and per-turn recordings, use **CC-BY-NC-ND-4.0**. The same audio-specific terms cover the unchanged WAV bytes embedded as `data:audio/wav` in `examples/real/index.html`. These terms take precedence for audio over the directory's CC-BY-NC-4.0 text license. Page text, transcripts and provenance retain CC-BY-NC-4.0.
 
-## 为什么这样切
+The Apache-2.0 text is in LICENSE. Creative Commons terms:
 
-* 把 `version.json` / `t3_action_ban.json` / `subsets/` 留在 Apache-2.0，是为了让"跑通这套
-  管线"这条使用路径不被 NC 拖成非商业：任何人（含公司）都可以自由安装、改造、二次分发框架
-  本身。
-* 基准**内容**（场景、台词、韵律配方、音色分配）走 CC BY-NC 4.0：可自由用于研究、评测、
-  课堂与衍生标注，但商用与把它灌进生产模型训练需要另行授权。
-* 音频**只作为 demo** 发布，因此额外加 ND：不许把这几条 wav 拆出来重组进别的语料库或榜单附件。
+- CC BY-NC 4.0: https://creativecommons.org/licenses/by-nc/4.0/legalcode
+- CC BY-NC-ND 4.0: https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode
 
-## 音频 demo 的定性
+The original release provenance describes fictional business facts and generated utterances based on anonymized service-call skeletons. All demonstration speech is synthesized. The 20 customer-turn audio clips illustrate vocal contrasts; multi-turn evaluation synthesizes customer speech at runtime.
 
-`data/benchmark/audio_samples/` 里的 20 条 wav 是**展示件**，用来让读者听见**同一句关键轮台词**
-在带韵律与不带韵律两种渲染下的差别。它们不是基准刺激集的抽样子集，也不构成任何统计意义上的
-代表性；每条只是**一句用户话轮（平均 3.5 秒，16 kHz 单声道），不是完整多轮对话**；主实验所需的
-完整刺激音频（1,100 条量级）**不随本仓库发布**，理由与后果写在
-[docs/limitations.md](docs/limitations.md)。跑评测时音频由管线在用你自己的 TTS key 时
-现合成，不依赖这 20 个文件。
+Historical asset-generation metadata is preserved as supplied. The synthetic offline runtime example uses generated test responses and is explicitly labelled; it carries no commercial-model performance measurement. Scenario content remains separately licensed when referenced by an example.
 
-数量设计就是"每个客户状态都能听到一对 A/B"的最小集合：5 个状态 × 2 个 base × 2 个渲染臂
-（state / neutral）= 20 条，覆盖 10 个场景、全部取自 **T3（文本中性）层** —— 即 demo 只演示
-声音通道，不演示文本通道（T1 层无样音）。`scripts/check_dataset.py` 会核对矩阵不缺格、不重复、
-层集合恒为 {T3}，且每条 wav 与 `manifest.jsonl` 的 sha256 逐条对上 —— 文档里的这些口径
-由断言兜住，改动必须同步文档。
-
-## 数据来源（provenance）
-
-* **场景骨架**：派生自已脱敏的客服会话记录的骨架抽取结果，只保留角色、流程阶段与策略规则，
-  不包含原始对话原文，也不包含可回溯到具体客户或坐席的标识符。
-* **话术文本**：由 LLM 依据骨架重新生成，并经人工与规则校验，属于生成内容。
-* **音频资产**：全部由商用 TTS 接口合成，不含任何真人录音，也不含真人音色克隆
-  （真人声纹属个人敏感信息）。厂商音色的再分发边界是完整刺激集不发布的理由之一。
-* **实体信息**：姓名、公司、金额、案情、岗位与补贴等均为虚构，与现实重合属巧合。
-* **生成器型号的公开口径**：见 [docs/limitations.md](docs/limitations.md) 的
-  "发布时的型号泛化"一节 —— `keyturn_canonical.jsonl` 的 `gen_model` 是**层级标签而非可复现
-  的快照名**，不要把它当作可复算的生成器标识。
-
-## 引用与问询
-
-引用格式见 [CITATION.bib](CITATION.bib)（论文 / 数据集 / 代码三段分开）。需要把基准内容或
-demo 音频用于非商业学术之外的用途（商用评测、产品训练、语料再分发），请按对应 CC 条款另行
-取得授权后再发布。
+Citation information is in CITATION.bib. For uses requiring additional permission, contact the project authors.

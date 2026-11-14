@@ -1,0 +1,60 @@
+{
+  "schema": "listen2serve.listening-only-evaluation/1",
+  "complete": false,
+  "scoring_paused_by_owner": true,
+  "metrics": {
+    "key_turn_pass": null,
+    "voice_pass": null,
+    "flow_rate": null,
+    "task_score": null
+  },
+  "metric_denominators": {
+    "key_turn_pass": 0,
+    "voice_pass": 0,
+    "flow_rate": 0,
+    "task_score": 0
+  },
+  "key_turn_score": null,
+  "amount_paid": null,
+  "monetary_note": "Call counts are observed usage; failed-call token usage and monetary charges may be unknown.",
+  "judge_stages": {
+    "keyturn": {
+      "configured_model": "google/gemini-3.8-flash",
+      "requested_model": null,
+      "response_model": null,
+      "request_count": 0,
+      "successful_count": 0
+    },
+    "voice": {
+      "configured_model": "google/gemini-3.8-flash",
+      "requested_model": null,
+      "response_model": null,
+      "request_count": 0,
+      "successful_count": 0
+    },
+    "flow": {
+      "configured_model": "google/gemini-3.8-flash",
+      "requested_model": null,
+      "response_model": null,
+      "request_count": 0,
+      "successful_count": 0
+    },
+    "leakage": {
+      "configured_model": "google/gemini-3.8-flash",
+      "requested_model": null,
+      "response_model": null,
+      "request_count": 0,
+      "successful_count": 0
+    }
+  },
+  "evaluation_status": "pending_owner_paused",
+  "original_evaluation_status": "not_requested",
+  "counts": {
+    "asr_requests": 0,
+    "asr_successful": 0,
+    "asr_cache_hits": 0,
+    "gemini_requests": 0,
+    "gemini_successful": 0
+  },
+  "failure_history": []
+}

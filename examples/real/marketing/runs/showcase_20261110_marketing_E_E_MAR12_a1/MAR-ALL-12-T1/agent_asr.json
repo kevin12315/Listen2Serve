@@ -1,0 +1,2582 @@
+{
+  "schema": "listen2serve.public-asr-bindings/1",
+  "status": "complete",
+  "turns": [
+    {
+      "text": "哎，您好，我是顺路司机平台的客服。请问是冯婷女士吗？今天给您打电话呢，是想跟您介绍一下我们平台针对新司机的一个体验活动。",
+      "language": "zh",
+      "duration_ms": 10320,
+      "words": [
+        {
+          "begin_time": 160,
+          "end_time": 280,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "哎"
+        },
+        {
+          "begin_time": 360,
+          "end_time": 720,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "您好"
+        },
+        {
+          "begin_time": 880,
+          "end_time": 1240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "我是"
+        },
+        {
+          "begin_time": 1240,
+          "end_time": 1360,
+          "fixed": true,
+          "punctuation": "",
+          "text": "顺"
+        },
+        {
+          "begin_time": 1360,
+          "end_time": 1560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "路"
+        },
+        {
+          "begin_time": 1560,
+          "end_time": 1920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "司机"
+        },
+        {
+          "begin_time": 1920,
+          "end_time": 2360,
+          "fixed": true,
+          "punctuation": "",
+          "text": "平台的"
+        },
+        {
+          "begin_time": 2360,
+          "end_time": 2880,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "客服"
+        },
+        {
+          "begin_time": 3200,
+          "end_time": 3560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "请问"
+        },
+        {
+          "begin_time": 3560,
+          "end_time": 3760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "是"
+        },
+        {
+          "begin_time": 3760,
+          "end_time": 4000,
+          "fixed": true,
+          "punctuation": "",
+          "text": "冯"
+        },
+        {
+          "begin_time": 4000,
+          "end_time": 4280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "婷"
+        },
+        {
+          "begin_time": 4280,
+          "end_time": 4640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "女士"
+        },
+        {
+          "begin_time": 4640,
+          "end_time": 4840,
+          "fixed": true,
+          "punctuation": "？",
+          "text": "吗"
+        },
+        {
+          "begin_time": 5120,
+          "end_time": 5440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "今天"
+        },
+        {
+          "begin_time": 5440,
+          "end_time": 5680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "给您"
+        },
+        {
+          "begin_time": 5680,
+          "end_time": 6200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "打电话"
+        },
+        {
+          "begin_time": 6200,
+          "end_time": 6280,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "呢"
+        },
+        {
+          "begin_time": 6360,
+          "end_time": 6680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "是想"
+        },
+        {
+          "begin_time": 6680,
+          "end_time": 6800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "跟"
+        },
+        {
+          "begin_time": 6800,
+          "end_time": 7000,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 7000,
+          "end_time": 7360,
+          "fixed": true,
+          "punctuation": "",
+          "text": "介"
+        },
+        {
+          "begin_time": 7360,
+          "end_time": 7720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "绍"
+        },
+        {
+          "begin_time": 7720,
+          "end_time": 7800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "一"
+        },
+        {
+          "begin_time": 7800,
+          "end_time": 7880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "下"
+        },
+        {
+          "begin_time": 7880,
+          "end_time": 7960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "我"
+        },
+        {
+          "begin_time": 7960,
+          "end_time": 8040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "们"
+        },
+        {
+          "begin_time": 8040,
+          "end_time": 8440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "平台"
+        },
+        {
+          "begin_time": 8440,
+          "end_time": 8800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "针对"
+        },
+        {
+          "begin_time": 8800,
+          "end_time": 9000,
+          "fixed": true,
+          "punctuation": "",
+          "text": "新"
+        },
+        {
+          "begin_time": 9000,
+          "end_time": 9080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "司"
+        },
+        {
+          "begin_time": 9080,
+          "end_time": 9400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "机的"
+        },
+        {
+          "begin_time": 9400,
+          "end_time": 9600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "一个"
+        },
+        {
+          "begin_time": 9600,
+          "end_time": 9960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "体验"
+        },
+        {
+          "begin_time": 9960,
+          "end_time": 10480,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "活动"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 1,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn1_agent.wav",
+      "audio_sha256": "a7902f1b529a4dc8c081046b1e31d45056498c0a09f7dc7114ac35d6f1be0b8b",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "1e12a17f30e80ca1d26aca9727bcc1129c9476f00e2730424a36baa822a51249",
+      "source_request_sha256": "1d33a41ba815537b9598086459ed70cd373b6d488935eeafbae7b18c7a2ac238",
+      "source_response_sha256": "e17af3a8b112d6622bbe7bedc13613620a36cf85c3db5bdbcf706ec9caddd41d",
+      "request_key": "5b88a24d21a1c6994a4a775758a3ea8b609a717e32f52d5afdd11760d1132fa7"
+    },
+    {
+      "text": "好的，那我跟您简单说一下哈。我们有个新司机体验包只要99元，现在首单还能立减20元。这个包里面包含线上接单培训，还有3天的优先派单体验，特别适合刚注册还没开始接单的新司机。",
+      "language": "zh",
+      "duration_ms": 17600,
+      "words": [
+        {
+          "begin_time": 480,
+          "end_time": 880,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "好的"
+        },
+        {
+          "begin_time": 1120,
+          "end_time": 1240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "那"
+        },
+        {
+          "begin_time": 1240,
+          "end_time": 1480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "我跟"
+        },
+        {
+          "begin_time": 1480,
+          "end_time": 1680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 1680,
+          "end_time": 2000,
+          "fixed": true,
+          "punctuation": "",
+          "text": "简"
+        },
+        {
+          "begin_time": 2000,
+          "end_time": 2240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 2240,
+          "end_time": 2480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "说"
+        },
+        {
+          "begin_time": 2480,
+          "end_time": 2586,
+          "fixed": true,
+          "punctuation": "",
+          "text": "一"
+        },
+        {
+          "begin_time": 2586,
+          "end_time": 2693,
+          "fixed": true,
+          "punctuation": "",
+          "text": "下"
+        },
+        {
+          "begin_time": 2693,
+          "end_time": 2800,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "哈"
+        },
+        {
+          "begin_time": 3320,
+          "end_time": 3560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "我们"
+        },
+        {
+          "begin_time": 3560,
+          "end_time": 4120,
+          "fixed": true,
+          "punctuation": "",
+          "text": "有个"
+        },
+        {
+          "begin_time": 4120,
+          "end_time": 4360,
+          "fixed": true,
+          "punctuation": "",
+          "text": "新"
+        },
+        {
+          "begin_time": 4360,
+          "end_time": 4760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "司机"
+        },
+        {
+          "begin_time": 4760,
+          "end_time": 5120,
+          "fixed": true,
+          "punctuation": "",
+          "text": "体验"
+        },
+        {
+          "begin_time": 5120,
+          "end_time": 5560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "包"
+        },
+        {
+          "begin_time": 5560,
+          "end_time": 6320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "只要"
+        },
+        {
+          "begin_time": 6320,
+          "end_time": 6420,
+          "fixed": true,
+          "punctuation": "",
+          "text": "9"
+        },
+        {
+          "begin_time": 6420,
+          "end_time": 6520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "9"
+        },
+        {
+          "begin_time": 6520,
+          "end_time": 6880,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "元"
+        },
+        {
+          "begin_time": 7320,
+          "end_time": 7640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "现在"
+        },
+        {
+          "begin_time": 7640,
+          "end_time": 7800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "首"
+        },
+        {
+          "begin_time": 7800,
+          "end_time": 7960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 7960,
+          "end_time": 8240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "还能"
+        },
+        {
+          "begin_time": 8240,
+          "end_time": 8600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "立减"
+        },
+        {
+          "begin_time": 8600,
+          "end_time": 8740,
+          "fixed": true,
+          "punctuation": "",
+          "text": "2"
+        },
+        {
+          "begin_time": 8740,
+          "end_time": 8880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "0"
+        },
+        {
+          "begin_time": 8880,
+          "end_time": 9200,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "元"
+        },
+        {
+          "begin_time": 9600,
+          "end_time": 9840,
+          "fixed": true,
+          "punctuation": "",
+          "text": "这个"
+        },
+        {
+          "begin_time": 9840,
+          "end_time": 10080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "包"
+        },
+        {
+          "begin_time": 10080,
+          "end_time": 10400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "里面"
+        },
+        {
+          "begin_time": 10400,
+          "end_time": 10920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "包含"
+        },
+        {
+          "begin_time": 10920,
+          "end_time": 11280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "线"
+        },
+        {
+          "begin_time": 11280,
+          "end_time": 11460,
+          "fixed": true,
+          "punctuation": "",
+          "text": "上"
+        },
+        {
+          "begin_time": 11460,
+          "end_time": 11640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "接"
+        },
+        {
+          "begin_time": 11640,
+          "end_time": 11813,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 11813,
+          "end_time": 11986,
+          "fixed": true,
+          "punctuation": "",
+          "text": "培"
+        },
+        {
+          "begin_time": 11986,
+          "end_time": 12160,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "训"
+        },
+        {
+          "begin_time": 12480,
+          "end_time": 12800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "还"
+        },
+        {
+          "begin_time": 12800,
+          "end_time": 12930,
+          "fixed": true,
+          "punctuation": "",
+          "text": "有"
+        },
+        {
+          "begin_time": 12930,
+          "end_time": 13060,
+          "fixed": true,
+          "punctuation": "",
+          "text": "3"
+        },
+        {
+          "begin_time": 13060,
+          "end_time": 13190,
+          "fixed": true,
+          "punctuation": "",
+          "text": "天"
+        },
+        {
+          "begin_time": 13190,
+          "end_time": 13320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "的"
+        },
+        {
+          "begin_time": 13320,
+          "end_time": 13680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "优先"
+        },
+        {
+          "begin_time": 13680,
+          "end_time": 13800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "派"
+        },
+        {
+          "begin_time": 13800,
+          "end_time": 14040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 14040,
+          "end_time": 14520,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "体验"
+        },
+        {
+          "begin_time": 14880,
+          "end_time": 15560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "特别适合"
+        },
+        {
+          "begin_time": 15560,
+          "end_time": 15760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "刚"
+        },
+        {
+          "begin_time": 15760,
+          "end_time": 16200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "注册"
+        },
+        {
+          "begin_time": 16200,
+          "end_time": 16520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "还没"
+        },
+        {
+          "begin_time": 16520,
+          "end_time": 16800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "开始"
+        },
+        {
+          "begin_time": 16800,
+          "end_time": 17080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "接"
+        },
+        {
+          "begin_time": 17080,
+          "end_time": 17240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 17240,
+          "end_time": 17400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "的"
+        },
+        {
+          "begin_time": 17400,
+          "end_time": 17626,
+          "fixed": true,
+          "punctuation": "",
+          "text": "新"
+        },
+        {
+          "begin_time": 17626,
+          "end_time": 17853,
+          "fixed": true,
+          "punctuation": "",
+          "text": "司"
+        },
+        {
+          "begin_time": 17853,
+          "end_time": 18080,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "机"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 2,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn2_agent.wav",
+      "audio_sha256": "7ca12144bc3d0702bc81a61257fae542344373f019783ed73e5092790ad94231",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "95da29799a91a9bcac0f2fa2c14e2badc9cb47e1cd5974980f424a7c88da55cd",
+      "source_request_sha256": "bb5979a527c058964d230d430dacbfc26df04c6fe6bce03ae1ae04c6f8620b15",
+      "source_response_sha256": "a79d3114a018e88d67c8078ea7e82d2d08e74e79f7c0b1315c18cca6d59d81cd",
+      "request_key": "02075d6771086d24a8f5c3704b5403c2919c898a62f42b94f86ddeb7e5e80dc4"
+    },
+    {
+      "text": "明白您想详细了解培训内容呀，线上接单培训主要讲解如何操作平台接单、接单注意事项，还有服务规范这些内容，帮助您更快上手。",
+      "language": "zh",
+      "duration_ms": 11040,
+      "words": [
+        {
+          "begin_time": 520,
+          "end_time": 840,
+          "fixed": true,
+          "punctuation": "",
+          "text": "明白"
+        },
+        {
+          "begin_time": 840,
+          "end_time": 1040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 1040,
+          "end_time": 1280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "想"
+        },
+        {
+          "begin_time": 1280,
+          "end_time": 1480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "详"
+        },
+        {
+          "begin_time": 1480,
+          "end_time": 1680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "细"
+        },
+        {
+          "begin_time": 1680,
+          "end_time": 1880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "了"
+        },
+        {
+          "begin_time": 1880,
+          "end_time": 2008,
+          "fixed": true,
+          "punctuation": "",
+          "text": "解"
+        },
+        {
+          "begin_time": 2008,
+          "end_time": 2136,
+          "fixed": true,
+          "punctuation": "",
+          "text": "培"
+        },
+        {
+          "begin_time": 2136,
+          "end_time": 2264,
+          "fixed": true,
+          "punctuation": "",
+          "text": "训"
+        },
+        {
+          "begin_time": 2264,
+          "end_time": 2392,
+          "fixed": true,
+          "punctuation": "",
+          "text": "内"
+        },
+        {
+          "begin_time": 2392,
+          "end_time": 2520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "容"
+        },
+        {
+          "begin_time": 2520,
+          "end_time": 2760,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "呀"
+        },
+        {
+          "begin_time": 3280,
+          "end_time": 3680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "线"
+        },
+        {
+          "begin_time": 3680,
+          "end_time": 3860,
+          "fixed": true,
+          "punctuation": "",
+          "text": "上"
+        },
+        {
+          "begin_time": 3860,
+          "end_time": 4040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "接"
+        },
+        {
+          "begin_time": 4040,
+          "end_time": 4186,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 4186,
+          "end_time": 4333,
+          "fixed": true,
+          "punctuation": "",
+          "text": "培"
+        },
+        {
+          "begin_time": 4333,
+          "end_time": 4480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "训"
+        },
+        {
+          "begin_time": 4480,
+          "end_time": 4800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "主要"
+        },
+        {
+          "begin_time": 4800,
+          "end_time": 5280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "讲"
+        },
+        {
+          "begin_time": 5280,
+          "end_time": 5400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "解"
+        },
+        {
+          "begin_time": 5400,
+          "end_time": 5520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "如"
+        },
+        {
+          "begin_time": 5520,
+          "end_time": 5640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "何"
+        },
+        {
+          "begin_time": 5640,
+          "end_time": 6040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "操作"
+        },
+        {
+          "begin_time": 6040,
+          "end_time": 6400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "平台"
+        },
+        {
+          "begin_time": 6400,
+          "end_time": 6800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "接"
+        },
+        {
+          "begin_time": 6800,
+          "end_time": 6880,
+          "fixed": true,
+          "punctuation": "、",
+          "text": "单"
+        },
+        {
+          "begin_time": 6960,
+          "end_time": 7240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "接"
+        },
+        {
+          "begin_time": 7240,
+          "end_time": 7392,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 7392,
+          "end_time": 7544,
+          "fixed": true,
+          "punctuation": "",
+          "text": "注"
+        },
+        {
+          "begin_time": 7544,
+          "end_time": 7696,
+          "fixed": true,
+          "punctuation": "",
+          "text": "意"
+        },
+        {
+          "begin_time": 7696,
+          "end_time": 7848,
+          "fixed": true,
+          "punctuation": "",
+          "text": "事"
+        },
+        {
+          "begin_time": 7848,
+          "end_time": 8000,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "项"
+        },
+        {
+          "begin_time": 8280,
+          "end_time": 8640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "还"
+        },
+        {
+          "begin_time": 8640,
+          "end_time": 8733,
+          "fixed": true,
+          "punctuation": "",
+          "text": "有"
+        },
+        {
+          "begin_time": 8733,
+          "end_time": 8826,
+          "fixed": true,
+          "punctuation": "",
+          "text": "服"
+        },
+        {
+          "begin_time": 8826,
+          "end_time": 8920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "务"
+        },
+        {
+          "begin_time": 8920,
+          "end_time": 9280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "规范"
+        },
+        {
+          "begin_time": 9280,
+          "end_time": 9560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "这些"
+        },
+        {
+          "begin_time": 9560,
+          "end_time": 9920,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "内容"
+        },
+        {
+          "begin_time": 10080,
+          "end_time": 10600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "帮助您"
+        },
+        {
+          "begin_time": 10600,
+          "end_time": 10960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "更快"
+        },
+        {
+          "begin_time": 10960,
+          "end_time": 11560,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "上手"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 3,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn3_agent.wav",
+      "audio_sha256": "72137495b063318b5cefdce3f916a9b99204fd0b0ff161aaf10deeb21613eb41",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "a739a65b49118f38a42429a640abdeccce9da2f18e6d49e6042480756a413854",
+      "source_request_sha256": "cf6e454866afc1194752b9fd2f383aad5842d405a7d5eee49b72494f282cb498",
+      "source_response_sha256": "67eb6be6d33dc8044e12998baf04f65f321853453acb2f5d7bf4a4f1ccc2d296",
+      "request_key": "0d6cab91544f4de16c95edc32b5f90f9fc0c7a5506eb0d665433ebb8d221f73e"
+    },
+    {
+      "text": "您有这方面的顾虑很正常，效果主要体现在优先派单体验上。您完成报名后，系统会在3天内给您优先派单的机会，您可以直观感受到接单数量的变化。",
+      "language": "zh",
+      "duration_ms": 11640,
+      "words": [
+        {
+          "begin_time": 280,
+          "end_time": 440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 440,
+          "end_time": 600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "有"
+        },
+        {
+          "begin_time": 600,
+          "end_time": 1200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "这方面的"
+        },
+        {
+          "begin_time": 1200,
+          "end_time": 1520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "顾虑"
+        },
+        {
+          "begin_time": 1520,
+          "end_time": 2240,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "很正常"
+        },
+        {
+          "begin_time": 2520,
+          "end_time": 2920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "效果"
+        },
+        {
+          "begin_time": 2920,
+          "end_time": 3880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "主要体现在"
+        },
+        {
+          "begin_time": 3880,
+          "end_time": 4280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "优先"
+        },
+        {
+          "begin_time": 4280,
+          "end_time": 4440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "派"
+        },
+        {
+          "begin_time": 4440,
+          "end_time": 4680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 4680,
+          "end_time": 5080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "体验"
+        },
+        {
+          "begin_time": 5080,
+          "end_time": 5280,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "上"
+        },
+        {
+          "begin_time": 5440,
+          "end_time": 5640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 5640,
+          "end_time": 5920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "完成"
+        },
+        {
+          "begin_time": 5920,
+          "end_time": 6280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "报名"
+        },
+        {
+          "begin_time": 6280,
+          "end_time": 6440,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "后"
+        },
+        {
+          "begin_time": 6560,
+          "end_time": 6880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "系"
+        },
+        {
+          "begin_time": 6880,
+          "end_time": 6986,
+          "fixed": true,
+          "punctuation": "",
+          "text": "统"
+        },
+        {
+          "begin_time": 6986,
+          "end_time": 7093,
+          "fixed": true,
+          "punctuation": "",
+          "text": "会"
+        },
+        {
+          "begin_time": 7093,
+          "end_time": 7200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "在"
+        },
+        {
+          "begin_time": 7200,
+          "end_time": 7320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "3"
+        },
+        {
+          "begin_time": 7320,
+          "end_time": 7760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "天内"
+        },
+        {
+          "begin_time": 7760,
+          "end_time": 8080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "给您"
+        },
+        {
+          "begin_time": 8080,
+          "end_time": 8400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "优先"
+        },
+        {
+          "begin_time": 8400,
+          "end_time": 8560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "派"
+        },
+        {
+          "begin_time": 8560,
+          "end_time": 8680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 8680,
+          "end_time": 9240,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "的机会"
+        },
+        {
+          "begin_time": 9360,
+          "end_time": 9760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您可以"
+        },
+        {
+          "begin_time": 9760,
+          "end_time": 10080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "直观"
+        },
+        {
+          "begin_time": 10080,
+          "end_time": 10600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "感受到"
+        },
+        {
+          "begin_time": 10600,
+          "end_time": 10920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "接"
+        },
+        {
+          "begin_time": 10920,
+          "end_time": 11020,
+          "fixed": true,
+          "punctuation": "",
+          "text": "单"
+        },
+        {
+          "begin_time": 11020,
+          "end_time": 11120,
+          "fixed": true,
+          "punctuation": "",
+          "text": "数"
+        },
+        {
+          "begin_time": 11120,
+          "end_time": 11220,
+          "fixed": true,
+          "punctuation": "",
+          "text": "量"
+        },
+        {
+          "begin_time": 11220,
+          "end_time": 11320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "的"
+        },
+        {
+          "begin_time": 11320,
+          "end_time": 11920,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "变化"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 4,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn4_agent.wav",
+      "audio_sha256": "be394268c1c6bd37c3258f28034050c4c48f880f7822d97fec1d046c910b339b",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "06b087e6e14c774b0086e39c38ccb0b65a3863534c6199b7cd31a5f094767bc1",
+      "source_request_sha256": "9ef38781bb93abaecb7ad6b76aed67edee51c6f4b35d77192a237584f2953d1b",
+      "source_response_sha256": "c7d7ec4fecad684f7131037362a0c60457f33b3bdf915de4cccea25f1dc255a7",
+      "request_key": "915bdbe6ee85754d7ce62d8fd6b73198e7ea54f811bda69c6fc6f5e63e8b7f54"
+    },
+    {
+      "text": "办理的话其实很简单，您只需要在电话里提供基本信息，之后会有专员跟进帮您完成报名，不需要额外准备什么材料。",
+      "language": "zh",
+      "duration_ms": 9040,
+      "words": [
+        {
+          "begin_time": 160,
+          "end_time": 560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "办"
+        },
+        {
+          "begin_time": 560,
+          "end_time": 720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "理"
+        },
+        {
+          "begin_time": 720,
+          "end_time": 880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "的"
+        },
+        {
+          "begin_time": 880,
+          "end_time": 1040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "话"
+        },
+        {
+          "begin_time": 1040,
+          "end_time": 1320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "其实"
+        },
+        {
+          "begin_time": 1320,
+          "end_time": 1660,
+          "fixed": true,
+          "punctuation": "",
+          "text": "很"
+        },
+        {
+          "begin_time": 1660,
+          "end_time": 2000,
+          "fixed": true,
+          "punctuation": "",
+          "text": "简"
+        },
+        {
+          "begin_time": 2000,
+          "end_time": 2220,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "单"
+        },
+        {
+          "begin_time": 2440,
+          "end_time": 2640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 2640,
+          "end_time": 3040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "只需要"
+        },
+        {
+          "begin_time": 3040,
+          "end_time": 3200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "在"
+        },
+        {
+          "begin_time": 3200,
+          "end_time": 3520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "电话"
+        },
+        {
+          "begin_time": 3520,
+          "end_time": 3720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "里"
+        },
+        {
+          "begin_time": 3720,
+          "end_time": 4040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "提供"
+        },
+        {
+          "begin_time": 4040,
+          "end_time": 4800,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "基本信息"
+        },
+        {
+          "begin_time": 5000,
+          "end_time": 5320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "之后"
+        },
+        {
+          "begin_time": 5320,
+          "end_time": 5600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "会"
+        },
+        {
+          "begin_time": 5600,
+          "end_time": 5706,
+          "fixed": true,
+          "punctuation": "",
+          "text": "有"
+        },
+        {
+          "begin_time": 5706,
+          "end_time": 5813,
+          "fixed": true,
+          "punctuation": "",
+          "text": "专"
+        },
+        {
+          "begin_time": 5813,
+          "end_time": 5920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "员"
+        },
+        {
+          "begin_time": 5920,
+          "end_time": 6320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "跟进"
+        },
+        {
+          "begin_time": 6320,
+          "end_time": 6600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "帮您"
+        },
+        {
+          "begin_time": 6600,
+          "end_time": 6880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "完成"
+        },
+        {
+          "begin_time": 6880,
+          "end_time": 7280,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "报名"
+        },
+        {
+          "begin_time": 7480,
+          "end_time": 7880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "不需要"
+        },
+        {
+          "begin_time": 7880,
+          "end_time": 8200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "额"
+        },
+        {
+          "begin_time": 8200,
+          "end_time": 8266,
+          "fixed": true,
+          "punctuation": "",
+          "text": "外"
+        },
+        {
+          "begin_time": 8266,
+          "end_time": 8333,
+          "fixed": true,
+          "punctuation": "",
+          "text": "准"
+        },
+        {
+          "begin_time": 8333,
+          "end_time": 8400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "备"
+        },
+        {
+          "begin_time": 8400,
+          "end_time": 8680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "什么"
+        },
+        {
+          "begin_time": 8680,
+          "end_time": 9200,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "材料"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 5,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn5_agent.wav",
+      "audio_sha256": "5e372bf1f53f20b5ff0b6e0084063bb9cf6c7e95cd192e10eccc60111584dfe5",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "baecdcac872ba6ddf57a97bda4865032cf247299fdbb8a94f82797c5a2e82b6e",
+      "source_request_sha256": "a189ccbe38d8f8c73f4b7f63b0e70cf01deb683d3549a39fd2274f85936bd924",
+      "source_response_sha256": "2df4796565a785d3e13c696a0da6eebd5a4fa5162f905eb20a27ef6657757ebd",
+      "request_key": "107742b4469c5dc85749c8f1a0ce619a24b8a518ffd5e68a02783b22acc52da2"
+    },
+    {
+      "text": "好的，那咱们这就开始登记哈。麻烦您先告诉我您的手机号码，方便后续专员联系您确认细节。",
+      "language": "zh",
+      "duration_ms": 7480,
+      "words": [
+        {
+          "begin_time": 480,
+          "end_time": 840,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "好的"
+        },
+        {
+          "begin_time": 1120,
+          "end_time": 1280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "那"
+        },
+        {
+          "begin_time": 1280,
+          "end_time": 1480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "咱们"
+        },
+        {
+          "begin_time": 1480,
+          "end_time": 1800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "这就"
+        },
+        {
+          "begin_time": 1800,
+          "end_time": 2040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "开始"
+        },
+        {
+          "begin_time": 2040,
+          "end_time": 2440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "登记"
+        },
+        {
+          "begin_time": 2440,
+          "end_time": 2680,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "哈"
+        },
+        {
+          "begin_time": 3160,
+          "end_time": 3480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "麻烦"
+        },
+        {
+          "begin_time": 3480,
+          "end_time": 3640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 3640,
+          "end_time": 3800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "先"
+        },
+        {
+          "begin_time": 3800,
+          "end_time": 4240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "告诉我"
+        },
+        {
+          "begin_time": 4240,
+          "end_time": 4520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您的"
+        },
+        {
+          "begin_time": 4520,
+          "end_time": 5200,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "手机号码"
+        },
+        {
+          "begin_time": 5400,
+          "end_time": 5760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "方便"
+        },
+        {
+          "begin_time": 5760,
+          "end_time": 6120,
+          "fixed": true,
+          "punctuation": "",
+          "text": "后续"
+        },
+        {
+          "begin_time": 6120,
+          "end_time": 6440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "专员"
+        },
+        {
+          "begin_time": 6440,
+          "end_time": 6760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "联系"
+        },
+        {
+          "begin_time": 6760,
+          "end_time": 6960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 6960,
+          "end_time": 7280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "确认"
+        },
+        {
+          "begin_time": 7280,
+          "end_time": 7960,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "细节"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 6,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn6_agent.wav",
+      "audio_sha256": "a82803650267eefd28e676c6943886ab941d23b15ba2a69d69d187181bde4ad3",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "321c9948ddd8fccd8bebfa57702a10b3bf3bf610d126247272367df1d127500e",
+      "source_request_sha256": "a7c0b58d854c628453f8ce50dcb21916a94b3b4ed530946b8622a62c6b5a33e9",
+      "source_response_sha256": "3aa85c6bcc0940c5ce968606ba6931ad65a4c9153122f4431c35a5d09d575729",
+      "request_key": "7b03e8ce911b9801aa0f5c09642273c42919e73c37dd7c39fbf8313b91840f21"
+    },
+    {
+      "text": "行呀，那专员就回拨您刚才的来电号码联系您，另外为了确认是您本人办理，还需要您提供一下姓名，您看方便吗。",
+      "language": "zh",
+      "duration_ms": 8920,
+      "words": [
+        {
+          "begin_time": 280,
+          "end_time": 480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "行"
+        },
+        {
+          "begin_time": 480,
+          "end_time": 640,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "呀"
+        },
+        {
+          "begin_time": 720,
+          "end_time": 880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "那"
+        },
+        {
+          "begin_time": 880,
+          "end_time": 1160,
+          "fixed": true,
+          "punctuation": "",
+          "text": "专员"
+        },
+        {
+          "begin_time": 1160,
+          "end_time": 1320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "就"
+        },
+        {
+          "begin_time": 1320,
+          "end_time": 1440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "回"
+        },
+        {
+          "begin_time": 1440,
+          "end_time": 1640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "拨"
+        },
+        {
+          "begin_time": 1640,
+          "end_time": 1840,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 1840,
+          "end_time": 2160,
+          "fixed": true,
+          "punctuation": "",
+          "text": "刚才"
+        },
+        {
+          "begin_time": 2160,
+          "end_time": 2280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "的"
+        },
+        {
+          "begin_time": 2280,
+          "end_time": 2560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "来电"
+        },
+        {
+          "begin_time": 2560,
+          "end_time": 2920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "号码"
+        },
+        {
+          "begin_time": 2920,
+          "end_time": 3240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "联系"
+        },
+        {
+          "begin_time": 3240,
+          "end_time": 3520,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "您"
+        },
+        {
+          "begin_time": 3960,
+          "end_time": 4400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "另"
+        },
+        {
+          "begin_time": 4400,
+          "end_time": 4506,
+          "fixed": true,
+          "punctuation": "",
+          "text": "外"
+        },
+        {
+          "begin_time": 4506,
+          "end_time": 4613,
+          "fixed": true,
+          "punctuation": "",
+          "text": "为"
+        },
+        {
+          "begin_time": 4613,
+          "end_time": 4720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "了"
+        },
+        {
+          "begin_time": 4720,
+          "end_time": 5040,
+          "fixed": true,
+          "punctuation": "",
+          "text": "确认"
+        },
+        {
+          "begin_time": 5040,
+          "end_time": 5400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "是您"
+        },
+        {
+          "begin_time": 5400,
+          "end_time": 5720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "本人"
+        },
+        {
+          "begin_time": 5720,
+          "end_time": 6080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "办"
+        },
+        {
+          "begin_time": 6080,
+          "end_time": 6120,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "理"
+        },
+        {
+          "begin_time": 6160,
+          "end_time": 6560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "还需要"
+        },
+        {
+          "begin_time": 6560,
+          "end_time": 6760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 6760,
+          "end_time": 7080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "提供"
+        },
+        {
+          "begin_time": 7080,
+          "end_time": 7440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "一下"
+        },
+        {
+          "begin_time": 7440,
+          "end_time": 7960,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "姓名"
+        },
+        {
+          "begin_time": 8120,
+          "end_time": 8280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 8280,
+          "end_time": 8480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "看"
+        },
+        {
+          "begin_time": 8480,
+          "end_time": 8840,
+          "fixed": true,
+          "punctuation": "",
+          "text": "方便"
+        },
+        {
+          "begin_time": 8840,
+          "end_time": 9200,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "吗"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 7,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn7_agent.wav",
+      "audio_sha256": "f4e519f1a8c521eb64be881b3bed77bc3de41618db5b02453c806967f58cd56e",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "0a03977f040637056a6cb85f3c51545ffed93ac3396670d76588a2bf2b7b4a67",
+      "source_request_sha256": "e051e1f8e47d76eb95e7502bae409021c858273d037911ae4eb47c1ff9c6c384",
+      "source_response_sha256": "9129cea4258ce38f4485cd701924744ff80db7f806d1e52e6586f2213624d076",
+      "request_key": "50c05d28544b564808d53b03fb6b99c2271458620be3b55f1b8fc98c46816a32"
+    },
+    {
+      "text": "好的冯婷女士，我记下了。那咱们确认一下：您同意办理新司机体验包，专员会回拨您的来电号码联系您完成后续手续，对吧。",
+      "language": "zh",
+      "duration_ms": 10920,
+      "words": [
+        {
+          "begin_time": 440,
+          "end_time": 920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "好的"
+        },
+        {
+          "begin_time": 920,
+          "end_time": 1080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "冯"
+        },
+        {
+          "begin_time": 1080,
+          "end_time": 1320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "婷"
+        },
+        {
+          "begin_time": 1320,
+          "end_time": 1760,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "女士"
+        },
+        {
+          "begin_time": 1960,
+          "end_time": 2120,
+          "fixed": true,
+          "punctuation": "",
+          "text": "我"
+        },
+        {
+          "begin_time": 2120,
+          "end_time": 2320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "记"
+        },
+        {
+          "begin_time": 2320,
+          "end_time": 2800,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "下了"
+        },
+        {
+          "begin_time": 3200,
+          "end_time": 3360,
+          "fixed": true,
+          "punctuation": "",
+          "text": "那"
+        },
+        {
+          "begin_time": 3360,
+          "end_time": 3600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "咱们"
+        },
+        {
+          "begin_time": 3600,
+          "end_time": 3920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "确认"
+        },
+        {
+          "begin_time": 3920,
+          "end_time": 4320,
+          "fixed": true,
+          "punctuation": "",
+          "text": "一下"
+        },
+        {
+          "begin_time": 4320,
+          "end_time": 4720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "："
+        },
+        {
+          "begin_time": 4720,
+          "end_time": 4960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 4960,
+          "end_time": 5280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "同意"
+        },
+        {
+          "begin_time": 5280,
+          "end_time": 5640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "办"
+        },
+        {
+          "begin_time": 5640,
+          "end_time": 5780,
+          "fixed": true,
+          "punctuation": "",
+          "text": "理"
+        },
+        {
+          "begin_time": 5780,
+          "end_time": 5920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "新"
+        },
+        {
+          "begin_time": 5920,
+          "end_time": 6060,
+          "fixed": true,
+          "punctuation": "",
+          "text": "司"
+        },
+        {
+          "begin_time": 6060,
+          "end_time": 6200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "机"
+        },
+        {
+          "begin_time": 6200,
+          "end_time": 6520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "体验"
+        },
+        {
+          "begin_time": 6520,
+          "end_time": 6800,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "包"
+        },
+        {
+          "begin_time": 7120,
+          "end_time": 7480,
+          "fixed": true,
+          "punctuation": "",
+          "text": "专员"
+        },
+        {
+          "begin_time": 7480,
+          "end_time": 7680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "会"
+        },
+        {
+          "begin_time": 7680,
+          "end_time": 7800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "回"
+        },
+        {
+          "begin_time": 7800,
+          "end_time": 8000,
+          "fixed": true,
+          "punctuation": "",
+          "text": "拨"
+        },
+        {
+          "begin_time": 8000,
+          "end_time": 8240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您的"
+        },
+        {
+          "begin_time": 8240,
+          "end_time": 8600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "来电"
+        },
+        {
+          "begin_time": 8600,
+          "end_time": 8960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "号码"
+        },
+        {
+          "begin_time": 8960,
+          "end_time": 9240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "联系"
+        },
+        {
+          "begin_time": 9240,
+          "end_time": 9440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 9440,
+          "end_time": 9720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "完成"
+        },
+        {
+          "begin_time": 9720,
+          "end_time": 10120,
+          "fixed": true,
+          "punctuation": "",
+          "text": "后续"
+        },
+        {
+          "begin_time": 10120,
+          "end_time": 10560,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "手续"
+        },
+        {
+          "begin_time": 10720,
+          "end_time": 11360,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "对吧"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 8,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn8_agent.wav",
+      "audio_sha256": "8887fceda1d13cbe9d244392e4bb8dca4571b4bf4739daaa9da8424dd3dfe21a",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "ff45745f1a110bad5c8f39f39062b13616b391e3b1e271289332c0e776952891",
+      "source_request_sha256": "a54d4e99f3b2eb5663b77ee540b8cbf9fd7eaedc311744df11e6fb712ebe3c8a",
+      "source_response_sha256": "19b400bfb51e4a77db1ead65fecfc6d2db8bf9540e83f7e6cfe187857a1ac23b",
+      "request_key": "3ed16244b1f9d47728b2a33d7615289dd2b79d7745ae015c526da2e875ff766a"
+    },
+    {
+      "text": "专员一般会在1-2个工作日内回拨您，请您留意接听电话就行。",
+      "language": "zh",
+      "duration_ms": 5440,
+      "words": [
+        {
+          "begin_time": 320,
+          "end_time": 760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "专员"
+        },
+        {
+          "begin_time": 760,
+          "end_time": 1080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "一般"
+        },
+        {
+          "begin_time": 1080,
+          "end_time": 1600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "会在"
+        },
+        {
+          "begin_time": 1600,
+          "end_time": 1760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "1"
+        },
+        {
+          "begin_time": 1760,
+          "end_time": 1920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "-"
+        },
+        {
+          "begin_time": 1920,
+          "end_time": 2080,
+          "fixed": true,
+          "punctuation": "",
+          "text": "2"
+        },
+        {
+          "begin_time": 2080,
+          "end_time": 2880,
+          "fixed": true,
+          "punctuation": "",
+          "text": "个工作日内"
+        },
+        {
+          "begin_time": 2880,
+          "end_time": 3000,
+          "fixed": true,
+          "punctuation": "",
+          "text": "回"
+        },
+        {
+          "begin_time": 3000,
+          "end_time": 3240,
+          "fixed": true,
+          "punctuation": "",
+          "text": "拨"
+        },
+        {
+          "begin_time": 3240,
+          "end_time": 3560,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "您"
+        },
+        {
+          "begin_time": 3800,
+          "end_time": 4200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "请您"
+        },
+        {
+          "begin_time": 4200,
+          "end_time": 4440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "留意"
+        },
+        {
+          "begin_time": 4440,
+          "end_time": 4760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "接听"
+        },
+        {
+          "begin_time": 4760,
+          "end_time": 5120,
+          "fixed": true,
+          "punctuation": "",
+          "text": "电话"
+        },
+        {
+          "begin_time": 5120,
+          "end_time": 5760,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "就行"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 9,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn9_agent.wav",
+      "audio_sha256": "cf1a2bdd8dd60c9ba89fdafa1c5fcb68c108f4c4351047724e0d84382e106664",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "d75120f4cd6ebbe9a076aa1fe249be7dce13790439ddd77291d4ff5b43283beb",
+      "source_request_sha256": "9d4102b8f2d2251311b9254cfb63cad67091d4b8195d635b616ba7c365b2314c",
+      "source_response_sha256": "9c1db92e787b061bb2b86b41e339b36852ecd85b81772ae241d2996649a7eacb",
+      "request_key": "109d0cb757924f8c32a70e18bf0803e87744f11bc591302634a50be909787cac"
+    },
+    {
+      "text": "好的冯女士，那我总结一下，您已同意办理新司机体验包，专员会在1~2个工作日内回拨您的来电号码联系您，祝您顺利，再见。",
+      "language": "zh",
+      "duration_ms": 10520,
+      "words": [
+        {
+          "begin_time": 280,
+          "end_time": 560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "好的"
+        },
+        {
+          "begin_time": 560,
+          "end_time": 760,
+          "fixed": true,
+          "punctuation": "",
+          "text": "冯"
+        },
+        {
+          "begin_time": 760,
+          "end_time": 1160,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "女士"
+        },
+        {
+          "begin_time": 1360,
+          "end_time": 1680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "那我"
+        },
+        {
+          "begin_time": 1680,
+          "end_time": 2060,
+          "fixed": true,
+          "punctuation": "",
+          "text": "总"
+        },
+        {
+          "begin_time": 2060,
+          "end_time": 2440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "结"
+        },
+        {
+          "begin_time": 2440,
+          "end_time": 2626,
+          "fixed": true,
+          "punctuation": "",
+          "text": "一"
+        },
+        {
+          "begin_time": 2626,
+          "end_time": 2813,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "下"
+        },
+        {
+          "begin_time": 3000,
+          "end_time": 3200,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您"
+        },
+        {
+          "begin_time": 3200,
+          "end_time": 3400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "已"
+        },
+        {
+          "begin_time": 3400,
+          "end_time": 3800,
+          "fixed": true,
+          "punctuation": "",
+          "text": "同意"
+        },
+        {
+          "begin_time": 3800,
+          "end_time": 4160,
+          "fixed": true,
+          "punctuation": "",
+          "text": "办"
+        },
+        {
+          "begin_time": 4160,
+          "end_time": 4280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "理"
+        },
+        {
+          "begin_time": 4280,
+          "end_time": 4400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "新"
+        },
+        {
+          "begin_time": 4400,
+          "end_time": 4520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "司"
+        },
+        {
+          "begin_time": 4520,
+          "end_time": 4640,
+          "fixed": true,
+          "punctuation": "",
+          "text": "机"
+        },
+        {
+          "begin_time": 4640,
+          "end_time": 4960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "体验"
+        },
+        {
+          "begin_time": 4960,
+          "end_time": 5200,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "包"
+        },
+        {
+          "begin_time": 5440,
+          "end_time": 5840,
+          "fixed": true,
+          "punctuation": "",
+          "text": "专员"
+        },
+        {
+          "begin_time": 5840,
+          "end_time": 6160,
+          "fixed": true,
+          "punctuation": "",
+          "text": "会在"
+        },
+        {
+          "begin_time": 6160,
+          "end_time": 6280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "1"
+        },
+        {
+          "begin_time": 6280,
+          "end_time": 6440,
+          "fixed": true,
+          "punctuation": "",
+          "text": "~"
+        },
+        {
+          "begin_time": 6440,
+          "end_time": 6560,
+          "fixed": true,
+          "punctuation": "",
+          "text": "2"
+        },
+        {
+          "begin_time": 6560,
+          "end_time": 7400,
+          "fixed": true,
+          "punctuation": "",
+          "text": "个工作日内"
+        },
+        {
+          "begin_time": 7400,
+          "end_time": 7520,
+          "fixed": true,
+          "punctuation": "",
+          "text": "回"
+        },
+        {
+          "begin_time": 7520,
+          "end_time": 7720,
+          "fixed": true,
+          "punctuation": "",
+          "text": "拨"
+        },
+        {
+          "begin_time": 7720,
+          "end_time": 7960,
+          "fixed": true,
+          "punctuation": "",
+          "text": "您的"
+        },
+        {
+          "begin_time": 7960,
+          "end_time": 8280,
+          "fixed": true,
+          "punctuation": "",
+          "text": "来电"
+        },
+        {
+          "begin_time": 8280,
+          "end_time": 8600,
+          "fixed": true,
+          "punctuation": "",
+          "text": "号码"
+        },
+        {
+          "begin_time": 8600,
+          "end_time": 8920,
+          "fixed": true,
+          "punctuation": "",
+          "text": "联系"
+        },
+        {
+          "begin_time": 8920,
+          "end_time": 9160,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "您"
+        },
+        {
+          "begin_time": 9320,
+          "end_time": 9680,
+          "fixed": true,
+          "punctuation": "",
+          "text": "祝您"
+        },
+        {
+          "begin_time": 9680,
+          "end_time": 10040,
+          "fixed": true,
+          "punctuation": "，",
+          "text": "顺利"
+        },
+        {
+          "begin_time": 10200,
+          "end_time": 10800,
+          "fixed": true,
+          "punctuation": "。",
+          "text": "再见"
+        }
+      ],
+      "backend": "dashscope",
+      "turn": 10,
+      "audio_path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/audio/turn10_agent.wav",
+      "audio_sha256": "50c42e8288a04cfb9dd4572f2e7ad6b2c01576ba675feea9c0c1e4dcff9dff4e",
+      "model_identity": {
+        "backend": "dashscope",
+        "requested_model": "qwen-audio-3.0-asr-flash",
+        "response_model": null,
+        "response_model_differs": null
+      },
+      "source_cache_sha256": "5d893f368888db7c25862371d7391f43323f7f18e2f5dc77fe808aceac819c1a",
+      "source_request_sha256": "e51ea1b3e07fcd195ce96c04a2d3088dbd496aa162d66a516bd20caa07ee1140",
+      "source_response_sha256": "c20933ad4e8e11c3564158775a838dbceac4400b03f914742010c97160ee601b",
+      "request_key": "453e0dc47716b6b9ae4e446ff5baa87ef69a4d965ff152b76d7acdc48f229593"
+    }
+  ]
+}
