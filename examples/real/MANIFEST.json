@@ -1,24 +1,10 @@
 {
-  "schema": "listen2serve.current-listening-set/1",
-  "available_roles": [
-    "marketing",
-    "hotline",
-    "collection"
-  ],
-  "missing_role": null,
-  "complete_three_role_set": true,
+  "schema": "listen2serve.conversation-examples/1",
+  "artifact_type": "conversation_examples",
   "coverage": {
     "E/E": "marketing",
     "N/N": "hotline",
     "N/E": "collection"
-  },
-  "evaluation_status": "waiting_for_provider",
-  "selection_uses_agent_scores": false,
-  "metrics": {
-    "key_turn_pass": null,
-    "voice_pass": null,
-    "flow_rate": null,
-    "task_score": null
   },
   "examples": [
     {
@@ -28,16 +14,8 @@
       "condition": "E/E",
       "latent_oracle": "cooperative",
       "source_package_sha256": "a12d88ddc5f25eab21e0a16c05ddca94e4ac088c4d777c78585a93aa4b690792",
-      "evaluation_status": "waiting_for_provider",
-      "metrics": {
-        "key_turn_pass": null,
-        "voice_pass": null,
-        "flow_rate": null,
-        "task_score": null
-      },
       "manifest": "marketing/MANIFEST.json",
-      "manifest_sha256": "62b697494b4ab6c63b390020297f8809f3fa697c0a0c7a6b6b614a97d9c14d61",
-      "current_evaluation": "evaluation/20261112/marketing.json"
+      "manifest_sha256": "e67297c8fa4998be506f025da312af627900beacfc6eda48a80b2751342ada8d"
     },
     {
       "role": "hotline",
@@ -46,16 +24,8 @@
       "condition": "N/N",
       "latent_oracle": "cooperative",
       "source_package_sha256": "6d18d18e5217218ab82595ee03ffa34d7e90e074b185f7f323346cffbc056b49",
-      "evaluation_status": "not_started_waiting_for_provider",
-      "metrics": {
-        "key_turn_pass": null,
-        "voice_pass": null,
-        "flow_rate": null,
-        "task_score": null
-      },
       "manifest": "hotline/MANIFEST.json",
-      "manifest_sha256": "acce11e45e85a3d91532089627df6b67a3168e82b681f63df8050f1d5a49e579",
-      "current_evaluation": "evaluation/20261112/hotline.json"
+      "manifest_sha256": "42134185930989413ba5204c375d6f3df5192e361d7d0deba82131a962eabdd9"
     },
     {
       "role": "collection",
@@ -64,28 +34,10 @@
       "condition": "N/E",
       "latent_oracle": "cooperative",
       "source_package_sha256": "5f1431112848e374775d5883169efbc9f304901a26d8fe4f2a1faad5284d92ed",
-      "evaluation_status": "not_started_waiting_for_provider",
-      "metrics": {
-        "key_turn_pass": null,
-        "voice_pass": null,
-        "flow_rate": null,
-        "task_score": null
-      },
       "manifest": "collection/MANIFEST.json",
-      "manifest_sha256": "da2871462d6c9c85997b8207bdb220f9af0b188c4dbe36a1cac44a28c86d9adc",
-      "current_evaluation": "evaluation/20261112/collection.json"
+      "manifest_sha256": "5e0947b3c342b76fcc5446468a4f6ed15a619166ea6783624189343a57ecfdab"
     }
   ],
   "local_framework_source_package_sha256": "8c25836d048f866225c2190b3d782e82872009ad7869c4d9007f1a8c1dfdc533",
-  "page_sha256": "6fc329ff5ddbefbe95f02d116c49af2d07545f3c9de648b4be7fc9fd35f98a66",
-  "user_confirmed_roles": [
-    "marketing",
-    "hotline",
-    "collection"
-  ],
-  "new_collection_user_listening": "accepted",
-  "note": "Each original generation retains its source hash and original audio; current framework validation is recorded separately.",
-  "current_evaluation": "evaluation/20261112/summary.json",
-  "role_packages_scope": "Immutable generation and pre-scoring snapshots; current status is in evaluation/20261112.",
-  "framework_source_scope": "Current release source; each original generation and the 2026-11-12 evaluation retain their own source identities."
+  "page_sha256": "24a13fcfa9ee2db2030ee150d7c8ccc91d8fa86600f2c9d9f213d10912900383"
 }

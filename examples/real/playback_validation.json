@@ -1,26 +1,15 @@
 {
-  "schema": "listen2serve.public-playback-validation/1",
+  "schema": "listen2serve.playback-validation/1",
   "status": "passed",
-  "checked_at_utc": "2026-11-14T15:22:53.146829+00:00",
-  "page_sha256": "6fc329ff5ddbefbe95f02d116c49af2d07545f3c9de648b4be7fc9fd35f98a66",
-  "page_manifest_sha256": "af6a21e8f408a3a07acea9172962390bae257b5de3a291f9e1c9ebb531f9fb56",
-  "browser_receipt_sha256": "73995de1d7931832da131316873cf8c8736819a05ec35a5ea9d242076fbde1dd",
-  "verification_script_sha256": "e487eea879dd05a49a1ae931cc6a5f70a98b0e8f3032b350fafd9aa96950db18",
-  "scope": "Actual isolated Chrome: file and loopback HTTP, muted decoding/playback, seek and responsive layout.",
+  "checked_at_utc": "2026-11-16T17:19:47.866501+00:00",
+  "page_sha256": "24a13fcfa9ee2db2030ee150d7c8ccc91d8fa86600f2c9d9f213d10912900383",
+  "page_manifest_sha256": "d5820c6fe574341daa81fc0415cbd242970bd5fd6830a7514cd16ac074f0c18b",
+  "browser_receipt_sha256": "ecc5f782c6f93bd60bbac7337d854ec253b8be7b8c83bc8646b28b3be271e224",
   "verified_origins": [
     "file",
     "loopback_http"
   ],
-  "audio_players_verified_per_origin": 9,
-  "seek_buttons_verified_per_origin": 24,
-  "desktop_and_mobile_layout_verified": true,
-  "nonlocal_page_requests": 0,
-  "console_errors": 0,
-  "original_audio_unchanged": true,
-  "human_listening_performed_by_verifier": false,
-  "app_preview_csp_validated": false,
-  "model_calls": 0,
-  "asr_calls": 0,
-  "judge_calls": 0,
-  "previous_validation": "evaluation/20261112/playback_validation_before_scoring.json"
+  "audio_players_per_origin": 9,
+  "seek_buttons_per_origin": 24,
+  "desktop_and_mobile_layout": "passed"
 }

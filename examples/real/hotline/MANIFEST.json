@@ -9,48 +9,9 @@
   "latent_oracle": "cooperative",
   "turns": 6,
   "key_turn": 5,
-  "publication": false,
-  "evaluation_status": "pending_owner_paused",
-  "metrics": {
-    "key_turn_pass": null,
-    "voice_pass": null,
-    "flow_rate": null,
-    "task_score": null
-  },
-  "metric_denominators": {
-    "key_turn_pass": 0,
-    "voice_pass": 0,
-    "flow_rate": 0,
-    "task_score": 0
-  },
   "source_package_sha256": "6d18d18e5217218ab82595ee03ffa34d7e90e074b185f7f323346cffbc056b49",
   "source_package_hash_root": "src/listen2serve",
   "sources": {
-    "campaign_plan": {
-      "path": "validation/showcase-20261111/campaign_plan.json",
-      "source_sha256": "2e4d3a4cbba098c6a4f3f293e3aae1010c82b090ec2d2b595e0d7c90a6de1eb3",
-      "included_unchanged": false
-    },
-    "verification": {
-      "path": "validation/showcase-20261111/verification.json",
-      "source_sha256": "0dc6e99234b0e67f581883bfa00e26344d4187504d1769c559722908bc165a37",
-      "included_unchanged": false
-    },
-    "selection": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/selection.json",
-      "source_sha256": "9daacc0bd2c5a09c6a6402ef67b241236b09e5a580dd0928bea4d08d49ab4d0f",
-      "included_unchanged": false
-    },
-    "generation_summary": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/summary.json",
-      "source_sha256": "37ddb2b8b3c236ab39c057ec36d03b64322e0fad7ec412c954821b4f8f85b04a",
-      "included_unchanged": false
-    },
-    "quality_review": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/quality_review.json",
-      "source_sha256": "22ebc3e3f11c1871371efbe71565d254b0f9beda5e2309a16f4a0c75b91cec7c",
-      "included_unchanged": false
-    },
     "trajectory": {
       "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/sim_status.json",
       "source_sha256": "b247f1c2b65eced0faf7c954d33bb2b5de71938d17dac90607b424912560caa3",
@@ -304,42 +265,24 @@
       "duration_s": 141.6
     }
   ],
-  "curation": {
-    "collection_size_intended": 3,
-    "coverage": "one selected role-condition sample per role; not a 3-by-3 matrix or population benchmark",
-    "agent_scores_used": false
-  },
   "licenses": {
     "text_transcription_provenance": "CC-BY-NC-4.0",
     "all_wav_audio": "CC-BY-NC-ND-4.0"
   },
   "derivation": [
-    "All WAVs and segments are original bytes, without normalization, trimming, replacement or splicing.",
-    "Endpoint text remains separate from independently requested, audio-bound ASR; unavailable ASR stays absent.",
-    "Raw source hashes and public derived hashes are distinct; these sanitized views are not resumable private caches.",
-    "Requested and provider-reported model identities stay separate; absent reported model remains null.",
-    "Formal scoring is paused; all four metrics are null with zero evaluated denominators."
+    "Original WAV bytes and segment timestamps are retained.",
+    "Endpoint text and independent ASR text have distinct labels.",
+    "Source hashes identify the generation inputs; public hashes identify the exported metadata.",
+    "Model identities and request parameters are recorded from the original generation."
   ],
   "public_derived_files": [
     {
       "path": "README.md",
-      "sha256": "5e601f6a5cacd5f50566e7d8d4063d8618ccb74d721a4379cd723cf45bd44451"
-    },
-    {
-      "path": "reports/showcase_20261111_hotline_N_N_HOT01_a1/evaluation_status.json",
-      "sha256": "2ccd9c3597549ba354b21b4087a673e351843c2fe70c8424e941c74db1b47f38"
-    },
-    {
-      "path": "review_status.json",
-      "sha256": "4789c98c5c9b28a5fcb4588000e531815351c6aa4b0cc08ad091488738466d83"
-    },
-    {
-      "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/agent_asr.json",
-      "sha256": "21d964fc3d8a26de2f0947f38cd59c6986daad9db6fbcee8233dbe7a7be7a792"
+      "sha256": "4017e42521ebcb5663ee600aefff06d49c75394247e46babdfc41053da1b937f"
     },
     {
       "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/sim_status.json",
-      "sha256": "e36f5f43c3b39e274d6ee0e200f023b2e9d49d2f9515c3cc5395ab7d15d006a1"
+      "sha256": "cbfaa15a5ce0b3d1dbd9fa50b0b0ddf0c93b0e2e398d92f68363f9f46aeac91f"
     },
     {
       "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/HOT-ALL-01-T3/voices.json",
@@ -347,11 +290,12 @@
     },
     {
       "path": "runs/showcase_20261111_hotline_N_N_HOT01_a1/run_manifest.json",
-      "sha256": "bc118e3140c0d8f77877d0ef6ee6917dcf0fd5b9d590489d06926a5a0743061d"
+      "sha256": "5edf0b59f883a7ac670900d7da579d5b9fffa7e00b707e294e7f8092962541e0"
     },
     {
       "path": "transcript.md",
-      "sha256": "3fddf09ab5759795b8ac2ce9b76bfb4e8266d65e27d998f2839b6174f37a496a"
+      "sha256": "e3f710e63836d5d954286d51aa4c725f371008932929693a30efdb5a076d559f"
     }
-  ]
+  ],
+  "artifact_type": "conversation_example"
 }

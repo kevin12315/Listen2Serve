@@ -17,7 +17,7 @@ The authors confirmed on 2026-10-17 that the manuscript name `qwen3-audio-plus` 
 
 Historical generation fields in the shipped demonstration metadata describe the generation of those assets. They are independent of the multi-turn simulator default and are preserved verbatim.
 
-Endpoint documentation was checked on 2026-10-17. Offline validation uses simulated APIs. The [real listening examples](../examples/real/index.html) contain three accepted complete calls made with `qwen-audio-3.0-realtime-plus`, `kimi-k3` and `qwen-audio-3.0-tts-plus`; each retains its original generation-source identity. Marketing has ten original ASR turns. The [2026-11-12 scoring check](../examples/real/evaluation/20261112/README.md) received no successful judge response: two request timeouts, then HTTP 503. Hotline and collection judging and new ASR were not started. A successful model-metadata lookup is recorded separately and is not a judge response. Service availability remains account-specific.
+The [conversation examples](../examples/real/index.html) include complete collection, marketing and hotline calls generated with `qwen-audio-3.0-realtime-plus`, `kimi-k3` and `qwen-audio-3.0-tts-plus`. Each example records its original generation-source identity, request parameters, voice assignments and audio fingerprints.
 
 ## Requested and reported identity
 

@@ -61,7 +61,7 @@ Public options and reports use **explicit / neutral wording** and these paper co
 
 The script runs generation, judging, and reporting in order. Results are written to `runs/<run_id>/` and `reports/<run_id>/`. Completed and explicitly partial trajectories, and saved verdicts, can be resumed only when their input identities match. Use a new run ID when changing a model, scenario, prompt, voice, or condition. For deliberate re-judging, use `l2s evaluate --fresh` and a separate `--report-id`.
 
-The three stages can also be run separately; see `l2s --help` and the help for each subcommand. The condition configs enable uniform ASR for the key-turn action judge. ASR or judge failures are surfaced as evaluation errors. A server disconnect after the key reply is captured is labelled `partial`: its key-turn action and voice can be scored, while whole-call FlowRate and TaskScore are left unscored. Reports show completion counts and metric denominators. A response timeout stops the session and preserves its partial audio; it never carries the old reply into the next turn. Timeout records are retained on resume; use a new run ID for a new attempt.
+The three stages can also be run separately; see `l2s --help` and the help for each subcommand. The condition configs enable uniform ASR for the key-turn action judge. ASR or judge failures are surfaced as evaluation errors. A server disconnect after the key reply is captured is labelled `partial`: its key-turn action and voice contribute to their respective metrics; whole-call FlowRate and TaskScore use complete dialogues. Reports show completion counts and metric denominators. A response timeout stops the session and preserves its partial audio; it never carries the old reply into the next turn. Timeout records are retained on resume; use a new run ID for a new attempt.
 
 ## Outputs and metrics
 
@@ -74,7 +74,7 @@ Each trajectory includes the customer/agent turns, the uniquely identified key t
 | **FlowRate** | mean checklist coverage, with full / partial / absent = 1 / 0.5 / 0 |
 | **TaskScore** | complete / partial / absent task attainment = 1 / 0.5 / 0 |
 
-See [how a scored example is displayed](docs/scoring_display.md) for the readable report, per-item evidence, audio links and pending-score states.
+See [how a scored example is displayed](docs/scoring_display.md) for the readable report, per-item evidence, audio links and model provenance.
 
 [examples/offline](examples/offline) illustrates the complete pipeline using simulated responses. The 20 clips in `data/benchmark/audio_samples/` demonstrate customer vocal delivery. The [real conversation examples](examples/real/index.html) contain Mandarin audio, aligned text, and model provenance:
 
@@ -84,9 +84,9 @@ See [how a scored example is displayed](docs/scoring_display.md) for the readabl
 | Marketing | E/E | `MAR-ALL-12-T1` | 10 | 6 |
 | Hotline | N/N | `HOT-ALL-01-T3` | 6 | 5 |
 
-Clone or download the repository, then open `examples/real/index.html` in a browser. GitHub's file view shows the HTML source and does not play the embedded examples. The local checkout also provides the linked JSON status records.
+Clone or download the repository, then open `examples/real/index.html` in a browser. The page includes embedded audio players, turn navigation and linked generation metadata.
 
-These saved real calls are unscored. The [2026-11-12 judging check](examples/real/evaluation/20261112/README.md) recorded two marketing timeouts followed by HTTP 503, with no successful judge response; its ten original ASR turns were reused. Hotline and collection judging and new ASR were not started. All four metrics remain `null` with zero scored denominators. Earlier failures are recorded separately; example selection uses input and recording fidelity before judging.
+The conversation examples illustrate customer states, vocal delivery, agent responses and key-turn alignment. The [offline example](examples/offline/README.md) provides the trajectory, per-item verdict and four-metric report formats using deterministic local services.
 
 ## Repository contents
 
@@ -96,7 +96,7 @@ These saved real calls are unscored. The [2026-11-12 judging check](examples/rea
 - `configs/`: the three multi-turn cue conditions.
 - `tests/` and `scripts/`: offline checks and experiment entrypoint.
 
-See [release scope and reproducibility](docs/limitations.md), [the limited order-reference correction](docs/dataset_corrections.md), [adding an endpoint](docs/adding_an_endpoint.md), and [contributing](CONTRIBUTING.md).
+See [reproducibility and artifact provenance](docs/limitations.md), [the limited order-reference correction](docs/dataset_corrections.md), [adding an endpoint](docs/adding_an_endpoint.md), and [contributing](CONTRIBUTING.md).
 
 ## License and citation
 

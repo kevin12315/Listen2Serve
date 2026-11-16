@@ -41,6 +41,6 @@ The Apache-2.0 text is in LICENSE. Creative Commons terms:
 
 The original release provenance describes fictional business facts and generated utterances based on anonymized service-call skeletons. All demonstration speech is synthesized. The 20 customer-turn audio clips illustrate vocal contrasts; multi-turn evaluation synthesizes customer speech at runtime.
 
-Historical asset-generation metadata is preserved as supplied. The synthetic offline runtime example uses generated test responses and is explicitly labelled; it carries no commercial-model performance measurement. Scenario content remains separately licensed when referenced by an example.
+Historical asset-generation metadata is preserved as supplied. The offline runtime example illustrates the output format using explicitly labelled synthetic test responses. Scenario content remains separately licensed when referenced by an example.
 
 Citation information is in CITATION.bib. For uses requiring additional permission, contact the project authors.

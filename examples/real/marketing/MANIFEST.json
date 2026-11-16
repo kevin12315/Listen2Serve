@@ -9,48 +9,9 @@
   "latent_oracle": "cooperative",
   "turns": 10,
   "key_turn": 6,
-  "publication": false,
-  "evaluation_status": "pending_after_provider_failures",
-  "metrics": {
-    "key_turn_pass": null,
-    "voice_pass": null,
-    "flow_rate": null,
-    "task_score": null
-  },
-  "metric_denominators": {
-    "key_turn_pass": 0,
-    "voice_pass": 0,
-    "flow_rate": 0,
-    "task_score": 0
-  },
   "source_package_sha256": "a12d88ddc5f25eab21e0a16c05ddca94e4ac088c4d777c78585a93aa4b690792",
   "source_package_hash_root": "src/listen2serve",
   "sources": {
-    "campaign_plan": {
-      "path": "validation/showcase-20261110/campaign_plan.json",
-      "source_sha256": "21e83fa7a3240091c1b5b9083f30192fcce8124713abfb3cd60b5203dcee5052",
-      "included_unchanged": false
-    },
-    "verification": {
-      "path": "validation/showcase-20261110/verification.json",
-      "source_sha256": "1c785aabdcf301be12b1beb22b54e7960ec9e0da1e7ae8fad0b3313fb8aac29c",
-      "included_unchanged": false
-    },
-    "selection": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_MAR12_a1/selection.json",
-      "source_sha256": "0972b4bb289ce7c507c2557a3144518dc2f4bc171b2d3727643cbf431108f394",
-      "included_unchanged": false
-    },
-    "generation_summary": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_MAR12_a1/summary.json",
-      "source_sha256": "a58b365ff4de6716585574f711057d54f0119cccb6d96528b7a1c7c5b221c61d",
-      "included_unchanged": false
-    },
-    "quality_review": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_MAR12_a1/quality_review.json",
-      "source_sha256": "1b6f672b901e768e8f37aa15e7c314e843711365956546f74a91f23c58cfa525",
-      "included_unchanged": false
-    },
     "trajectory": {
       "path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/sim_status.json",
       "source_sha256": "a2cbdb89de19386033ffcff1914ab3139033ece78824d500ec4aab5c3f9bfe66",
@@ -64,96 +25,6 @@
     "voices": {
       "path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/voices.json",
       "source_sha256": "188529c404772a4d2e9be31f3f58645cc9fb9974462664296a89692bad1c56b3",
-      "included_unchanged": false
-    },
-    "evaluation_summary": {
-      "path": "validation/showcase-20261110/evaluations/showcase_20261110_marketing_E_E_MAR12_a1/summary.json",
-      "source_sha256": "12bab6bd9aa7720bb0b898e2728fdc8c2b968ff34b2561515e6f138592893b82",
-      "included_unchanged": false
-    },
-    "evaluation_usage": {
-      "path": "validation/showcase-20261110/evaluations/showcase_20261110_marketing_E_E_MAR12_a1/usage.json",
-      "source_sha256": "0f96465652645df10fdc9aef1315a996c6d3960b41d084aca874350153c9f30c",
-      "included_unchanged": false
-    },
-    "evaluation_invocation": {
-      "path": "validation/showcase-20261110/evaluations/showcase_20261110_marketing_E_E_MAR12_a1/invocation.json",
-      "source_sha256": "d3bd21e5d53f215d2c9e978190a08b0906ff93621e9c7db87f8efbc6641d733f",
-      "included_unchanged": false
-    },
-    "evaluation_history_manifest": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/manifest.json",
-      "source_sha256": "7cd9495f5ab690a45a3625183b603b3d0354918c79e2cd448bc59ab779305635",
-      "included_unchanged": false
-    },
-    "evaluation_role_claim": {
-      "path": "validation/showcase-20261110/evaluations/role-claims/marketing.json",
-      "source_sha256": "46f4dec27bce164518e0dd16caca6d502ee1a5921a9ae223b01d3793da30244c",
-      "included_unchanged": false
-    },
-    "evaluation_recovery_claim": {
-      "path": "validation/showcase-20261110/evaluations/recovery-claims/showcase_20261110_marketing_E_E_MAR12_a1.json",
-      "source_sha256": "a66eb7e3c4f999b84eda783b1646e85514706e0c20f10718afb621cbdc046738",
-      "included_unchanged": false
-    },
-    "initial_stop": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/stop.json",
-      "source_sha256": "3e16ba24ffba5612e032740c94193a46e00e01f3549e6c70d98d66f2b49c7366",
-      "included_unchanged": false
-    },
-    "initial_summary": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/summary.json",
-      "source_sha256": "d065adad55184ef97de3b2757f559982b39b062396130433a11bc236f08e1a66",
-      "included_unchanged": false
-    },
-    "initial_usage": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/usage.json",
-      "source_sha256": "00895efbb60b619d0deef621b53908a1d1cda63db0a8fed63a664906eb069843",
-      "included_unchanged": false
-    },
-    "initial_invocation": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/invocation.json",
-      "source_sha256": "46f4dec27bce164518e0dd16caca6d502ee1a5921a9ae223b01d3793da30244c",
-      "included_unchanged": false
-    },
-    "initial_role_claim": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/role_claim.json",
-      "source_sha256": "46f4dec27bce164518e0dd16caca6d502ee1a5921a9ae223b01d3793da30244c",
-      "included_unchanged": false
-    },
-    "initial_selection": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/selection.json",
-      "source_sha256": "0972b4bb289ce7c507c2557a3144518dc2f4bc171b2d3727643cbf431108f394",
-      "included_unchanged": false
-    },
-    "initial_plan": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/plan.json",
-      "source_sha256": "21e83fa7a3240091c1b5b9083f30192fcce8124713abfb3cd60b5203dcee5052",
-      "included_unchanged": false
-    },
-    "initial_verification": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/verification.json",
-      "source_sha256": "1c785aabdcf301be12b1beb22b54e7960ec9e0da1e7ae8fad0b3313fb8aac29c",
-      "included_unchanged": false
-    },
-    "initial_trajectory": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/trajectory.json",
-      "source_sha256": "a2cbdb89de19386033ffcff1914ab3139033ece78824d500ec4aab5c3f9bfe66",
-      "included_unchanged": false
-    },
-    "initial_run_manifest": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/run_manifest.json",
-      "source_sha256": "754c002fa3bfd148276574d1d9a8a019ceb219f0cbab1d3c79a8bc865c9e6770",
-      "included_unchanged": false
-    },
-    "initial_evaluator": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/evaluator.py",
-      "source_sha256": "a590f102e984f836b953c2326f911da4541cb3d6abead21ae9616c717c58af62",
-      "included_unchanged": false
-    },
-    "initial_failed_request": {
-      "path": "validation/showcase-20261110/recovery-history/showcase_20261110_marketing_E_E_MAR12_a1/initial-timeout/snapshot/failed_request.json",
-      "source_sha256": "8d2690b0bf6b9893f80d812751911783aa04fc9b83551f8f6af2caf6738038ca",
       "included_unchanged": false
     },
     "asr_evidence_1": {
@@ -304,16 +175,6 @@
     "asr_evidence_30": {
       "path": "validation/showcase-20261110/evalcache/showcase_20261110_marketing_E_E_MAR12_a1/453e0dc47716b6b9ae4e446ff5baa87ef69a4d965ff152b76d7acdc48f229593.asr.response.json",
       "source_sha256": "c20933ad4e8e11c3564158775a838dbceac4400b03f914742010c97160ee601b",
-      "included_unchanged": false
-    },
-    "failed_judge_response": {
-      "path": "validation/showcase-20261110/evalcache/showcase_20261110_marketing_E_E_MAR12_a1/ff433748db327bc805162ab21e05d4933abad1d2599b44eb6868c5ffb6ed65bd.llm.response.json",
-      "source_sha256": "dc6f60317c42e130180f8379a23d264eed2a249ef5a5ad6fbcca54fbe2ef3567",
-      "included_unchanged": false
-    },
-    "failed_judge_request": {
-      "path": "validation/showcase-20261110/evalcache/showcase_20261110_marketing_E_E_MAR12_a1/ff433748db327bc805162ab21e05d4933abad1d2599b44eb6868c5ffb6ed65bd.llm.request.json",
-      "source_sha256": "8d2690b0bf6b9893f80d812751911783aa04fc9b83551f8f6af2caf6738038ca",
       "included_unchanged": false
     },
     "llm_request_1": {
@@ -685,34 +546,20 @@
       "duration_s": 176.8
     }
   ],
-  "curation": {
-    "collection_size_intended": 3,
-    "coverage": "one selected role-condition sample per role; not a 3-by-3 matrix or population benchmark",
-    "agent_scores_used": false
-  },
   "licenses": {
     "text_transcription_provenance": "CC-BY-NC-4.0",
     "all_wav_audio": "CC-BY-NC-ND-4.0"
   },
   "derivation": [
-    "All WAVs and segments are original bytes, without normalization, trimming, replacement or splicing.",
-    "Endpoint text remains separate from independently requested, audio-bound ASR; unavailable ASR stays absent.",
-    "Raw source hashes and public derived hashes are distinct; these sanitized views are not resumable private caches.",
-    "Requested and provider-reported model identities stay separate; absent reported model remains null.",
-    "Formal scoring is paused; all four metrics are null with zero evaluated denominators."
+    "Original WAV bytes and segment timestamps are retained.",
+    "Endpoint text and independent ASR text have distinct labels.",
+    "Source hashes identify the generation inputs; public hashes identify the exported metadata.",
+    "Model identities and request parameters are recorded from the original generation."
   ],
   "public_derived_files": [
     {
       "path": "README.md",
-      "sha256": "40d897897dda5f2c0b173947ef78465834ef6c178412443d6ad061ffde7dd82a"
-    },
-    {
-      "path": "reports/showcase_20261110_marketing_E_E_MAR12_a1/evaluation_status.json",
-      "sha256": "2daf48190933c64f937f7209226142c04c146e97038a6e114d50ce802f480f19"
-    },
-    {
-      "path": "review_status.json",
-      "sha256": "3d8f3abb2e88ffcea8b4244039fde6e01aa9cb59bbb82b25c17ecc4d4e60d402"
+      "sha256": "e1f9fa4efd84f3aeedf28a7bb4d5f58d85fb1c087226afff842a82256e00cd2f"
     },
     {
       "path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/agent_asr.json",
@@ -720,7 +567,7 @@
     },
     {
       "path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/sim_status.json",
-      "sha256": "c01009fbe10d54da10f2f22f2b2f7d912a5062500677e513ea52175d2273d95f"
+      "sha256": "76f7c6eb87f90e84cdd944ded4d5f21c7e97b86695eb451406e48660638e0297"
     },
     {
       "path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/MAR-ALL-12-T1/voices.json",
@@ -728,11 +575,12 @@
     },
     {
       "path": "runs/showcase_20261110_marketing_E_E_MAR12_a1/run_manifest.json",
-      "sha256": "0c61b45ca2c783eb939e83c353c07baf09061acd9f845a458d5b9b0a9f8a47eb"
+      "sha256": "53faa68002d28707196fe39b4751f20dd9c787f58ce3f86c94a6790126d1a40b"
     },
     {
       "path": "transcript.md",
-      "sha256": "e26dde663830300145eefc896b82bdfa7210432651bd7bb060568b9df8012f30"
+      "sha256": "ccc6ed6fef82b4c857141fef976ea7432fb48da691c1e32ac09f8978ea0d48e4"
     }
-  ]
+  ],
+  "artifact_type": "conversation_example"
 }

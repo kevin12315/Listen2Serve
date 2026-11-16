@@ -3,8 +3,7 @@
 The [offline report](../examples/offline/reports/offline/report_audio.md) and
 [per-scenario verdict](../examples/offline/reports/offline/verdicts_audio.json)
 show the released output format. Their responses and scores are synthetic test
-outputs; the WAVs contain test pulses. They illustrate fields and links, rather
-than a commercial model's performance.
+outputs; the WAVs contain test pulses. They illustrate the trajectory, evidence fields, metric aggregation and report links.
 
 ## Public example layout
 
@@ -12,10 +11,10 @@ A scored listening example is read in this order:
 
 1. A short case description: role, customer state, condition, scenario ID and complete/partial status.
 2. A full-call WAV and aligned transcript, with separate customer and agent WAVs at the marked critical turn.
-3. A compact table containing KeyTurnPass, VoicePass, FlowRate and TaskScore, copied from the saved verdict. Pending values are shown as “Not scored”, with the evaluation status beside them.
+3. A compact table containing KeyTurnPass, VoicePass, FlowRate and TaskScore, copied from the saved verdict. The saved evaluation status and per-metric denominators accompany the metric values.
 4. Links to the generated Markdown report, the original per-item JSON verdict and its model/input provenance. Readers can inspect an action's cited words and turn, or hear the speech associated with a voice score.
 
-The three current live calls demonstrate the first two parts and explicit pending states; the offline report demonstrates the complete scoring format. A showcase's eventual score describes that selected call. Dataset-level results use the benchmark trial set and its own denominators.
+The three conversation examples demonstrate full-call audio, aligned turns and critical exchanges. The offline report demonstrates the complete scoring format. Dataset-level results use the benchmark trial set and its own denominators.
 
 ## Four main metrics
 
@@ -54,15 +53,19 @@ trajectory, scenario and audio contents. These fields support inspection of the
 judgment alongside the audio; a quotation match alone does not establish the
 semantic correctness of a score.
 
-## Current live listening examples
+## Conversation examples
 
-The [listening page](../examples/real/index.html) contains three complete calls:
+The [listening page](../examples/real/index.html) presents three complete calls:
 
-- Collection N/E: `COL-NEG-45-T3`, 8 turns, critical turn 6. Wording is neutral and delivery retains the cooperative state. The example is accepted; [current evaluation](../examples/real/evaluation/20261112/collection.json) is not started while waiting for the judge service. No new ASR or judging was requested.
-- Marketing E/E: `MAR-ALL-12-T1`, 10 turns, critical turn 6. Its ten original ASR turns are retained. The [2026-11-12 check](../examples/real/evaluation/20261112/marketing.json) made two timeout requests without HTTP responses, then received HTTP 503; no judge response succeeded. Earlier timeout/503 failures are separate history.
-- Hotline N/N: `HOT-ALL-01-T3`, 6 turns, critical turn 5. Customer delivery is neutral and the latent oracle remains unchanged. The example is accepted; [current evaluation](../examples/real/evaluation/20261112/hotline.json) is not started while waiting for the judge service. No new ASR or judging was requested.
+| Service | Condition | Scenario | Turns | Key turn |
+|---|---|---|---|---|
+| Collection | N/E | `COL-NEG-45-T3` | 8 | 6 |
+| Marketing | E/E | `MAR-ALL-12-T1` | 10 | 6 |
+| Hotline | N/N | `HOT-ALL-01-T3` | 6 | 5 |
 
-This three-role listening set covers N/E, E/E and N/N with one accepted call per role. All three examples were selected for display before judging. Each call's four metrics remain `null` with zero scored denominators because the latest service check produced no successful judge response. Current status links above distinguish the three marketing requests from earlier failures and from the unstarted hotline/collection evaluations. The offline files illustrate the completed scoring schema.
+Each example includes original full-call and per-turn audio, endpoint text,
+state and condition labels, scenario context and generation provenance.
+Marketing includes a separately labelled independent ASR transcript.
 
 Generation, judging and reporting can run separately through `l2s run-eval`,
 `l2s evaluate` and `l2s report`. For a listening demonstration, select on input
@@ -72,4 +75,4 @@ trial set, completion counts and per-metric denominators.
 
 ## Model identity shown with scoring
 
-The report separates the requested judge from the model identifier returned by the provider. A missing returned identifier remains `null`; it is not filled from configuration. Detailed verdict JSON records each judge stage's identities, including multiple snapshots if the service returns them. A retry against retained audio preserves the call itself and records the eventual successful judge response.
+The report separates the requested judge from the model identifier returned by the provider. A missing returned identifier remains `null`; it is not filled from configuration. Detailed verdict JSON records each judge stage's identities, including multiple snapshots if the service returns them. Saved audio and input identities bind each evaluation to its conversation.

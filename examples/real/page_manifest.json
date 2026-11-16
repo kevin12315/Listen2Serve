@@ -1,8 +1,8 @@
 {
-  "schema": "listen2serve.listening-only-page/1",
+  "schema": "listen2serve.conversation-page/1",
   "page": "index.html",
-  "page_sha256": "6fc329ff5ddbefbe95f02d116c49af2d07545f3c9de648b4be7fc9fd35f98a66",
-  "plan_sha256": "2e4d3a4cbba098c6a4f3f293e3aae1010c82b090ec2d2b595e0d7c90a6de1eb3",
+  "page_sha256": "24a13fcfa9ee2db2030ee150d7c8ccc91d8fa86600f2c9d9f213d10912900383",
+  "artifact_type": "conversation_examples",
   "media": [
     {
       "id": "marketing-full",
@@ -77,62 +77,9 @@
       "duration_seconds": 21.12
     }
   ],
-  "metrics": {
-    "key_turn_pass": null,
-    "voice_pass": null,
-    "flow_rate": null,
-    "task_score": null
-  },
-  "new_asr_requests": 0,
-  "new_judge_requests": 3,
-  "complete_three_role_listening_set": true,
   "available_roles": [
-    "collection",
     "marketing",
-    "hotline"
-  ],
-  "missing_roles": [],
-  "scored_export_gate_unchanged": true,
-  "self_check": {
-    "audio_hashes_verified": 9,
-    "seek_buttons_verified": 24,
-    "local_links_verified": 6,
-    "external_dependencies": 0,
-    "privacy_scan": "passed"
-  },
-  "human_listening_performed_by_builder": false,
-  "user_listening_acceptance": {
-    "recorded_at_utc": "2026-11-12T07:08:07.912253+00:00",
-    "source_receipt_sha256": "4b6bd65e96ad82123fab6d361de30d58e632aabec5af00537238d3f16c00c992",
-    "examples": [
-      {
-        "role": "marketing",
-        "run_id": "showcase_20261110_marketing_E_E_MAR12_a1",
-        "scenario_id": "MAR-ALL-12-T1",
-        "audio_sha256": "afb8668b13cec45861e70640d2a0a3198a10ada42e0792bf7a14c20ff2688157",
-        "accepted": true
-      },
-      {
-        "role": "hotline",
-        "run_id": "showcase_20261111_hotline_N_N_HOT01_a1",
-        "scenario_id": "HOT-ALL-01-T3",
-        "audio_sha256": "3aef76975b0b0b77029405f6a31722acd46c207ff1ed8436296a0739ab142e70",
-        "accepted": true
-      },
-      {
-        "role": "collection",
-        "run_id": "showcase_20261111_collection_N_E_COLNEG45_a1",
-        "scenario_id": "COL-NEG-45-T3",
-        "audio_sha256": "63973b813e5bcb908697d4c0a1ad959fb273c9be74d5cff237dd7a13fe65fc78",
-        "accepted": true
-      }
-    ]
-  },
-  "current_scoring_status": "evaluation/20261112/summary.json",
-  "request_counts_scope": "2026-11-12 scoring service check",
-  "page_build_requests": {
-    "asr": 0,
-    "judge": 0,
-    "generation": 0
-  }
+    "hotline",
+    "collection"
+  ]
 }

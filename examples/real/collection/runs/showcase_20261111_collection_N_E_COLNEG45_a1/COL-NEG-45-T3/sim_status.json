@@ -278,12 +278,5 @@
   "source_trajectory_sha256": "b3ec174caf3d682e2f3a3c42c2a2451174728b4de319064a6b3ddca084be22aa",
   "condition": "N/E",
   "wording": "neutral",
-  "latent_oracle": "cooperative",
-  "evaluation_status": "pending_owner_paused",
-  "metrics": {
-    "key_turn_pass": null,
-    "voice_pass": null,
-    "flow_rate": null,
-    "task_score": null
-  }
+  "latent_oracle": "cooperative"
 }

@@ -1,6 +1,6 @@
 # Complete dialogue transcript
 
-User and agent endpoint text are preserved. Independent agent ASR, where actually requested, is labelled separately.
+The transcript aligns customer and agent endpoint text with the original per-turn audio.
 
 ## Turn 1
 

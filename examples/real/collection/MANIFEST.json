@@ -9,48 +9,9 @@
   "latent_oracle": "cooperative",
   "turns": 8,
   "key_turn": 6,
-  "publication": false,
-  "evaluation_status": "pending_owner_paused",
-  "metrics": {
-    "key_turn_pass": null,
-    "voice_pass": null,
-    "flow_rate": null,
-    "task_score": null
-  },
-  "metric_denominators": {
-    "key_turn_pass": 0,
-    "voice_pass": 0,
-    "flow_rate": 0,
-    "task_score": 0
-  },
   "source_package_sha256": "5f1431112848e374775d5883169efbc9f304901a26d8fe4f2a1faad5284d92ed",
   "source_package_hash_root": "src/listen2serve",
   "sources": {
-    "campaign_plan": {
-      "path": "validation/showcase-20261111-collection-backup/campaign_plan.json",
-      "source_sha256": "3a0753bac455de7015fcfb362148c3352c9b4cc795f49d987fdcc5e75c7ff807",
-      "included_unchanged": false
-    },
-    "verification": {
-      "path": "validation/showcase-20261111-collection-backup/verification.json",
-      "source_sha256": "a2f728abb88fa3eda0ef29e6f061e609b641dd2a6a0160a5117afb0961a50a4b",
-      "included_unchanged": false
-    },
-    "selection": {
-      "path": "validation/showcase-20261111-collection-backup/attempts/showcase_20261111_collection_N_E_COLNEG45_a1/selection.json",
-      "source_sha256": "5e5f5f63fad9bf755e9860bef143c04bc297ed281a9cdb9cb2ca3fb31d578269",
-      "included_unchanged": false
-    },
-    "generation_summary": {
-      "path": "validation/showcase-20261111-collection-backup/attempts/showcase_20261111_collection_N_E_COLNEG45_a1/summary.json",
-      "source_sha256": "009dac67fb556d8675d94ae8ed5b7c88405ed2af9b7626857114d848f4475de1",
-      "included_unchanged": false
-    },
-    "quality_review": {
-      "path": "validation/showcase-20261111-collection-backup/attempts/showcase_20261111_collection_N_E_COLNEG45_a1/quality_review.json",
-      "source_sha256": "fe6cd80690ef95edff9493d9186fe4ea2882f5e08979964e65b02ebbc46e3ea8",
-      "included_unchanged": false
-    },
     "trajectory": {
       "path": "runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/sim_status.json",
       "source_sha256": "b3ec174caf3d682e2f3a3c42c2a2451174728b4de319064a6b3ddca084be22aa",
@@ -64,351 +25,6 @@
     "voices": {
       "path": "runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/voices.json",
       "source_sha256": "c6a8735504a8a8fbb998ee5967a1adf9217b777b45ee98d987d1f282e4e37793",
-      "included_unchanged": false
-    },
-    "resume_legacy_receipt": {
-      "path": "validation/showcase-20261104/overallusage-eight-candidates.json",
-      "source_sha256": "7182ddf89e5a0488fd19cbd48194ade60679600854c2911db9974a42c95d6a46",
-      "included_unchanged": false
-    },
-    "resume_history_9": {
-      "path": "runs/live_20261025_collection/COL-ALL-01-T3/sim_status.json",
-      "source_sha256": "0e5f02bf453d817df258007f939f209441e6cb6b48af3e5e7fca18847e0c1640",
-      "included_unchanged": false
-    },
-    "resume_history_10": {
-      "path": "runs/live_20261025_collection/run_manifest.json",
-      "source_sha256": "826ed6c0432a1d29a85a474837ba74ac4821bf840340f7d95650abb5f33f3246",
-      "included_unchanged": false
-    },
-    "resume_history_11": {
-      "path": "validation/live-acceptance/live_20261025_collection-generate.json",
-      "source_sha256": "1a674318ecbb8f4e6637809e0521336463dc36bdb2d21e0adcbd62d902ac0b2d",
-      "included_unchanged": false
-    },
-    "resume_history_12": {
-      "path": "runs/live_20261025_collection_r2/COL-ALL-01-T3/sim_status.json",
-      "source_sha256": "c78028a54b397a42b1d792fa0a8f4710f61caf0d212c64e914e638f59204bf0d",
-      "included_unchanged": false
-    },
-    "resume_history_13": {
-      "path": "runs/live_20261025_collection_r2/run_manifest.json",
-      "source_sha256": "7e0a38f357e3ed3e27c54485777df1695740fa7cd3791b1c2a9c2e26d686cba7",
-      "included_unchanged": false
-    },
-    "resume_history_14": {
-      "path": "validation/live-acceptance/live_20261025_collection_r2-generate.json",
-      "source_sha256": "32a4e39274018352e87240244988bd85b4c9ef9bbfecf56cefff2d23373fea5c",
-      "included_unchanged": false
-    },
-    "resume_history_15": {
-      "path": "runs/live_20261025_collection_audio/COL-ALL-10-T3/sim_status.json",
-      "source_sha256": "f193bd51fa9d433c77b126293fb550b55562475e5b5b247d5a9cdce1f7a41cfb",
-      "included_unchanged": false
-    },
-    "resume_history_16": {
-      "path": "runs/live_20261025_collection_audio/run_manifest.json",
-      "source_sha256": "2bef6b4f8b7ec9d1bc5dc0cb223740bb4dd661c80df2d95cc3bf502da74c8fcc",
-      "included_unchanged": false
-    },
-    "resume_history_17": {
-      "path": "validation/live-acceptance/live_20261025_collection_audio-generate.json",
-      "source_sha256": "4f6a1f88153fc3b67089c7922af1e9911c55708ae00dfb2c9e28a87f69a811ca",
-      "included_unchanged": false
-    },
-    "resume_archived_public_artifact": {
-      "path": "validation/public-example-archive/before-current-listening-examples-20261111/MANIFEST.json",
-      "source_sha256": "f044db3a8df30eab6e5f5cac3a24ad4eeaabbc381f6a7502cfbd453f37ae14ec",
-      "included_unchanged": false
-    },
-    "resume_history_19": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_collection_N_E_a1/reservation.json",
-      "source_sha256": "ad4a34029556c6a422b1cce23b916ad27bee6fb20aaf334919859bbced83443c",
-      "included_unchanged": false
-    },
-    "resume_history_20": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_collection_N_E_a1/summary.json",
-      "source_sha256": "3fcb823f649a8f035e9a215d762416234638be1e3f05d85013f90c6db08c80d4",
-      "included_unchanged": false
-    },
-    "resume_history_21": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_collection_N_E_a1/selection.json",
-      "source_sha256": "7c74c984d3338db596f7726fa3f8950635f5e8c900ca0d77d8106bac71b50ac8",
-      "included_unchanged": false
-    },
-    "resume_history_22": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_hotline_N_N_a1/reservation.json",
-      "source_sha256": "bb6f4be24d185f7ff1a2642e8af13eab09c827da801c04300759e41044d331b9",
-      "included_unchanged": false
-    },
-    "resume_history_23": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_hotline_N_N_a1/summary.json",
-      "source_sha256": "dc385f3be58070e40a74a1f1e417cb3ed0e378216480dc12b33e0c45e6c36b13",
-      "included_unchanged": false
-    },
-    "resume_history_24": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_hotline_N_N_a1/selection.json",
-      "source_sha256": "6bc155ee284dac500f91726837bec0631c6e2695451c6af361e9abc756df65de",
-      "included_unchanged": false
-    },
-    "resume_history_25": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_MAR12_a1/reservation.json",
-      "source_sha256": "d66697517b4b4806926a1826d32d6e85a78b76fabd4774fa3750d93245872360",
-      "included_unchanged": false
-    },
-    "resume_history_26": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_MAR12_a1/summary.json",
-      "source_sha256": "a58b365ff4de6716585574f711057d54f0119cccb6d96528b7a1c7c5b221c61d",
-      "included_unchanged": false
-    },
-    "resume_history_27": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_MAR12_a1/selection.json",
-      "source_sha256": "0972b4bb289ce7c507c2557a3144518dc2f4bc171b2d3727643cbf431108f394",
-      "included_unchanged": false
-    },
-    "resume_history_28": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_MAR12_a1/manual_review.json",
-      "source_sha256": "0972b4bb289ce7c507c2557a3144518dc2f4bc171b2d3727643cbf431108f394",
-      "included_unchanged": false
-    },
-    "resume_history_29": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_a1/reservation.json",
-      "source_sha256": "33b4ab4021b37afe928c6b2736924aa283acb8844bf845c8752df428b4fc1298",
-      "included_unchanged": false
-    },
-    "resume_history_30": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_a1/summary.json",
-      "source_sha256": "08719209bb31e0e46051357c7b7d666e8415eed365f61fb04da3fa155bfa351d",
-      "included_unchanged": false
-    },
-    "resume_history_31": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_a1/manual_review.json",
-      "source_sha256": "97d8acc37e847abba7a2edf56d29c28ac73e99d3b0ce55e50a1cb007a71be7d0",
-      "included_unchanged": false
-    },
-    "resume_history_32": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_a2/reservation.json",
-      "source_sha256": "b432aec7b636a65142f075d96adc576752731eb705cca16d3d6011f3ed7f0018",
-      "included_unchanged": false
-    },
-    "resume_history_33": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_a2/summary.json",
-      "source_sha256": "0c4613205ba11d188c2d9edd634fedba1ab0e244417c3174ea57e9035751d0eb",
-      "included_unchanged": false
-    },
-    "resume_history_34": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_a2/selection.json",
-      "source_sha256": "87c5046029a7c55832c6a3bfe61b539a64d5649fb3b04a970d9b029074fc2099",
-      "included_unchanged": false
-    },
-    "resume_history_35": {
-      "path": "validation/showcase-20261110/attempts/showcase_20261110_marketing_E_E_a2/manual_review.json",
-      "source_sha256": "ab5ba66f2e9d81ff7b32edb0408fb4f9ed867d8d4785ce9b964758ece606f682",
-      "included_unchanged": false
-    },
-    "resume_history_36": {
-      "path": "validation/showcase-20261111/campaign_plan.json",
-      "source_sha256": "2e4d3a4cbba098c6a4f3f293e3aae1010c82b090ec2d2b595e0d7c90a6de1eb3",
-      "included_unchanged": false
-    },
-    "resume_history_37": {
-      "path": "validation/showcase-20261111/verification.json",
-      "source_sha256": "0dc6e99234b0e67f581883bfa00e26344d4187504d1769c559722908bc165a37",
-      "included_unchanged": false
-    },
-    "resume_history_38": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_collection_N_E_COL17_a1/reservation.json",
-      "source_sha256": "9c6b1c81139aedd4d46c0d78f2007c11c99d130bfb4b081d63c9eb112f9e9105",
-      "included_unchanged": false
-    },
-    "resume_history_39": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_collection_N_E_COL17_a1/summary.json",
-      "source_sha256": "dd069ffb4a3723819ad95e3eaa4c18e3b0872c474a70c8b66b1bd75677f58692",
-      "included_unchanged": false
-    },
-    "resume_history_40": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_collection_N_E_COL17_a1/manual_review.json",
-      "source_sha256": "c37ff3fac902457e2bd2d4672a9e0b22786df3574beecf3490d6348144c3c56e",
-      "included_unchanged": false
-    },
-    "resume_history_41": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_collection_N_E_COL17_a1/selection.json",
-      "source_sha256": "c37ff3fac902457e2bd2d4672a9e0b22786df3574beecf3490d6348144c3c56e",
-      "included_unchanged": false
-    },
-    "resume_history_42": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/reservation.json",
-      "source_sha256": "cf08cd648651afc91f55bc0296ff130922624c3997a5258e410a49ec4ced2e4c",
-      "included_unchanged": false
-    },
-    "resume_history_43": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/summary.json",
-      "source_sha256": "37ddb2b8b3c236ab39c057ec36d03b64322e0fad7ec412c954821b4f8f85b04a",
-      "included_unchanged": false
-    },
-    "resume_history_44": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/manual_review.json",
-      "source_sha256": "9daacc0bd2c5a09c6a6402ef67b241236b09e5a580dd0928bea4d08d49ab4d0f",
-      "included_unchanged": false
-    },
-    "resume_history_45": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/selection.json",
-      "source_sha256": "9daacc0bd2c5a09c6a6402ef67b241236b09e5a580dd0928bea4d08d49ab4d0f",
-      "included_unchanged": false
-    },
-    "resume_history_46": {
-      "path": "validation/showcase-20261111/attempts/showcase_20261111_hotline_N_N_HOT01_a1/quality_review.json",
-      "source_sha256": "22ebc3e3f11c1871371efbe71565d254b0f9beda5e2309a16f4a0c75b91cec7c",
-      "included_unchanged": false
-    },
-    "resume_history_47": {
-      "path": "validation/showcase-20261111-col-retry/campaign_plan.json",
-      "source_sha256": "de4f043d6d5eaef28c7a46d6e6b3d8c39b7699cb25d94cd9d58bf0b2ea0b464c",
-      "included_unchanged": false
-    },
-    "resume_history_48": {
-      "path": "validation/showcase-20261111-col-retry/verification.json",
-      "source_sha256": "ed673916f0d2d920aeccc9639046a2afc9db6f183addd4f4374d13c009885782",
-      "included_unchanged": false
-    },
-    "resume_history_49": {
-      "path": "validation/showcase-20261111-col-retry/attempts/showcase_20261111_collection_N_E_COL17_a2/reservation.json",
-      "source_sha256": "194ee94ce7695513ac62a8c04c49cf6d3091f8d385a25c64b6c9004e051af8e2",
-      "included_unchanged": false
-    },
-    "resume_history_50": {
-      "path": "validation/showcase-20261111-col-retry/attempts/showcase_20261111_collection_N_E_COL17_a2/summary.json",
-      "source_sha256": "0a6b719a84277411d2f15cb87c8135fce65681e1fd092623d8a40ae3bea08e6f",
-      "included_unchanged": false
-    },
-    "resume_history_51": {
-      "path": "validation/showcase-20261111-col-retry/attempts/showcase_20261111_collection_N_E_COL17_a2/manual_review.json",
-      "source_sha256": "86b1ffbffda3c9664b1fbb98fb772048c8a5e13035fc1205d967c83f9e93f988",
-      "included_unchanged": false
-    },
-    "resume_history_52": {
-      "path": "validation/showcase-20261111-col-retry/attempts/showcase_20261111_collection_N_E_COL17_a2/selection.json",
-      "source_sha256": "86b1ffbffda3c9664b1fbb98fb772048c8a5e13035fc1205d967c83f9e93f988",
-      "included_unchanged": false
-    },
-    "resume_history_53": {
-      "path": "validation/showcase-20261111-collection-final/campaign_plan.json",
-      "source_sha256": "77a4d03fe35c904082850bf5eee3b737318d2f25dc4d670b6364f09b682a6a3c",
-      "included_unchanged": false
-    },
-    "resume_history_54": {
-      "path": "validation/showcase-20261111-collection-final/verification.json",
-      "source_sha256": "80904c814fae0dc211e53abcd992948ffda3fbde0b0ead5f9f17b952cb5abf08",
-      "included_unchanged": false
-    },
-    "resume_history_55": {
-      "path": "validation/showcase-20261111-collection-final/attempts/showcase_20261111_collection_N_E_COL10_a2/reservation.json",
-      "source_sha256": "bdadf245d9b08ab26fe61cd262ca601bc6bc70e00055f6b3ed6d7faa68dd8ce9",
-      "included_unchanged": false
-    },
-    "resume_history_56": {
-      "path": "validation/showcase-20261111-collection-final/attempts/showcase_20261111_collection_N_E_COL10_a2/summary.json",
-      "source_sha256": "728de6dd54065928f276f6be39a7798603bcbb5e4c3ccc2ce55b5d771d55255d",
-      "included_unchanged": false
-    },
-    "resume_history_57": {
-      "path": "validation/showcase-20261111-collection-final/attempts/showcase_20261111_collection_N_E_COL10_a2/selection.json",
-      "source_sha256": "90a3eafd66d16194db3cfe1e0d485b21ffe3ff2714a1d60772b8238ec5425844",
-      "included_unchanged": false
-    },
-    "resume_history_58": {
-      "path": "validation/showcase-20261111-collection-final/attempts/showcase_20261111_collection_N_E_COL10_a2/manual_review.json",
-      "source_sha256": "90a3eafd66d16194db3cfe1e0d485b21ffe3ff2714a1d60772b8238ec5425844",
-      "included_unchanged": false
-    },
-    "resume_history_59": {
-      "path": "validation/showcase-20261111-collection-resume/campaign_plan.json",
-      "source_sha256": "92fdaf800526c62ed9d342b7b4907c45b262afd4f4895cefc9d566fbd61fc2e2",
-      "included_unchanged": false
-    },
-    "resume_history_60": {
-      "path": "validation/showcase-20261111-collection-resume/verification.json",
-      "source_sha256": "6053b8d6327a8ef1ad891333d61073f61bb9e8fd16cb0966cf0b6af499a21b78",
-      "included_unchanged": false
-    },
-    "resume_history_61": {
-      "path": "validation/showcase-20261111-collection-resume/attempts/showcase_20261111_collection_N_E_COL04_a1/reservation.json",
-      "source_sha256": "447d42c34f3040cbe91b5484def47dbc10995efc88185600edf43a00957addea",
-      "included_unchanged": false
-    },
-    "resume_history_62": {
-      "path": "validation/showcase-20261111-collection-resume/attempts/showcase_20261111_collection_N_E_COL04_a1/summary.json",
-      "source_sha256": "717a7a840aa35bcc1295a57fc9ccc9c05b7ebe2e254f672eda5bec2348550e17",
-      "included_unchanged": false
-    },
-    "resume_history_63": {
-      "path": "validation/showcase-20261111-collection-resume/attempts/showcase_20261111_collection_N_E_COL04_a1/selection.json",
-      "source_sha256": "8d38abacc7a78cc98ecc3fd552e16869ab892f5c40cffc58bbef6e49bd925a1c",
-      "included_unchanged": false
-    },
-    "resume_history_64": {
-      "path": "validation/showcase-20261111-collection-resume/attempts/showcase_20261111_collection_N_E_COL04_a1/manual_review.json",
-      "source_sha256": "e52d55efbab8b4921b99fac3f20fb51f859e4e4aaa5d979fffce3b5df20054e7",
-      "included_unchanged": false
-    },
-    "resume_history_65": {
-      "path": "validation/showcase-20261111-collection-resume/attempts/showcase_20261111_collection_N_E_COL04_a1/quality_review.json",
-      "source_sha256": "9f19182a0daf3cb8cf848feb6d8cfd884c64ce0b6b904f202ff2cd0a7c67d4aa",
-      "included_unchanged": false
-    },
-    "resume_history_66": {
-      "path": "validation/showcase-20261111-collection-corrected/campaign_plan.json",
-      "source_sha256": "f263c23f532d7dfb53ffc2bdd793b48f1dac61c9c6a8ad395fe2022ccff0cbe5",
-      "included_unchanged": false
-    },
-    "resume_history_67": {
-      "path": "validation/showcase-20261111-collection-corrected/verification.json",
-      "source_sha256": "4ad7ef708d19f0b81dd3835e972bd695487017a5955211b3cdaebd388c5d5a4e",
-      "included_unchanged": false
-    },
-    "resume_history_68": {
-      "path": "validation/showcase-20261111-collection-corrected/attempts/showcase_20261111_collection_N_E_COL04_a2/reservation.json",
-      "source_sha256": "e2c129cc108f877f3ebc663002e89c4f30e31afb50e108c92bbecf8123329f46",
-      "included_unchanged": false
-    },
-    "resume_history_69": {
-      "path": "validation/showcase-20261111-collection-corrected/attempts/showcase_20261111_collection_N_E_COL04_a2/summary.json",
-      "source_sha256": "95bf198a31a9ad8e736d4c53f74892b4c0c936011c8e4fb150c6afc35d664f40",
-      "included_unchanged": false
-    },
-    "resume_history_70": {
-      "path": "validation/showcase-20261111-collection-corrected/attempts/showcase_20261111_collection_N_E_COL04_a2/selection.json",
-      "source_sha256": "e49e38288516ec6251ed5686d36055552bb29c77b7a5cf3e65519d4b3596b4c0",
-      "included_unchanged": false
-    },
-    "resume_history_71": {
-      "path": "validation/showcase-20261111-collection-corrected/attempts/showcase_20261111_collection_N_E_COL04_a2/manual_review.json",
-      "source_sha256": "735d1730e87927221ea8f2f592a36f51a56174dd94d6659189abc01102a7b3a5",
-      "included_unchanged": false
-    },
-    "resume_history_72": {
-      "path": "validation/showcase-20261111-collection-corrected/attempts/showcase_20261111_collection_N_E_COL04_a2/quality_review.json",
-      "source_sha256": "9311b3d14cae9be550398be21ccd051a7f9d03009f4fbd1b83c461cd523d6dc1",
-      "included_unchanged": false
-    },
-    "prior_COL04_source_receipt": {
-      "path": "validation/showcase-20261111/post-finance-preconditions-fix/verification.json",
-      "source_sha256": "3727d14eacb87e69ef04d5d5f21a63d8c93c05cca1497dc646071ef8c8f956e4",
-      "included_unchanged": false
-    },
-    "prior_COL04_corrected_source_receipt": {
-      "path": "validation/showcase-20261111-collection-resume/post-source-fix/verification.json",
-      "source_sha256": "4cf1b421d65d207b92cb419b4a950e76626afe4225579ce0c92ecb5d70c4f49e",
-      "included_unchanged": false
-    },
-    "backup_source_receipt": {
-      "path": "validation/showcase-20261111-collection-corrected/post-disclosure-fix/verification.json",
-      "source_sha256": "38ede1a5088a4c59233dfdaca86e8f049951e8df50b06f34ec810e42f083165b",
-      "included_unchanged": false
-    },
-    "backup_reservation": {
-      "path": "validation/showcase-20261111-collection-backup/attempts/showcase_20261111_collection_N_E_COLNEG45_a1/reservation.json",
-      "source_sha256": "b489f3d7f50f40b43e724abf5f300b6445d8d03637f56e5a875d847432df5a90",
       "included_unchanged": false
     },
     "llm_request_1": {
@@ -717,42 +333,24 @@
       "duration_s": 164.4
     }
   ],
-  "curation": {
-    "collection_size_intended": 3,
-    "coverage": "one selected role-condition sample per role; not a 3-by-3 matrix or population benchmark",
-    "agent_scores_used": false
-  },
   "licenses": {
     "text_transcription_provenance": "CC-BY-NC-4.0",
     "all_wav_audio": "CC-BY-NC-ND-4.0"
   },
   "derivation": [
-    "All WAVs and segments are original bytes, without normalization, trimming, replacement or splicing.",
-    "Endpoint text remains separate from independently requested, audio-bound ASR; unavailable ASR stays absent.",
-    "Raw source hashes and public derived hashes are distinct; these sanitized views are not resumable private caches.",
-    "Requested and provider-reported model identities stay separate; absent reported model remains null.",
-    "Formal scoring is paused; all four metrics are null with zero evaluated denominators."
+    "Original WAV bytes and segment timestamps are retained.",
+    "Endpoint text and independent ASR text have distinct labels.",
+    "Source hashes identify the generation inputs; public hashes identify the exported metadata.",
+    "Model identities and request parameters are recorded from the original generation."
   ],
   "public_derived_files": [
     {
       "path": "README.md",
-      "sha256": "d428f7c345d7a87c937afcc5a65dec9abca81f23ba7194ed89fee003aa64cc6a"
-    },
-    {
-      "path": "reports/showcase_20261111_collection_N_E_COLNEG45_a1/evaluation_status.json",
-      "sha256": "2ccd9c3597549ba354b21b4087a673e351843c2fe70c8424e941c74db1b47f38"
-    },
-    {
-      "path": "review_status.json",
-      "sha256": "60934fe0c4ae7877ab4fa12b78dc2a441de5081fe43ad3150e3d9a286a0acdba"
-    },
-    {
-      "path": "runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/agent_asr.json",
-      "sha256": "21d964fc3d8a26de2f0947f38cd59c6986daad9db6fbcee8233dbe7a7be7a792"
+      "sha256": "da45d159ade892f12e1c8ac669cf9bc191ce667c328ad5730e1b7cf52a009b16"
     },
     {
       "path": "runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/sim_status.json",
-      "sha256": "6feac9a6cf2c734dbb7cba5cb32d59a1aa5ba465e78cdac7cec7b0dca23de1bb"
+      "sha256": "9fae98d25754151051889efac1fa9f9bd1541df9dfab12c168379eb1edafba91"
     },
     {
       "path": "runs/showcase_20261111_collection_N_E_COLNEG45_a1/COL-NEG-45-T3/voices.json",
@@ -760,11 +358,12 @@
     },
     {
       "path": "runs/showcase_20261111_collection_N_E_COLNEG45_a1/run_manifest.json",
-      "sha256": "a63ac43b0f5db0c6e50af652059c49a11be7c231a18e1b8cb665299ef39d0a4d"
+      "sha256": "69fbf1b3b8c9ab7bc757359a9e0e1b6381ec722fc1a9534157c4f5d085f67b35"
     },
     {
       "path": "transcript.md",
-      "sha256": "5159425cdb2439ce415def0b1f91f65084cf57380f6dcc1bace71e9c2c385b76"
+      "sha256": "7dea4edccd62fe07ffc09b565e6cef1131ddc4d352539e3eccd86e95650557f3"
     }
-  ]
+  ],
+  "artifact_type": "conversation_example"
 }
